@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 
 Keya Tarafdar
-Priya is here
+Priya Acharjee
