@@ -9,4 +9,3 @@ Currently, two official plugins are available:
 
 Keya Tarafdar
 Priya Acharjee
-Shreya Kundu
