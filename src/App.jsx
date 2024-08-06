@@ -1,14 +1,30 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import Home from "./Pages/Home";
+import { useEffect, useState } from "react";
+import { ThemeProvider } from "./Context/Theme";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [themeMode, setThemeMode] = useState("light");
+
+  const lightTheme = () => {
+    setThemeMode("light");
+  };
+
+  const darkTheme = () => {
+    setThemeMode("dark");
+  };
+
+  // Actual change in theme
+  useEffect(() => {
+    document.querySelector("html").classList.remove("light", "dark");
+    document.querySelector("html").classList.add(themeMode);
+  }, [themeMode]);
 
   return (
     <>
-      <h1>Event Management</h1>
+      <ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
+        <Home />
+      </ThemeProvider>
     </>
   );
 }
