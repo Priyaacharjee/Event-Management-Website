@@ -2,6 +2,7 @@ import "./App.css";
 import Home from "./Pages/Home";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "./Context/Theme";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [themeMode, setThemeMode] = useState("light");
@@ -23,7 +24,11 @@ function App() {
   return (
     <>
       <ThemeProvider value={{ themeMode, lightTheme, darkTheme }}>
-        <Home />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
       </ThemeProvider>
     </>
   );
