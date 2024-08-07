@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main className="h-96">Event</main>
+      <Footer/>
     </>
   );
 }
