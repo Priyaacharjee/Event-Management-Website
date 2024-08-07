@@ -1,5 +1,6 @@
 import "./App.css";
 import Home from "./Pages/Home";
+import Event_card from "./Components/Event_card";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "./Context/Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -27,6 +28,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/" element={<Event_card />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
