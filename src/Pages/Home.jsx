@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import Company_card from "../Components/Company_card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendarCheck,
@@ -33,7 +34,7 @@ export default function Home() {
           {/* Gallery crd slider */}
         </div>
 
-        <div className="h-96">{/* Collaboration Company */}</div>
+        <div className="h-auto"><Company_card/></div>
 
         <div className="w-[90%] bg-gradient-to-r from-[#355070] to-[#6D597A] h-60 rounded-xl px-32 py-10 flex text-white">
           {/* Analytics */}
