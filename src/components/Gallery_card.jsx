@@ -89,7 +89,7 @@ export default function Gallery_Card() {
   };
 
   return (
-    <div className="mt-32 w-full">
+    <div className="mt-32 w-full" id="gallery">
       <div className="px-4 bg-slate-900 items-center sm:m-auto w-full flex-wrap">
         <div className="h-auto w-100 flex flex-wrap flex-col items-center text-center px-10 pt-8">
           {/* Gallery header */}
