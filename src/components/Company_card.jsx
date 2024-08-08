@@ -28,7 +28,7 @@ const CompanyCard = ({ logo, rating }) => {
 
 const CompanyGrid = ({ companies }) => {
   return (
-    <div className="main grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 p-6">
+    <div className="mt-20 py-28 main grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-20 gap-y-10">
       {companies.map((company, index) => (
         <CompanyCard key={index} logo={company.logo} rating={company.rating} />
       ))}

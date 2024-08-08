@@ -1,30 +1,56 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const FreqtQuestion = ({ ques, ans }) => {
   const [showAns, setshowAns] = useState(false);
+  const [isClosingAnsDiv, setIsClosingAnsDiv] = useState(false);
   function showAnsClick() {
-    setshowAns(!showAns);
+    if (showAns) {
+      setIsClosingAnsDiv(true);
+      setTimeout(() => {
+        setIsClosingAnsDiv(false);
+        setshowAns(false);
+      }, 900);
+    } else {
+      setshowAns(true);
+    }
   }
+
   return (
-    <div className="container mx-auto px-4 py-2 w-[95%] flex shadow-md">
+    <div id="freq" className="container mx-auto px-4 py-2 w-[95%] flex shadow-md">
       <div className="w-[98%]">
         <div className="bg-white rounded-lg px-5 py-2 sm:py-3 md:py-3 lg:py-4 xl:py-5 2xl:py-7">
           <div className="flex">
-            <h2 className="2xl:text-2xl xl:text-xl lg:text-lg md:text-[17px] text-sm font-medium mb-0 w-[100%]">
+            <h2 className="2xl:text-xl xl:text-lg lg:text-lg md:text-[17px] text-sm font-medium mb-0 w-[100%]">
               {ques}
             </h2>
             <div className="w-[10%]flex items-end">
-              <FontAwesomeIcon
-                icon={faCaretDown}
-                className="hover:cursor-pointer hover:size-5"
-                onClick={showAnsClick}
-              />
+              {showAns ? (
+                <FontAwesomeIcon
+                  icon={faCaretUp}
+                  className="hover:cursor-pointer hover:size-5"
+                  onClick={showAnsClick}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faCaretDown}
+                  className="hover:cursor-pointer hover:size-5"
+                  onClick={showAnsClick}
+                />
+              )}
             </div>
           </div>
-          {showAns ? <div className="text-gray-600 pt-10 animate-slideBelow text-lg">{ans}</div> : null}
+          {(showAns || isClosingAnsDiv) && (
+            <div
+              className={`text-gray-600 pt-10 ${
+                isClosingAnsDiv ? "animate-slideUp" : "animate-slideBelow"
+              } text-lg`}
+            >
+              {ans}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -35,7 +61,7 @@ const FrequentlyAskedQuestion = ({ Questions }) => {
   return (
     <>
       <div className="container mx-auto mt-5 px-4 py-20 w-[70%]">
-        <h1 className="text-5xl font-bold mb-20 text-center">
+        <h1 className="2xl:text-5xl xl:text-5xl lg:text-4xl md:text-4xl sm:text-3xl text-2xl font-bold mb-20 text-center">
           Frequently Asked Questions
         </h1>
         {Questions.map((ques_no, index) => (
