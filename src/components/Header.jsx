@@ -1,5 +1,5 @@
+
 import React, { useState } from "react";
-import ThemeButton from "./ThemeButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
@@ -23,35 +23,20 @@ export default function Header() {
 
   return (
     <>
-      <nav className="bg-blue-950 h-12 flex items-center px-4 justify-center w-auto">
-        {/* <ThemeButton /> */}
+      <nav id="header" className="bg-blue-950 h-12 flex items-center px-4 justify-center w-auto">
+        {/* Logo */}
+        <div className="w-1/5 text-white lg:pl-15 xl:pl-20">Logo</div>
 
-        {/* Logo----------------------------------------------------------------------------- */}
-        <div className="w-1/5 text-white lg:pl-15 xl:pl-20 ">Logo</div>
-
-        {/* Navbar Manu----------------------------------------------------------------------------- */}
-        <div className="items-center w-3/5 ">
+        {/* Navbar Menu */}
+        <div className="items-center w-3/5">
           <ul className="invisible sm:visible md:visible lg:visible xl:visible 2xl:visible text-white flex text-center">
-            {/* <li></li> */}
-            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline items-center w-1/5">
-              Home
-            </li>
-            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline w-1/5">
-              Services
-            </li>
-            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline w-1/5">
-              About
-            </li>
-            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline w-1/5">
-              Contact
-            </li>
-            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline p w-1/5">
-              Gallery
-            </li>
+            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline items-center w-1/5">Home</li>
+            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline w-1/5">Services</li>
+            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline w-1/5">About</li>
+            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline w-1/5">Contact</li>
+            <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline w-1/5">Gallery</li>
           </ul>
         </div>
-        {/* Login Button----------------------------------------------------------------------------- */}
-        {/* <button className="rounded-md bg-slate-100 px-3 items-center py-1 ml-auto mr-5 xl:mr-16 2xl:mr-20">Login</button> */}
 
         {/* User logo----------------------------------------------------------------------------- */}
         <div className="w-2/5 2xl:w-1/5 xl:w-1/5 lg:w-1/5 md:w-1/5 sm:w-1/5 flex justify-end px-3 py-1 space-x-3 2xl:pr-5 xl:pr-4 lg:pr-3 md:pr-2 sm:pr-0 items-center">
@@ -77,7 +62,7 @@ export default function Header() {
             />
           </div>
 
-          {/* Hamburger Menu------------------------------------------------------------------------- */}
+          {/* Hamburger Menu */}
           {hamburgerMenuClicked ? (
             <FontAwesomeIcon
               icon={faXmark}
@@ -140,8 +125,9 @@ export default function Header() {
               Gallery
             </div>
           </div>
-        ) : null}
+        ):null}
       </div>
     </>
-  );
-}
+  )
+};
+

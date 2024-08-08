@@ -14,7 +14,10 @@ import FreqtQuestion from "../Components/FreqtQuestion";
 export default function Home() {
   return (
     <>
+        {/* ----------------------------------------------------------------------------- HEADER ------------------------------------------------------------- */}
       <Header />
+
+        {/* -----------------------------------------------------------------------------EVENT TYPES --------------------------------------------------------- */}
       <div className="bg-slate-900 w-full h-80 px-32 py-20">
         {/* event cards */}
       </div>
@@ -27,9 +30,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-[90%] bg-gradient-to-r from-[#011936] to-[#243b55] h-80 rounded-xl px-32 py-20">
-          {/* Gallery crd slider */}
-        </div>
+        {/*--------------------------------------------------------------------------   GALLERY -------------------------------------------------------------  */}
+            <div className="w-[90%] bg-gradient-to-r from-[#011936] to-[#243b55] h-80 rounded-xl px-32 py-20">
+              {/* Gallery crd slider */}
+            </div>
 
         <div className="h-auto">
           <Company_card />

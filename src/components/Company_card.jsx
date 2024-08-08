@@ -1,92 +1,3 @@
-// -----------------------------------------------------------------------  WITHOUT PROPERTIES ------------------------------------------------------------
-
-// import React from 'react';
-
-// export default function CompanyCard() {
-//   return (
-//     <div className="main grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 p-6">
-//       {/*--------------------  COMPANY 1 ------------------------------ */}
-//       <div className="flex justify-center items-center">
-//         <div className="card rounded-xl w-44 h-46 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
-//           <div className="rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
-//           <img
-//             className="rounded-full w-24 h-24 mt-[-60px] border-4 border-white-500/100 shadow-2xl"
-//             src="https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg"
-//             alt="Company Logo"
-//           />
-//           <div className="p-2 pt-[10px]">Provided us : <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i></div>
-//         </div>
-//       </div>
-
-//       {/*--------------------  COMPANY 2 ------------------------------ */}
-//       <div className="flex justify-center items-center">
-//         <div className="card rounded-xl w-44 h-46 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
-//           <div className="rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
-//           <img
-//             className="rounded-full w-24 h-24 mt-[-60px] border-4 border-white-500/100 shadow-2xl"
-//             src="https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg"
-//             alt="Company Logo"
-//           />
-//           <div className="p-2 pt-[10px]">Provided us : <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i></div>
-//         </div>
-//       </div>
-
-//       {/*--------------------  COMPANY 3 ------------------------------ */}
-//       <div className="flex justify-center items-center">
-//         <div className="card rounded-xl w-44 h-46 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
-//           <div className="rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
-//           <img
-//             className="rounded-full w-24 h-24 mt-[-60px] border-4 border-white-500/100 shadow-2xl"
-//             src="https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg"
-//             alt="Company Logo"
-//           />
-//           <div className="p-2 pt-[10px]">Provided us :  <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i> <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i> <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i></div>
-//         </div>
-//       </div>
-
-//       {/*--------------------  COMPANY 4 ------------------------------ */}
-//       <div className="flex justify-center items-center">
-//         <div className="card rounded-xl w-44 h-46 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
-//           <div className="rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
-//           <img
-//             className="rounded-full w-24 h-24 mt-[-60px] border-4 border-white-500/100 shadow-2xl"
-//             src="https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg"
-//             alt="Company Logo"
-//           />
-//           <div className="p-2 pt-[10px]">Provided us :  <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i> <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i></div>
-//         </div>
-//       </div>
-
-//       {/*--------------------  COMPANY 5 ------------------------------ */}
-//       <div className="flex justify-center items-center">
-//         <div className="card rounded-xl w-44 h-46 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
-//           <div className="rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
-//           <img
-//             className="rounded-full w-24 h-24 mt-[-60px] border-4 border-white-500/100 shadow-2xl"
-//             src="https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg"
-//             alt="Company Logo"
-//           />
-//           <div className="p-2 pt-[10px]">Provided us : <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i></div>
-//         </div>
-//       </div>
-
-//       {/*--------------------  COMPANY 6 ------------------------------ */}
-//       <div className="flex justify-center items-center">
-//         <div className="card rounded-xl w-44 h-46 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
-//           <div className="rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
-//           <img
-//             className="rounded-full w-24 h-24 mt-[-60px] border-4 border-white-500/100 shadow-2xl"
-//             src="https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg"
-//             alt="Company Logo"
-//           />
-//           <div className="p-2 pt-[10px]">Provided us : <i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i><i class="fa fa-star text-xs text-yellow-500" aria-hidden="true"></i></div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 // -----------------------------------------------------------------------  WITH PROPERTIES ------------------------------------------------------------
 
 import React from 'react';
@@ -101,7 +12,7 @@ const CompanyCard = ({ logo, rating }) => {
   ));
 
   return (
-    <div className="flex justify-center items-center">
+    <div id="collaborators" className="flex justify-center items-center">
       <div className="card rounded-xl w-44 h-46 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
         <div className="rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
         <img
@@ -131,23 +42,23 @@ const companiesData = [
     rating: 4,
   },
   {
-    logo: 'https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg',
+    logo: 'https://sightsinplus.com/wp-content/uploads/2022/03/Cognizant-announces-new-logo-and-tagline.jpg',
     rating: 3,
   },
   {
-    logo: 'https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg',
+    logo: 'https://media.licdn.com/dms/image/C4E0BAQFYg_g-er2Bxg/company-logo_200_200/0/1630614870677/cogitate_technology_solutions_logo?e=2147483647&v=beta&t=-tH9eewONJ1qhj2LaaY3xi-Xwk57XncXH1MWKjEe3P8',
     rating: 3,
   },
   {
-    logo: 'https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg',
+    logo: 'https://telavergecommunications.com/wp-content/uploads/2022/09/telaverge-home.png',
     rating: 2,
   },
   {
-    logo: 'https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg',
+    logo: 'https://media.talentbattle.in/Files/C4U_Images/C4U_BLOG_IMAGES/C4U_BLOG_CATEGORIES_IMAGES/85/29.png',
     rating: 4,
   },
   {
-    logo: 'https://logos-world.net/wp-content/uploads/2020/04/Amazon-Symbol.jpg',
+    logo: 'https://logos-world.net/wp-content/uploads/2020/07/Accenture-Symbol.png',
     rating: 2,
   },
 ];
