@@ -22,6 +22,8 @@ export default function Home() {
       {/*EVENT TYPES --------------------------------------------------------- */}
       <div id="services" className="bg-slate-900 w-full h-80 px-32 py-20">
         {/* event cards */}
+
+        
       </div>
 
       {/*FEATURES --------------------------------------------------------- */}
