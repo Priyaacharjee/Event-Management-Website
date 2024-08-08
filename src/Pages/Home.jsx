@@ -11,6 +11,7 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import FreqtQuestion from "../Components/FreqtQuestion";
+import Gallery_Card from "../Components/Gallery_card";
 
 export default function Home() {
   return (
@@ -41,7 +42,8 @@ export default function Home() {
 
         {/* UPCOMING  EVENTS ------------------------------------------------------------ */}
         <Upcoming_event />
-
+        {/* Gallery Card------------------------------------------------- */}
+        <Gallery_Card/>
         {/* COMPANY NAMES ------------------------------------------------------------ */}
         <div className="h-auto">
           <Company_card />
