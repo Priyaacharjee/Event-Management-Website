@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -20,12 +18,10 @@ export default function Header() {
       setTimeout(() => {
         setHamburgerMenuClicked(false);
         setIsClosing(false);
-      }, 1000); 
+      }, 900);
     } else {
       setHamburgerMenuClicked(true);
     }
-
-    setdropDownOpen(false);
   };
 
   const [dropDownOpen, setdropDownOpen] = useState(false);
@@ -45,10 +41,7 @@ export default function Header() {
 
   return (
     <>
-      {/* Menu in phone screen------------------------------------------------------------------------- */}
-      <div
-        className="w-full flex h-[40rem] justify-end bg-cover relative text-white"
-      >
+      <div className="w-full flex h-[40rem] justify-end bg-cover relative text-white">
         <video
           autoPlay
           loop
@@ -76,12 +69,12 @@ export default function Header() {
             id="header"
             className="h-12 flex items-center px-4 justify-center w-full text-[16px]"
           >
-            {/* Logo */}
+            {/* Logo----------------------------------------------------------------------------- */}
             <div className="w-[50%] 2xl:w-[20%] xl:w-[20%] lg:w-[20%] md:w-[20%] sm:w-[15%] text-white lg:pl-15 xl:pl-20">
               Logo
             </div>
 
-            {/* Navbar Menu */}
+            {/* Navbar Menu----------------------------------------------------------------------------- */}
             <div className="items-center md:w-3/5 hidden sm:block md:block lg:block xl:block 2xl:block sm:text-sm md:text-sm lg:text-lg sm:w-[65%]">
               <ul className=" text-white text-center grid grid-cols-5">
                 <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline items-center">
@@ -102,13 +95,14 @@ export default function Header() {
               </ul>
             </div>
 
-
             {/* User logo----------------------------------------------------------------------------- */}
             <div className="w-2/5 2xl:w-1/5 xl:w-1/5 lg:w-1/5 md:w-1/5 sm:w-[25%] flex justify-end py-1  items-center 2xl:pl-[6%] xl:pl-[6%] lg:pl-[5%] md:pl-[5%] sm:pl-[5%] pl-[5%]">
-             {/* Login Button----------------------------------------------------------------------------- */}
-           <button className="text-center rounded-md text-white bg-white bg-opacity-[0.3] hover:bg-opacity-[0.2] items-center pt-[5px] pb-[5px] ml-auto mr-5 xl:mr-16 2xl:mr-20 w-[60%] hover:w-[61%] h-10 hover:h-11 lg:text-xl hover:text-blue-200">
+              {/* Login Button----------------------------------------------------------------------------- */}
+              <button className="text-center rounded-md text-white bg-white bg-opacity-[0.3] hover:bg-opacity-[0.2] items-center pt-[5px] pb-[5px] ml-auto mr-5 xl:mr-16 2xl:mr-20 w-[60%] hover:w-[61%] h-10 hover:h-11 lg:text-xl hover:text-blue-200">
                 Login
-           </button>
+              </button>
+
+              {/* Content After Login----------------------------------------------------------------------------- */}
               {/* <div className="2xl:w-[30%] xl:w-[35%] lg:w-[40%] md:w-[100%] flex justify-center pr-1">
                 <img
                   src="https://cdn-icons-png.freepik.com/512/219/219986.png"

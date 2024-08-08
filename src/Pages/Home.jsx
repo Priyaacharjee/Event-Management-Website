@@ -15,15 +15,15 @@ import FreqtQuestion from "../Components/FreqtQuestion";
 export default function Home() {
   return (
     <>
-      {/* ----------------------------------------------------------------------------- HEADER ------------------------------------------------------------- */}
-       <Header />
+      {/*HEADER ------------------------------------------------------------- */}
+      <Header />
 
-       {/* -----------------------------------------------------------------------------EVENT TYPES --------------------------------------------------------- */}
-     <div id="services" className="bg-slate-900 w-full h-80 px-32 py-20">
+      {/*EVENT TYPES --------------------------------------------------------- */}
+      <div id="services" className="bg-slate-900 w-full h-80 px-32 py-20">
         {/* event cards */}
       </div>
 
-       {/* ---------------------------------------------------------------------------- FEATURES --------------------------------------------------------- */}
+      {/*FEATURES --------------------------------------------------------- */}
       <div id="features" className="justify-center items-center flex-col flex">
         <div className="flex flex-col text-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:flex-row 2xl:flex 2xl:flex-row px-10 py-14 xl:py-24 items-center h-auto">
           <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8">
@@ -39,16 +39,19 @@ export default function Home() {
           </div>
         </div>
 
-{/* ------------------------------------------------------------------------------ UPCOMING  EVENTS ------------------------------------------------------------ */}
-        <Upcoming_event/>
+        {/* UPCOMING  EVENTS ------------------------------------------------------------ */}
+        <Upcoming_event />
 
-{/* ------------------------------------------------------------------------------ COMPANY NAMES ------------------------------------------------------------ */}
+        {/* COMPANY NAMES ------------------------------------------------------------ */}
         <div className="h-auto">
           <Company_card />
         </div>
 
-  {/*----------------------------------------------------------------   ANALYTICS      ---------------------------------------------------------------------- */}
-        <div id="analytics" className="grid-cols-2 md:grid-cols-4 grid w-[90%] bg-gradient-to-r from-[#355070] to-[#6D597A] h-auto rounded-xl text-white items-center justify-center md:py-10">
+        {/*ANALYTICS ---------------------------------------------------------------------- */}
+        <div
+          id="analytics"
+          className="grid-cols-2 md:grid-cols-4 grid w-[90%] bg-gradient-to-r from-[#355070] to-[#6D597A] h-auto rounded-xl text-white items-center justify-center md:py-10"
+        >
           <div className="flex flex-col h-full justify-center m-auto py-10 w-[40%]">
             <div>
               <FontAwesomeIcon
@@ -91,7 +94,7 @@ export default function Home() {
         </div>
       </div>
 
- {/*------------------------------------------------------------------- GET STARTED-------------------------------------------------------------------------------- */}
+      {/* Get Started-------------------------------------------------------------------------------- */}
       <div className="flex flex-col items-center pt-20 w-[50%] sm:w-[40%] md:w-[45%] lg:w-[44%] xl:w-[36%] 2xl:w-[40%] text-center m-auto">
         <div className="2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-2xl font-sans font-bold">
           Elevate your Events, elevate Our brand
@@ -103,12 +106,9 @@ export default function Home() {
         </div>
       </div>
 
-{/*--------------------------------------------------------------     Frequently asked question    ----------------------------------------------------- */}
+      {/* Frequently asked question--------------------------------------------------------------- */}
       <FreqtQuestion />
-
-{/*------------------------------------------------------------------------      FOOTER    --------------------------------------------------------------- */}
       <Footer />
     </>
   );
 }
-
