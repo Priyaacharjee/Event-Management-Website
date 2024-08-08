@@ -22,6 +22,7 @@ export default function Header() {
     } else {
       setHamburgerMenuClicked(true);
     }
+    setdropDownOpen(false);
   };
 
   const [dropDownOpen, setdropDownOpen] = useState(false);
@@ -98,12 +99,12 @@ export default function Header() {
             {/* User logo----------------------------------------------------------------------------- */}
             <div className="w-2/5 2xl:w-1/5 xl:w-1/5 lg:w-1/5 md:w-1/5 sm:w-[25%] flex justify-end py-1  items-center 2xl:pl-[6%] xl:pl-[6%] lg:pl-[5%] md:pl-[5%] sm:pl-[5%] pl-[5%]">
               {/* Login Button----------------------------------------------------------------------------- */}
-              <button className="text-center rounded-md text-white bg-white bg-opacity-[0.3] hover:bg-opacity-[0.2] items-center pt-[5px] pb-[5px] ml-auto mr-5 xl:mr-16 2xl:mr-20 w-[60%] hover:w-[61%] h-10 hover:h-11 lg:text-xl hover:text-blue-200">
+              {/* <button className="text-center rounded-md text-white bg-white bg-opacity-[0.3] hover:bg-opacity-[0.2] items-center pt-[5px] pb-[5px] ml-auto mr-5 xl:mr-16 2xl:mr-20 w-[60%] hover:w-[61%] h-10 hover:h-11 lg:text-xl hover:text-blue-200">
                 Login
-              </button>
+              </button> */}
 
               {/* Content After Login----------------------------------------------------------------------------- */}
-              {/* <div className="2xl:w-[30%] xl:w-[35%] lg:w-[40%] md:w-[100%] flex justify-center pr-1">
+              <div className="2xl:w-[30%] xl:w-[35%] lg:w-[40%] md:w-[100%] flex justify-center pr-1">
                 <img
                   src="https://cdn-icons-png.freepik.com/512/219/219986.png"
                   alt=""
@@ -132,7 +133,7 @@ export default function Header() {
                     onClick={dropDown}
                   />
                 )}
-              </div> */}
+              </div>
 
               {/* Hamburger Menu */}
               {hamburgerMenuClicked ? (
@@ -156,7 +157,7 @@ export default function Header() {
 
         {(dropDownOpen || isClosingDropdown) && (
           <div
-            className={`absolute top-14 flex-col flex justify-end text-white w-40 items-center h-[5.2rem] mr-[5%] bg-slate-300 bg-opacity-[0.3] rounded-lg ${
+            className={`absolute top-14 flex-col flex justify-end text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-slate-300 bg-opacity-[0.3] rounded-lg ${
               isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
             }`}
           >
