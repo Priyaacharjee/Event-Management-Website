@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Company_card from "../Components/Company_card";
+import Upcoming_event from "../Components/UpcomingEvents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendarCheck,
@@ -10,17 +11,20 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import FreqtQuestion from "../Components/FreqtQuestion";
-import UpcomingEvents from "../Components/UpcomingEvents";
 
 export default function Home() {
   return (
     <>
+      {/*HEADER ------------------------------------------------------------- */}
       <Header />
-      <div className="bg-slate-900 w-full h-80 px-32 py-20">
+
+      {/*EVENT TYPES --------------------------------------------------------- */}
+      <div id="services" className="bg-slate-900 w-full h-80 px-32 py-20">
         {/* event cards */}
       </div>
 
-      <div className="justify-center items-center flex-col flex">
+      {/*FEATURES --------------------------------------------------------- */}
+      <div id="features" className="justify-center items-center flex-col flex">
         <div className="flex flex-col text-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:flex-row 2xl:flex 2xl:flex-row px-10 py-14 xl:py-24 items-center h-auto">
           <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8">
             Manage, promote, and track your event— all in one platform
@@ -35,17 +39,19 @@ export default function Home() {
           </div>
         </div>
 
-        {/* <div className="w-[90%] bg-gradient-to-r from-[#011936] to-[#243b55] h-80 rounded-xl px-32 py-20"> */}
-          {/* Gallery crd slider */}
-        {/* </div> */}
-        <UpcomingEvents/>
+        {/* UPCOMING  EVENTS ------------------------------------------------------------ */}
+        <Upcoming_event />
 
+        {/* COMPANY NAMES ------------------------------------------------------------ */}
         <div className="h-auto">
           <Company_card />
         </div>
 
-        {/* Analytics---------------------------------------------------------------------------------- */}
-        <div className="grid-cols-2 md:grid-cols-4 grid w-[90%] bg-gradient-to-r from-[#355070] to-[#6D597A] h-auto rounded-xl text-white items-center justify-center md:py-10" id="analytics">
+        {/*ANALYTICS ---------------------------------------------------------------------- */}
+        <div
+          id="analytics"
+          className="grid-cols-2 md:grid-cols-4 grid w-[90%] bg-gradient-to-r from-[#355070] to-[#6D597A] h-auto rounded-xl text-white items-center justify-center md:py-10"
+        >
           <div className="flex flex-col h-full justify-center m-auto py-10 w-[40%]">
             <div>
               <FontAwesomeIcon

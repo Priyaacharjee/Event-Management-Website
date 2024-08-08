@@ -19,7 +19,7 @@ const FreqtQuestion = ({ ques, ans }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-2 w-[95%] flex shadow-md">
+    <div id="freq" className="container mx-auto px-4 py-2 w-[95%] flex shadow-md">
       <div className="w-[98%]">
         <div className="bg-white rounded-lg px-5 py-2 sm:py-3 md:py-3 lg:py-4 xl:py-5 2xl:py-7">
           <div className="flex">

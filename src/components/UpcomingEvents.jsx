@@ -8,11 +8,11 @@ export default function UpcomingEvents() {
       <div className="w-full bg-gradient-to-r from-[#011936] to-[#243b55] h-[30rem] px-32 py-20"></div>
       <div className="w-[80%] h-auto m-auto mt-[-25rem] grid-cols-1">
         <div className="bg-gradient-to-r from-[#011936] to-[#243b55] h-[20%] py-10 text-white flex items-center justify-end pr-20 font-serif">
-          <div className="px-5 text-2xl hover:text-blue-200 hover:cursor-pointer hover:text-[25px]">
+          <div className="px-5 text-2xl hover:text-blue-200 hover:cursor-pointer">
             Upcoming Events
           </div>
-          <div className="px-5 hover:text-blue-200 hover:cursor-pointer text-white hover:text-2xl">
-            <FontAwesomeIcon icon={faArrowRight} className="" />
+          <div className="px-5 hover:text-blue-200 hover:cursor-pointer text-white">
+            <FontAwesomeIcon icon={faArrowRight}/>
           </div>
         </div>
         <div className="bg-slate-200 h-[80%] grid grid-cols-2 px-10 py-5">

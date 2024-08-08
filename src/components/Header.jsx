@@ -22,7 +22,6 @@ export default function Header() {
     } else {
       setHamburgerMenuClicked(true);
     }
-    setdropDownOpen(false);
   };
 
   const [dropDownOpen, setdropDownOpen] = useState(false);
@@ -33,10 +32,11 @@ export default function Header() {
       setTimeout(() => {
         setdropDownOpen(false);
         setIsClosingDropdown(false);
-      }, 1000);
+      }, 900);
     } else {
       setdropDownOpen(true);
     }
+    setHamburgerMenuClicked(false);
   };
 
   return (
@@ -50,6 +50,7 @@ export default function Header() {
           className="absolute w-full h-full object-cover"
           style={{
             filter: "brightness(0.5)",
+            position: "absolute",
           }}
         >
           <source src={bgVideo} type="video/mp4" />
@@ -169,11 +170,7 @@ export default function Header() {
         )}
 
         {(hamburgerMenuClicked || isClosing) && (
-          <div
-            className={`flex-col flex justify-end mr-10 text-white w-40 items-center h-[12.2rem] ${
-              isClosing ? "animate-slideOut" : "animate-slideIn"
-            } absolute top-14 bg-slate-300 bg-opacity-[0.3] rounded-lg`}
-          >
+          <div className={`flex-col flex justify-end mr-5 text-white w-40 items-center h-[12.2rem] ${isClosing ? 'animate-slideOut' : 'animate-slideIn'} absolute top-14 bg-slate-300 bg-opacity-[0.3] rounded-lg`}>
             <div className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-blue-300 hover:underline hover:font-bold">
               Home
             </div>
