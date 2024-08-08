@@ -74,7 +74,7 @@ export default function Footer() {
             </li>
             <li>
               <Link 
-                to="help" 
+                to="freq" 
                 smooth={true} 
                 duration={500} 
                 className="flex items-center text-gray-300 hover:text-blue-400 transition-colors cursor-pointer"
@@ -90,7 +90,7 @@ export default function Footer() {
           <h3 className="text-lg font-semibold mb-4">Our Team</h3>
           <ul className="space-y-2">
             <li><a href="https://drive.google.com/file/d/1fIC3CKETxXfNN36SpSeMarLesOpgnx_X/view?usp=drivesdk" className="text-gray-300 hover:text-blue-400 transition-colors">Jayita Bhowmik</a></li>
-            <li><a href="#2" className="text-gray-300 hover:text-blue-400 transition-colors">Keya Tarafdar</a></li>
+            <li><a href="https://docs.google.com/document/d/159yuCoWaNpEdNQU9DL74hRHT_nfcmgWF4dYBVrmyf2o/edit" className="text-gray-300 hover:text-blue-400 transition-colors">Keya Tarafdar</a></li>
             <li><a href="https://drive.google.com/file/d/1ewvh3hg01vqpOJO4qVVDPPFE7H-kVQaC/view?usp=drivesdk" className="text-gray-300 hover:text-blue-400 transition-colors">Priya Acharjee</a></li>
             <li><a href="https://drive.google.com/file/d/1eMZtPVV9EoumPvwrryq_q7l5z6DPBBXM/view?usp=drivesdk" className="text-gray-300 hover:text-blue-400 transition-colors">Shreya Kundu</a></li>
           </ul>
