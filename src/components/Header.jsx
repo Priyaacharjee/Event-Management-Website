@@ -47,8 +47,8 @@ export default function Header() {
     <>
       {/* Menu in phone screen------------------------------------------------------------------------- */}
       <div
-  className="w-full flex h-[40rem] justify-end bg-cover relative text-white ${hamburgerMenuClicked ? 'animate-slideIn' : isClosing ? 'animate-slideOut' : 'hidden'}"
->
+        className="w-full flex h-[40rem] justify-end bg-cover relative text-white"
+      >
         <video
           autoPlay
           loop
