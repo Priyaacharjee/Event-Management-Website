@@ -42,8 +42,10 @@ export default function Home() {
 
         {/* UPCOMING  EVENTS ------------------------------------------------------------ */}
         <Upcoming_event />
-        {/* Gallery Card------------------------------------------------- */}
+
+        {/* Gallery card */}
         <Gallery_Card/>
+
         {/* COMPANY NAMES ------------------------------------------------------------ */}
         <div className="h-auto">
           <Company_card />
