@@ -7,6 +7,8 @@ export default {
       animation: {
         slideIn: "slideIn 1s ease-in-out",
         slideOut: "slideOut 1s ease-in-out",
+        slideBelow: "slideBelow 1s ease-in-out",
+        slideUp: "slideUp 1s ease-in-out",
       },
 
       keyframes: {
@@ -18,6 +20,16 @@ export default {
         slideOut: {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(100%)"},
+        },
+
+        slideBelow: {
+          "0%": { transform: "translateY(-100%)"},
+          "100%": { transform: "translateY(0)"},
+        },
+
+        slideUp: {
+          "0%": { transform: "translateY(0)"},
+          "100%": { transform: "translateY(-100%)"},
         },
       },
     },
