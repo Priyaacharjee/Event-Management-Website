@@ -115,11 +115,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Text */}
+      {/* Bottom Text------------------------------------------------------ */}
       <div className="bg-gray-900 text-center py-4 mt-8">
         <p className="text-sm">&copy; {new Date().getFullYear()} YourCompany. All rights reserved | Terms & Conditions | Privacy Policy</p>
       </div>
     </footer>
   );
 }
-
