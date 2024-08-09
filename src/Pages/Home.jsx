@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import FreqtQuestion from "../Components/FreqtQuestion";
 import Gallery_Card from "../Components/Gallery_card";
-import Event_card from "../Components/Event_card";
+import Event_card from "../components/Event_card";
 
 export default function Home() {
   return (

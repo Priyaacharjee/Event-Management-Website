@@ -8,6 +8,7 @@ import {
   faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import bgVideo from "../assets/bg_video.mp4";
+import ThemeButton from "./ThemeButton";
 
 export default function Header() {
   const [hamburgerMenuClicked, setHamburgerMenuClicked] = useState(false);
@@ -166,6 +167,7 @@ export default function Header() {
                 />
               )}
             </div>
+            <ThemeButton/>
           </nav>
         </div>
 
