@@ -13,10 +13,10 @@ const CompanyCard = ({ logo, rating }) => {
 
   return (
     <div id="collaborators" className="flex justify-center items-center">
-      <div className="card rounded-xl w-44 h-46 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
-        <div className="rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
+      <div className="rounded-xl xs:w-56 w-44 h-40 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
+        <div className=" rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
         <img
-          className="rounded-full w-24 h-24 mt-[-60px] border-4 border-white-500/100 shadow-2xl"
+          className="rounded-full w-[120px] h-[120px] mt-[-66px] border-4 border-white-500/100 shadow-2xl"
           src={logo}
           alt="Company Logo"
         />
@@ -28,13 +28,14 @@ const CompanyCard = ({ logo, rating }) => {
 
 const CompanyGrid = ({ companies }) => {
   return (
-    <div className="mt-20 py-28 main grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-20 gap-y-10">
+    <div className="py-24 grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 xs:gap-x-6 xs:gap-y-6 gap-x-20 gap-y-10">
       {companies.map((company, index) => (
         <CompanyCard key={index} logo={company.logo} rating={company.rating} />
       ))}
     </div>
   );
 };
+
 
 const companiesData = [
   {
@@ -46,7 +47,11 @@ const companiesData = [
     rating: 3,
   },
   {
-    logo: 'https://media.licdn.com/dms/image/C4E0BAQFYg_g-er2Bxg/company-logo_200_200/0/1630614870677/cogitate_technology_solutions_logo?e=2147483647&v=beta&t=-tH9eewONJ1qhj2LaaY3xi-Xwk57XncXH1MWKjEe3P8',
+    logo: 'https://media.talentbattle.in/Files/C4U_Images/C4U_BLOG_IMAGES/C4U_BLOG_CATEGORIES_IMAGES/85/29.png',
+    rating: 4,
+  },
+  {
+    logo: 'https://i.pinimg.com/736x/dc/ff/1e/dcff1e321e7fc8387ccb4d1007906cdf.jpg',
     rating: 3,
   },
   {
@@ -54,11 +59,7 @@ const companiesData = [
     rating: 2,
   },
   {
-    logo: 'https://media.talentbattle.in/Files/C4U_Images/C4U_BLOG_IMAGES/C4U_BLOG_CATEGORIES_IMAGES/85/29.png',
-    rating: 4,
-  },
-  {
-    logo: 'https://logos-world.net/wp-content/uploads/2020/07/Accenture-Symbol.png',
+    logo: 'https://i.pinimg.com/474x/26/18/66/261866f939644dc0fc73eb129af3b42e.jpg',
     rating: 2,
   },
 ];
@@ -66,4 +67,5 @@ const companiesData = [
 export default function App() {
   return <CompanyGrid companies={companiesData} />;
 }
+
 

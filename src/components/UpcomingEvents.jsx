@@ -5,7 +5,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 export default function UpcomingEvents() {
   return (
     <>
-      <div className="w-full bg-gradient-to-r from-[#011936] to-[#243b55] h-[30rem] px-32 py-20"></div>
+      <div className="w-full bg-slate-900 h-[30rem] px-32 py-20"></div>
       <div className="w-[80%] h-auto m-auto mt-[-25rem] grid-cols-1">
         <div className="bg-gradient-to-r from-[#011936] to-[#243b55] h-[20%] py-10 text-white flex items-center justify-end pr-20 font-serif">
           <div className="px-5 text-2xl hover:text-blue-200 hover:cursor-pointer hover:text-[25px]">

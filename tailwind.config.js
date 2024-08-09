@@ -32,6 +32,10 @@ export default {
           "100%": { transform: "translateY(-100%)"},
         },
       },
+
+      screens: {
+        'xs': '320px', 
+      },
     },
   },
   plugins: [],

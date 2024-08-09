@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TypeAnimation } from 'react-type-animation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
@@ -11,6 +12,8 @@ import bgVideo from "../assets/bg_video.mp4";
 export default function Header() {
   const [hamburgerMenuClicked, setHamburgerMenuClicked] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [dropDownOpen, setDropDownOpen] = useState(false);
+  const [isClosingDropdown, setIsClosingDropdown] = useState(false);
 
   const hambergerClick = () => {
     if (hamburgerMenuClicked) {
@@ -22,54 +25,65 @@ export default function Header() {
     } else {
       setHamburgerMenuClicked(true);
     }
-    setdropDownOpen(false);
+    setDropDownOpen(false);
   };
 
-  const [dropDownOpen, setdropDownOpen] = useState(false);
-  const [isClosingDropdown, setIsClosingDropdown] = useState(false);
   const dropDown = () => {
     if (dropDownOpen) {
       setIsClosingDropdown(true);
       setTimeout(() => {
-        setdropDownOpen(false);
+        setDropDownOpen(false);
         setIsClosingDropdown(false);
       }, 900);
     } else {
-      setdropDownOpen(true);
+      setDropDownOpen(true);
     }
     setHamburgerMenuClicked(false);
   };
 
   return (
     <>
-      <div className="w-full flex h-[40rem] justify-end bg-cover relative text-white">
+      <div className="relative w-full h-[38rem]">
+        {/* Video Element */}
         <video
           autoPlay
           loop
           muted
           playsInline
           className="absolute w-full h-full object-cover"
-          style={{
-            filter: "brightness(0.5)",
-            position: "absolute",
-          }}
+          style={{ filter: "brightness(0.6)" }}
         >
           <source src={bgVideo} type="video/mp4" />
         </video>
-        <div
-          className="absolute text-white w-full"
-          style={{
-            top: "5%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "2rem",
-            fontWeight: "bold",
-          }}
-        >
-          <nav
-            id="header"
-            className="h-12 flex items-center px-4 justify-center w-full text-[16px]"
-          >
+
+        
+        {/* Overlay Text */}
+        <div id="cursor" className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">WELCOME TO XYZ</h1>
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12">
+            We make
+            <TypeAnimation
+              sequence={[
+              ' In-person meeting',
+              3000,
+              ' Virtual meeting',
+              3000,
+              ' Hybrid meeting',
+              3000,
+            ]}
+            wrapper="span"
+            speed={150}
+            style={{ fontSize: '1.5em', color: '#8EA8FF', display: 'inline-block'}}
+            repeat={Infinity}
+          />
+          for you
+        </h1>
+       </div>
+
+
+        {/* Content Below the Video */}
+        <div className="absolute text-white w-full" style={{ top: "5%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "2rem", fontWeight: "bold" }}>
+          <nav id="header" className="h-12 flex items-center px-4 justify-center w-full text-[16px]">
             {/* Logo----------------------------------------------------------------------------- */}
             <div className="w-[50%] 2xl:w-[20%] xl:w-[20%] lg:w-[20%] md:w-[20%] sm:w-[15%] text-white lg:pl-15 xl:pl-20">
               Logo
@@ -110,7 +124,7 @@ export default function Header() {
                   alt=""
                   title="User Image"
                   className="rounded-xl h-6 w-6 md:h-8 md:w-8 lg:h-8 lg:w-8 xl:h-8 xl:w-8 2xl:h-8 2xl:w-8 sm:h-6 sm:w-6 hover:cursor-pointer"
-                ></img>
+                />
               </div>
               <div className="w-auto pr-5">
                 <span className="text-white font-bold hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline">
@@ -189,6 +203,9 @@ export default function Header() {
             </div>
           </div>
         )}
+
+        {/* Gradient Overlay */}
+        <div className="absolute bottom-0 left-0 w-full h-[30rem] bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
       </div>
     </>
   );
