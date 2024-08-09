@@ -1,6 +1,5 @@
 import "./App.css";
 import Home from "./Pages/Home";
-import Event_card from "./Components/Event_card";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "./Context/Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

@@ -22,7 +22,10 @@ export default function Home() {
       <Header />
 
       {/*EVENT TYPES --------------------------------------------------------- */}
-      <div id="services" className="bg-slate-900 w-full h-auto px-20 text-center">
+      <div
+        id="services"
+        className="bg-slate-900 w-full h-auto px-20 text-center"
+      >
         {/* event cards */}
         <Event_card />
       </div>
@@ -30,7 +33,7 @@ export default function Home() {
       {/*FEATURES 1--------------------------------------------------------- */}
       <div id="features" className="justify-center items-center flex-col flex">
         <div className="flex flex-col text-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:flex-row 2xl:flex 2xl:flex-row px-10 py-14 xl:py-24 items-center h-auto">
-          <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8">
+          <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8 animate-assembleText">
             Manage, promote, and track your event— all in one platform
           </div>
           <div className="px-10 text-md sm:text-lg">
@@ -44,44 +47,59 @@ export default function Home() {
         </div>
 
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
-        <Upcoming_event />
+        <Upcoming_event
+          name="Student Enrichment Program"
+          des="The Student Enrichment Program is a dynamic initiative aimed at equipping students with essential skills and knowledge through workshops, mentoring, and hands-on experiences."
+          date="2023-03-15"
+          time="14:00"
+          venue="Kolkata"
+        />
 
         {/* FEATURES 2 ------------------------------------------------------------ */}
-        <div id="highlight" className="py-16 px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14">
-            <div className="mt-16 mb-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center">
-
-                  {/* Image Slider Column */}
-                  <div id="imuu" className="flex justify-center rounded-lg">
-                    <Slider />
-                  </div>
-
-                  {/* Text Column */}
-                  <div className="flex flex-col text-center md:text-left">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4">
-                      Discover Our Key Features
-                    </h2>
-                    <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
-                      Explore the unique features that set us apart from the competition. Our platform is designed to cater to your every need, ensuring a seamless and successful event experience.
-                    </p>
-                  </div>
-
-                  {/* Overlay Image - Not responsive till now */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "335%",
-                      left: "47%",
-                      transform: "translateX(-50%)",
-                      zIndex: 10,
-                    }}
-                  >
-                      <div className="w-[400px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>
-                      <div className="w-[300px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>
-                      <div className="w-[200px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>            
-                  </div> 
+        <div
+          id="highlight"
+          className="py-16 px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14"
+        >
+          <div className="mt-16 mb-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center">
+            {/* Image Slider Column */}
+            <div id="imuu" className="flex justify-center rounded-lg">
+              <Slider />
             </div>
+
+            {/* Text Column */}
+            <div className="flex flex-col text-center md:text-left">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4">
+                Discover Our Key Features
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+                Explore the unique features that set us apart from the
+                competition. Our platform is designed to cater to your every
+                need, ensuring a seamless and successful event experience.
+              </p>
+            </div>
+
+            {/* Overlay Image - Not responsive till now */}
+            <div
+              style={{
+                position: "absolute",
+                top: "335%",
+                left: "47%",
+                transform: "translateX(-50%)",
+                zIndex: 10,
+              }}
+            >
+              <div className="w-[400px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">
+                hi shreya
+              </div>
+              <div className="w-[300px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">
+                hi shreya
+              </div>
+              <div className="w-[200px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">
+                hi shreya
+              </div>
+            </div>
+          </div>
         </div>
-        
 
         {/* Gallery card */}
         <Gallery_Card />
