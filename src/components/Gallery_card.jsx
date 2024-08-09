@@ -111,19 +111,19 @@ export default function Gallery_Card() {
                 .map((slide, slideIndex) => (
                   <div
                     key={slideIndex}
-                    className="slider flex-shrink-0 justify-center items-center border-white border-2 rounded-xl p-4 w-[280px] sm:w-[380px] md:w-[380px] 2xl:w-[400px] h-auto"
+                    className="slider flex-shrink-0 justify-center items-center border-white border-2 rounded-xl p-4 w-[280px] sm:w-[380px] md:w-[380px] 2xl:w-[400px] h-[230px] "
                   >
                     {slide.type === "image" ? (
                       <img
                         src={slide.src}
                         alt={`Slide ${slideIndex}`}
-                        className="w-full h-48 object-cover hover:scale-105 duration-300"
+                        className="w-full h-48 object-cover hover:scale-105 duration-300 animate-fade-in"
                       />
                     ) : (
                       <video
                         src={slide.src}
                         controls
-                        className="w-full h-48 object-cover hover:scale-105 duration-300"
+                        className="w-full h-48 object-cover hover:scale-105 duration-300 animate-fade-in"
                       ></video>
                     )}
                   </div>
@@ -152,7 +152,7 @@ export default function Gallery_Card() {
                   className="text-2xl cursor-pointer"
                 >
                   <RxDotFilled
-                    className={`hover:text-yellow-400 ${
+                    className={`hover:text-yellow-200 ${
                       slideIndex === currentIndex ? "text-yellow-400" : ""
                     }`}
                   />

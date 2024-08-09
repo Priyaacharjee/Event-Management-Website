@@ -62,7 +62,7 @@ export default function Event_card() {
           </div>
         </div>
       </div>
-      
+
       <div className="md:w-[19rem] h-auto m-autopt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden pt-10">
           <div className="bg-pink-400 shadow-lg rounded-lg overflow-hidden w-full">
             <div className="p-4">
