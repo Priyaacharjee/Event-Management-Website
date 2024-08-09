@@ -16,7 +16,6 @@ function App() {
     setThemeMode("dark");
   };
 
-  // Actual change in theme
   useEffect(() => {
     document.querySelector("html").classList.remove("light", "dark");
     document.querySelector("html").classList.add(themeMode);
@@ -28,7 +27,6 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
