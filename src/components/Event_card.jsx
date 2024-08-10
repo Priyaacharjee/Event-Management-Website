@@ -9,7 +9,7 @@ export default function Event_card() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 sm:gap-y-10 md:gap-x-9 lg:gap-x-9 xl:gap-x-20 2xl:gap-x-28">
 
       {/* In-person Events--------------------------------------------- */}
-        <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl overflow-hidden bg-gradient-to-br">
+        <div className="bg-gradient-to-r from-indigo-800 via-purple-300 to-blue-600 rounded-xl overflow-hidden bg-gradient-to-br">
           <div className="p-4">
             <h2 className="text-xl font-semibold justify-center">
               In-Person Meeting
@@ -23,11 +23,11 @@ export default function Event_card() {
               Explore More
             </button>
           </div>
-          <div className="h-48 bg-cover bg-center border-2">{/* img */}</div>
+          <div className="h-48 bg-cover bg-center">{/* img */}</div>
         </div>
 
         {/* Virtual Events--------------------------------------------- */}
-        <div className="bg-blue-500 shadow-md rounded-xl overflow-hidden">
+        <div className="bg-gradient-to-r from-indigo-800 via-purple-300 to-blue-600 shadow-md rounded-xl overflow-hidden">
           <div className="p-4">
             <h2 className="text-xl font-semibold justify-center">
               Virtual Meeting
@@ -43,7 +43,7 @@ export default function Event_card() {
         </div>
 
         {/* Hybrid Event---------------------------------------------------- */}
-        <div className="bg-pink-400 shadow-lg rounded-lg overflow-hidden hidden lg:block">
+        <div className="bg-gradient-to-r from-indigo-800 via-purple-300 to-blue-600 shadow-lg rounded-lg overflow-hidden hidden lg:block">
           <div className="p-4">
             <h2 className="text-xl font-semibold justify-center">
               Hybrid Meeting

@@ -75,9 +75,9 @@ export default function Home() {
                       zIndex: 10,
                     }}
                   >
-                      <div className="w-[400px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>
-                      <div className="w-[300px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>
-                      <div className="w-[200px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>            
+                      <div className="w-[400px] h-12 bg-gradient-to-r from-blue-900 via-slate-900 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>
+                      <div className="w-[300px] h-12 bg-gradient-to-r from-blue-900 via-slate-900 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>
+                      <div className="w-[200px] h-12 bg-gradient-to-r from-blue-900 via-slate-900 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">hi shreya</div>            
                   </div> 
             </div>
         </div>

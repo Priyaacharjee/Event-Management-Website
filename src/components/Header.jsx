@@ -60,9 +60,10 @@ export default function Header() {
         
         {/* Overlay Text */}
         <div id="cursor" className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">WELCOME TO XYZ</h1>
+          {/* <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">WELCOME TO <span className="text-cyan-300">VIBRANT CONNECTION</span></h1> */}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">WELCOME TO <span className="text-cyan-300 lg:text-7xl font-serif">VIBRANT CONNECTION</span></h1>
           <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white mt-4 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12">
-            We make
+            We make&nbsp;
             <TypeAnimation
               sequence={[
               ' In-person meeting',
@@ -77,7 +78,7 @@ export default function Header() {
             style={{ fontSize: '1.5em', color: '#8EA8FF', display: 'inline-block'}}
             repeat={Infinity}
           />
-          for you
+           &nbsp;for you
         </h1>
        </div>
 
