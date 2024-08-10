@@ -18,29 +18,15 @@ const Slider = () => {
     return () => clearInterval(interval); 
   }, []);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
   return (
     <div
       style={{
-        position: "relative",
-        width: "60%",
-        height: "60%",
         maxWidth: "100%",
         borderRadius: "1rem",
         overflow: "hidden",
         margin: "auto",
       }}
+      className="2xl:w-[80%] 2xl:h-[90%] lg:w-[70%] lg:h-[100%] md:w-[85%] md:h-[100%]"
     >
       <img
         src={images[currentIndex]}
