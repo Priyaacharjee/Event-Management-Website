@@ -23,7 +23,9 @@ export default function Event_card() {
               Explore More
             </button>
           </div>
-          <div className="h-48 bg-cover bg-center">{/* img */}</div>
+          <div className="h-48 bg-cover bg-center px-8">
+             <img src="https://media.tenor.com/_BlvwswJ0FoAAAAM/taking-a-bow-meeting.gif"/>
+          </div>
         </div>
 
         {/* Virtual Events--------------------------------------------- */}
@@ -58,7 +60,7 @@ export default function Event_card() {
             </button>
           </div>
           <div className="h-48 bg-cover bg-center">
-            {/* img  */}
+            {/* img */}
           </div>
         </div>
       </div>
