@@ -58,45 +58,36 @@ export default function Home() {
         {/* FEATURES 2 ------------------------------------------------------------ */}
         <div
           id="highlight"
-          className="py-16 px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14"
+          className=" px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 pb-16"
         >
-          <div className="mt-16 mb-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center">
+          <div className="mt-16 mb-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-2">
             {/* Image Slider Column */}
             <div id="imuu" className="flex justify-center rounded-lg">
               <Slider />
             </div>
-
+            
             {/* Text Column */}
-            <div className="flex flex-col text-center md:text-left">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4">
+            <div className="flex flex-col text-center md:text-left 2xl:pt-[15%] 2xl:px-14 xl:pt-[12%] lg:pt-[10%]">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[45px] xl:text-6xl 2xl:text-7xl font-bold mb-4">
                 Discover Our Key Features
               </h2>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[25px] lg:pt-5 md:pt-1">
                 Explore the unique features that set us apart from the
                 competition. Our platform is designed to cater to your every
                 need, ensuring a seamless and successful event experience.
               </p>
-            </div>
 
-            {/* Overlay Image - Not responsive till now */}
-            <div
-              style={{
-                position: "absolute",
-                top: "335%",
-                left: "47%",
-                transform: "translateX(-50%)",
-                zIndex: 10,
-              }}
-            >
-              <div className="w-[400px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">
-                hi shreya
-              </div>
-              <div className="w-[300px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">
-                hi shreya
-              </div>
-              <div className="w-[200px] h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex flex-col items-center">
-                hi shreya
-              </div>
+              <div className="md:absolute 2xl:ml-[-17rem] xl:ml-[-10rem] lg:ml-[-10rem] md:ml-[-8rem] 2xl:mt-[25%] xl:mt-[20%] lg:mt-[21%] md:mt-[30%] sm:m-auto">
+                  <div className=" 2xl:w-[450px] xl:w-[320px] lg:w-[300px] md:w-[300px] sm:w-[250px] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                    hi shreya
+                  </div>
+                  <div className="2xl:w-[350px]  xl:w-[240px] lg:w-[220px] md:w-[220px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                    hi shreya
+                  </div>
+                  <div className="2xl:w-[250px]  xl:w-[140px] lg:w-[140px] md:w-[140px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                    hi shreya
+                  </div>
+            </div>
             </div>
           </div>
         </div>
