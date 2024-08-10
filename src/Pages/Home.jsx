@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "../Components/Slider"; // Adjust the path if necessary
+import Slider from "../Components/Slider";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Company_card from "../Components/Company_card";
@@ -26,7 +26,6 @@ export default function Home() {
         id="services"
         className="bg-slate-900 w-full h-auto px-20 text-center"
       >
-        {/* event cards */}
         <Event_card />
       </div>
 
@@ -65,10 +64,10 @@ export default function Home() {
             <div id="imuu" className="flex justify-center rounded-lg">
               <Slider />
             </div>
-            
+
             {/* Text Column */}
             <div className="flex flex-col text-center md:text-left 2xl:pt-[15%] 2xl:px-14 xl:pt-[12%] lg:pt-[10%]">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[45px] xl:text-6xl 2xl:text-7xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[45px] xl:text-6xl 2xl:text-7xl font-bold mb-4 font-serif">
                 Discover Our Key Features
               </h2>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[25px] lg:pt-5 md:pt-1">
@@ -78,16 +77,16 @@ export default function Home() {
               </p>
 
               <div className="md:absolute 2xl:ml-[-17rem] xl:ml-[-10rem] lg:ml-[-10rem] md:ml-[-8rem] 2xl:mt-[25%] xl:mt-[20%] lg:mt-[21%] md:mt-[30%] sm:m-auto">
-                  <div className=" 2xl:w-[450px] xl:w-[320px] lg:w-[300px] md:w-[300px] sm:w-[250px] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
-                    hi shreya
-                  </div>
-                  <div className="2xl:w-[350px]  xl:w-[240px] lg:w-[220px] md:w-[220px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
-                    hi shreya
-                  </div>
-                  <div className="2xl:w-[250px]  xl:w-[140px] lg:w-[140px] md:w-[140px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
-                    hi shreya
-                  </div>
-            </div>
+                <div className=" 2xl:w-[450px] xl:w-[320px] lg:w-[300px] md:w-[300px] sm:w-[250px] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                  10+ Payment Gateway
+                </div>
+                <div className="2xl:w-[350px]  xl:w-[240px] lg:w-[220px] md:w-[220px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                  Reviews Rating
+                </div>
+                <div className="2xl:w-[250px]  xl:w-[140px] lg:w-[140px] md:w-[140px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                  Venue Map
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -161,6 +160,7 @@ export default function Home() {
 
       {/* Frequently asked question--------------------------------------------------------------- */}
       <FreqtQuestion />
+
       <Footer />
     </>
   );

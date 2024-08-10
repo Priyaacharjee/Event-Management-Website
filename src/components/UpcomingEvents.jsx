@@ -30,7 +30,7 @@ export default function UpcomingEvents({ name, des, time, date, venue }) {
               <br></br>
             </div>
             <div className="h-full w-full pb-2">
-              <span className="text-xl font-serif font-semibold ">Des:</span>{" "}
+              <span className="text-xl font-serif font-semibold ">Description:</span>{" "}
               {des}
               <br></br>
             </div>
@@ -45,7 +45,7 @@ export default function UpcomingEvents({ name, des, time, date, venue }) {
               <br></br>
             </div>
             <div className="h-full w-full pb-2">
-              <span className="text-xl font-serif font-semibold ">vanue:</span>{" "}
+              <span className="text-xl font-serif font-semibold ">Venue:</span>{" "}
               {venue}
               <br></br>
             </div>
