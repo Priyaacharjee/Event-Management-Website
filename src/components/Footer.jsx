@@ -12,10 +12,10 @@ export default function Footer() {
         
         {/* About Us */}
         <div className="flex flex-col items-center text-center">
-          <div className="text-center md:text-left mb-4 md:mb-0">
-            <h1 className="text-2xl font-bold">OurLogo</h1>
+          <div className="text-center md:text-left md:mb-0">
+               <img className="w-full h-[50%] rounded-2xl" src="logo.jpeg"/>
           </div>
-          <p className="text-gray-300 mt-4">We are a company dedicated to providing the best services and solutions for our clients. Our mission is to deliver excellence through innovation and commitment.</p>
+          <p className="mt-[-2rem] text-gray-300 ">We are a company dedicated to providing the best services and solutions for our clients. Our mission is to deliver excellence through innovation and commitment.</p>
         </div>
         
         {/* Quick Links */}

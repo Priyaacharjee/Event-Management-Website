@@ -87,8 +87,8 @@ export default function Header() {
         <div className="absolute text-white w-full" style={{ top: "5%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "2rem", fontWeight: "bold" }}>
           <nav id="header" className="h-12 flex items-center px-4 justify-center w-full text-[16px]">
             {/* Logo----------------------------------------------------------------------------- */}
-            <div className="w-[50%] 2xl:w-[20%] xl:w-[20%] lg:w-[20%] md:w-[20%] sm:w-[15%] text-white lg:pl-15 xl:pl-20">
-              Logo
+            <div className="mt-[1rem] w-[50%] 2xl:w-[20%] xl:w-[20%] lg:w-[20%] md:w-[20%] sm:w-[15%] text-white lg:pl-15 xl:pl-20">
+              <img className="w-[70%] h-[30%] rounded-2xl" src="logo.jpeg"/>
             </div>
 
             {/* Navbar Menu----------------------------------------------------------------------------- */}
