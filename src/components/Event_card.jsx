@@ -64,7 +64,7 @@ export default function Event_card() {
       </div>
       
       <div className="md:w-[19rem] h-auto m-autopt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden pt-10">
-          <div className="bg-pink-400 shadow-lg rounded-lg overflow-hidden w-full">
+          <div className="bg-gradient-to-r from-indigo-800 via-purple-300 to-blue-600 shadow-lg rounded-lg overflow-hidden w-full">
             <div className="p-4">
               <h2 className="text-xl font-semibold justify-center">
                 Hybrid Meeting
