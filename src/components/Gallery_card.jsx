@@ -89,7 +89,7 @@ export default function Gallery_Card() {
   };
 
   return (
-    <div className="mt-32 w-full">
+    <div className=" w-full" id="gallery">
       <div className="px-4 bg-slate-900 items-center sm:m-auto w-full flex-wrap">
         <div className="h-auto w-100 flex flex-wrap flex-col items-center text-center px-10 pt-8">
           {/* Gallery header */}
@@ -111,19 +111,19 @@ export default function Gallery_Card() {
                 .map((slide, slideIndex) => (
                   <div
                     key={slideIndex}
-                    className="slider flex-shrink-0 justify-center items-center border-white border-2 rounded-xl p-4 w-[280px] sm:w-[380px] md:w-[380px] 2xl:w-[400px] h-auto"
+                    className="slider flex-shrink-0 justify-center items-center border-white border-2 rounded-xl p-4 w-[280px] sm:w-[380px] md:w-[380px] 2xl:w-[400px] h-[230px] "
                   >
                     {slide.type === "image" ? (
                       <img
                         src={slide.src}
                         alt={`Slide ${slideIndex}`}
-                        className="w-full h-48 object-cover hover:scale-105 duration-300"
+                        className="w-full h-48 object-cover hover:scale-105 duration-300 animate-fade-in"
                       />
                     ) : (
                       <video
                         src={slide.src}
                         controls
-                        className="w-full h-48 object-cover hover:scale-105 duration-300"
+                        className="w-full h-48 object-cover hover:scale-105 duration-300 animate-fade-in"
                       ></video>
                     )}
                   </div>
@@ -151,7 +151,11 @@ export default function Gallery_Card() {
                   onClick={() => goToSlide(slideIndex)}
                   className="text-2xl cursor-pointer"
                 >
-                  <RxDotFilled className=" hover:text-yellow-400" />
+                  <RxDotFilled
+                    className={`hover:text-yellow-200 ${
+                      slideIndex === currentIndex ? "text-yellow-400" : ""
+                    }`}
+                  />
                 </div>
               ))}
             </div>
