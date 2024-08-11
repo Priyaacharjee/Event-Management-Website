@@ -5,19 +5,8 @@ import hybrid from "../assets/hybrid.mp4";
 
 const Event = ({ event_type, des, video }) => {
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center">
-    <h1 className="text-3xl font-bold mb-6 text-white">The minimalist way to host all your events successfully!!!</h1>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-purple-800 shadow-pink-600 rounded-xl overflow-hidden bg-gradient-to-br">
-      <div className="p-4">
-        <h2 className="text-xl font-semibold justify-center">In-Person Meeting</h2>
-        <p className="mt-2 text-white-600">Keep it all together at the venue</p>
-        </div>
-=======
     <>
       <div className="pb-7 bg-gradient-to-r from-indigo-800 via-purple-300 to-blue-600 rounded-xl overflow-hidden">
->>>>>>> c2f7634c45745db0df89c0fc87ac77ce141603fa
         <div className="p-4">
           <h2 className="text-2xl font-semibold justify-center font-serif">
             {event_type}

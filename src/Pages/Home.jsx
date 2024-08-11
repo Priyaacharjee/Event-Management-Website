@@ -13,11 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import FreqtQuestion from "../Components/FreqtQuestion";
 import Gallery_Card from "../Components/Gallery_card";
-<<<<<<< HEAD
 import Event_card from "../Components/Event_card";
-=======
-import Event_card from "../components/Event_card";
->>>>>>> c2f7634c45745db0df89c0fc87ac77ce141603fa
 
 export default function Home() {
   return (
@@ -26,14 +22,10 @@ export default function Home() {
       <Header />
 
       {/*EVENT TYPES --------------------------------------------------------- */}
-<<<<<<< HEAD
-      <div id="services" className="bg-slate-900 w-full h-80 px-32 py-20">
-=======
       <div
         id="services"
         className="bg-slate-900 w-full h-auto px-20 text-center"
       >
->>>>>>> c2f7634c45745db0df89c0fc87ac77ce141603fa
         <Event_card />
       </div>
 
