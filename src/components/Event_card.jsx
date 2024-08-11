@@ -5,7 +5,7 @@ export default function Event_card (){
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center">
     <h1 className="text-3xl font-bold mb-6 text-white">The minimalist way to host all your events successfully!!!</h1>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 width-100">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-purple-800 shadow-pink-600 rounded-xl overflow-hidden bg-gradient-to-br">
       <div className="p-4">
         <h2 className="text-xl font-semibold justify-center">In-Person Meeting</h2>
