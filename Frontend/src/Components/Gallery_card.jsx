@@ -149,7 +149,7 @@ export default function Gallery_Card() {
                 <div
                   key={slideIndex}
                   onClick={() => goToSlide(slideIndex)}
-                  className="text-2xl cursor-pointer"
+                  className="xl:text-2xl sm:text-xl xs:text-md text-sm cursor-pointer"
                 >
                   <RxDotFilled
                     className={`hover:text-yellow-200 ${
