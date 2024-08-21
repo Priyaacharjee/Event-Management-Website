@@ -13,7 +13,7 @@ const Event = ({ event_type, des, video }) => {
           </h2>
           <p className="mt-4 text-white">{des}</p>
         </div>
-        <div className="pt-2 pb-4">
+        <div className="pt-2 pb-2">
           <button className="bg-blue-200 text-black px-4 py-2 rounded-2xl align-middle justify-between">
             Explore More
           </button>
@@ -24,7 +24,7 @@ const Event = ({ event_type, des, video }) => {
             loop
             muted
             playsInline
-            className="object-cover overflow-hidden h-52 w-[80%] rounded-lg p-7"
+            className="object-cover overflow-hidden h-52 w-[80%] rounded-lg p-[5%]"
           >
             <source src={video} type="video/mp4" />
           </video>
@@ -56,15 +56,17 @@ export default function Event_card() {
         />
 
         {/* Hybrid Event--------------------------------------------- */}
-        <Event
-          event_type="Hybrid Meeting"
-          des="Merge the physical with the virtual"
-          video={hybrid}
-        />
+        <div className="w-full h-full hidden lg:block">
+          <Event
+            event_type="Hybrid Meeting"
+            des="Merge the physical with the virtual"
+            video={hybrid}
+          />
+        </div>
       </div>
 
       {/* Onpy For md & sm Screen--------------------------------------- */}
-      <div className="md:w-[19rem] h-auto m-autopt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden pt-10">
+      <div className="md:w-[48%] h-auto m-autopt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden pt-10">
         <Event
           event_type="Hybrid Meeting"
           des="Merge the physical with the virtual"

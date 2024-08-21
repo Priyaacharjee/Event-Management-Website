@@ -26,7 +26,7 @@ const Slider = () => {
         overflow: "hidden",
         margin: "auto",
       }}
-      className="2xl:w-[80%] 2xl:h-[90%] lg:w-[70%] lg:h-[100%] md:w-[85%] md:h-[100%]"
+      className="2xl:w-[80%] 2xl:h-[75%] xl:h-[80%] lg:w-[70%] lg:h-[90%] md:w-[85%] md:h-[100%]"
     >
       <img
         src={images[currentIndex]}

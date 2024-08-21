@@ -19,7 +19,7 @@ const FreqtQuestion = ({ ques, ans }) => {
   }
 
   return (
-    <div id="freq" className="container mx-auto px-4 py-2 w-[95%] flex shadow-md">
+    <div className="container mx-auto px-4 py-2 w-[95%] flex shadow-md">
       <div className="w-[98%]">
         <div className="bg-white rounded-lg px-5 py-2 sm:py-3 md:py-3 lg:py-4 xl:py-5 2xl:py-7">
           <div className="flex">
@@ -60,7 +60,7 @@ const FreqtQuestion = ({ ques, ans }) => {
 const FrequentlyAskedQuestion = ({ Questions }) => {
   return (
     <>
-      <div className="container mx-auto mt-5 px-4 py-20 w-[70%]">
+      <div className="container mx-auto mt-5 px-4 py-20 w-[70%]" id="freq">
         <h1 className="2xl:text-5xl xl:text-5xl lg:text-4xl md:text-4xl sm:text-3xl text-2xl font-bold mb-20 text-center">
           Frequently Asked Questions
         </h1>
