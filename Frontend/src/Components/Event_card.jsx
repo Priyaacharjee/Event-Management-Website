@@ -18,13 +18,13 @@ const Event = ({ event_type, des, video }) => {
             Explore More
           </button>
         </div>
-        <div className="h-52 w-full bg-cover bg-center flex justify-center mt-2">
+        <div className="h-52 w-full bg-cover bg-center flex justify-center mt-2 items-center">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="object-cover overflow-hidden h-52 w-[80%] rounded-lg p-[10%]"
+            className="object-cover overflow-hidden h-48 w-[75%] rounded-lg "
           >
             <source src={video} type="video/mp4" />
           </video>
@@ -42,7 +42,7 @@ export default function Event_card() {
         The minimalist way to host all your events successfully!!!
       </h1>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 sm:gap-y-10 md:gap-x-5 lg:gap-x-4 xl:gap-x-6 xl:gap-y-6 2xl:gap-x-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 sm:gap-y-10 md:gap-x-5 lg:gap-x-4 xl:gap-x-6 xl:gap-y-6 2xl:gap-x-6 gap-y-3">
         {/* In-person Events--------------------------------------------- */}
         
         <Event
@@ -73,7 +73,7 @@ export default function Event_card() {
 
 
       {/* Onpy For md & sm Screen--------------------------------------- */}
-      <div className="md:w-[48%] h-auto m-autopt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden sm:pt-10 md:pt-5">
+      <div className="md:w-[48%] h-auto m-autopt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden sm:pt-10 md:pt-5 mt-3">
         <Event
           event_type="Hybrid Meeting"
           des="Unite the real with digital world!!"
