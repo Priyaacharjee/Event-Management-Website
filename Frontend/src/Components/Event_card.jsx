@@ -18,13 +18,13 @@ const Event = ({ event_type, des, video }) => {
             Explore More
           </button>
         </div>
-        <div className="h-52 w-full bg-cover bg-center flex justify-center mt-2">
+        <div className="h-52 w-full bg-cover bg-center flex justify-center mt-2 border-2 border-red-500 items-center">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="object-cover overflow-hidden h-52 w-[80%] rounded-lg p-[5%]"
+            className="object-cover overflow-hidden h-48 w-[70%] rounded-lg border-2 border-red-500"
           >
             <source src={video} type="video/mp4" />
           </video>
