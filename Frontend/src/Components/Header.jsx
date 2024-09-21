@@ -311,6 +311,3 @@ export default function Header() {
     </>
   );
 }
-
-
-
