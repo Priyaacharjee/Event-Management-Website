@@ -19,15 +19,17 @@ const Event = ({ event_type, des, video }) => {
           </button>
         </div>
         <div className="h-52 w-full bg-cover bg-center flex justify-center mt-2">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="object-cover overflow-hidden h-52 w-[80%] rounded-lg p-7"
-          >
-            <source src={video} type="video/mp4" />
-          </video>
+            <div className="object-cover overflow-hidden h-52 w-[80%] rounded-lg p-7">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="rounded-lg"
+                >
+                  <source src={video} type="video/mp4" />
+                </video>
+            </div>  
         </div>
       </div>
     </>
@@ -63,7 +65,7 @@ export default function Event_card() {
         />
       </div>
 
-      {/* Onpy For md & sm Screen--------------------------------------- */}
+      {/* Ony For md & sm Screen--------------------------------------- */}
       <div className="md:w-[19rem] h-auto m-autopt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden pt-10">
         <Event
           event_type="Hybrid Meeting"
