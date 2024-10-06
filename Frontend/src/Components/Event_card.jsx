@@ -72,7 +72,7 @@ export default function Event_card() {
       </div>
 
 
-      {/* Onpy For md & sm Screen--------------------------------------- */}
+      {/* Only For md & sm Screen--------------------------------------- */}
       <div className="md:w-[48%] h-auto m-autopt-10 block sm:block md:block lg:hidden xl:hidden 2xl:hidden sm:pt-10 md:pt-5 mt-3">
         <Event
           event_type="Hybrid Meeting"

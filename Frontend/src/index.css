@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: 'Anathema';
+    src: url('/src/assets/Anathema.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'copyduck';
+    src: url('/src/assets/Copyduck.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'campana';
+    src: url('/src/assets/CampanaScript.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'blacksword';
+    src: url('/src/assets/Blacksword.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.text-gradient1 {
+    background: linear-gradient(to right,#191970,	#0096FF); /* Gradient colors */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Ensure text color is transparent */
+}
+
+@font-face{
+    font-family: 'quick';
+    src: url('/src/assets/Quickcounters.otf');
+    font-weight: normal;
+    font-style: normal;
+}
