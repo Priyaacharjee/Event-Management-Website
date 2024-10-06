@@ -20,6 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // app.use("/admins", adminRouter);
-// app.use("/users", userRouter);
+app.use("/users", userRouter);
 
 app.listen(8000);
