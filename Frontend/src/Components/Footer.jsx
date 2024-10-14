@@ -118,7 +118,7 @@ export default function Footer() {
 
       {/* Bottom Text------------------------------------------------------ */}
       <div className="bg-gray-900 text-center py-4 mt-8">
-        <p className="text-sm">&copy; {new Date().getFullYear()} YourCompany. All rights reserved | Terms & Conditions | Privacy Policy</p>
+        <p className="text-sm">&copy; {new Date().getFullYear()} Eventek. All rights reserved | Terms & Conditions | Privacy Policy</p>
       </div>
     </footer>
   );

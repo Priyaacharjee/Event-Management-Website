@@ -6,10 +6,10 @@ const mongoUri = process.env.MONGODB_URI;
 mongoose
   .connect(`${mongoUri}`, { dbName: "event_management" })
   .then(() => {
-    console.log("Connected");
+    console.log("Server is running");
   })
   .catch((err) => {
-    console(err.message);
+    console.log(err.message);
   });
 
 module.exports = mongoose.connection;

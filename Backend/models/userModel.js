@@ -18,6 +18,8 @@ const userSchema = mongoose.Schema({
   },
   createdEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
   appliedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
+  pastEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
 });
 
 module.exports = mongoose.model("user", userSchema);
+

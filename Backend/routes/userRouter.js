@@ -1,13 +1,22 @@
+// *userRouter.js*
 const express = require("express");
 const router = express.Router();
 const isLoggedIn = require("../middlewares/userIsLoggedIn");
 const {
+  signUp,
   loginUser,
   logoutUser,
   getUser,
   uploadProfilePicture,
   updatePasswordRequest,
 } = require("../controller/userController");
+
+router.get("/", (req, res) => {
+  res.send("Users");
+});
+
+// USER REGISTER
+router.post("/signup", signUp);
 
 // USER LOGIN
 router.post("/login", loginUser);
