@@ -109,7 +109,7 @@ export default function Header() {
                 <input
                   className={`outline-none text-xl h-16 text-zinc-600 font-serif ring-1 ring-zinc-400 focus:ring-2 duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-xl px-4 py-2 shadow-md focus:shadow-lg dark:shadow-md w-[70%] 2xl:w-[80%] xl:w-[60%] lg:w-[80%] ${isSearchDropdown ? "animate-slideUp block" : "animate-slideBelow block"}`}
                   autoComplete="off"
-                  placeholder="Search here for..."
+                  placeholder="Search here for product reviews, FAQs and More..."
                   name="text"
                   type="text"
                   onKeyDown={handleEnter}
@@ -290,7 +290,7 @@ export default function Header() {
   </div>
 
   {/* hero-right */}
-  <div className="hero-right lg:w-1/3 hidden lg:block">
+  <div className=" hero-right lg:w-1/3 hidden lg:block ">
     <img src="hero.png" alt="Hero" className="w-[400px] h-[400px] 2xl:w-[500px] xl:w-[400px] lg:w-[300px] 2xl:h-[500px] xl:h-[400px] lg:h-[300px] object-cover" />
   </div>
 

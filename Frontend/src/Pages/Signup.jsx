@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'; 
 import Login from "./Login";
+import {signUp} from "../utils/utils";
 
 const Signup = () => {
   const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
-    companyName: '',
+    userName: '',
     email: '',
     contactNumber: '',
     password: '',
@@ -15,6 +16,7 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [signupError, setSignupError] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -42,7 +44,7 @@ const Signup = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.companyName) newErrors.companyName = 'Company/User name is required';
+    if (!formData.userName) newErrors.userName = 'Company/User name is required';
     
     if (!formData.email) {
       newErrors.email = 'Email is required';
@@ -70,16 +72,44 @@ const Signup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSignupError(''); 
+
     if (validateForm()) {
-      alert('Signup successful!');
-      console.log('Form submitted successfully:', formData);
+      try {
+        const result = await signUp(
+          formData.userName,
+          formData.email,
+          formData.contactNumber,
+          formData.password,
+          formData.agreeToTerms
+        );
+
+        if (result && result.error) { 
+          if (result.error === "User already exists. Please Login.") {
+            alert(result.error); 
+          } else {
+            setSignupError('Signup failed. Please try again.'); 
+          }
+        } else {
+          console.log('Signup successful:', result);
+          alert('Signup successful!');
+          navigate('/'); 
+        }
+      } catch (error) {
+        console.error('Signup failed:', error);
+        setSignupError('An error occurred during signup. Please try again.'); 
+      }
     }
-  };
+};
+
+  
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8 ">
+    {/* Sign up box */}
       <div className="bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl flex mt-4 mb-4">
         {/* Left Part */}
         <div className="w-full md:w-1/2 p-6 sm:p-8 relative">
@@ -89,23 +119,23 @@ const Signup = () => {
             <div className="relative z-0 w-full mb-4 group">
               <input
                 type="text"
-                name="companyName"
-                value={formData.companyName}
+                name="userName"
+                value={formData.userName}
                 onChange={handleChange}
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 ${
-                  errors.companyName ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-600'
+                  errors.userName ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-600'
                 } peer`}
                 placeholder=" "
               />
               <label
-                htmlFor="companyName"
+                htmlFor="userName"
                 className={`peer-focus:font-medium absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-2.5 ${
-                  errors.companyName ? 'text-red-500' : 'peer-focus:text-blue-600'
+                  errors.userName ? 'text-red-500' : 'peer-focus:text-blue-600'
                 } peer-focus:top-3 peer-focus:scale-75 peer-focus:-translate-y-6`}
               >
                 Company Name/User Name
               </label>
-              {errors.companyName && <p className="text-red-500 text-sm mt-1">{errors.companyName}</p>}
+              {errors.userName && <p className="text-red-500 text-sm mt-1">{errors.userName}</p>}
             </div>
 
             {/* EMAIL */}
@@ -129,6 +159,7 @@ const Signup = () => {
               </label>
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
+            
 
             {/* CONTACT NUMBER */}
             <div className="relative z-0 w-full mb-4 sm:mb-6 group">
