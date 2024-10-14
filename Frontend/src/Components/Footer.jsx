@@ -12,10 +12,11 @@ export default function Footer() {
         
         {/* About Us */}
         <div className="flex flex-col items-center text-center">
-          <div className="text-center md:text-left md:mb-0">
-               <img className="w-full h-[50%] rounded-2xl" src="logo.jpeg"/>
+          <div className="text-2xl font-serif text-center md:text-left md:mb-0">
+               {/* <img className="border-4 w-full h-[50%] rounded-2xl" src="logo.jpeg"/> */}
+               Eventek
           </div>
-          <p className="mt-[-2rem] text-gray-300 ">We are a company dedicated to providing the best services and solutions for our clients. Our mission is to deliver excellence through innovation and commitment.</p>
+          <p className="mt-[2rem] text-gray-300 ">We are a company dedicated to providing the best services and solutions for our clients. Our mission is to deliver excellence through innovation and commitment.</p>
         </div>
         
         {/* Quick Links */}
@@ -117,7 +118,7 @@ export default function Footer() {
 
       {/* Bottom Text------------------------------------------------------ */}
       <div className="bg-gray-900 text-center py-4 mt-8">
-        <p className="text-sm">&copy; {new Date().getFullYear()} YourCompany. All rights reserved | Terms & Conditions | Privacy Policy</p>
+        <p className="text-sm">&copy; {new Date().getFullYear()} Eventek. All rights reserved | Terms & Conditions | Privacy Policy</p>
       </div>
     </footer>
   );
