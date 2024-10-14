@@ -158,6 +158,7 @@ const Signup = () => {
                 <p className="text-red-500 text-sm mt-1">{errors.email}</p>
               )}
             </div>
+            
 
             {/* CONTACT NUMBER */}
             <div className="relative z-0 w-full mb-4 sm:mb-6 group">
