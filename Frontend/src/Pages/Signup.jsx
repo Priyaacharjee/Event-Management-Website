@@ -265,11 +265,11 @@ const Signup = () => {
 
           {/* OR CONTINUE WITH */}
           <div className="flex items-center justify-between mt-6">
-            <hr className="w-[35%] border-b w-1/5 lg:w-1/4" />
+            <hr className="border-b w-1/5 lg:w-1/4" />
             <p className="text-xs text-center text-gray-500 uppercase">
               Or continue with
             </p>
-            <hr className="w-[35%] border-b w-1/5 lg:w-1/4" />
+            <hr className="border-b w-1/5 lg:w-1/4" />
           </div>
 
           {/* GOOGLE AND FACEBOOK BUTTONS */}
