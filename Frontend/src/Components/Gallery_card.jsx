@@ -104,7 +104,7 @@ export default function Gallery_Card() {
           </div>
           {/* End gallery header */}
 
-          <div className="max-w-[1500px] h-auto w-full m-auto py-20 px-2 sm:px-4 relative group">
+          <div className="max-w-[1500px] h-auto w-full m-auto py-20 px-2 sm:px-4  group">
             <div className="slider flex overflow-hidden items-center justify-center gap-4">
               {slides
                 .slice(currentIndex, currentIndex + 3)
