@@ -41,6 +41,7 @@ module.exports.signUp = async (req, res) => {
   }
 };
 
+
 // Login
 module.exports.loginUser = async (req, res) => {
   try {
