@@ -75,7 +75,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSignupError(''); 
+    setSignupError("");
 
     if (validateForm()) {
       try {
@@ -87,23 +87,17 @@ const Signup = () => {
           formData.agreeToTerms
         );
 
-        if (result && result.error) { 
-          if (result.error === "User already exists. Please Login.") {
-            alert(result.error); 
-          } else {
-            setSignupError('Signup failed. Please try again.'); 
-          }
+        if (result !== "User created successfully") {
+          alert(result);
         } else {
-          console.log('Signup successful:', result);
-          alert('Signup successful!');
-          navigate('/'); 
+          navigate("/");
         }
       } catch (error) {
-        console.error('Signup failed:', error);
-        setSignupError('An error occurred during signup. Please try again.'); 
+        console.error("Signup failed:", error);
+        setSignupError("An error occurred during signup. Please try again.");
       }
     }
-};
+  };
 
   
 

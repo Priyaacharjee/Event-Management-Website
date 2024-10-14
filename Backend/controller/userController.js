@@ -12,9 +12,7 @@ module.exports.signUp = async (req, res) => {
     if (email && password && userName && contactNumber && agreeToTerms) {
       const existingUser = await userModel.findOne({ email });
       if (existingUser) {
-        return res
-          .status(400)
-          .json({ error: "User already exists. Please Login." });
+        return res.send("User already exists. Please Login.");
       }
 
       const salt = await bcrypt.genSalt(12);
@@ -32,21 +30,17 @@ module.exports.signUp = async (req, res) => {
         httpOnly: true,
         secure: false,
         sameSite: "Lax",
-        path: "/",
       });
 
-      return res
-        .status(201)
-        .json({ message: "User created successfully", user: newUser });
+      res.send("User created successfully");
     } else {
-      return res.status(400).json({
-        error: "All fields are required and you must agree to the terms.",
-      });
+      res.send("All fields are required and you must agree to the terms.");
     }
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    res.send(err.message);
   }
 };
+
 
 // Login
 module.exports.loginUser = async (req, res) => {
