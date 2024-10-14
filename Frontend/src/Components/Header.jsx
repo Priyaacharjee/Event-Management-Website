@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faBars,faXmark,faCaretDown,faCaretUp,faMagnifyingGlass,faUser,} from "@fortawesome/free-solid-svg-icons";
-import ThemeButton from "./ThemeButton";
+import {faBars,faXmark,faCaretDown,faCaretUp,faMagnifyingGlass,faUser} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 
