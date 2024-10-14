@@ -1,7 +1,7 @@
 // *userRouter.js*
 const express = require("express");
 const router = express.Router();
-const userIsLoggedIn = require("../middlewares/userIsLoggedIn");
+const isLoggedIn = require("../middlewares/userIsLoggedIn");
 const {signUp} = require("../controller/userController");
 
 router.get("/", (req, res) => {

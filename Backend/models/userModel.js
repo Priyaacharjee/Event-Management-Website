@@ -2,10 +2,10 @@
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
-  userName: String,
+  username: String,
   email: String,
   password: String,
-  contactNumber: String,
+  contact: String,
   createdEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
   appliedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
   pastEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],

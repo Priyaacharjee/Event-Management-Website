@@ -8,7 +8,6 @@ module.exports.signUp = async (req, res) => {
   try {
     let { email, password, userName, contactNumber, agreeToTerms } = req.body;
 
-    console.log('Received request body:', req.body);
     if (email && password && userName && contactNumber && agreeToTerms) {
       const existingUser = await userModel.findOne({ email });
       if (existingUser) {
@@ -21,16 +20,15 @@ module.exports.signUp = async (req, res) => {
       let newUser = await userModel.create({
         email,
         password: hashedPassword,
-        userName,
-        contactNumber,
-        agreeToTerms, 
+        username: userName,
+        contact: contactNumber,
       });
 
       let token = generateToken(newUser);
       res.cookie("token", token, {
         httpOnly: true, 
-        secure: true, 
-        sameSite: "None", 
+        secure: false, 
+        sameSite: "Lax", 
         path: "/", 
       });
 
