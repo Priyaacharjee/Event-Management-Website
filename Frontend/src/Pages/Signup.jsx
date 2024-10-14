@@ -1,81 +1,80 @@
-import React, { useState } from 'react';
-import { FaGoogle, FaFacebook } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useState } from "react";
+import { FaGoogle, FaFacebook } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Login from "./Login";
-import {signUp} from "../utils/utils";
+import { signUp } from "../utils/utils";
 
 const Signup = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    userName: '',
-    email: '',
-    contactNumber: '',
-    password: '',
-    confirmPassword: '',
+    userName: "",
+    email: "",
+    contactNumber: "",
+    password: "",
+    confirmPassword: "",
     agreeToTerms: false,
   });
 
   const [errors, setErrors] = useState({});
-  const [signupError, setSignupError] = useState('');
+  const [signupError, setSignupError] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
 
-
-  if (name === 'confirmPassword') {
-    if (value !== formData.password) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        confirmPassword: 'Passwords do not match',
-      }));
-    } else {
-      setErrors((prevErrors) => {
-        const { confirmPassword, ...rest } = prevErrors;
-        return rest;
-      });
+    if (name === "confirmPassword") {
+      if (value !== formData.password) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          confirmPassword: "Passwords do not match",
+        }));
+      } else {
+        setErrors((prevErrors) => {
+          const { confirmPassword, ...rest } = prevErrors;
+          return rest;
+        });
+      }
     }
-  }
   };
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.userName) newErrors.userName = 'Company/User name is required';
-    
+    if (!formData.userName)
+      newErrors.userName = "Company/User name is required";
+
     if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!formData.email.includes('@')) {
-      newErrors.email = 'Invalid email';
+      newErrors.email = "Email is required";
+    } else if (!formData.email.includes("@")) {
+      newErrors.email = "Invalid email";
     }
 
     if (!formData.contactNumber) {
-      newErrors.contactNumber = 'Contact number is required';
+      newErrors.contactNumber = "Contact number is required";
     } else if (!/^\d{10}$/.test(formData.contactNumber)) {
-      newErrors.contactNumber = 'Contact number must be 10 digits';
+      newErrors.contactNumber = "Contact number must be 10 digits";
     }
 
-    if (!formData.password) newErrors.password = 'Password is required';
-    
+    if (!formData.password) newErrors.password = "Password is required";
+
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = "Passwords do not match";
     }
 
     if (!formData.agreeToTerms) {
-      newErrors.agreeToTerms = 'You must agree to the terms and privacy policy';
+      newErrors.agreeToTerms = "You must agree to the terms and privacy policy";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSignupError(''); 
+    setSignupError("");
 
     if (validateForm()) {
       try {
@@ -87,33 +86,27 @@ const Signup = () => {
           formData.agreeToTerms
         );
 
-        if (result && result.error) { 
-          if (result.error === "User already exists. Please Login.") {
-            alert(result.error); 
-          } else {
-            setSignupError('Signup failed. Please try again.'); 
-          }
+        if (result !== "User created successfully") {
+          alert(result);
         } else {
-          console.log('Signup successful:', result);
-          alert('Signup successful!');
-          navigate('/'); 
+          navigate("/");
         }
       } catch (error) {
-        console.error('Signup failed:', error);
-        setSignupError('An error occurred during signup. Please try again.'); 
+        console.error("Signup failed:", error);
+        setSignupError("An error occurred during signup. Please try again.");
       }
     }
-};
-
-  
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8 ">
-    {/* Sign up box */}
+      {/* Sign up box */}
       <div className="bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl flex mt-4 mb-4">
         {/* Left Part */}
         <div className="w-full md:w-1/2 p-6 sm:p-8 relative">
-          <h2 className="font-serif text-3xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">Sign up</h2>
+          <h2 className="font-serif text-3xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
+            Sign up
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* COMPANY NAME */}
             <div className="relative z-0 w-full mb-4 group">
@@ -123,19 +116,23 @@ const Signup = () => {
                 value={formData.userName}
                 onChange={handleChange}
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 ${
-                  errors.userName ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-600'
+                  errors.userName
+                    ? "border-red-500 focus:border-red-500"
+                    : "border-gray-300 focus:border-blue-600"
                 } peer`}
                 placeholder=" "
               />
               <label
                 htmlFor="userName"
                 className={`peer-focus:font-medium absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-2.5 ${
-                  errors.userName ? 'text-red-500' : 'peer-focus:text-blue-600'
+                  errors.userName ? "text-red-500" : "peer-focus:text-blue-600"
                 } peer-focus:top-3 peer-focus:scale-75 peer-focus:-translate-y-6`}
               >
                 Company Name/User Name
               </label>
-              {errors.userName && <p className="text-red-500 text-sm mt-1">{errors.userName}</p>}
+              {errors.userName && (
+                <p className="text-red-500 text-sm mt-1">{errors.userName}</p>
+              )}
             </div>
 
             {/* EMAIL */}
@@ -147,7 +144,7 @@ const Signup = () => {
                 onChange={handleChange}
                 id="email"
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                  errors.email ? "border-red-500" : "border-gray-300"
                 } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
@@ -157,7 +154,9 @@ const Signup = () => {
               >
                 Email Address
               </label>
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
 
             {/* CONTACT NUMBER */}
@@ -168,7 +167,7 @@ const Signup = () => {
                 value={formData.contactNumber}
                 onChange={handleChange}
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 ${
-                  errors.contactNumber ? 'border-red-500' : 'border-gray-300'
+                  errors.contactNumber ? "border-red-500" : "border-gray-300"
                 } peer`}
                 placeholder=" "
               />
@@ -178,7 +177,11 @@ const Signup = () => {
               >
                 Contact Number
               </label>
-              {errors.contactNumber && <p className="text-red-500 text-sm mt-1">{errors.contactNumber}</p>}
+              {errors.contactNumber && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.contactNumber}
+                </p>
+              )}
             </div>
 
             {/* PASSWORD */}
@@ -189,7 +192,7 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleChange}
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
-                  errors.password ? 'border-red-500' : 'border-gray-300'
+                  errors.password ? "border-red-500" : "border-gray-300"
                 } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
@@ -199,7 +202,9 @@ const Signup = () => {
               >
                 Password
               </label>
-              {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+              )}
             </div>
 
             {/* CONFIRM PASSWORD */}
@@ -210,7 +215,7 @@ const Signup = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
-                  errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+                  errors.confirmPassword ? "border-red-500" : "border-gray-300"
                 } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
@@ -220,30 +225,33 @@ const Signup = () => {
               >
                 Confirm Password
               </label>
-              {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.confirmPassword}
+                </p>
+              )}
             </div>
 
             {/* CHECKBOX */}
             <div className="flex items-start pb-4 sm:pb-6">
-                <input
-                  type="checkbox"
-                  name="agreeToTerms"
-                  checked={formData.agreeToTerms}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
-                />
-                <div className="ml-2">
-                  <label className="block text-gray-600">
-                    I'm agree with the terms and privacy policy
-                  </label>
-                  {errors.agreeToTerms && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.agreeToTerms}
-                    </p>
-                  )}
-                </div>
+              <input
+                type="checkbox"
+                name="agreeToTerms"
+                checked={formData.agreeToTerms}
+                onChange={handleChange}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
+              />
+              <div className="ml-2">
+                <label className="block text-gray-600">
+                  I'm agree with the terms and privacy policy
+                </label>
+                {errors.agreeToTerms && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.agreeToTerms}
+                  </p>
+                )}
+              </div>
             </div>
-
 
             {/* SIGN IN BUTTON */}
             <button
@@ -256,9 +264,11 @@ const Signup = () => {
 
           {/* OR CONTINUE WITH */}
           <div className="flex items-center justify-between mt-6">
-              <hr className="w-[35%] border-b w-1/5 lg:w-1/4"/>
-              <p className="text-xs text-center text-gray-500 uppercase">Or continue with</p>
-              <hr className="w-[35%] border-b w-1/5 lg:w-1/4"/>
+            <hr className="w-[35%] border-b w-1/5 lg:w-1/4" />
+            <p className="text-xs text-center text-gray-500 uppercase">
+              Or continue with
+            </p>
+            <hr className="w-[35%] border-b w-1/5 lg:w-1/4" />
           </div>
 
           {/* GOOGLE AND FACEBOOK BUTTONS */}
@@ -277,19 +287,19 @@ const Signup = () => {
             </button>
           </div>
 
-         {/* ALREADY HAVE AN ACCOUNT LINK */}
-         <div className="text-center mt-4 mb-2">
+          {/* ALREADY HAVE AN ACCOUNT LINK */}
+          <div className="text-center mt-4 mb-2">
             <p className="text-gray-600">
-              Already have an account?{' '}
+              Already have an account?{" "}
               <span
-              className="text-blue-600 underline hover:no-underline cursor-pointer"
-              onClick={() => {
-                console.log('Login link clicked');
-                navigate('/login');
-              }}
-            >
-                 Login
-            </span>
+                className="text-blue-600 underline hover:no-underline cursor-pointer"
+                onClick={() => {
+                  console.log("Login link clicked");
+                  navigate("/login");
+                }}
+              >
+                Login
+              </span>
             </p>
           </div>
         </div>
@@ -297,10 +307,20 @@ const Signup = () => {
         {/* Right Part */}
         <div
           className="hidden md:flex md:w-1/2 items-center justify-center p-8 relative "
-          style={{ clipPath: 'polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)' }}
+          style={{
+            clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)",
+          }}
         >
-          <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted>
-            <source src="https://media.istockphoto.com/id/2153401715/video/young-empowering-thought-leader-standing-behind-a-tribune-showing-an-inspiring-presentation.mp4?s=mp4-640x640-is&k=20&c=RJ1xCk0nm_OltgDlxOqDxEnGAg2jKz-nYvGS21P3zpQ=" type="video/mp4" />
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+          >
+            <source
+              src="https://media.istockphoto.com/id/2153401715/video/young-empowering-thought-leader-standing-behind-a-tribune-showing-an-inspiring-presentation.mp4?s=mp4-640x640-is&k=20&c=RJ1xCk0nm_OltgDlxOqDxEnGAg2jKz-nYvGS21P3zpQ="
+              type="video/mp4"
+            />
           </video>
         </div>
       </div>
@@ -309,4 +329,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
