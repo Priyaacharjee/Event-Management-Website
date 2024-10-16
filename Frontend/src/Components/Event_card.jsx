@@ -127,6 +127,7 @@ const Event = ({ event_type, des, video }) => {
   );
 };
 
+
 export default function Event_card() {
   return (
    

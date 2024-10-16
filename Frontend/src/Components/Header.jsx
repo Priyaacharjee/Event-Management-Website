@@ -220,21 +220,21 @@ export default function Header() {
             } absolute top-14 right-5 bg-slate-300 bg-opacity-[0.3] rounded-lg`}
             style={{backgroundColor:'rgba(0, 0, 255, 0.6)'}}
           >
-            <div className="w-full text-center pt-4 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
+            <Link className="w-full text-center pt-4 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
               Home
-            </div>
-            <div className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
+            </Link>
+            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
               Services
-            </div>
-            <div className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
+            </Link>
+            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
               About
-            </div>
-            <div className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
+            </Link>
+            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
               Contact
-            </div>
-            <div className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
+            </Link>
+            <Link className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
               Gallery
-            </div>
+            </Link>
           </div>
         )}
 
