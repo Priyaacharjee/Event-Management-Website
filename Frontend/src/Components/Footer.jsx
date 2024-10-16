@@ -13,7 +13,6 @@ export default function Footer() {
         {/* About Us */}
         <div className="flex flex-col items-center text-center">
           <div className="text-2xl font-serif text-center md:text-left md:mb-0">
-               {/* <img className="border-4 w-full h-[50%] rounded-2xl" src="logo.jpeg"/> */}
                Eventek
           </div>
           <p className="mt-[2rem] text-gray-300 ">We are a company dedicated to providing the best services and solutions for our clients. Our mission is to deliver excellence through innovation and commitment.</p>

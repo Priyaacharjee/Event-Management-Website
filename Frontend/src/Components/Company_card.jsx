@@ -16,7 +16,7 @@ const CompanyCard = ({ logo, rating }) => {
       <div className="rounded-xl xs:w-56 w-44 h-40 justify-center shadow-md bg-zinc-100 flex flex-col items-center">
         <div className=" rounded-xl h-20 bg-gradient-to-r from-blue-900 to-cyan-600 shadow-2xl w-full"></div>
         <img
-          className="rounded-full w-[120px] h-[120px] mt-[-66px] border-4 border-white-500/100 shadow-2xl"
+          className="rounded-full w-[120px] h-[115px] mt-[-66px] border-4 border-white-500/100 shadow-2xl"
           src={logo}
           alt="Company Logo"
         />
@@ -61,6 +61,18 @@ const companiesData = [
   {
     logo: 'https://i.pinimg.com/474x/26/18/66/261866f939644dc0fc73eb129af3b42e.jpg',
     rating: 2,
+  },
+  {
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkmk-siGMW3NHmUIx8VoPzJPwv9xWVxzIV0A&s',
+    rating: 3,
+  },
+  {
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Meesho_logo.png',
+    rating: 4,
+  },
+  {
+    logo: 'https://media.geeksforgeeks.org/wp-content/uploads/20190802021607/geeks14.png',
+    rating: 4,
   },
 ];
 
