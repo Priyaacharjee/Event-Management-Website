@@ -132,7 +132,7 @@ export default function Gallery_Card() {
 
             {/* Left Arrow */}
             <div
-              className="hidden group-hover:block absolute top-[32%] transform translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer z-10"
+              className=" absolute top-[32%] transform translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-white/60 text-black cursor-pointer z-10"
               onClick={prevSlide}
             >
               <BsChevronCompactLeft size={30} />
@@ -140,7 +140,7 @@ export default function Gallery_Card() {
 
             {/* Right Arrow */}
             <div
-              className="hidden group-hover:block absolute top-[32%] transform translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer z-10"
+              className="absolute top-[32%] transform translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-white/60 text-black  cursor-pointer z-10"
               onClick={nextSlide}
             >
               <BsChevronCompactRight size={30} />
