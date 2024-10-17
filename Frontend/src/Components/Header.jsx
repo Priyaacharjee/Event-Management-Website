@@ -217,7 +217,7 @@ export default function Header({ menuItems }) {
         {/* User Dropdown */}
         {(dropDownOpen || isClosingDropdown) && (
           <div
-            className={`absolute top-14 left-[49%] 2xl:left-[87%] xl:left-[83%] lg:left-[75%] md:left-[71%] sm:left-[66%] flex-col flex text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-slate-300 bg-opacity-[0.3] rounded-lg ${
+            className={`border-4 absolute top-14 left-[49%] 2xl:left-[87%] xl:left-[83%] lg:left-[75%] md:left-[71%] sm:left-[66%] flex-col flex text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-slate-300 bg-opacity-[0.3] rounded-lg ${
               isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
             }`}
           >
