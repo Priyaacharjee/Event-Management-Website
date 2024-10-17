@@ -11,6 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ThemeButton from "./ThemeButton";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-scroll';
+
 
 export default function Header() {
   const navigate = useNavigate();
@@ -129,28 +131,48 @@ export default function Header() {
         {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------  NAVBAR */}
         <nav
           id="header"
-          className="h-16 flex items-center px-4 justify-between w-full text-[16px] bg-black text-white fixed top-0"
+          className="h-16 flex items-center px-4 justify-between w-full text-[16px] bg-black text-white fixed top-0 z-50"
         >
           {/* Logo */}
-          <div className="font-serif text-2xl w-[50%] sm:w-[15%] md:w-[20%] lg:w-[20%] xl:w-[20%] 2xl:w-[20%] lg:pl-5 xl:pl-8">
+          <div className="text-gradient2 font-serif text-5xl w-[50%] sm:w-[20%] md:w-[20%] lg:w-[20%] xl:w-[20%] 2xl:w-[20%] lg:pl-5 xl:pl-8"  style={{ fontFamily: '"quick"' }}>
             Eventek
           </div>
 
           {/* Navbar Menu */}
-          <div className="hidden sm:flex md:w-3/5 lg:w-[45%] xl:w-[40%] 2xl:w-[35%] items-center">
-            <ul className="w-full flex justify-around text-center sm:space-x-4 md:space-x-6 lg:space-x-8">
-              <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline">
+          <div className="hidden md:flex md:w-3/5 lg:w-[45%] xl:w-[40%] 2xl:w-[35%] items-center">
+            <ul className="w-full flex justify-around text-center sm:space-x-2 md:space-x-4 lg:space-x-8">
+            <Link 
+                to="services" 
+                smooth={true} 
+                duration={500} 
+                className="hover:cursor-pointer hover:text-red-300 hover:font-bold "
+              >
                 Services
-              </li>
-              <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline">
-                About
-              </li>
-              <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline">
-                Contact
-              </li>
-              <li className="hover:cursor-pointer hover:text-blue-100 hover:font-bold hover:underline">
-                Gallery
-              </li>
+              </Link>
+              <Link 
+                to="features" 
+                smooth={true} 
+                duration={500} 
+                className="hover:cursor-pointer hover:text-red-300 hover:font-bold "
+              >
+                Features
+              </Link>
+              <Link 
+                to="upcoming" 
+                smooth={true} 
+                duration={500} 
+                className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
+              >
+                 Upcoming&nbsp; Events
+              </Link>
+              <Link 
+                to="freq" 
+                smooth={true} 
+                duration={500} 
+                className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
+              >
+                 Help
+              </Link>
             </ul>
           </div>
 
@@ -171,33 +193,50 @@ export default function Header() {
               <div className=" w-full flex justify-center items-center">
                 <button
                   onClick={handleLogInClick}
-                  className="bg-indigo-400  hover:bg-slate-500 flex justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-4 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl "
+                  className="flex btn1 justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-2 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl "
                 >
                   Log In
                 </button>
               </div>
             </div>
 
-            {/* Hamburger Menu */}
-            <div className="block sm:hidden">
-              {hamburgerMenuClicked ? (
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  style={{ color: "#ffffff" }}
-                  className="cursor-pointer h-6 w-7"
-                  onClick={hambergerClick}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faBars}
-                  style={{ color: "#ffffff" }}
-                  className="cursor-pointer h-6"
-                  onClick={hambergerClick}
-                />
-              )}
+            {/* Hamburger Icon */}
+            <div className="block md:hidden position-fixed no">
+              <FontAwesomeIcon
+                icon={hamburgerMenuClicked ? faXmark : faBars}
+                style={{ color: "#ffffff" }}
+                className={`cursor-pointer h-6 w-7 animate-none`}
+                onClick={hambergerClick}
+              />
             </div>
           </div>
         </nav>
+
+          {/* Hamburger Menu */}
+          {(hamburgerMenuClicked || isClosing) && (
+          <div
+            className={` flex-col flex justify-end mt-4 mr-2 text-white w-40 items-center h-[12.2rem]  ${
+              isClosing ? "animate-slideOut" : "animate-slideIn"
+            } absolute top-14 right-5 bg-slate-300 bg-opacity-[0.3] rounded-lg`}
+            style={{backgroundColor:'rgba(0, 0, 255, 0.6)'}}
+          >
+            <Link className="w-full text-center pt-4 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
+              Home
+            </Link>
+            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
+              Services
+            </Link>
+            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
+              About
+            </Link>
+            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
+              Contact
+            </Link>
+            <Link className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
+              Gallery
+            </Link>
+          </div>
+        )}
 
         {/* User Dropdown */}
         {(dropDownOpen || isClosingDropdown) && (
@@ -215,49 +254,26 @@ export default function Header() {
           </div>
         )}
 
-        {/* Hamburger Menu Dropdown */}
-        {(hamburgerMenuClicked || isClosing) && (
-          <div
-            className={`flex-col flex justify-end mr-5 text-white w-40 items-center h-[12.2rem] ${
-              isClosing ? "animate-slideOut" : "animate-slideIn"
-            } absolute top-14 right-5 bg-slate-300 bg-opacity-[0.3] rounded-lg`}
-          >
-            <div className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-blue-300 hover:underline hover:font-bold">
-              Home
-            </div>
-            <div className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-blue-300 hover:underline hover:font-bold">
-              Services
-            </div>
-            <div className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-blue-300 hover:underline hover:font-bold">
-              About
-            </div>
-            <div className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-blue-300 hover:underline hover:font-bold">
-              Contact
-            </div>
-            <div className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-blue-300 hover:underline hover:font-bold">
-              Gallery
-            </div>
-          </div>
-        )}
+ 
       </div>
 
       {/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------  HERO  PANEL */}
-      <div className="hero flex flex-col lg:flex-row lg:items-center lg:justify-between lg:h-[42rem] p-4 bg-gradient-to-r from-cyan-500 to-blue-500  lg:bg-none">
+      <div className="hero flex flex-col lg:flex-row lg:items-center lg:justify-between lg:h-[42rem] p-4 bg-gradient-to-b from-cyan-300 to-white  lg:bg-none lg:mb-[-4rem]">
         {/* hero-left */}
-        <div className="hero-left lg:w-2/3 lg:mt-0 mt-[5rem] pl-4 lg:pl-6 flex flex-col items-center lg:items-start lg:text-left">
-          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-6 text-center lg:text-left">
+        <div className="lg:ml-12 hero-left lg:w-[55rem] lg:mt-0 mt-[5rem] pl-4 lg:pl-6 flex flex-col items-center lg:items-start lg:text-left">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-2xl mb-6 text-center lg:text-left font-serif">
             Crafting your experience
           </h1>
           <h1 className="font-bold font-serif text-center lg:text-left">
             <p
-              className="text-gradient1 text-4xl xs:text-4xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-8xl font-bold h-32 pt-2"
+              className="text-gradient1 text-4xl xs:text-4xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-bold h-32 pt-2"
               style={{ fontFamily: '"quick"' }}
             >
-              Ready to get started?
+              Ready to get started&nbsp;?
             </p>
           </h1>
           <br />
-          <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center lg:text-left mt-[-5rem] md:mt-[-3rem] lg:mt-[1px]">
+          <h1 className="text-sm font-serif font-bold sm:font-normal sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl text-center lg:text-left mt-[-4rem] md:mt-[-3rem] lg:mt-[-3rem] xl:mt-[1px]">
             We make&nbsp;
             <TypeAnimation
               sequence={[
@@ -272,32 +288,30 @@ export default function Header() {
               speed={150}
               style={{
                 fontSize: "1.5em",
-                color: "#8EA8FF",
+                color: "#3d8cf2",
                 display: "inline-block",
               }}
               repeat={Infinity}
             />
             &nbsp;for you
           </h1>
-          <div className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left">
-            We specialize in organizing exquisite and memorable events. From
-            elegant weddings to corporate gatherings, we bring your vision to
-            life with precision and style.
+          <div className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif">
+           We specialize in organizing exquisite events, whether in-person, virtual, or hybrid mode,
+           with flawless execution and attention to detail.
           </div>
-          <div className="flex flex-col lg:flex-row w-full lg:w-[70%] mt-6 lg:mt-8 space-y-4 lg:space-y-0 lg:space-x-4 items-center lg:items-start">
-            {/* LOGIN Button */}
-            <div className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]">
+          <div className=" flex justify-center items-center gap-4 lg:gap-0 flex-col xds:flex-row  w-full lg:w-[70%] mt-6 lg:mt-8 space-y-4 lg:space-y-0 lg:space-x-4 items-center lg:items-start">
+            <div className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]" style={{ color: "#ffffff" }}>
               <button
                 onClick={handleSignUpClick}
-                className="flex justify-center items-center h-full w-full bg-indigo-400 p-4 rounded-full font-bold text-xl hover:bg-slate-500"
+                className="flex btn1 justify-center items-center h-full w-full  p-4 rounded-full "
               >
                 Create Events
               </button>
             </div>
-            <div className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]">
+            <div className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]" style={{ color: "#ffffff" }}>
               <button
                 onClick={handleLogInClick}
-                className="flex justify-center items-center h-full w-full bg-indigo-400 p-4 rounded-full font-bold text-xl hover:bg-slate-500"
+                className="flex btn1 justify-center items-center h-full w-full p-4 rounded-full -mt-4 lg:mt-0"
               >
                 Show Events
               </button>
@@ -306,11 +320,11 @@ export default function Header() {
         </div>
 
         {/* hero-right */}
-        <div className=" hero-right lg:w-1/3 hidden lg:block ">
+        <div className=" hero-right lg:w-[45rem] hidden lg:block ">
           <img
             src="hero.png"
             alt="Hero"
-            className="w-[400px] h-[400px] 2xl:w-[500px] xl:w-[400px] lg:w-[300px] 2xl:h-[500px] xl:h-[400px] lg:h-[300px] object-cover"
+            className="w-[600px] h-[400px] 2xl:w-[630px] xl:w-[600px] lg:w-[500px] 2xl:h-[500px] xl:h-[400px] lg:h-[350px] object-cover"
           />
         </div>
 
@@ -319,10 +333,10 @@ export default function Header() {
           <div className="relative w-full">
             <input
               type="text"
-              placeholder="Search Here..."
-              className="w-full h-full p-4 rounded-full bg-zinc-200 text-zinc-600 font-mono focus:outline-none md:p-3 sm:p-3 xs:p-3 shadow-2xl border-2 border-black "
+              placeholder="Search for product reviews, FAQs and More..."
+              className="w-full h-full p-4 rounded-full font-serif text-sm sm:text-md text-zinc-700 font-mono focus:outline-none md:p-3 sm:p-3 xs:p-3 shadow-2xl border-2 border-black "
             />
-            <button className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-slate-900 rounded-full w-10 h-10">
+            <button className="absolute right-[2px] top-1/2 transform -translate-y-1/2 bg-slate-900 rounded-full w-[4rem] h-[2.67rem]">
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
                 style={{ color: "#ffffff" }}

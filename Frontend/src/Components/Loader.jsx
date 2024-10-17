@@ -10,5 +10,4 @@ export default function Loader() {
   <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
 </div>
 </>
-  )
-}
+)}

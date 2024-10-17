@@ -5,7 +5,6 @@ import Login from "./Login";
 import { signUp } from "../utils/utils";
 import Loader from "../Components/loader";
 
-
 const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
