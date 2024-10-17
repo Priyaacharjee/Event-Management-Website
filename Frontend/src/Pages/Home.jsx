@@ -10,15 +10,39 @@ import FreqtQuestion from "../Components/FreqtQuestion";
 import Gallery_Card from "../Components/Gallery_card";
 import Event_card from "../Components/Event_card";
 import { useNavigate } from "react-router-dom";
+import { AiFillHome, AiOutlineSolution, AiOutlineAppstore, AiOutlineTeam, AiOutlineQuestionCircle, AiFillEdit,  AiFillVideoCamera } from 'react-icons/ai';
+
+
+const headerMenuItems = [
+  { label: 'Services', href: 'services' },
+  { label: 'Features', href: 'features' },
+  { label: 'Upcoming  Events', href: 'upcoming' },
+  { label: 'Help', href: 'freq' },
+];
+
+
+const footerMenuItems = [
+  { href: 'header', label: 'Header', icon: AiFillHome },
+  { href: 'services', label: 'Services', icon: AiOutlineSolution },
+  { href: 'features', label: 'Features', icon: AiOutlineAppstore },
+  { href: 'collaborators', label: 'Collaborators', icon: AiOutlineTeam },
+  { href: 'analytic', label: 'Analytics', icon: AiFillEdit },
+  { href: 'freq', label: 'Help', icon: AiOutlineQuestionCircle },
+];
+
 
 export default function Home() {
   const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate("/signup");
+  };
 
 
   return (
     <>
       {/*HEADER ------------------------------------------------------------- */}
-      <Header />
+      <Header menuItems={headerMenuItems} />
 
       {/*EVENT TYPES --------------------------------------------------------- */}
       <div
@@ -156,8 +180,11 @@ export default function Home() {
           Elevate your Events, elevate Our brand
         </div>
         <div className="h-[10%] w-[75%] hover:w-[76%] sm:w-[65%] sm:hover:w-[66%] md:w-[50%] md:hover:w-[51%] lg:w-[40%] lg:hover:w-[41%]">
-          <button className="mt-10 h-full w-full bg-blue-400 p-5 rounded-md font-bold 2xl:text-3xl xl:text-2xl md:text-2xl sm:text-xl text-xl hover:bg-blue-500">
-            Get Started
+          <button 
+                onClick={handleSignUpClick}
+                className="mt-10 h-full w-full bg-blue-400 p-5 rounded-md font-bold 2xl:text-3xl xl:text-2xl md:text-2xl sm:text-xl text-xl hover:bg-blue-500"
+          >
+             Get Started
           </button>
         </div>
       </div>
@@ -165,7 +192,7 @@ export default function Home() {
       {/* Frequently asked question--------------------------------------------------------------- */}
       <FreqtQuestion />
 
-      <Footer />
+      <Footer menuItems1={footerMenuItems}/>
     </>
   );
 }
