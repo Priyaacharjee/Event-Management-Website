@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-scroll';
 
 
-export default function Header() {
+export default function Header({ menuItems }) {
   const navigate = useNavigate();
   const [hamburgerMenuClicked, setHamburgerMenuClicked] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -141,38 +141,17 @@ export default function Header() {
           {/* Navbar Menu */}
           <div className="hidden md:flex md:w-3/5 lg:w-[45%] xl:w-[40%] 2xl:w-[35%] items-center">
             <ul className="w-full flex justify-around text-center sm:space-x-2 md:space-x-4 lg:space-x-8">
-            <Link 
-                to="services" 
-                smooth={true} 
-                duration={500} 
-                className="hover:cursor-pointer hover:text-red-300 hover:font-bold "
-              >
-                Services
-              </Link>
-              <Link 
-                to="features" 
-                smooth={true} 
-                duration={500} 
-                className="hover:cursor-pointer hover:text-red-300 hover:font-bold "
-              >
-                Features
-              </Link>
-              <Link 
-                to="upcoming" 
-                smooth={true} 
-                duration={500} 
-                className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
-              >
-                 Upcoming&nbsp; Events
-              </Link>
-              <Link 
-                to="freq" 
-                smooth={true} 
-                duration={500} 
-                className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
-              >
-                 Help
-              </Link>
+              {menuItems.map((item, index) => (
+                <Link
+                  key={index}
+                  to={item.href}
+                  smooth={true}
+                  duration={500}
+                  className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </ul>
           </div>
 
@@ -189,7 +168,7 @@ export default function Header() {
             </div>
 
             {/* LOGIN Button */}
-            <div className=" flex items-center justify-center px-1 sm:px-8 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
+            <div className=" flex items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
               <div className=" w-full flex justify-center items-center">
                 <button
                   onClick={handleLogInClick}
@@ -201,7 +180,7 @@ export default function Header() {
             </div>
 
             {/* Hamburger Icon */}
-            <div className="block md:hidden position-fixed no">
+            <div className="block md:hidden fixed ">
               <FontAwesomeIcon
                 icon={hamburgerMenuClicked ? faXmark : faBars}
                 style={{ color: "#ffffff" }}
@@ -212,31 +191,28 @@ export default function Header() {
           </div>
         </nav>
 
-          {/* Hamburger Menu */}
-          {(hamburgerMenuClicked || isClosing) && (
+        {/* Hamburger Menu */}
+        {(hamburgerMenuClicked || isClosing) && (
           <div
-            className={` flex-col flex justify-end mt-4 mr-2 text-white w-40 items-center h-[12.2rem]  ${
+            className={`flex-col flex justify-end mt-4 mr-2 text-white w-40 items-center h-auto ${
               isClosing ? "animate-slideOut" : "animate-slideIn"
-            } absolute top-14 right-5 bg-slate-300 bg-opacity-[0.3] rounded-lg`}
-            style={{backgroundColor:'rgba(0, 0, 255, 0.6)'}}
+            } fixed top-14 right-5 bg-slate-300 bg-opacity-[0.3] rounded-lg`}
+            style={{ backgroundColor: "rgba(0, 0, 255, 0.6)" }}
           >
-            <Link className="w-full text-center pt-4 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
-              Home
-            </Link>
-            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
-              Services
-            </Link>
-            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
-              About
-            </Link>
-            <Link className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300  hover:font-bold">
-              Contact
-            </Link>
-            <Link className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
-              Gallery
-            </Link>
+            {menuItems.map((item, index) => (
+              <Link
+                key={index}
+                to={item.href}
+                smooth={true}
+                duration={500}
+                className="w-full text-center pt-2 pb-2 border-b-[0.5px] border-white hover:cursor-pointer hover:text-red-300 hover:font-bold"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         )}
+
 
         {/* User Dropdown */}
         {(dropDownOpen || isClosingDropdown) && (

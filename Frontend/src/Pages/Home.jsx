@@ -11,6 +11,14 @@ import Gallery_Card from "../Components/Gallery_card";
 import Event_card from "../Components/Event_card";
 import { useNavigate } from "react-router-dom";
 
+
+const homeMenuItems = [
+  { label: 'Services', href: 'services' },
+  { label: 'Features', href: 'features' },
+  { label: 'Upcoming  Events', href: 'upcoming' },
+  { label: 'Help', href: 'freq' },
+];
+
 export default function Home() {
   const navigate = useNavigate();
 
@@ -18,7 +26,7 @@ export default function Home() {
   return (
     <>
       {/*HEADER ------------------------------------------------------------- */}
-      <Header />
+      <Header menuItems={homeMenuItems} />
 
       {/*EVENT TYPES --------------------------------------------------------- */}
       <div
