@@ -33,6 +33,8 @@ export default function Header({ menuItems }) {
     navigate("/login");
   };
 
+
+
   const searchClick = () => {
     if (searchBarClicked) {
       setIsSearchDropdown(true);
@@ -168,7 +170,7 @@ export default function Header({ menuItems }) {
             </div>
 
             {/* LOGIN Button */}
-            <div className=" flex items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
+            {/* <div className=" flex items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
               <div className=" w-full flex justify-center items-center">
                 <button
                   onClick={handleLogInClick}
@@ -177,7 +179,37 @@ export default function Header({ menuItems }) {
                   Log In
                 </button>
               </div>
-            </div>
+            </div> */}
+
+
+            {/* USER SECTION IN NAVBAR */}
+            {/* USER LOGO */}
+            <FontAwesomeIcon
+            icon={faUser}
+            className="text-lg cursor-pointer"
+            />
+
+            {/* USER  NAME */}
+            <span className="text-white font-bold hover:text-blue-100 hover:underline">
+            User
+            </span>
+
+            {/* CARET SIGN */}
+            {dropDownOpen ? (
+            <FontAwesomeIcon
+              icon={faCaretUp}
+              className="cursor-pointer"
+              style={{ color: "#ffffff" }}
+              onClick={dropDown}
+            />
+            ) : (
+            <FontAwesomeIcon
+              icon={faCaretDown}
+              style={{ color: "#ffffff" }}
+              className="cursor-pointer"
+              onClick={dropDown}
+            />
+            )}
 
             {/* Hamburger Icon */}
             <div className="block md:hidden fixed ">
@@ -273,7 +305,7 @@ export default function Header({ menuItems }) {
           </h1>
           <div className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif">
            We specialize in organizing exquisite events, whether in-person, virtual, or hybrid mode,
-           with flawless execution and attention to detail.
+           with flawless execution and attention to detail for upto 500 people.
           </div>
           <div className=" flex justify-center items-center gap-4 lg:gap-0 flex-col xds:flex-row  w-full lg:w-[70%] mt-6 lg:mt-8 space-y-4 lg:space-y-0 lg:space-x-4 items-center lg:items-start">
             <div className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]" style={{ color: "#ffffff" }}>

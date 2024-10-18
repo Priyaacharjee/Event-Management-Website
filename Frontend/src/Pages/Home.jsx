@@ -54,7 +54,7 @@ export default function Home() {
       </div>
 
       {/*FEATURES 1--------------------------------------------------------- */}
-      <div id="features" className="justify-center items-center flex-col flex">
+      <div  className="justify-center items-center flex-col flex">
         <div className="flex flex-col text-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:flex-row 2xl:flex 2xl:flex-row px-10 py-14 xl:py-24 items-center h-auto">
             <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8 animate-assembleText">
               Manage, promote, and track your event— all in one platform
@@ -83,7 +83,7 @@ export default function Home() {
 
         {/* FEATURES 2 ------------------------------------------------------------ */}
         <div
-          id="highlight"
+          id="features"
           className=" px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 pb-16"
         >
           <div className="mt-16 mb-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-2">
