@@ -78,23 +78,23 @@ export default function App() {
 
 const freqQues = [
   {
-    ques: "What is Vibrant Connection, and how can it help me with my event?",
-    ans: "Vibrant Connection is an all-in-one event management platform that helps you plan, execute, and evaluate your events with ease. From registration to revenue tracking, we've got the tools you need to drive results.",
+    ques: "What is Eventek, and how can it help me with my event?",
+    ans: "Eventek is an all-in-one event management platform that helps you plan, execute, and evaluate your events with ease. From registration to revenue tracking, we've got the tools you need to drive results.",
   },
   {
-    ques: "Is Vibrant Connection suitable for events of all sizes?",
-    ans: " Yes, Vibrant Connection is designed to accommodate events of all sizes, from small meetings to large conferences and Events.",
+    ques: "Is Eventek suitable for events of all sizes?",
+    ans: " Yes, Eventek is designed to accommodate events of all sizes, from small meetings to large conferences and Events.",
   },
   {
-    ques: "How do I create a schedule for my event on Vibrant Connection?",
+    ques: "How do I create a schedule for my event on Eventek?",
     ans: "You can easily create and manage your event schedule, including sessions, speakers, and venues, using our intuitive scheduling tool.",
   },
   {
-    ques: "Is Vibrant Connection a secure platform for my event data?",
+    ques: "Is Eventek a secure platform for my event data?",
     ans: "Yes, our platform is built with enterprise-grade security measures to protect your event data and ensure compliance with industry standards.",
   },
   {
-    ques: "What kind of support does Vibrant Connection offer?",
+    ques: "What kind of support does Eventek offer?",
     ans: "Our dedicated support team is available 24/7 to assist with any questions or issues you may have. We also offer comprehensive online resources, including tutorials and guides.",
   },
 ];
