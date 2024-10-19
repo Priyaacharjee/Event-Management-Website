@@ -89,7 +89,7 @@ export default function Gallery_Card() {
   };
 
   return (
-    <div className=" w-full" id="gallery">
+    <div className="w-full" id="gallery">
       <div className="px-4 bg-slate-900 items-center sm:m-auto w-full flex-wrap">
         <div className="h-auto w-100 flex flex-wrap flex-col items-center text-center px-10 pt-8">
           {/* Gallery header */}
@@ -130,21 +130,23 @@ export default function Gallery_Card() {
                 ))}
             </div>
 
+            {/* Left Arrow */}
             <div
-              className="hidden group-hover:block absolute top-[32%] transform translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+              className=" absolute top-[32%] transform translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-white/60 text-black cursor-pointer z-10"
               onClick={prevSlide}
             >
               <BsChevronCompactLeft size={30} />
             </div>
 
+            {/* Right Arrow */}
             <div
-              className="hidden group-hover:block absolute top-[32%] transform translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+              className="absolute top-[32%] transform translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-white/60 text-black  cursor-pointer z-10"
               onClick={nextSlide}
             >
               <BsChevronCompactRight size={30} />
             </div>
 
-            <div className="flex top-4 mt-4  justify-center py-2 text-white">
+            <div className="flex top-4 mt-4 justify-center py-2 text-white">
               {slides.map((_, slideIndex) => (
                 <div
                   key={slideIndex}

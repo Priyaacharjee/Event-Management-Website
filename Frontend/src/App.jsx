@@ -1,8 +1,14 @@
 import "./App.css";
-import Home from "./Pages/Home";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "./Context/Theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./Pages/Home";
+import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
+import Forgetpassword from "./Pages/Forgetpassword";
+import Resetpassword from "./Pages/Resetpassword";
+import CreateForm from "./Pages/CreateForm";
 
 function App() {
   const [themeMode, setThemeMode] = useState("light");
@@ -26,6 +32,11 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgetpassword" element={<Forgetpassword />} />
+            <Route path="/resetpassword" element={<Resetpassword />} />
+            <Route path="/createform" element={<CreateForm />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

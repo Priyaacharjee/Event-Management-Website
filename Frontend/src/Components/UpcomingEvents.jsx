@@ -20,7 +20,7 @@ export default function UpcomingEvents({ name, des, time, date, venue }) {
             <img
               src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grow-your-business-webinar-instagram-post-design-template-6da4a1a4774fbca08910aa6001dbf484_screen.jpg?ts=1687284357"
               alt=""
-              className="2xl:h-[75%] 2xl:w-[75%] xl:h-[80%] xl:w-[80%] lg:h-[85%] lg:w-[85%] md:h-[95%] md:w-[95%] sm:h-[95%] sm:w-[80%] h-[100%] w-[100%] m-auto transform transition-transform duration-500 hover:scale-105"
+              className="2xl:h-[75%] 2xl:w-[75%] xl:h-[80%] xl:w-[80%] lg:h-[85%] lg:w-[85%] md:h-[95%] md:w-[95%] sm:h-[95%] sm:w-[80%] h-[100%] w-[100%] m-auto  duration-500 hover:scale-105"
             ></img>
           </div>
           <div className="pt-5">
