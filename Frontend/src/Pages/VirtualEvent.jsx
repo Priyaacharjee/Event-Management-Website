@@ -1,8 +1,6 @@
 import React from 'react';
 import VirtualCard from '../Components/VirtualCard';
 import { useNavigate } from 'react-router-dom';
-import CreateForm from './CreateForm';
-import EventPage from './EventPage';
 
 
 const virtualEvents = [
