@@ -3,16 +3,13 @@ import { createEvent } from "../utils/utils";
 
 const CreateForm = () => {
   const [isPaid, setIsPaid] = useState(false);
-  const [isPublic, setIsPublic] = useState(true);
-  const [eventType, setEventType] = useState("");
-  const [headcount, setHeadcount] = useState(0);
   const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     eventName: "",
-    organizedBy: "",
-    organizationEmail: "",
+    // organizedBy: "",
+    // organizationEmail: "",
     eventDate: "",
     eventTime: "",
     eventType: "",
@@ -22,9 +19,12 @@ const CreateForm = () => {
     description: "",
     registrationEndDate: "",
     rulesFile: null,
+    headcount: 0,
+    isPaid: false,
+    isPublic: true,
+    paidAmountPerPerson: 0,
     posterImage: null,
     paymentScanner: null,
-    paidAmountPerPerson: 0,
   });
 
   const handleInputChange = (event) => {
@@ -37,18 +37,10 @@ const CreateForm = () => {
     setFormData({ ...formData, [name]: files[0] });
   };
 
-  const handlePaymentChange = (event) => {
-    setIsPaid(event.target.value === "paid");
-  };
-
-  const handleTransparencyChange = (event) => {
-    setIsPublic(event.target.value === "public");
-  };
-
   const handleEventTypeChange = (event) => {
-    const selectedType = event.target.value;
-    setEventType(selectedType);
-    calculatePayableAmount(headcount, selectedType);
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+    calculatePayableAmount(formData.headcount, value);
   };
 
   const calculatePayableAmount = (headcount, eventType) => {
@@ -107,7 +99,7 @@ const CreateForm = () => {
               </div>
 
               {/* Organized By */}
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Organized By <span className="text-red-500">*</span>
                 </label>
@@ -120,10 +112,10 @@ const CreateForm = () => {
                   placeholder="Enter organizer's name/Company Name"
                   required
                 />
-              </div>
+              </div> */}
 
               {/* Organization Email */}
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Organization Email <span className="text-red-500">*</span>
                 </label>
@@ -136,7 +128,7 @@ const CreateForm = () => {
                   placeholder="Enter organization email"
                   required
                 />
-              </div>
+              </div> */}
 
               {/* Event Date */}
               <div>
@@ -192,12 +184,8 @@ const CreateForm = () => {
                 <select
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   value={formData.eventType}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      eventType: e.target.value,
-                    })
-                  }
+                  name="eventType"
+                  onChange={handleEventTypeChange}
                   required
                 >
                   <option value="" disabled selected>
@@ -210,7 +198,7 @@ const CreateForm = () => {
               </div>
 
               {/* Conditional Field Based on Event Type */}
-              {eventType === "in_person" && (
+              {formData.eventType === "in_person" && (
                 <div className="bg-indigo-200 p-6 rounded-xl">
                   <label className="block text-sm mt-8 font-medium text-gray-700">
                     Preferable City Name <span className="text-red-500">*</span>
@@ -227,7 +215,7 @@ const CreateForm = () => {
                 </div>
               )}
 
-              {eventType === "virtual" && (
+              {formData.eventType === "virtual" && (
                 <div className="bg-indigo-200 p-6 rounded-xl">
                   <label className="block text-sm mt-8 font-medium text-gray-700">
                     Preferable Online Meeting Platform{" "}
@@ -250,7 +238,7 @@ const CreateForm = () => {
                 </div>
               )}
 
-              {eventType === "hybrid" && (
+              {formData.eventType === "hybrid" && (
                 <>
                   <div className="bg-indigo-200 p-6 rounded-xl">
                     <div>
@@ -326,12 +314,13 @@ const CreateForm = () => {
                 </label>
                 <select
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  value={formData.isPaid}
+                  value={!formData.isPaid}
+                  name="isPaid"
                   onChange={(e) => {
                     if (e.target.value === "Paid")
-                      setFormData({
-                        ...formData,
-                        isPaid: true,
+                      handleIsPaid((e) => {
+                        const { name, value } = e.target;
+                        setFormData({ ...formData, [name]: value });
                       });
                   }}
                   required
@@ -339,13 +328,13 @@ const CreateForm = () => {
                   <option value="" disabled selected>
                     Select payment type
                   </option>
+                  <option value="not_paid">Free</option>
                   <option value="paid">Paid</option>
-                  <option value="not_paid">Not Paid</option>
                 </select>
               </div>
 
               {/* Paid Amount/Person */}
-              {isPaid && (
+              {formData.isPaid && (
                 <>
                   <div className="bg-indigo-200 p-6 rounded-xl">
                     <div>
@@ -394,17 +383,20 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="number"
+                  name="headcount"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  placeholder="Enter number of visitors"
-                  value={headcount}
+                  placeholder="Enter number of maximum participent"
                   onChange={(e) => {
                     const value = parseInt(e.target.value);
                     if (value > 500) {
                       setError("Headcount cannot exceed 500 people");
                     } else {
                       setError("");
-                      setHeadcount(value);
-                      calculatePayableAmount(value, eventType);
+                      setFormData({
+                        ...formData,
+                        headcount: e.target.value, 
+                      });
+                      calculatePayableAmount(e.target.value, formData.eventType); 
                     }
                   }}
                   required
