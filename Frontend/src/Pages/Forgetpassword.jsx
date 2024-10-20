@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaGoogle, FaFacebook } from "react-icons/fa";
+import { changePasswordRequest } from "../utils/utils";
+import Resetpassword from "./Resetpassword";
 
 const Forgetpassword = () => {
   const [formData, setFormData] = useState({
-    email: '',
+    email: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -15,17 +17,19 @@ const Forgetpassword = () => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
+
+  const [reset, setReset] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
 
     if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!formData.email.includes('@')) {
-      newErrors.email = 'Invalid email';
+      newErrors.email = "Email is required";
+    } else if (!formData.email.includes("@")) {
+      newErrors.email = "Invalid email";
     }
 
     setErrors(newErrors);
@@ -36,13 +40,23 @@ const Forgetpassword = () => {
     e.preventDefault();
     const isValid = validateForm();
     if (isValid) {
-      navigate('/resetpassword'); 
+      changePasswordRequest(formData.email).then((response) => {
+        if (response) {
+          setReset(true);
+        } else {
+          alert("Account does't exists!");
+        }
+      });
     } else {
       if (errors.email) {
-        alert('Wrong Email');
+        alert("Wrong Email");
       }
     }
   };
+
+  if (reset) {
+    return <Resetpassword email={formData.email} />;
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8">
@@ -50,17 +64,27 @@ const Forgetpassword = () => {
         {/* LEFT PART */}
         <div
           className="hidden md:flex md:w-1/3 items-center justify-center p-8 relative "
-          style={{ clipPath: 'circle(81% at 6% 50%)' }}
+          style={{ clipPath: "circle(81% at 6% 50%)" }}
         >
-          <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted>
-            <source src="https://media.istockphoto.com/id/1341025387/video/creative-people-brainstorming-about-start-up-project-and-collaboration.mp4?s=mp4-640x640-is&k=20&c=sYlazAvs9s6YNXRjqOhGIraUkb-U7yAIjoOvRuVfQ9w=" type="video/mp4" />
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+          >
+            <source
+              src="https://media.istockphoto.com/id/1341025387/video/creative-people-brainstorming-about-start-up-project-and-collaboration.mp4?s=mp4-640x640-is&k=20&c=sYlazAvs9s6YNXRjqOhGIraUkb-U7yAIjoOvRuVfQ9w="
+              type="video/mp4"
+            />
           </video>
         </div>
 
         {/* RIGHT PART */}
         <div className="w-full md:w-2/3 p-6 sm:p-8 relative">
           {/* TITLE/HEADING */}
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">Forget Password</h2>
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
+            Forget Password
+          </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* EMAIL */}
@@ -72,7 +96,7 @@ const Forgetpassword = () => {
                 onChange={handleChange}
                 id="email"
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                  errors.email ? "border-red-500" : "border-gray-300"
                 } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
@@ -82,7 +106,9 @@ const Forgetpassword = () => {
               >
                 Enter Email Address
               </label>
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
 
             {/* BUTTON */}
