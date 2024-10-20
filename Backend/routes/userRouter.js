@@ -9,6 +9,7 @@ const {
   getUser,
   uploadProfilePicture,
   updatePasswordRequest,
+  createEvent,
 } = require("../controller/userController");
 
 router.get("/", (req, res) => {
@@ -32,5 +33,9 @@ router.get("/updatepasswordrequest", isLoggedIn, updatePasswordRequest);
 
 // UPLOAD PROFILE PICTURE (USING CLOUDINARY)
 router.post("/uploadprofilepicture", isLoggedIn, uploadProfilePicture);
+
+// CREATE ORDER
+// router.post("/createevent", isLoggedIn, createEvent);
+router.post("/createevent",  createEvent);
 
 module.exports = router;

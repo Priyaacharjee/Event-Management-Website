@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { createEvent } from "../utils/utils";
+
 
 const CreateForm = () => {
   const [isPaid, setIsPaid] = useState(false);
@@ -7,6 +9,34 @@ const CreateForm = () => {
   const [headcount, setHeadcount] = useState(0); 
   const [payableAmount, setPayableAmount] = useState(0); 
   const [error, setError] = useState(''); 
+
+  const [formData, setFormData] = useState({
+    eventName: '',
+    organizedBy: '',
+    organizationEmail: '',
+    eventDate: '',
+    eventTime: '',
+    speakerName: '',
+    cityName: '',
+    platform: '',
+    description: '',
+    registrationEndDate: '',
+    rulesFile: null,
+    posterImage: null,
+    paymentScanner: null,
+    paidAmountPerPerson: 0,
+  });
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (event) => {
+    const { name, files } = event.target;
+    setFormData({ ...formData, [name]: files[0] });
+  };
 
 
   const handlePaymentChange = (event) => {
@@ -23,7 +53,6 @@ const CreateForm = () => {
         calculatePayableAmount(headcount, selectedType); 
   };
 
-  
 
   const calculatePayableAmount = (headcount, eventType) => {
     let amount = 0;
@@ -44,6 +73,32 @@ const CreateForm = () => {
   
     setPayableAmount(amount);
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); 
+  
+    // Create FormData object
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+    formDataToSend.append('isPaid', isPaid);
+    formDataToSend.append('headcount', headcount);
+    formDataToSend.append('payableAmount', payableAmount);
+  
+    // Call createEvent function
+    const result = await createEvent(formDataToSend);
+  
+    // Handle the response
+    if (result.success) {
+      // Success logic (e.g., show success message, redirect, etc.)
+      alert("Event created successfully!");
+    } else {
+      // Error handling
+      alert(`Error: ${result.message}`);
+    }
+  };
+  
   
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -53,7 +108,7 @@ const CreateForm = () => {
           <div className="w-full lg:w-full">
             <h2 className="font-serif text-3xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8 text-indigo-600">Create Your Event</h2>
             
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               {/* Event Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -61,6 +116,9 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="text"
+                  name="eventName" 
+                  value={formData.eventName} 
+                  onChange={handleInputChange}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   placeholder="Enter event name"
                   required
@@ -74,6 +132,9 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="text"
+                  name="organizedBy" 
+                  value={formData.organizedBy} 
+                  onChange={handleInputChange}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   placeholder="Enter organizer's name/Company Name"
                   required
@@ -87,6 +148,9 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="email"
+                  name="organizationEmail" 
+                  value={formData.organizationEmail} 
+                  onChange={handleInputChange}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   placeholder="Enter organization email"
                   required
@@ -100,6 +164,9 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="date"
+                  name="eventDate" 
+                  value={formData.eventDate} 
+                  onChange={handleInputChange}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
@@ -112,6 +179,9 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="time"
+                  name="eventTime" 
+                  value={formData.eventTime} 
+                  onChange={handleInputChange}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
@@ -124,6 +194,9 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="text"
+                  name="speakerName" 
+                  value={formData.speakerName} 
+                  onChange={handleInputChange}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   placeholder="Enter speaker's name"
                   required
@@ -150,12 +223,15 @@ const CreateForm = () => {
 
               {/* Conditional Field Based on Event Type */}
               {eventType === 'in_person' && (
-                <div>
+                <div className="bg-indigo-200 p-6 rounded-xl">
                   <label className="block text-sm mt-8 font-medium text-gray-700">
                     Preferable City Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
+                    name="cityName" 
+                    value={formData.cityName} 
+                    onChange={handleInputChange}
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                     placeholder="Enter preferable city"
                     required
@@ -164,11 +240,16 @@ const CreateForm = () => {
               )}
 
               {eventType === 'virtual' && (
-                <div>
+                <div className="bg-indigo-200 p-6 rounded-xl">
                   <label className="block text-sm mt-8 font-medium text-gray-700">
                     Preferable Online Meeting Platform <span className="text-red-500">*</span>
                   </label>
-                  <select className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                  <select 
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" 
+                  name="platform" 
+                  value={formData.platform} 
+                  onChange={handleInputChange}
+                  required>
                     <option value="" disabled selected>Select preferable platform</option>
                     <option value="zoom">Zoom</option>
                     <option value="gmeet">Google Meet</option>
@@ -179,12 +260,16 @@ const CreateForm = () => {
 
               {eventType === 'hybrid' && (
                 <>
+                  <div className="bg-indigo-200 p-6 rounded-xl">
                   <div>
                     <label className="block text-sm mt-8 font-medium text-gray-700">
                       Preferable City Name <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
+                      name="cityName" 
+                      value={formData.cityName} 
+                      onChange={handleInputChange}
                       className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                       placeholder="Enter preferable city"
                       required
@@ -194,12 +279,19 @@ const CreateForm = () => {
                     <label className="block text-sm mt-8 font-medium text-gray-700">
                       Preferable Online Meeting Platform <span className="text-red-500">*</span>
                     </label>
-                    <select className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                    <select 
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" 
+                    name="platform" 
+                    value={formData.platform} 
+                    onChange={handleInputChange}
+                    required
+                    >
                       <option value="" disabled selected>Select preferable platform</option>
                       <option value="zoom">Zoom</option>
                       <option value="gmeet">Google Meet</option>
                       <option value="skype">Skype</option>
                     </select>
+                    </div>
                   </div>
                 </>
               )}
@@ -239,12 +331,16 @@ const CreateForm = () => {
               {/* Paid Amount/Person */}
               {isPaid && (
                 <>
+                <div className="bg-indigo-200 p-6 rounded-xl">
                   <div>
                     <label className="block text-sm mt-8 font-medium text-gray-700">
                       Paid Amount/Person <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="number"
+                      name="paidAmountPerPerson" 
+                      value={formData.paidAmountPerPerson} 
+                      onChange={handleInputChange}
                       className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                       placeholder="Enter amount per person"
                       required
@@ -260,10 +356,13 @@ const CreateForm = () => {
 
                     <input
                       type="file"
+                      name="paymentScanner" 
                       accept=".jpg,.jpeg,.png"
+                      onChange={handleFileChange}
                       className="mt-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
                       required
                     />
+                  </div>
                   </div>
                 </>
               )}
@@ -307,24 +406,30 @@ const CreateForm = () => {
                 <textarea
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   rows="4"
+                  name="description" 
+                  value={formData.description} 
+                  onChange={handleInputChange}
                   placeholder="Enter event description in 100 words"
                   required
                 />
               </div>
 
               {/* Last Date of Registration*/}
-              {isPublic && (
+              {/* {isPublic && ( */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Last Date of Registration <span className="text-red-500">*</span>
+                    Last Date of Registration <span className="text-gray-400">(if any)</span>
                   </label>
                   <input
                     type="date"
+                    name="registrationEndDate" 
+                    value={formData.registrationEndDate} 
+                    onChange={handleInputChange}
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    required
+                    // required
                   />
                 </div>
-              )}
+              {/* )} */}
 
               {/* Rules & Regulations */}
               <div>
@@ -333,7 +438,9 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="file"
+                  name="rulesFile" 
                   accept=".pdf"
+                  onChange={handleFileChange}
                   className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
                 />
               </div>
@@ -346,7 +453,9 @@ const CreateForm = () => {
                 </label>
                 <input
                   type="file"
+                  name="posterImage" 
                   accept=".jpg,.jpeg,.png"
+                  onChange={handleFileChange} 
                   className="mt-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
                   required
                 />
@@ -355,9 +464,9 @@ const CreateForm = () => {
 
               {/* Payment */}
               <div className='w-[90%] flex justify-center items-center flex-col'>
-                <div className=" mt-8 flex justify-center items-center bg-yellow-200 p-6 rounded-xl shadow-md">
+                <div className=" mt-8 flex justify-center items-center bg-indigo-200 p-6 rounded-xl shadow-md">
                     <h3 className="text-lg font-bold text-red-500">Total Bill: ₹{payableAmount}</h3>
-                    <button className="mt-2 ml-8 bg-green-500 text-white p-2 rounded-md hover:bg-green-600">
+                    <button className="mt-2 ml-8 bg-indigo-600 text-white p-2 rounded-md hover:bg-green-600">
                     Pay Now
                     </button>
                 </div>

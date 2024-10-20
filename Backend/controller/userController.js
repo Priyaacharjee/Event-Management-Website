@@ -1,8 +1,11 @@
 const userModel = require("../models/userModel");
+const eventModel = require("../models/EventModel"); 
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
 require("dotenv").config();
+const path = require('path');
+const fs = require('fs');
 
 // Register User
 module.exports.signUp = async (req, res) => {
@@ -40,7 +43,6 @@ module.exports.signUp = async (req, res) => {
     res.send(err.message);
   }
 };
-
 
 // Login
 module.exports.loginUser = async (req, res) => {
@@ -153,5 +155,58 @@ module.exports.uploadProfilePicture = async (req, res) => {
   } catch (err) {
     console.log(err.message);
     res.send("Internal Server Error");
+  }
+};
+
+// Create Event Controller
+module.exports.createEvent = async (req, res) => {
+  try {
+    const {
+      eventName,
+      organizedBy,
+      organizationEmail,
+      eventDate,
+      eventTime,
+      speakerName,
+      cityName,
+      platform,
+      description,
+      registrationEndDate,
+      isPaid,
+      paidAmountPerPerson,
+      headcount,
+      payableAmount,
+      eventType,
+      isPublic,
+    } = req.body;
+
+    // Create a new event object
+    const newEvent = new Event({
+      eventName,
+      organizedBy,
+      organizationEmail,
+      eventDate,
+      eventTime,
+      speakerName,
+      cityName: eventType === 'in_person' || eventType === 'hybrid' ? cityName : null,
+      platform: eventType === 'virtual' || eventType === 'hybrid' ? platform : null,
+      description,
+      registrationEndDate,
+      isPaid,
+      paidAmountPerPerson: isPaid ? paidAmountPerPerson : 0,
+      headcount,
+      payableAmount,
+      eventType,
+      isPublic,
+    });
+
+    // Save event to the database
+    await newEvent.save();
+    console.log(req.body); 
+    return res.json({ success: true, message: 'Event created successfully!' });
+    }catch (error) {
+    console.log(req.body); 
+    console.error('Error:', error);
+    return res.json({ success: false, message: 'Failed to create event.' });
   }
 };
