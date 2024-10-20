@@ -41,7 +41,6 @@ module.exports.signUp = async (req, res) => {
   }
 };
 
-
 // Login
 module.exports.loginUser = async (req, res) => {
   try {
@@ -115,7 +114,24 @@ module.exports.getUser = async (req, res) => {
 // Update Password Request
 module.exports.updatePasswordRequest = async (req, res) => {
   try {
-    let email = req.body.email;
+    let user = userModel.findOne({ email: req.body.email });
+    if (user) {
+      res.send(true);
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Update Password
+module.exports.updatePassword = async (req, res) => {
+  try {
+    let { email, password } = req.body;
+    let user = userModel.updateOne({ email }, { $set: { password } });
+    if (user) {
+      res.send("Password Updated Successfully");
+    }
   } catch (err) {
     console.log(err.message);
     res.send("Internal Server Error");

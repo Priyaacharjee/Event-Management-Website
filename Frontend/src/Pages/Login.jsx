@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { FaGoogle, FaFacebook } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { FaGoogle, FaFacebook } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../utils/utils";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -16,7 +17,7 @@ const Login = () => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -24,12 +25,12 @@ const Login = () => {
     const newErrors = {};
 
     if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!formData.email.includes('@')) {
-      newErrors.email = 'Invalid email';
+      newErrors.email = "Email is required";
+    } else if (!formData.email.includes("@")) {
+      newErrors.email = "Invalid email";
     }
 
-    if (!formData.password) newErrors.password = 'Password is required';
+    if (!formData.password) newErrors.password = "Password is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -39,25 +40,22 @@ const Login = () => {
     e.preventDefault();
     const isValid = validateForm();
     if (isValid) {
-      alert('Login successful!');
-      console.log('Form logged in successfully:', formData);
-    } else {
-      if (errors.email && errors.password) {
-        alert('Wrong email & password');
-      } else if (errors.email) {
-        alert('Wrong Email');
-      } else if (errors.password) {
-        alert('Wrong Password');
-      }
+      loginUser(formData.email, formData.password).then((response) => {
+        if (response !== "Login successfully") {
+          alert(response);
+        } else {
+          navigate("/");
+        }
+      });
     }
   };
 
   const handleForgetPasswordClick = () => {
-    navigate('/forgetpassword');
+    navigate("/forgetpassword");
   };
 
   const handleSignupClick = () => {
-    navigate('/signup');
+    navigate("/signup");
   };
 
   return (
@@ -66,9 +64,14 @@ const Login = () => {
         {/* LEFT PART */}
         <div
           className="hidden md:flex md:w-1/3 items-center justify-center p-8 relative "
-          style={{ clipPath: 'circle(63% at 4% 50%)' }}
+          style={{ clipPath: "circle(63% at 4% 50%)" }}
         >
-          <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted>
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+          >
             <source
               src="https://media.istockphoto.com/id/2037484164/video/people-using-videoconference-app-take-part-in-virtual-meeting-collage.mp4?s=mp4-640x640-is&k=20&c=tr4LlV9pmPyOqNLedkJSjWSgtQxkOydhwoCA69Jijmg="
               type="video/mp4"
@@ -78,7 +81,9 @@ const Login = () => {
 
         {/* RIGHT PART */}
         <div className="w-full md:w-2/3 p-6 sm:p-8 relative">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">Log In</h2>
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
+            Log In
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* EMAIL */}
             <div className="relative z-0 w-full mb-4 sm:mb-6 group">
@@ -89,7 +94,7 @@ const Login = () => {
                 onChange={handleChange}
                 id="email"
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                  errors.email ? "border-red-500" : "border-gray-300"
                 } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
@@ -99,7 +104,9 @@ const Login = () => {
               >
                 Email Address
               </label>
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
 
             {/* PASSWORD */}
@@ -110,7 +117,7 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
                 className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
-                  errors.password ? 'border-red-500' : 'border-gray-300'
+                  errors.password ? "border-red-500" : "border-gray-300"
                 } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
@@ -120,7 +127,9 @@ const Login = () => {
               >
                 Password
               </label>
-              {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+              )}
             </div>
 
             {/* FORGET PASSWORD */}
@@ -145,7 +154,7 @@ const Login = () => {
 
           <div className="mt-6 text-center">
             <p className="text-gray-600">
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <button
                 type="button"
                 onClick={handleSignupClick}

@@ -9,6 +9,7 @@ const {
   getUser,
   uploadProfilePicture,
   updatePasswordRequest,
+  updatePassword,
 } = require("../controller/userController");
 
 router.get("/", (req, res) => {
@@ -28,7 +29,10 @@ router.get("/logout", isLoggedIn, logoutUser);
 router.get("/getuser", isLoggedIn, getUser);
 
 // UPDATE PASSWORD REQUEST
-router.get("/updatepasswordrequest", isLoggedIn, updatePasswordRequest);
+router.get("/updatepasswordrequest", updatePasswordRequest);
+
+// UPDATE PASSWORD
+router.put("/updatepassword", updatePassword);
 
 // UPLOAD PROFILE PICTURE (USING CLOUDINARY)
 router.post("/uploadprofilepicture", isLoggedIn, uploadProfilePicture);

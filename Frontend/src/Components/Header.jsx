@@ -4,16 +4,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faXmark,
-  faCaretDown,
-  faCaretUp,
   faMagnifyingGlass,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import ThemeButton from "./ThemeButton";
 import { useNavigate } from "react-router-dom";
+import { findUser } from "../utils/utils";
 
 export default function Header() {
   const navigate = useNavigate();
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    findUser().then((response) => {
+      setUser(response.username);
+    });
+  }, []);
+
   const [hamburgerMenuClicked, setHamburgerMenuClicked] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);

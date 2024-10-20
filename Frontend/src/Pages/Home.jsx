@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "../Components/Slider";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Company_card from "../Components/Company_card";
 import Upcoming_event from "../Components/UpcomingEvents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarCheck, faCalendar, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarCheck,
+  faCalendar,
+  faGlobe,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import FreqtQuestion from "../Components/FreqtQuestion";
 import Gallery_Card from "../Components/Gallery_card";
 import Event_card from "../Components/Event_card";
@@ -13,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();
-
 
   return (
     <>
@@ -31,19 +35,18 @@ export default function Home() {
       {/*FEATURES 1--------------------------------------------------------- */}
       <div id="features" className="justify-center items-center flex-col flex">
         <div className="flex flex-col text-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:flex-row 2xl:flex 2xl:flex-row px-10 py-14 xl:py-24 items-center h-auto">
-            <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8 animate-assembleText">
-              Manage, promote, and track your event— all in one platform
-            </div>
-            <div className="px-10 text-md sm:text-lg">
-              Maximize your event's potential with our powerful, all-in-one
-              management solution. With <strong>Vibrant Connection</strong>, you
-              can effortlessly plan, execute, and evaluate your event's success.{" "}
-              <br></br>
-              <br></br>Simplify your workflow, amplify your impact, and leave a
-              lasting impression on your attendees.
-            </div>
+          <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8 animate-assembleText">
+            Manage, promote, and track your event— all in one platform
+          </div>
+          <div className="px-10 text-md sm:text-lg">
+            Maximize your event's potential with our powerful, all-in-one
+            management solution. With <strong>Vibrant Connection</strong>, you
+            can effortlessly plan, execute, and evaluate your event's success.{" "}
+            <br></br>
+            <br></br>Simplify your workflow, amplify your impact, and leave a
+            lasting impression on your attendees.
+          </div>
         </div>
-
 
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
         <Upcoming_event
