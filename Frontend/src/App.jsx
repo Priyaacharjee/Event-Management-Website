@@ -8,11 +8,8 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Forgetpassword from "./Pages/Forgetpassword";
 import Resetpassword from "./Pages/Resetpassword";
-<<<<<<< HEAD
 import VirtualEvent from "./Pages/VirtualEvent";
-=======
 import CreateForm from "./Pages/CreateForm";
->>>>>>> b68d80164534898b5b6e4f482d450858b15c6d2a
 
 function App() {
   const [themeMode, setThemeMode] = useState("light");

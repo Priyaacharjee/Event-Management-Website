@@ -5,10 +5,14 @@ import {
   faBars,
   faXmark,
   faMagnifyingGlass,
+  faUser,
+  faCaretDown,
+  faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { findUser } from "../utils/utils";
 import { Link } from 'react-scroll';
+
 
 
 export default function Header({ menuItems }) {
