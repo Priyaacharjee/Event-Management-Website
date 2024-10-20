@@ -15,40 +15,67 @@ import FreqtQuestion from "../Components/FreqtQuestion";
 import Gallery_Card from "../Components/Gallery_card";
 import Event_card from "../Components/Event_card";
 import { useNavigate } from "react-router-dom";
+import { AiFillHome, AiOutlineSolution, AiOutlineAppstore, AiOutlineTeam, AiOutlineQuestionCircle, AiFillEdit,  AiFillVideoCamera } from 'react-icons/ai';
+
+
+const headerMenuItems = [
+  { label: 'Services', href: 'services' },
+  { label: 'Features', href: 'features' },
+  { label: 'Upcoming  Events', href: 'upcoming' },
+  { label: 'Help', href: 'freq' },
+];
+
+
+const footerMenuItems = [
+  { href: 'header', label: 'Header', icon: AiFillHome },
+  { href: 'services', label: 'Services', icon: AiOutlineSolution },
+  { href: 'features', label: 'Features', icon: AiOutlineAppstore },
+  { href: 'collaborators', label: 'Collaborators', icon: AiOutlineTeam },
+  { href: 'analytic', label: 'Analytics', icon: AiFillEdit },
+  { href: 'freq', label: 'Help', icon: AiOutlineQuestionCircle },
+];
+
 
 export default function Home() {
   const navigate = useNavigate();
 
+  const handleSignUpClick = () => {
+    navigate("/signup");
+  };
+
+
   return (
     <>
       {/*HEADER ------------------------------------------------------------- */}
-      <Header />
+      <Header menuItems={headerMenuItems} />
 
       {/*EVENT TYPES --------------------------------------------------------- */}
       <div
         id="services"
-        className="bg-slate-900 w-full h-auto px-20 text-center"
+        className="bg-slate-900 h-auto px-8 rounded-[2rem] text-center mt-8 lg:mt-0 ml-12 mr-12"
+        style={{boxShadow:'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px'}}
       >
         <Event_card />
       </div>
 
       {/*FEATURES 1--------------------------------------------------------- */}
-      <div id="features" className="justify-center items-center flex-col flex">
+      <div  className="justify-center items-center flex-col flex">
         <div className="flex flex-col text-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:flex-row 2xl:flex 2xl:flex-row px-10 py-14 xl:py-24 items-center h-auto">
-          <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8 animate-assembleText">
-            Manage, promote, and track your event— all in one platform
-          </div>
-          <div className="px-10 text-md sm:text-lg">
-            Maximize your event's potential with our powerful, all-in-one
-            management solution. With <strong>Vibrant Connection</strong>, you
-            can effortlessly plan, execute, and evaluate your event's success.{" "}
-            <br></br>
-            <br></br>Simplify your workflow, amplify your impact, and leave a
-            lasting impression on your attendees.
-          </div>
+            <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8 animate-assembleText">
+              Manage, promote, and track your event— all in one platform
+            </div>
+            <div className="px-10 text-md sm:text-lg">
+              Maximize your event's potential with our powerful, all-in-one
+              management solution. With <i><strong style={{color:'#1534a7',fontSize:'2rem',fontFamily: '"quick"'}}>Eventek </strong></i>, you
+              can effortlessly plan, execute, and evaluate your event's success.{" "}
+              <br></br>
+              <br></br>Simplify your workflow, amplify your impact, and leave a
+              lasting impression on your attendees.
+            </div>
         </div>
 
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
+        <div id="upcoming">
         <Upcoming_event
           name="Student Enrichment Program"
           des="The Student Enrichment Program is a dynamic initiative aimed at equipping students with essential skills and knowledge through workshops, mentoring, and hands-on experiences."
@@ -56,10 +83,11 @@ export default function Home() {
           time="14:00"
           venue="Kolkata"
         />
+        </div>
 
         {/* FEATURES 2 ------------------------------------------------------------ */}
         <div
-          id="highlight"
+          id="features"
           className=" px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 pb-16"
         >
           <div className="mt-16 mb-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-2">
@@ -74,20 +102,19 @@ export default function Home() {
                 Discover Our Key Features
               </h2>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[25px] lg:pt-5 md:pt-1">
-                Explore the unique features that set us apart from the
-                competition. Our platform is designed to cater to your every
+                Explore the unique features that set us apart from the others. Our platform is designed to cater your every
                 need, ensuring a seamless and successful event experience.
               </p>
 
               <div className="md:absolute 2xl:ml-[-17rem] xl:ml-[-10rem] lg:ml-[-10rem] md:ml-[-8rem] 2xl:mt-[25%] xl:mt-[20%] lg:mt-[21%] md:mt-[30%] sm:m-auto">
-                <div className=" 2xl:w-[450px] xl:w-[320px] lg:w-[300px] md:w-[300px] sm:w-[250px] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
-                  10+ Payment Gateway
+                <div className=" 2xl:w-[450px] xl:w-[400px] lg:w-[380px] md:w-[360px] sm:w-[370px] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                   Easy management and tracking
                 </div>
-                <div className="2xl:w-[350px]  xl:w-[240px] lg:w-[220px] md:w-[220px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
-                  Reviews Rating
+                <div className="2xl:w-[350px]  xl:w-[300px] lg:w-[280px] md:w-[280px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                   Various Event Modes
                 </div>
-                <div className="2xl:w-[250px]  xl:w-[140px] lg:w-[140px] md:w-[140px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
-                  Venue Map
+                <div className="2xl:w-[250px]  xl:w-[240px] lg:w-[230px] md:w-[220px] sm:w-[100%] 2xl:h-14 xl:h-11 sm:h-12 bg-gradient-to-r from-slate-800 via-blue-700 to-cyan-700 rounded-3xl mt-5 text-white text-2xl flex justify-center items-center">
+                   Event promotions
                 </div>
               </div>
             </div>
@@ -99,8 +126,10 @@ export default function Home() {
 
         {/* COMPANY NAMES ------------------------------------------------------------ */}
         <div className="h-auto w-[85%]">
+          <h1 className="text-center mt-[4rem] text-4xl md:text-6xl font-bold">Our Collaborators</h1>
           <Company_card />
         </div>
+
 
         {/*ANALYTICS ---------------------------------------------------------------------- */}
         <div
@@ -155,8 +184,11 @@ export default function Home() {
           Elevate your Events, elevate Our brand
         </div>
         <div className="h-[10%] w-[75%] hover:w-[76%] sm:w-[65%] sm:hover:w-[66%] md:w-[50%] md:hover:w-[51%] lg:w-[40%] lg:hover:w-[41%]">
-          <button className="mt-10 h-full w-full bg-blue-400 p-5 rounded-md font-bold 2xl:text-3xl xl:text-2xl md:text-2xl sm:text-xl text-xl hover:bg-blue-500">
-            Get Started
+          <button 
+                onClick={handleSignUpClick}
+                className="mt-10 h-full w-full bg-blue-400 p-5 rounded-md font-bold 2xl:text-3xl xl:text-2xl md:text-2xl sm:text-xl text-xl hover:bg-blue-500"
+          >
+             Get Started
           </button>
         </div>
       </div>
@@ -164,7 +196,7 @@ export default function Home() {
       {/* Frequently asked question--------------------------------------------------------------- */}
       <FreqtQuestion />
 
-      <Footer />
+      <Footer menuItems1={footerMenuItems}/>
     </>
   );
 }
