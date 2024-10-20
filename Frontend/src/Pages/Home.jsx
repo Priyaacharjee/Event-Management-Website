@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Slider from "../Components/Slider";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Company_card from "../Components/Company_card";
 import Upcoming_event from "../Components/UpcomingEvents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendarCheck,
-  faCalendar,
-  faGlobe,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarCheck, faCalendar, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
 import FreqtQuestion from "../Components/FreqtQuestion";
 import Gallery_Card from "../Components/Gallery_card";
 import Event_card from "../Components/Event_card";
@@ -59,7 +54,7 @@ export default function Home() {
       </div>
 
       {/*FEATURES 1--------------------------------------------------------- */}
-      <div  className="justify-center items-center flex-col flex">
+      <div id="features" className="justify-center items-center flex-col flex">
         <div className="flex flex-col text-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:flex-row 2xl:flex 2xl:flex-row px-10 py-14 xl:py-24 items-center h-auto">
             <div className="grid grid-col-2 w-auto text-2xl sm:text-3xl md:text-4xl font-bold px-10 pb-8 animate-assembleText">
               Manage, promote, and track your event— all in one platform
@@ -74,6 +69,7 @@ export default function Home() {
             </div>
         </div>
 
+
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
         <div id="upcoming">
         <Upcoming_event
@@ -87,7 +83,7 @@ export default function Home() {
 
         {/* FEATURES 2 ------------------------------------------------------------ */}
         <div
-          id="features"
+          id="highlight"
           className=" px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 pb-16"
         >
           <div className="mt-16 mb-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-2">

@@ -1,11 +1,11 @@
 const userModel = require("../models/userModel");
-const eventModel = require("../models/EventModel"); 
+const eventModel = require("../models/EventModel");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
 require("dotenv").config();
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
 // Register User
 module.exports.signUp = async (req, res) => {
@@ -75,7 +75,7 @@ module.exports.loginUser = async (req, res) => {
           return res.send("Email or Password is wrong");
         }
       } else {
-        return res.send("Internal Server Error");
+        return res.send("Something is missing");
       }
     }
   } catch (err) {
@@ -181,7 +181,6 @@ module.exports.createEvent = async (req, res) => {
     const {
       eventName,
       organizedBy,
-      organizationEmail,
       eventDate,
       eventTime,
       speakerName,
@@ -190,40 +189,55 @@ module.exports.createEvent = async (req, res) => {
       description,
       registrationEndDate,
       isPaid,
-      paidAmountPerPerson,
       headcount,
       payableAmount,
       eventType,
       isPublic,
-    } = req.body;
+    } = req.body.formData;
 
-    // Create a new event object
-    const newEvent = new Event({
+    let event = await eventModel.create({
       eventName,
       organizedBy,
-      organizationEmail,
-      eventDate,
-      eventTime,
-      speakerName,
-      cityName: eventType === 'in_person' || eventType === 'hybrid' ? cityName : null,
-      platform: eventType === 'virtual' || eventType === 'hybrid' ? platform : null,
-      description,
-      registrationEndDate,
-      isPaid,
-      paidAmountPerPerson: isPaid ? paidAmountPerPerson : 0,
-      headcount,
-      payableAmount,
+      date: eventDate,
+      time: eventTime,
+      speaker: speakerName,
       eventType,
+      city: cityName,
+      platform,
       isPublic,
+      isPaid,
+      payableAmount,
+      headcount,
+      description,
+      lastDateOfRegistration: registrationEndDate,
     });
+    console.log(await eventModel.find({}));
 
-    // Save event to the database
-    await newEvent.save();
-    console.log(req.body); 
-    return res.json({ success: true, message: 'Event created successfully!' });
-    }catch (error) {
-    console.log(req.body); 
-    console.error('Error:', error);
-    return res.json({ success: false, message: 'Failed to create event.' });
+    // Create a new event object
+    // const newEvent = new Event({
+    //   eventName,
+    //   organizedBy,
+    //   organizationEmail,
+    //   eventDate,
+    //   eventTime,
+    //   speakerName,
+    //   cityName: eventType === 'in_person' || eventType === 'hybrid' ? cityName : null,
+    //   platform: eventType === 'virtual' || eventType === 'hybrid' ? platform : null,
+    //   description,
+    //   registrationEndDate,
+    //   isPaid,
+    //   paidAmountPerPerson: isPaid ? paidAmountPerPerson : 0,
+    //   headcount,
+    //   payableAmount,
+    //   eventType,
+    //   isPublic,
+    // });
+
+    // // Save event to the database
+    // await newEvent.save();
+    // console.log(req.body);
+    res.send("Event created successfully!");
+  } catch (error) {
+    res.send(error.message);
   }
 };

@@ -14,6 +14,8 @@ module.exports = async (req, res, next) => {
         req.user = user;
         next();
       }
+    }else {
+      res.send("You need to login first");
     }
   } catch (err) {
     console.log(err.message);
