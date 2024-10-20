@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
+  ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   eventName: { type: String, required: true },
-  organizedBy: { type: String, required: true },
+  // organizedBy: { type: String, required: true },
   // email: { type: String, required: true },
   date: { type: Date, required: true },
   time: { type: String, required: true },
@@ -16,8 +17,26 @@ const eventSchema = new mongoose.Schema({
   headcount: { type: Number, required: true },
   description: { type: String, required: true },
   lastDateOfRegistration: { type: Date },
-  // rulesFile: { type: String },
-  // posterImage: { type: String , required: true},
+  posterImage: {
+    public_id: {
+      type: String,
+      required: false,
+    },
+    url: {
+      type: String,
+      required: false,
+    },
+  },
+  scannerImage: {
+    public_id: {
+      type: String,
+      required: false,
+    },
+    url: {
+      type: String,
+      required: false,
+    },
+  },
 });
 
 module.exports = mongoose.model("event", eventSchema);

@@ -180,7 +180,7 @@ module.exports.createEvent = async (req, res) => {
   try {
     const {
       eventName,
-      organizedBy,
+      // organizedBy,
       eventDate,
       eventTime,
       speakerName,
@@ -196,8 +196,9 @@ module.exports.createEvent = async (req, res) => {
     } = req.body.formData;
 
     let event = await eventModel.create({
+      ownerId: req.user._id,
       eventName,
-      organizedBy,
+      // organizedBy,
       date: eventDate,
       time: eventTime,
       speaker: speakerName,
@@ -211,31 +212,12 @@ module.exports.createEvent = async (req, res) => {
       description,
       lastDateOfRegistration: registrationEndDate,
     });
-    console.log(await eventModel.find({}));
 
-    // Create a new event object
-    // const newEvent = new Event({
-    //   eventName,
-    //   organizedBy,
-    //   organizationEmail,
-    //   eventDate,
-    //   eventTime,
-    //   speakerName,
-    //   cityName: eventType === 'in_person' || eventType === 'hybrid' ? cityName : null,
-    //   platform: eventType === 'virtual' || eventType === 'hybrid' ? platform : null,
-    //   description,
-    //   registrationEndDate,
-    //   isPaid,
-    //   paidAmountPerPerson: isPaid ? paidAmountPerPerson : 0,
-    //   headcount,
-    //   payableAmount,
-    //   eventType,
-    //   isPublic,
-    // });
+    await userModel.findOneAndUpdate(
+      { _id: req.user._id },
+      { $push: { createdEvents: event._id } }
+    );
 
-    // // Save event to the database
-    // await newEvent.save();
-    // console.log(req.body);
     res.send("Event created successfully!");
   } catch (error) {
     res.send(error.message);
