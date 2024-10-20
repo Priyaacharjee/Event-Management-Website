@@ -39,7 +39,7 @@ router.put("/updatepassword", updatePassword);
 router.post("/uploadprofilepicture", isLoggedIn, uploadProfilePicture);
 
 // CREATE ORDER
-// router.post("/createevent", isLoggedIn, createEvent);
-router.post("/createevent",  createEvent);
+router.post("/createevent", isLoggedIn, createEvent);
+// router.post("/createevent",  createEvent);
 
 module.exports = router;
