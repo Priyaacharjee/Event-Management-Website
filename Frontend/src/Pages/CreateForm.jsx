@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { createEvent } from "../utils/utils";
 
 const CreateForm = () => {
-  const [isPaid, setIsPaid] = useState(false);
   const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     eventName: "",
-    // organizedBy: "",
-    // organizationEmail: "",
     eventDate: "",
     eventTime: "",
     eventType: "",
@@ -24,8 +21,51 @@ const CreateForm = () => {
     isPublic: true,
     paidAmountPerPerson: 0,
     posterImage: null,
+    scannerImage: null,
     paymentScanner: null,
   });
+
+  const handleScannerImage = async (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      alert("Please Upload an Scanner Image");
+      return;
+    }
+    const maxSizeInKB = 70;
+    if (file.size > maxSizeInKB * 1024) {
+      alert(`File size should be less than ${maxSizeInKB} KB.`);
+      return;
+    }
+
+    const imageData = await setFileToBase(file);
+    setFormData({ ...formData, scannerImage: imageData });
+  };
+
+  const handlePosterImage = async (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      alert("Please Upload an Poster Image");
+      return;
+    }
+    const maxSizeInKB = 70;
+    if (file.size > maxSizeInKB * 1024) {
+      alert(`File size should be less than ${maxSizeInKB} KB.`);
+      return;
+    }
+
+    const imageData = await setFileToBase(file);
+    setFormData({ ...formData, posterImage: imageData });
+  };
+
+  const setFileToBase = (file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+    });
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -314,14 +354,13 @@ const CreateForm = () => {
                 </label>
                 <select
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  value={!formData.isPaid}
                   name="isPaid"
                   onChange={(e) => {
-                    if (e.target.value === "Paid")
-                      handleIsPaid((e) => {
-                        const { name, value } = e.target;
-                        setFormData({ ...formData, [name]: value });
-                      });
+                    if (e.target.value == "paid") {
+                      setFormData({ ...formData, isPaid: true });
+                    } else {
+                      setFormData({ ...formData, isPaid: false });
+                    }
                   }}
                   required
                 >
@@ -366,7 +405,7 @@ const CreateForm = () => {
                         type="file"
                         name="paymentScanner"
                         accept=".jpg,.jpeg,.png"
-                        onChange={handleFileChange}
+                        onChange={handleScannerImage}
                         className="mt-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
                         required
                       />
@@ -394,9 +433,12 @@ const CreateForm = () => {
                       setError("");
                       setFormData({
                         ...formData,
-                        headcount: e.target.value, 
+                        headcount: e.target.value,
                       });
-                      calculatePayableAmount(e.target.value, formData.eventType); 
+                      calculatePayableAmount(
+                        e.target.value,
+                        formData.eventType
+                      );
                     }
                   }}
                   required
@@ -468,7 +510,7 @@ const CreateForm = () => {
                   type="file"
                   name="posterImage"
                   accept=".jpg,.jpeg,.png"
-                  onChange={handleFileChange}
+                  onChange={handlePosterImage}
                   className="mt-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
                   required
                 />
