@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "../Components/Slider";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Company_card from "../Components/Company_card";
 import Upcoming_event from "../Components/UpcomingEvents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarCheck, faCalendar, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarCheck,
+  faCalendar,
+  faGlobe,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import FreqtQuestion from "../Components/FreqtQuestion";
 import Gallery_Card from "../Components/Gallery_card";
 import Event_card from "../Components/Event_card";
@@ -68,7 +73,6 @@ export default function Home() {
               lasting impression on your attendees.
             </div>
         </div>
-
 
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
         <div id="upcoming">
