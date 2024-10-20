@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { findUser, logoutUser } from "../utils/utils";
 import { Link } from "react-scroll";
 
+
 export default function Header({ menuItems }) {
   const navigate = useNavigate();
 
