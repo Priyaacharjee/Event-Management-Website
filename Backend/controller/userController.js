@@ -180,7 +180,6 @@ module.exports.createEvent = async (req, res) => {
   try {
     const {
       eventName,
-      // organizedBy,
       eventDate,
       eventTime,
       speakerName,
@@ -193,12 +192,33 @@ module.exports.createEvent = async (req, res) => {
       payableAmount,
       eventType,
       isPublic,
+      scannerImage,
+      posterImage,
     } = req.body.formData;
+
+    if (!posterImage) {
+      return res.status(400).send("No Event Poster uploaded.");
+    }
+
+    if (isPaid && !scannerImage) {
+      return res.status(400).send("No Scanner Image uploaded.");
+    }
+
+    const scannerResult = await cloudinary.uploader.upload(scannerImage, {
+      folder: "eventManagement_scannerImages",
+      width: 300,
+      crop: "scale",
+    });
+
+    const posterResult = await cloudinary.uploader.upload(posterImage, {
+      folder: "eventManagement_posterImages",
+      width: 300,
+      crop: "scale",
+    });
 
     let event = await eventModel.create({
       ownerId: req.user._id,
       eventName,
-      // organizedBy,
       date: eventDate,
       time: eventTime,
       speaker: speakerName,
@@ -211,6 +231,14 @@ module.exports.createEvent = async (req, res) => {
       headcount,
       description,
       lastDateOfRegistration: registrationEndDate,
+      scannerImage:{
+        public_id: scannerResult.public_id,
+        url: scannerResult.secure_url,
+      },
+      posterImage:{
+        public_id: posterResult.public_id,
+        url: posterResult.secure_url,
+      },
     });
 
     await userModel.findOneAndUpdate(
