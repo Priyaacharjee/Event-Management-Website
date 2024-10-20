@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import EventPage from "../Pages/EventPage";
 
 const VirtualCard = ({key,name, date, organizer, platform, image}) => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const VirtualCard = ({key,name, date, organizer, platform, image}) => {
       {/* Register Button */}
       <button
         className="btn2 mt-4"
-        //onClick={() => navigate(link)}
+        onClick={() => navigate("/eventpage")}
         //mt-6 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:from-purple-900 hover:to-blue-900 focus:outline-none
       >
         Register Now
