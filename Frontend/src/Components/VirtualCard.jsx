@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import EventPage from "../Pages/EventPage";
 
 const VirtualCard = ({key,name, date, organizer, platform, image}) => {
   const navigate = useNavigate();
