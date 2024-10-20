@@ -9,6 +9,8 @@ import Login from "./Pages/Login";
 import Forgetpassword from "./Pages/Forgetpassword";
 import Resetpassword from "./Pages/Resetpassword";
 import VirtualEvent from "./Pages/VirtualEvent";
+import InPersonEvent from "./Pages/InPersonEvent";
+import HybridEvent from "./Pages/HybridEvent";
 import CreateForm from "./Pages/CreateForm";
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
             <Route path="/forgetpassword" element={<Forgetpassword />} />
             <Route path="/resetpassword" element={<Resetpassword />} />
             <Route path="/virtualevent" element={<VirtualEvent />} />
+            <Route path="/inpersonevent" element={<InPersonEvent />} />
+            <Route path="/hybridevent" element={<HybridEvent />} />
             <Route path="/createform" element={<CreateForm />} />
           </Routes>
         </BrowserRouter>
