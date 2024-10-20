@@ -90,4 +90,5 @@ const EventPage = () => {
   return <EventDetails eventid={eventData} />;
 };
 
+
 export default EventPage;
