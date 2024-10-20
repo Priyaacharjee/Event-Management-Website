@@ -21,7 +21,6 @@ app.use(cookieParser());
 
 // app.use("/admins", adminRouter);
 app.use("/users", userRouter);
-app.use("/events", userRouter);
 
 
 app.listen(8000);

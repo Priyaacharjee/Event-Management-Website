@@ -130,7 +130,6 @@ const Event = ({ event_type, des, video }) => {
 
 export default function Event_card() {
   return (
-   
     <div className="py-5 flex flex-col items-center justify-center pb-24">
       <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-6 text-indigo-400 pt-8 pb-8">
         <p>"The minimalist way to host all your events successfully"</p>
