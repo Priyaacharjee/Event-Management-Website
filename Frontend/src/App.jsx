@@ -8,6 +8,7 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Forgetpassword from "./Pages/Forgetpassword";
 import Resetpassword from "./Pages/Resetpassword";
+import VirtualEvent from "./Pages/VirtualEvent";
 
 function App() {
   const [themeMode, setThemeMode] = useState("light");
@@ -35,6 +36,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/forgetpassword" element={<Forgetpassword />} />
             <Route path="/resetpassword" element={<Resetpassword />} />
+            <Route path="/virtualevent" element={<VirtualEvent />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
