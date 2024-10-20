@@ -84,7 +84,7 @@ export default function Event_card() {
           event_type="Hybrid Meeting"
           des="Unite the real world with digital world!!"
           video={hybrid}
-          navigateTo="/hybridevent" // Added navigateTo for consistency
+          navigateTo="/hybridevent" 
         />
       </div>
     </div>

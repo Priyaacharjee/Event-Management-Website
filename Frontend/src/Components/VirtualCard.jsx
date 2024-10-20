@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const VirtualCard = ({key, date, organizer, platform, image}) => {
+const VirtualCard = ({key,name, date, organizer, platform, image}) => {
   const navigate = useNavigate();
 
   return (
@@ -13,6 +13,11 @@ const VirtualCard = ({key, date, organizer, platform, image}) => {
           alt="Event"
           className="w-full h-52 object-cover rounded-md "
         />
+      </div>
+
+      {/* Event Name */}
+      <div className="mt-4">
+        <h2 className="text-xl font-semibold text-white">{name}</h2>
       </div>
 
       {/* Event Date */}
@@ -38,7 +43,7 @@ const VirtualCard = ({key, date, organizer, platform, image}) => {
       <button
         className="btn2 mt-4"
         //onClick={() => navigate(link)}
-        //mt-6 bg-gradient-to-r from-pink-400 to-blue-400 text-white font-bold py-2 px-4 rounded-lg hover:from-yellow-500 hover:to-blue-500 focus:outline-none
+        //mt-6 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:from-purple-900 hover:to-blue-900 focus:outline-none
       >
         Register Now
       </button>
