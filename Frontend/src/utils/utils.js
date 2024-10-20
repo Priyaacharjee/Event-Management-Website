@@ -3,7 +3,7 @@ import axios from "axios";
 
 // USER FUNCTIONS ----------------------------------------------------------------
 
-//----------- User Signup
+// User Signup
 export const signUp = async (
   userName,
   email,
@@ -42,7 +42,19 @@ export const loginUser = async (email, password) => {
     return response.data;
   } catch (err) {
     console.log(err.message);
-    alert("An error occured during login");
+  }
+};
+
+// User Logout
+export const logoutUser = async () => {
+  try {
+    let response = await axios.get(
+      "http://localhost:8000/users/logout",
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
   }
 };
 
@@ -78,7 +90,7 @@ export const findUser = async () => {
     let response = await axios.get("http://localhost:8000/users/getuser", {
       withCredentials: true,
     });
-    if (response.data) {
+    if (response.data.username) {
       return response.data;
     } else {
       return null;
@@ -86,21 +98,20 @@ export const findUser = async () => {
   } catch (err) {
     console.log(err.message);
   }
-}
-// --------------Create Event
+};
 
+// Create Event
 export const createEvent = async (formData) => {
+  console.log(formData);
   try {
-    const response = await axios.post('http://localhost:8000/events/createevent', formData, {
-      // headers: {
-      //   'Content-Type': 'multipart/form-data', // Set correct content type for file uploads
-      // },
-      withCredentials: true, // Include credentials (cookies) in the request if necessary
-    });
+    const response = await axios.post(
+      "http://localhost:8000/users/createevent",
+      { formData },
+      { withCredentials: true }
+    );
 
     return response.data; // Return the response data from the server
   } catch (err) {
-    console.log('Error creating event:', err.message);
-    return { success: false, message: err.message }; // Return an error object
+    return err.message; // Return an error object
   }
 };

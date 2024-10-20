@@ -103,7 +103,7 @@
     left: -100%;
     top: 0;
     border-radius: 9999px;
-    background-color: rgba(16, 185, 129, 1); 
+    background-color: rgb(84, 11, 168); 
     z-index: -10;
     transform: scale(1);
   }
