@@ -49,8 +49,10 @@ function VirtualEvent() {
           <div className="text-white text-xl font-bold">Eventek</div>
           <ul className="flex space-x-8">
             <li className="text-white cursor-pointer">Home</li>
-            <li className="text-white cursor-pointer">Services</li>
+            <li className="text-white cursor-pointer">Upcoming events</li>
+            <li className="text-white cursor-pointer">About</li>
             <li className="text-white cursor-pointer">Contact</li>
+        
           </ul>
           <button className="bg-blue-700 text-white py-2 px-4 rounded-md" onClick={() => navigate("/login")}>Log In</button>
         </nav>
@@ -72,13 +74,12 @@ function VirtualEvent() {
           </p>
           <button className="btn1 justify-center items-center p-4 rounded-md mt-4" onClick={() => navigate("/CreateForm")}>Create Meeting</button>
         </div>
-        {/* bg-red-500 text-white py-3 px-6 mt-4 rounded-md text-lg */}
       </section>
 
       {/* Upcoming Events Section */}
       <section className="text-center mb-8">
         <h2 className="text-3xl font-serif font-semibold">Our upcoming events</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-8">
           {virtualEvents.map((item) => (
             <VirtualCard
               key={item._id}
