@@ -7,6 +7,14 @@ function EventPage() {
   const navigate = useNavigate();
   const { eventId } = useParams();
 
+  const [event, setevent] = useState({});
+
+  useEffect(() => {
+    fetchSingleEvent(eventId).then((response) => {
+      setevent(response);
+    });
+  }, []);
+
   const eventTags = [
     { label: "Event Name", value: event.eventName },
     {
@@ -40,14 +48,6 @@ function EventPage() {
     { label: "Rules & Regulations", value: event.rules },
   ];
 
-  const [event, setevent] = useState({});
-
-  useEffect(() => {
-    fetchSingleEvent(eventId).then((response) => {
-      setevent(response);
-    });
-  }, []);
-
   return (
     <>
       <div className="flex flex-col items-center py-10">
@@ -59,12 +59,12 @@ function EventPage() {
             className="w-96 h-48 object-cover rounded-lg"
           />
           <div className="ml-8">
-            {/* Dynamically render event details */}
             {eventTags.map((item, index) => (
               <p key={index} className="text-lg font-medium">
                 {item.label} : <span className="font-light">{item.value}</span>
               </p>
             ))}
+
             <button
               className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
               onClick={() => navigate("/registrationform")}
@@ -76,11 +76,15 @@ function EventPage() {
 
         {/* Description Section */}
         <div className="w-full max-w-4xl mt-8">
-          {descriptionTags.map((item, index) => (
-            <p key={index} className="text-lg font-medium">
-              {item.label} : <span className="font-light">{item.value}</span>
-            </p>
-          ))}
+          {descriptionTags.map((item, index) =>
+            (event.eventType === "virtual" && item.label === "Venue") ||
+            (event.eventType === "in_person" &&
+              item.label === "Platform") ? null : (
+              <p key={index} className="text-lg font-medium">
+                {item.label} : <span className="font-light">{item.value}</span>
+              </p>
+            )
+          )}
         </div>
 
         {/* Comment Section */}
