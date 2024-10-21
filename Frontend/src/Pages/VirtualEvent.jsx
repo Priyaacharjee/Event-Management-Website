@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import VirtualCard from "../Components/VirtualCard";
 import { NavLink, useNavigate } from "react-router-dom";
-import { findUser, logoutUser, fetchVirtualEvents } from "../utils/utils";
+import { fetchVirtualEvents } from "../utils/utils";
+import { findUser, logoutUser } from "../utils/utils";
 import { Link } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "../Components/Footer";
@@ -9,6 +10,7 @@ import {
   faBars,
   faXmark,
   faUser,
+  faMagnifyingGlass,
   faCaretDown,
   faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +20,43 @@ const footerMenuItems = [
   { href: "header", label: "Header", icon: AiFillHome },
   { href: "features", label: "Features", icon: AiOutlineAppstore },
   { href: "contact", label: "Contact", icon: AiFillContacts },
+];
+
+const virtualEvents = [
+  {
+    _id: "1",
+    name: "TCS Global Leadership Summit",
+    date: "24-09-2024",
+    organizer: "TCS",
+    platform: "Google meet",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlEo5Tk4qtc8LYOiDmEq5VE1rGJzAd18p1lg&s",
+  },
+  {
+    _id: "2",
+    name: "Infosys Tech Vision 2024",
+    date: "15-10-2024",
+    organizer: "Infosys",
+    platform: "Zoom",
+    image:
+      "https://mma.prnewswire.com/media/633365/Infosys_Logo.jpg?p=facebook",
+  },
+  {
+    _id: "3",
+    name: "Wipro Innovate 2024",
+    date: "20-11-2024",
+    organizer: "Wipro",
+    platform: "Google meet",
+    image: "https://admeducation.com/wp-content/uploads/2024/05/WIPRO-Logo.jpg",
+  },
+  {
+    _id: "4",
+    name: "Accenture Women’s Leadership Forum",
+    date: "20-11-2024",
+    organizer: "Accenture",
+    platform: "Google Meet",
+    image: "https://www.nidv.eu/wp-content/uploads/2020/12/Accenture.png",
+  },
 ];
 
 function VirtualEvent() {
@@ -42,27 +81,27 @@ function VirtualEvent() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [isClosingDropdown, setIsClosingDropdown] = useState(false);
 
-  //const [searchBarClicked, setSearchBarClicked] = useState(false);
-  //const [isSearchDropdown, setIsSearchDropdown] = useState(false);
+  const [searchBarClicked, setSearchBarClicked] = useState(false);
+  const [isSearchDropdown, setIsSearchDropdown] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
 
   const handleLogInClick = () => {
     navigate("/login");
   };
 
-  // const searchClick = () => {
-  //   if (searchBarClicked) {
-  //     setIsSearchDropdown(true);
-  //     setTimeout(() => {
-  //       setSearchBarClicked(false);
-  //       setIsSearchDropdown(false);
-  //     }, 900);
-  //   } else {
-  //     setSearchBarClicked(true);
-  //   }
-  //   setDropDownOpen(false);
-  //   setHamburgerMenuClicked(false);
-  // };
+  const searchClick = () => {
+    if (searchBarClicked) {
+      setIsSearchDropdown(true);
+      setTimeout(() => {
+        setSearchBarClicked(false);
+        setIsSearchDropdown(false);
+      }, 900);
+    } else {
+      setSearchBarClicked(true);
+    }
+    setDropDownOpen(false);
+    setHamburgerMenuClicked(false);
+  };
 
   const hambergerClick = () => {
     if (hamburgerMenuClicked) {
@@ -75,7 +114,7 @@ function VirtualEvent() {
       setHamburgerMenuClicked(true);
     }
     setDropDownOpen(false);
-    //setSearchBarClicked(false);
+    setSearchBarClicked(false);
   };
 
   const dropDown = () => {
@@ -89,14 +128,14 @@ function VirtualEvent() {
       setDropDownOpen(true);
     }
     setHamburgerMenuClicked(false);
-    //setSearchBarClicked(false);
+    setSearchBarClicked(false);
   };
 
-  // function handleEnter(e) {
-  //   if (e.keyCode == 13) {
-  //     alert("search clicked!");
-  //   }
-  // }
+  function handleEnter(e) {
+    if (e.keyCode == 13) {
+      alert("search clicked!");
+    }
+  }
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
@@ -104,10 +143,10 @@ function VirtualEvent() {
     if (scrollDirection !== direction) {
       setScrollDirection(direction);
       if (direction === "down") {
-        // setIsSearchDropdown(true);
+        setIsSearchDropdown(true);
         setTimeout(() => {
-          // setSearchBarClicked(false);
-          //setIsSearchDropdown(false);
+          setSearchBarClicked(false);
+          setIsSearchDropdown(false);
         }, 900);
       }
     }
@@ -143,7 +182,28 @@ function VirtualEvent() {
     <>
       <div className="App">
         <div className="w-full h-16">
-          {/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------  NAVBAR */}
+          {/* Search-Bar Dropdown */}
+          {(searchBarClicked || isSearchDropdown) && (
+            <div
+              className={`pt-[7rem] pb-[3rem] bg-zinc-200 relative top-13 w-full h-24 flex justify-center items-center shadow-xl ${
+                isSearchDropdown ? "animate-slideUp" : "animate-slideBelow"
+              } lg:flex hidden`}
+            >
+              <input
+                className={`outline-none text-xl h-16 text-zinc-600 font-serif ring-1 ring-zinc-400 focus:ring-2 duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-xl px-4 py-2 shadow-md focus:shadow-lg dark:shadow-md w-[70%] 2xl:w-[80%] xl:w-[60%] lg:w-[80%] ${
+                  isSearchDropdown
+                    ? "animate-slideUp block"
+                    : "animate-slideBelow block"
+                }`}
+                autoComplete="off"
+                placeholder="Search here for product reviews, FAQs and More..."
+                name="text"
+                type="text"
+                onKeyDown={handleEnter}
+              />
+            </div>
+          )}
+          {/* NAVBAR */}
           <nav
             id="header"
             className="h-16 flex items-center px-4 justify-between w-full text-[16px] bg-black text-white fixed top-0 z-50"
@@ -185,6 +245,16 @@ function VirtualEvent() {
 
             {/* User Section */}
             <div className="w-[50%] sm:w-[35%] md:w-[35%] lg:w-2/5 xl:w-[25%] 2xl:w-[20%] flex justify-end items-center space-x-4">
+              {/* Search Button */}
+              <div className="hidden lg:flex xl:w-[35%] lg:w-[20%] md:w-full justify-center">
+                <FontAwesomeIcon
+                  icon={faMagnifyingGlass}
+                  style={{ color: "#ffffff" }}
+                  className="text-xl cursor-pointer"
+                  onClick={searchClick}
+                />
+              </div>
+
               {/* USER SECTION IN NAVBAR */}
               {user ? (
                 <>
@@ -286,25 +356,44 @@ function VirtualEvent() {
         <section className="text-center my-8 p-8">
           <h1
             className="text-7xl text-blue-600 font-bold font-serif "
-            style={{ fontFamily: '"quick"' }}
+            style={{ fontFamily: "quick" }}
           >
             Virtual Events
           </h1>
           <div className="flex h-72 items-center">
-            <p className="text-slate-500 lg:text-xl lg:mt-6 text-center lg:text-left font-serif w-[66%] pl-16">
+            <p className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif w-[66%] pl-16">
               Join our virtual events to connect with industry experts, explore
               exciting opportunities, and expand your network—all from the
-              comfort of home. <br></br><br></br>Engage in insightful discussions, discover the
-              latest trends, and collaborate with professionals in a thriving
-              online community! Don't miss out on these dynamic, interactive
+              comfort of home.
+              <br /> Engage in insightful discussions, discover the latest
+              trends, and collaborate with professionals in a thriving online
+              community! Don’t miss out on these dynamic, interactive
               experiences!
             </p>
-            <div className=" w-[30%] ml-auto flex justify-end pr-16">
+            <div className=" w-[30%] ml-auto flex justify-end pl-16">
               <img
                 className="h-72"
                 src="https://img.freepik.com/free-vector/flat-happy-people-celebrate-birthday-online-party-via-internet_88138-908.jpg?w=996&t=st=1729426892~exp=1729427492~hmac=2c95422e579b3eed41d8a1a45f1607770d86d96f634223b841a5e3b6370cd776"
                 alt="virtualevent"
               />
+            </div>
+          </div>
+
+          {/* search div for md and sm screen------------------------- */}
+          <div className="max-w-lg relative m-auto mt-[0rem] flex flex-col lg:hidden h-16 md:h-16 sm:h-16 xs:h-16">
+            <div className="relative w-full">
+              <input
+                type="text"
+                placeholder="Search for product reviews, FAQs and More..."
+                className="w-full h-full p-4 rounded-full text-sm sm:text-md text-zinc-700 font-mono focus:outline-none md:p-3 sm:p-3 xs:p-3 shadow-2xl border-2 border-black "
+              />
+              <button className="absolute right-[2px] top-1/2 transform -translate-y-1/2 bg-slate-900 rounded-full w-[4rem] h-[2.67rem]">
+                <FontAwesomeIcon
+                  icon={faMagnifyingGlass}
+                  style={{ color: "#ffffff" }}
+                  className="text-xl  md:text-lg sm:text-base xs:text-sm"
+                />
+              </button>
             </div>
           </div>
 
