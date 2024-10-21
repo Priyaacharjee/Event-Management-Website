@@ -290,16 +290,16 @@ function VirtualEvent() {
           >
             Virtual Events
           </h1>
-          <div className="flex">
-            <p className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif w-[69%]">
+          <div className="flex h-72 items-center">
+            <p className="text-slate-500 lg:text-xl lg:mt-6 text-center lg:text-left font-serif w-[66%] pl-16">
               Join our virtual events to connect with industry experts, explore
               exciting opportunities, and expand your network—all from the
-              comfort of home. Engage in insightful discussions, discover the
+              comfort of home. <br></br><br></br>Engage in insightful discussions, discover the
               latest trends, and collaborate with professionals in a thriving
               online community! Don’t miss out on these dynamic, interactive
               experiences!
             </p>
-            <div className=" w-[30%] ml-auto flex justify-end">
+            <div className=" w-[30%] ml-auto flex justify-end pr-16">
               <img
                 className="h-72"
                 src="https://img.freepik.com/free-vector/flat-happy-people-celebrate-birthday-online-party-via-internet_88138-908.jpg?w=996&t=st=1729426892~exp=1729427492~hmac=2c95422e579b3eed41d8a1a45f1607770d86d96f634223b841a5e3b6370cd776"
@@ -308,12 +308,12 @@ function VirtualEvent() {
             </div>
           </div>
 
-          <div className="mt-[-5%]">
+          <div className="mt-[2%]">
             <p className="text-2xl font-bold font-serif bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to- to-blue-950">
               WANT TO CREATE A VIRTUAL MEETING?
             </p>
             <button
-              className="btn1 justify-center items-center p-4 rounded-md mt-4"
+              className="btn1 justify-center items-center p-4 rounded-md mt-5"
               onClick={() => navigate("/CreateForm")}
             >
               Create Meeting
