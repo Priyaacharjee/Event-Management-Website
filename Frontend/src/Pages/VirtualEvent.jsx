@@ -3,43 +3,6 @@ import VirtualCard from "../Components/VirtualCard";
 import { useNavigate } from "react-router-dom";
 import { fetchVirtualEvents } from "../utils/utils";
 
-// const virtualEvents = [
-//   {
-//     _id: "1",
-//     name: "TCS Global Leadership Summit",
-//     date: "24-09-2024",
-//     organizer: "TCS",
-//     platform: "Google meet",
-//     image:
-//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlEo5Tk4qtc8LYOiDmEq5VE1rGJzAd18p1lg&s",
-//   },
-//   {
-//     _id: "2",
-//     name: "Infosys Tech Vision 2024",
-//     date: "15-10-2024",
-//     organizer: "Infosys",
-//     platform: "Zoom",
-//     image:
-//       "https://mma.prnewswire.com/media/633365/Infosys_Logo.jpg?p=facebook",
-//   },
-//   {
-//     _id: "3",
-//     name: "Wipro Innovate 2024",
-//     date: "20-11-2024",
-//     organizer: "Wipro",
-//     platform: "Google meet",
-//     image: "https://admeducation.com/wp-content/uploads/2024/05/WIPRO-Logo.jpg",
-//   },
-//   {
-//     _id: "4",
-//     name: "Accenture Women’s Leadership Forum",
-//     date: "20-11-2024",
-//     organizer: "Accenture",
-//     platform: "Google Meet",
-//     image: "https://www.nidv.eu/wp-content/uploads/2020/12/Accenture.png",
-//   },
-// ];
-
 function VirtualEvent() {
   const navigate = useNavigate();
   const [virtualEvents, setvirtualEvents] = useState([]);
@@ -58,8 +21,10 @@ function VirtualEvent() {
           <div className="text-white text-xl font-bold">Eventek</div>
           <ul className="flex space-x-8">
             <li className="text-white cursor-pointer">Home</li>
-            <li className="text-white cursor-pointer">Services</li>
+            <li className="text-white cursor-pointer">Upcoming events</li>
+            <li className="text-white cursor-pointer">About</li>
             <li className="text-white cursor-pointer">Contact</li>
+        
           </ul>
           <button
             className="bg-blue-700 text-white py-2 px-4 rounded-md"
@@ -109,7 +74,6 @@ function VirtualEvent() {
             Create Meeting
           </button>
         </div>
-        {/* bg-red-500 text-white py-3 px-6 mt-4 rounded-md text-lg */}
       </section>
 
       {/* Upcoming Events Section */}
@@ -117,7 +81,7 @@ function VirtualEvent() {
         <h2 className="text-3xl font-serif font-semibold">
           Our upcoming events
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-8">
           {Array.isArray(virtualEvents) &&
             virtualEvents.map((item) => (
               <VirtualCard
