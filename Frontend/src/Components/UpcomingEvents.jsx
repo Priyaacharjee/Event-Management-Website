@@ -1,8 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function UpcomingEvents({
+  eventId,
   name,
   des,
   time,
@@ -11,6 +13,7 @@ export default function UpcomingEvents({
   venue,
   poster,
 }) {
+  const navigate = useNavigate();
   return (
     <>
       <div className="w-full bg-slate-900 h-[40rem] md:h-[25rem] lg:h-[30rem] sm:px-32 py-20"></div>
@@ -20,7 +23,11 @@ export default function UpcomingEvents({
             Upcoming Events
           </div>
           <div className="md:px-5 pl-4 hover:text-blue-200 hover:cursor-pointer text-white">
-            <FontAwesomeIcon icon={faArrowRight} className="hover:text-xl" />
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              className="hover:text-xl"
+              onClick={() => navigate(`/eventpage/${eventId}`)}
+            />
           </div>
         </div>
         <div className="bg-slate-200 grid grid-cols-1 md:grid-cols-2 md:px-5 px-5 py-5 items-center text-center md:h-[20rem] lg:h-[22rem] xl:h-[27rem] 2xl:h-[30rem]">

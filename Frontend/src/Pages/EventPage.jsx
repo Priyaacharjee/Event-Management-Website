@@ -38,7 +38,7 @@ function EventPage() {
 
   const descriptionTags = [
     { label: "Platform", value: event.platform },
-    { label: "Venue", value: event.venue },
+    { label: "Venue", value: event.city },
     { label: "Description", value: event.description },
     { label: "Remaining Seats", value: event.remainingSeats },
     {

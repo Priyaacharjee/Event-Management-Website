@@ -4,8 +4,6 @@ const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
 require("dotenv").config();
-const path = require("path");
-const fs = require("fs");
 
 // Register User
 module.exports.signUp = async (req, res) => {
@@ -267,6 +265,30 @@ module.exports.fetchAllVirtualEvents = async (req, res) => {
       .find({ eventType: "virtual" })
       .populate({ path: "ownerId" });
     res.send(virtualEvents);
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+// Fetch All In_person Events
+module.exports.fetchAllIn_PersonEvents = async (req, res) => {
+  try {
+    let in_personEvents = await eventModel
+      .find({ eventType: "in_person" })
+      .populate({ path: "ownerId" });
+    res.send(in_personEvents);
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+// Fetch All Hybrid Events
+module.exports.fetchAllHybridEvents = async (req, res) => {
+  try {
+    let hybridEvents = await eventModel
+      .find({ eventType: "hybrid" })
+      .populate({ path: "ownerId" });
+    res.send(hybridEvents);
   } catch (err) {
     res.send(err.message);
   }
