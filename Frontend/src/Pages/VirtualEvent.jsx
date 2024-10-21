@@ -296,7 +296,7 @@ function VirtualEvent() {
               exciting opportunities, and expand your network—all from the
               comfort of home. <br></br><br></br>Engage in insightful discussions, discover the
               latest trends, and collaborate with professionals in a thriving
-              online community! Don’t miss out on these dynamic, interactive
+              online community! Don't miss out on these dynamic, interactive
               experiences!
             </p>
             <div className=" w-[30%] ml-auto flex justify-end pr-16">
