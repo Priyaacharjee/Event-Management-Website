@@ -1,8 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-
-const VirtualCard = ({key,name, date, organizer, platform, image}) => {
+const VirtualCard = ({ eventId, name, date, organizer, platform, posterImage }) => {
   const navigate = useNavigate();
 
   return (
@@ -10,7 +9,7 @@ const VirtualCard = ({key,name, date, organizer, platform, image}) => {
       {/* Event Image */}
       <div className="overflow-hidden rounded-xl">
         <img
-          src={image}
+          src={posterImage}
           alt="Event"
           className="w-full h-52 object-cover rounded-md "
         />
@@ -23,7 +22,14 @@ const VirtualCard = ({key,name, date, organizer, platform, image}) => {
 
       {/* Event Date */}
       <div className="mt-4">
-        <h2 className="text-xl font-semibold text-white">Date : {date}</h2>
+        <h2 className="text-xl font-semibold text-white">
+          Date :{" "}
+          {new Date(date).getDate().toString().padStart(2, "0") +
+            "-" +
+            (new Date(date).getMonth() + 1).toString().padStart(2, "0") +
+            "-" +
+            new Date(date).getFullYear()}
+        </h2>
       </div>
 
       {/* Organizer */}
@@ -33,18 +39,15 @@ const VirtualCard = ({key,name, date, organizer, platform, image}) => {
         </p>
       </div>
 
-      {/* Venue */}
+      {/* Platform */}
       <div className="mt-2">
-        <p className="text-lg font-medium text-white">
-           Platform : {platform}
-        </p>
+        <p className="text-lg font-medium text-white">Platform : {platform}</p>
       </div>
 
       {/* Register Button */}
       <button
         className="btn2 mt-4"
-        onClick={() => navigate("/eventpage")}
-        //mt-6 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:from-purple-900 hover:to-blue-900 focus:outline-none
+        onClick={() => navigate(`/eventpage/${eventId}`)}
       >
         Register Now
       </button>

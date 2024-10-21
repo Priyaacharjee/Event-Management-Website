@@ -11,6 +11,9 @@ const {
   updatePasswordRequest,
   updatePassword,
   createEvent,
+  fetchAllVirtualEvents,
+  fetchSingleEvent,
+  fetchLastCreatedEvent,
 } = require("../controller/userController");
 
 router.get("/", (req, res) => {
@@ -40,6 +43,14 @@ router.post("/uploadprofilepicture", isLoggedIn, uploadProfilePicture);
 
 // CREATE ORDER
 router.post("/createevent", isLoggedIn, createEvent);
-// router.post("/createevent",  createEvent);
+
+// FETCH ALL VIRTUAL EVENTS
+router.get("/fetchallvirtualevents", fetchAllVirtualEvents);
+
+// FETCH A SINGLE EVENT
+router.post("/fetchsingleevent", fetchSingleEvent);
+
+// FETCH LAST CREATED EVENT
+router.get("/fetchlastcreatedevent", fetchLastCreatedEvent);
 
 module.exports = router;
