@@ -19,8 +19,11 @@ export default function UpcomingEvents({
       <div className="w-full bg-slate-900 h-[40rem] md:h-[25rem] lg:h-[30rem] sm:px-32 py-20"></div>
       <div className="w-[80%] h-auto m-auto mt-[-35rem] md:mt-[-20rem] lg:mt-[-25rem] grid-cols-1 md:grid-cols-2 ">
         <div className="bg-gradient-to-r from-[#011936] to-[#243b55] h-[20%] py-10 text-white flex items-center md:justify-end justify-center md:pr-5 font-serif">
-          <div className="lg:px-5 md:px-5 md:text-2xl text-right text-lg hover:text-blue-200 hover:cursor-pointer hover:text-[25px]">
-            Upcoming Events
+          <div
+            className="lg:px-5 md:px-5 md:text-2xl text-right text-lg hover:text-blue-200 hover:cursor-pointer hover:text-[25px]"
+            onClick={() => navigate(`/eventpage/${eventId}`)}
+          >
+            Explore Now
           </div>
           <div className="md:px-5 pl-4 hover:text-blue-200 hover:cursor-pointer text-white">
             <FontAwesomeIcon
