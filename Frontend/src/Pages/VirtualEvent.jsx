@@ -365,7 +365,7 @@ function VirtualEvent() {
               Join our virtual events to connect with industry experts, explore
               exciting opportunities, and expand your network—all from the
               comfort of home.
-              <br /> Engage in insightful discussions, discover the latest
+              <br/><br/> Engage in insightful discussions, discover the latest
               trends, and collaborate with professionals in a thriving online
               community! Don’t miss out on these dynamic, interactive
               experiences!
