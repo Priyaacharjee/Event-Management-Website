@@ -14,6 +14,8 @@ const {
   fetchAllVirtualEvents,
   fetchSingleEvent,
   fetchLastCreatedEvent,
+  fetchAllIn_PersonEvents,
+  fetchAllHybridEvents,
 } = require("../controller/userController");
 
 router.get("/", (req, res) => {
@@ -46,6 +48,12 @@ router.post("/createevent", isLoggedIn, createEvent);
 
 // FETCH ALL VIRTUAL EVENTS
 router.get("/fetchallvirtualevents", fetchAllVirtualEvents);
+
+// FETCH ALL IN_PERSON EVENTS
+router.get("/fetchallin_personvents", fetchAllIn_PersonEvents);
+
+// FETCH ALL HYBRID EVENTS
+router.get("/fetchallhyybridevents", fetchAllHybridEvents);
 
 // FETCH A SINGLE EVENT
 router.post("/fetchsingleevent", fetchSingleEvent);

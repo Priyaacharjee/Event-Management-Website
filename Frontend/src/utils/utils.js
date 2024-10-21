@@ -130,6 +130,36 @@ export const fetchVirtualEvents = async () => {
   }
 };
 
+// Fetch In-person Events
+export const fetchIn_PersonEvents = async () => {
+  try {
+    let response = await axios.get(
+      "http://localhost:8000/users/fetchallin_personvents",
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Fetch Hybrid Events
+export const fetchHybridEvents = async () => {
+  try {
+    let response = await axios.get(
+      "http://localhost:8000/users/fetchallhyybridevents",
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 // Fetch a Single Event
 export const fetchSingleEvent = async (eventId) => {
   try {

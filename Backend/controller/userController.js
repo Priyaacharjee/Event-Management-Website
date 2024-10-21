@@ -4,8 +4,6 @@ const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
 require("dotenv").config();
-const path = require("path");
-const fs = require("fs");
 
 // Register User
 module.exports.signUp = async (req, res) => {
@@ -272,6 +270,30 @@ module.exports.fetchAllVirtualEvents = async (req, res) => {
   }
 };
 
+// Fetch All In_person Events
+module.exports.fetchAllIn_PersonEvents = async (req, res) => {
+  try {
+    let in_personEvents = await eventModel
+      .find({ eventType: "in_person" })
+      .populate({ path: "ownerId" });
+    res.send(in_personEvents);
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+// Fetch All Hybrid Events
+module.exports.fetchAllHybridEvents = async (req, res) => {
+  try {
+    let hybridEvents = await eventModel
+      .find({ eventType: "hybrid" })
+      .populate({ path: "ownerId" });
+    res.send(hybridEvents);
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
 // Fetch Single Event
 module.exports.fetchSingleEvent = async (req, res) => {
   try {
@@ -290,9 +312,14 @@ module.exports.fetchSingleEvent = async (req, res) => {
 // Fetch Last Created Event
 module.exports.fetchLastCreatedEvent = async (req, res) => {
   try {
-    const lastEvent = await eventModel.findOne().sort({ createdAt: -1 }).exec();
-    res.send(lastEvent);
+    const lastEvent = await eventModel.find();
+    if (lastEvent.length !== 0) {
+      res.send(lastEvent[lastEvent.length - 1]);
+    } else {
+      res.send("No Event Created!");
+    }
   } catch (err) {
+    console.log(err.message);
     res.send(err.message);
   }
 };
