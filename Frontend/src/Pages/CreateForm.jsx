@@ -20,9 +20,9 @@ const CreateForm = () => {
     isPaid: false,
     isPublic: true,
     paidAmountPerPerson: 0,
+    bill: 0,
     posterImage: null,
     scannerImage: null,
-    paymentScanner: null,
   });
 
   const handleScannerImage = async (e) => {
@@ -138,38 +138,6 @@ const CreateForm = () => {
                 />
               </div>
 
-              {/* Organized By */}
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Organized By <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="organizedBy"
-                  value={formData.organizedBy}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  placeholder="Enter organizer's name/Company Name"
-                  required
-                />
-              </div> */}
-
-              {/* Organization Email */}
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Organization Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  name="organizationEmail"
-                  value={formData.organizationEmail}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  placeholder="Enter organization email"
-                  required
-                />
-              </div> */}
-
               {/* Event Date */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -250,7 +218,6 @@ const CreateForm = () => {
                     onChange={handleInputChange}
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                     placeholder="Enter preferable city"
-                    required
                   />
                 </div>
               )}
@@ -266,7 +233,6 @@ const CreateForm = () => {
                     name="platform"
                     value={formData.platform}
                     onChange={handleInputChange}
-                    required
                   >
                     <option value="" disabled selected>
                       Select preferable platform
@@ -293,7 +259,6 @@ const CreateForm = () => {
                         onChange={handleInputChange}
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                         placeholder="Enter preferable city"
-                        required
                       />
                     </div>
                     <div>
@@ -306,7 +271,6 @@ const CreateForm = () => {
                         name="platform"
                         value={formData.platform}
                         onChange={handleInputChange}
-                        required
                       >
                         <option value="" disabled selected>
                           Select preferable platform
@@ -403,11 +367,9 @@ const CreateForm = () => {
 
                       <input
                         type="file"
-                        name="paymentScanner"
                         accept=".jpg,.jpeg,.png"
                         onChange={handleScannerImage}
                         className="mt-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
-                        required
                       />
                     </div>
                   </div>
@@ -478,10 +440,8 @@ const CreateForm = () => {
                   value={formData.registrationEndDate}
                   onChange={handleInputChange}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  // required
                 />
               </div>
-              {/* )} */}
 
               {/* Rules & Regulations */}
               <div>
@@ -522,7 +482,16 @@ const CreateForm = () => {
                   <h3 className="text-lg font-bold text-red-500">
                     Total Bill: ₹{payableAmount}
                   </h3>
-                  <button className="mt-2 ml-8 bg-indigo-600 text-white p-2 rounded-md hover:bg-green-600">
+                  <button
+                    className="mt-2 ml-8 bg-indigo-600 text-white p-2 rounded-md hover:bg-green-600"
+                    onClick={() => {
+                      setFormData({
+                        ...formData,
+                        bill: payableAmount,
+                      });
+                      alert(`${payableAmount}/- Payment successfull`)
+                    }}
+                  >
                     Pay Now
                   </button>
                 </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "../Components/Slider";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
@@ -23,6 +23,7 @@ import {
   AiOutlineQuestionCircle,
   AiFillEdit,
 } from "react-icons/ai";
+import { fetchLastCreatedEvent } from "../utils/utils";
 
 const headerMenuItems = [
   { label: "Services", href: "services" },
@@ -46,6 +47,13 @@ export default function Home() {
   const handleSignUpClick = () => {
     navigate("/signup");
   };
+
+  const [lastEvent, setlastEvent] = useState({});
+  useEffect(() => {
+    fetchLastCreatedEvent().then((resonse) => {
+      setlastEvent(resonse);
+    });
+  }, []);
 
   return (
     <>
@@ -92,13 +100,15 @@ export default function Home() {
         </div>
 
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
-        <div id="upcoming">
+        <div id="upcoming" className="w-[85%]">
           <Upcoming_event
-            name="Student Enrichment Program"
-            des="The Student Enrichment Program is a dynamic initiative aimed at equipping students with essential skills and knowledge through workshops, mentoring, and hands-on experiences."
-            date="2023-03-15"
-            time="14:00"
-            venue="Kolkata"
+            name={lastEvent.eventName}
+            des={lastEvent.description}
+            date={lastEvent.date}
+            time={lastEvent.time}
+            platform={lastEvent.platform}
+            venue={lastEvent.city}
+            poster={lastEvent.posterImage ? lastEvent.posterImage.url : null}
           />
         </div>
 

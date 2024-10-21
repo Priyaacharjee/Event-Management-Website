@@ -1,35 +1,31 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { fetchSingleEvent } from "../utils/utils";
 
 function EventPage() {
   const navigate = useNavigate();
-  const [event, setevent] = useState(
-    {
-      _id: 1,
-      name: "TCS Global Leadership Summit",
-      organizer: "TCS",
-      dateTime: "30th - September - 2024",
-      speaker: "John Doe",
-      paidAmount: "$30",
-      interestedButton: "Interested",
-      totalVisitors: "250",
-      platform: "Google Meet",
-      venue: "Kolkata",
-      description: "Join us for an amazing dance event.",
-      remainingSeats: "25",
-      registrationDeadline: "25th September 2024",
-      rules: "",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Xuc5hDXl6WWuLOCcRZG4ei5zsC7hmldPwQ&s",
+  const { eventId } = useParams();
 
-    })
   const eventTags = [
-    { label: "Event Name", value: event.name },
-    { label: "Organized by", value: event.organizer },
-    { label: "Date & Time", value: event.dateTime },
+    { label: "Event Name", value: event.eventName },
+    {
+      label: "Organized by",
+      value: event.ownerId ? event.ownerId.username : null,
+    },
+    {
+      label: "Date & Time",
+      value: `${new Date(event.date).toLocaleDateString("en-GB")}, ${
+        event.time
+      }`,
+    },
     { label: "Speaker", value: event.speaker },
-    { label: "Paid Amount", value: event.paidAmount },
+    {
+      label: "Paid Amount",
+      value: event.payableAmount ? event.payableAmount : "Free",
+    },
     { label: "Interested", value: event.interestedButton },
-    { label: "Total Seats", value: event.totalVisitors },
+    { label: "Total Seats", value: event.headcount },
   ];
 
   const descriptionTags = [
@@ -37,21 +33,29 @@ function EventPage() {
     { label: "Venue", value: event.venue },
     { label: "Description", value: event.description },
     { label: "Remaining Seats", value: event.remainingSeats },
-    { label: "Last Date of Registration", value: event.registrationDeadline },
+    {
+      label: "Last Date of Registration",
+      value: new Date(event.lastDateOfRegistration).toLocaleDateString("en-GB"),
+    },
     { label: "Rules & Regulations", value: event.rules },
   ];
 
-  useEffect(() => {
+  const [event, setevent] = useState({});
 
-  }, [])
+  useEffect(() => {
+    fetchSingleEvent(eventId).then((response) => {
+      setevent(response);
+    });
+  }, []);
+
   return (
     <>
       <div className="flex flex-col items-center py-10">
         {/* Event Header with Image */}
         <div className="flex justify-between w-full max-w-4xl items-center">
           <img
-            src={event.image}
-            alt={event.name}
+            src={event.posterImage ? event.posterImage.url : null}
+            alt={event.eventName}
             className="w-96 h-48 object-cover rounded-lg"
           />
           <div className="ml-8">
@@ -61,7 +65,10 @@ function EventPage() {
                 {item.label} : <span className="font-light">{item.value}</span>
               </p>
             ))}
-            <button className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500" onClick={() => navigate("/registrationform")}>
+            <button
+              className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
+              onClick={() => navigate("/registrationform")}
+            >
               Register Now
             </button>
           </div>
@@ -87,8 +94,7 @@ function EventPage() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-
-export default EventPage
+export default EventPage;

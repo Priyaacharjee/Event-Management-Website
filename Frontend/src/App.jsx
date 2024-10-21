@@ -46,7 +46,7 @@ function App() {
             <Route path="/hybridevent" element={<HybridEvent />} />
             <Route path="/createform" element={<CreateForm />} />
             <Route path="/registrationform" element={<Registrationform/>}/>
-            <Route path="/eventpage" element={<EventPage />} />
+            <Route path="/eventpage/:eventId" element={<EventPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

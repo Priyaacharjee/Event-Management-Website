@@ -175,7 +175,7 @@ module.exports.uploadProfilePicture = async (req, res) => {
   }
 };
 
-// Create Event Controller
+// Create Event
 module.exports.createEvent = async (req, res) => {
   try {
     const {
@@ -194,21 +194,25 @@ module.exports.createEvent = async (req, res) => {
       isPublic,
       scannerImage,
       posterImage,
+      bill,
     } = req.body.formData;
 
     if (!posterImage) {
-      return res.status(400).send("No Event Poster uploaded.");
+      return res.send("No Event Poster uploaded.");
     }
 
-    if (isPaid && !scannerImage) {
-      return res.status(400).send("No Scanner Image uploaded.");
+    if (isPaid && scannerImage === null) {
+      return res.send("No Scanner Image uploaded.");
     }
 
-    const scannerResult = await cloudinary.uploader.upload(scannerImage, {
-      folder: "eventManagement_scannerImages",
-      width: 300,
-      crop: "scale",
-    });
+    let scannerResult = null;
+    if (scannerImage) {
+      scannerResult = await cloudinary.uploader.upload(scannerImage, {
+        folder: "eventManagement_scannerImages",
+        width: 300,
+        crop: "scale",
+      });
+    }
 
     const posterResult = await cloudinary.uploader.upload(posterImage, {
       folder: "eventManagement_posterImages",
@@ -228,14 +232,18 @@ module.exports.createEvent = async (req, res) => {
       isPublic,
       isPaid,
       payableAmount,
+      bill,
       headcount,
       description,
       lastDateOfRegistration: registrationEndDate,
-      scannerImage:{
-        public_id: scannerResult.public_id,
-        url: scannerResult.secure_url,
-      },
-      posterImage:{
+      scannerImage:
+        scannerImage !== null
+          ? {
+              public_id: scannerResult.public_id,
+              url: scannerResult.secure_url,
+            }
+          : null,
+      posterImage: {
         public_id: posterResult.public_id,
         url: posterResult.secure_url,
       },
@@ -249,5 +257,42 @@ module.exports.createEvent = async (req, res) => {
     res.send("Event created successfully!");
   } catch (error) {
     res.send(error.message);
+  }
+};
+
+// Fetch All Virtual Events
+module.exports.fetchAllVirtualEvents = async (req, res) => {
+  try {
+    let virtualEvents = await eventModel
+      .find({ eventType: "virtual" })
+      .populate({ path: "ownerId" });
+    res.send(virtualEvents);
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+// Fetch Single Event
+module.exports.fetchSingleEvent = async (req, res) => {
+  try {
+    const { eventId } = req.body;
+
+    let event = await eventModel
+      .findOne({ _id: eventId })
+      .populate({ path: "ownerId" });
+
+    res.send(event);
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+// Fetch Last Created Event
+module.exports.fetchLastCreatedEvent = async (req, res) => {
+  try {
+    const lastEvent = await eventModel.findOne().sort({ createdAt: -1 }).exec();
+    res.send(lastEvent);
+  } catch (err) {
+    res.send(err.message);
   }
 };

@@ -48,10 +48,9 @@ export const loginUser = async (email, password) => {
 // User Logout
 export const logoutUser = async () => {
   try {
-    let response = await axios.get(
-      "http://localhost:8000/users/logout",
-      { withCredentials: true }
-    );
+    let response = await axios.get("http://localhost:8000/users/logout", {
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
     console.log(err.message);
@@ -113,5 +112,45 @@ export const createEvent = async (formData) => {
     return response.data; // Return the response data from the server
   } catch (err) {
     return err.message; // Return an error object
+  }
+};
+
+// Fetch Virtual Events
+export const fetchVirtualEvents = async () => {
+  try {
+    let response = await axios.get(
+      "http://localhost:8000/users/fetchallvirtualevents",
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Fetch a Single Event
+export const fetchSingleEvent = async (eventId) => {
+  try {
+    let response = await axios.post(
+      "http://localhost:8000/users/fetchsingleevent",
+      { eventId }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Fetch a Single Event
+export const fetchLastCreatedEvent = async () => {
+  try {
+    let response = await axios.get(
+      "http://localhost:8000/users/fetchlastcreatedevent",
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
   }
 };
