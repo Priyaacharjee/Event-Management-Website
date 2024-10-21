@@ -185,16 +185,14 @@ function VirtualEvent() {
           {/* Search-Bar Dropdown */}
           {(searchBarClicked || isSearchDropdown) && (
             <div
-              className={`pt-[7rem] pb-[3rem] bg-zinc-200 relative top-13 w-full h-24 flex justify-center items-center shadow-xl ${
-                isSearchDropdown ? "animate-slideUp" : "animate-slideBelow"
-              } lg:flex hidden`}
+              className={`pt-[7rem] pb-[3rem] bg-zinc-200 relative top-13 w-full h-24 flex justify-center items-center shadow-xl ${isSearchDropdown ? "animate-slideUp" : "animate-slideBelow"
+                } lg:flex hidden`}
             >
               <input
-                className={`outline-none text-xl h-16 text-zinc-600 font-serif ring-1 ring-zinc-400 focus:ring-2 duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-xl px-4 py-2 shadow-md focus:shadow-lg dark:shadow-md w-[70%] 2xl:w-[80%] xl:w-[60%] lg:w-[80%] ${
-                  isSearchDropdown
+                className={`outline-none text-xl h-16 text-zinc-600 font-serif ring-1 ring-zinc-400 focus:ring-2 duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-xl px-4 py-2 shadow-md focus:shadow-lg dark:shadow-md w-[70%] 2xl:w-[80%] xl:w-[60%] lg:w-[80%] ${isSearchDropdown
                     ? "animate-slideUp block"
                     : "animate-slideBelow block"
-                }`}
+                  }`}
                 autoComplete="off"
                 placeholder="Search here for product reviews, FAQs and More..."
                 name="text"
@@ -312,9 +310,8 @@ function VirtualEvent() {
           {/* Hamburger Menu */}
           {(hamburgerMenuClicked || isClosing) && (
             <div
-              className={`flex-col flex justify-end mt-4 mr-2 text-white w-40 items-center h-auto ${
-                isClosing ? "animate-slideOut" : "animate-slideIn"
-              } fixed top-14 right-5 bg-opacity-[0.3] rounded-lg`}
+              className={`flex-col flex justify-end mt-4 mr-2 text-white w-40 items-center h-auto ${isClosing ? "animate-slideOut" : "animate-slideIn"
+                } fixed top-14 right-5 bg-opacity-[0.3] rounded-lg`}
               style={{ backgroundColor: "rgba(0, 0, 255, 0.6)" }}
             >
               {menuItems.map((item, index) => (
@@ -334,9 +331,8 @@ function VirtualEvent() {
           {/* User Dropdown */}
           {(dropDownOpen || isClosingDropdown) && user && (
             <div
-              className={`absolute top-[4.5rem] left-[49%] 2xl:left-[87%] xl:left-[83%] lg:left-[75%] md:left-[71%] sm:left-[66%] flex-col flex text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-opacity-[0.3] rounded-lg ${
-                isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
-              }`}
+              className={`absolute top-[4.5rem] left-[49%] 2xl:left-[87%] xl:left-[83%] lg:left-[75%] md:left-[71%] sm:left-[66%] flex-col flex text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-opacity-[0.3] rounded-lg ${isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
+                }`}
               style={{ backgroundColor: "rgba(0, 0, 255, 0.6)" }}
             >
               <div className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:underline hover:font-bold">
@@ -362,15 +358,15 @@ function VirtualEvent() {
           </h1>
           <div className="flex h-72 items-center">
             <p className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif w-[66%] pl-16">
-              Join our virtual events to connect with industry experts, explore
-              exciting opportunities, and expand your network—all from the
-              comfort of home.
-              <br/><br/> Engage in insightful discussions, discover the latest
-              trends, and collaborate with professionals in a thriving online
-              community! Don’t miss out on these dynamic, interactive
-              experiences!
+              Join our virtual events to connect with industry experts, explore exciting opportunities, and expand your network—all from the comfort of home. Engage in insightful discussions, discover the latest trends, and collaborate with professionals in a dynamic online community.
+
+              <br /><br />
+
+              Whether you're looking to enhance your skills or broaden your connections, our events offer valuable insights and interactive experiences. Don’t miss out—participate in workshops, panels, and live sessions designed to help you grow personally and professionally.
+
+
             </p>
-            <div className=" w-[30%] ml-auto flex justify-end pl-16">
+            <div className=" w-[30%] ml-auto flex justify-end pr-5">
               <img
                 className="h-72"
                 src="https://img.freepik.com/free-vector/flat-happy-people-celebrate-birthday-online-party-via-internet_88138-908.jpg?w=996&t=st=1729426892~exp=1729427492~hmac=2c95422e579b3eed41d8a1a45f1607770d86d96f634223b841a5e3b6370cd776"
