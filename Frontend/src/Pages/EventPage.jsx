@@ -6,6 +6,14 @@ import { fetchSingleEvent } from "../utils/utils";
 function EventPage() {
   const navigate = useNavigate();
   const { eventId } = useParams();
+  
+  const [event, setevent] = useState({});
+
+  useEffect(() => {
+    fetchSingleEvent(eventId).then((response) => {
+      setevent(response);
+    });
+  }, []);
 
   const eventTags = [
     { label: "Event Name", value: event.eventName },
@@ -40,13 +48,6 @@ function EventPage() {
     { label: "Rules & Regulations", value: event.rules },
   ];
 
-  const [event, setevent] = useState({});
-
-  useEffect(() => {
-    fetchSingleEvent(eventId).then((response) => {
-      setevent(response);
-    });
-  }, []);
 
   return (
     <>
