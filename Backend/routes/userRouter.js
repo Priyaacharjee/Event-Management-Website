@@ -13,6 +13,7 @@ const {
   createEvent,
   fetchAllVirtualEvents,
   fetchSingleEvent,
+  fetchLastCreatedEvent,
 } = require("../controller/userController");
 
 router.get("/", (req, res) => {
@@ -48,5 +49,8 @@ router.get("/fetchallvirtualevents", fetchAllVirtualEvents);
 
 // FETCH A SINGLE EVENT
 router.post("/fetchsingleevent", fetchSingleEvent);
+
+// FETCH LAST CREATED EVENT
+router.get("/fetchlastcreatedevent", fetchLastCreatedEvent);
 
 module.exports = router;

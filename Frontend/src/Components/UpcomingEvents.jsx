@@ -2,7 +2,15 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-export default function UpcomingEvents({ name, des, time, date, venue }) {
+export default function UpcomingEvents({
+  name,
+  des,
+  time,
+  date,
+  platform,
+  venue,
+  poster,
+}) {
   return (
     <>
       <div className="w-full bg-slate-900 h-[40rem] md:h-[25rem] lg:h-[30rem] sm:px-32 py-20"></div>
@@ -15,11 +23,11 @@ export default function UpcomingEvents({ name, des, time, date, venue }) {
             <FontAwesomeIcon icon={faArrowRight} className="hover:text-xl" />
           </div>
         </div>
-        <div className="bg-slate-200 grid grid-cols-1 md:grid-cols-2 md:px-5 px-5 py-5 items-center text-center md:h-[20rem] lg:h-[22rem] xl:h-[27rem] 2xl:h-[30rem] ">
+        <div className="bg-slate-200 grid grid-cols-1 md:grid-cols-2 md:px-5 px-5 py-5 items-center text-center md:h-[20rem] lg:h-[22rem] xl:h-[27rem] 2xl:h-[30rem]">
           <div className="mt-[-3.5rem] md:mt-[-6rem] lg:mt-[-7.5rem]">
             <img
-              src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grow-your-business-webinar-instagram-post-design-template-6da4a1a4774fbca08910aa6001dbf484_screen.jpg?ts=1687284357"
-              alt=""
+              src={poster}
+              alt={name}
               className="2xl:h-[75%] 2xl:w-[75%] xl:h-[80%] xl:w-[80%] lg:h-[85%] lg:w-[85%] md:h-[95%] md:w-[95%] sm:h-[95%] sm:w-[80%] h-[100%] w-[100%] m-auto  duration-500 hover:scale-105"
             ></img>
           </div>
@@ -30,13 +38,19 @@ export default function UpcomingEvents({ name, des, time, date, venue }) {
               <br></br>
             </div>
             <div className="h-full w-full pb-2">
-              <span className="text-xl font-serif font-semibold ">Description:</span>{" "}
+              <span className="text-xl font-serif font-semibold ">
+                Description:
+              </span>{" "}
               {des}
               <br></br>
             </div>
             <div className="h-full w-full pb-2">
               <span className="text-xl font-serif font-semibold ">Date:</span>{" "}
-              {date}
+              {new Date(date).getDate().toString().padStart(2, "0") +
+                "-" +
+                (new Date(date).getMonth() + 1).toString().padStart(2, "0") +
+                "-" +
+                new Date(date).getFullYear()}
               <br></br>
             </div>
             <div className="h-full w-full pb-2">
@@ -44,11 +58,25 @@ export default function UpcomingEvents({ name, des, time, date, venue }) {
               {time}
               <br></br>
             </div>
-            <div className="h-full w-full pb-2">
-              <span className="text-xl font-serif font-semibold ">Venue:</span>{" "}
-              {venue}
-              <br></br>
-            </div>
+            {venue ? (
+              <div className="h-full w-full pb-2">
+                <span className="text-xl font-serif font-semibold ">
+                  Venue:
+                </span>{" "}
+                {venue}
+                <br></br>
+              </div>
+            ) : null}
+
+            {platform ? (
+              <div className="h-full w-full pb-2">
+                <span className="text-xl font-serif font-semibold ">
+                  Platform:
+                </span>{" "}
+                {platform}
+                <br></br>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

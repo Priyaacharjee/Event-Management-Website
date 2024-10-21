@@ -286,3 +286,13 @@ module.exports.fetchSingleEvent = async (req, res) => {
     res.send(err.message);
   }
 };
+
+// Fetch Last Created Event
+module.exports.fetchLastCreatedEvent = async (req, res) => {
+  try {
+    const lastEvent = await eventModel.findOne().sort({ createdAt: -1 }).exec();
+    res.send(lastEvent);
+  } catch (err) {
+    res.send(err.message);
+  }
+};

@@ -142,3 +142,15 @@ export const fetchSingleEvent = async (eventId) => {
     console.log(err.message);
   }
 };
+
+// Fetch a Single Event
+export const fetchLastCreatedEvent = async () => {
+  try {
+    let response = await axios.get(
+      "http://localhost:8000/users/fetchlastcreatedevent",
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
