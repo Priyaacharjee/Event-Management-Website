@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const VirtualCard = ({key,name, date, organizer, platform, image}) => {
   const navigate = useNavigate();
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import { AiFillHome, AiOutlineSolution, AiOutlineAppstore, AiOutlineTeam, AiOutlineQuestionCircle, AiFillEdit,  AiFillVideoCamera } from 'react-icons/ai';
+import { AiFillVideoCamera } from 'react-icons/ai';
 import { Link } from 'react-scroll';
 
 export default function Footer({ menuItems1 }) {
