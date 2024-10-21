@@ -231,11 +231,11 @@ module.exports.createEvent = async (req, res) => {
       headcount,
       description,
       lastDateOfRegistration: registrationEndDate,
-      scannerImage:{
+      scannerImage: {
         public_id: scannerResult.public_id,
         url: scannerResult.secure_url,
       },
-      posterImage:{
+      posterImage: {
         public_id: posterResult.public_id,
         url: posterResult.secure_url,
       },
@@ -249,5 +249,32 @@ module.exports.createEvent = async (req, res) => {
     res.send("Event created successfully!");
   } catch (error) {
     res.send(error.message);
+  }
+};
+
+// Fetch All Virtual Events
+module.exports.fetchAllVirtualEvents = async (req, res) => {
+  try {
+    let virtualEvents = await eventModel
+      .find({ eventType: "virtual" })
+      .populate({ path: "ownerId" });
+    res.send(virtualEvents);
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+// Fetch Single Event
+module.exports.fetchSingleEvent = async (req, res) => {
+  try {
+    const { eventId } = req.body;
+
+    let event = await eventModel
+      .findOne({ _id: eventId })
+      .populate({ path: "ownerId" });
+      
+    res.send(event);
+  } catch (err) {
+    res.send(err.message);
   }
 };
