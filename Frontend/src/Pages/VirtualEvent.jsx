@@ -9,7 +9,6 @@ import Footer from '../Components/Footer';
 import {
   faBars,
   faXmark,
-  faMagnifyingGlass,
   faUser,
   faCaretDown,
   faCaretUp,
