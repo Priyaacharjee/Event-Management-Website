@@ -102,6 +102,7 @@ export default function Home() {
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
         <div id="upcoming" className="w-[85%]">
           <Upcoming_event
+            eventId={lastEvent._id}
             name={lastEvent.eventName}
             des={lastEvent.description}
             date={lastEvent.date}

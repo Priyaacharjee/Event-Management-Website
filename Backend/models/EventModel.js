@@ -8,6 +8,7 @@ const eventSchema = new mongoose.Schema({
   speaker: { type: String },
   eventType: { type: String },
   city: { type: String },
+  hall: { type: String },
   platform: { type: String },
   isPublic: { type: Boolean },
   isPaid: { type: Boolean },

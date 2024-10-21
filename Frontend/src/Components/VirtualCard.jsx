@@ -49,7 +49,7 @@ const VirtualCard = ({ eventId, name, date, organizer, platform, posterImage }) 
         className="btn2 mt-4"
         onClick={() => navigate(`/eventpage/${eventId}`)}
       >
-        Register Now
+        Explore More
       </button>
     </div>
   );
