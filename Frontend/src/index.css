@@ -38,7 +38,7 @@
 }
 
 .text-gradient1 {
-    background: linear-gradient(to right,#191970,	#0096FF); 
+    background: linear-gradient(to right,#191970,	#1768a3); 
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -62,7 +62,7 @@
   }
   
   .btn1:hover {
-    font-size: 1.5rem; 
+    font-size: 1.4rem; 
     box-shadow: rgba(0, 0, 0, 0.45) 0px 10px 20px; 
     cursor: pointer; 
   }

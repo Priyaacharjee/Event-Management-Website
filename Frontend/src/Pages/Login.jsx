@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../utils/utils";
 import Loader from "../Components/loader";

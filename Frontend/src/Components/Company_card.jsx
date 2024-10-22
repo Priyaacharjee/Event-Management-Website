@@ -1,5 +1,3 @@
-// ---------------------------  WITH PROPERTIES ---------------------------
-
 import React from 'react';
 
 const CompanyCard = ({ logo, rating }) => {
