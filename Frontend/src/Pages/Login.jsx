@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../utils/utils";
+import Loader from "../Components/loader";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Login = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading,setLoading]=useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -40,13 +42,17 @@ const Login = () => {
     e.preventDefault();
     const isValid = validateForm();
     if (isValid) {
-      loginUser(formData.email, formData.password).then((response) => {
-        if (response !== "Login successfully") {
-          alert(response);
-        } else {
-          navigate("/");
-        }
-      });
+       setLoading(true);
+       setTimeout(()=>{
+         loginUser(formData.email, formData.password).then((response) => {
+           if (response !== "Login successfull") {
+             alert(response);
+            } else {
+              navigate("/");
+            }
+          });
+          setLoading(false)
+        },3000);
     }
   };
 
@@ -166,6 +172,27 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {loading && (
+        <>
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 999,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader />
+          </div>
+        </>
+      )
+      }
     </div>
   );
 };

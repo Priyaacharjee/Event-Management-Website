@@ -22,43 +22,6 @@ const footerMenuItems = [
   { href: "contact", label: "Contact", icon: AiFillContacts },
 ];
 
-// const virtualEvents = [
-//   {
-//     _id: "1",
-//     name: "TCS Global Leadership Summit",
-//     date: "24-09-2024",
-//     organizer: "TCS",
-//     platform: "Google meet",
-//     image:
-//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlEo5Tk4qtc8LYOiDmEq5VE1rGJzAd18p1lg&s",
-//   },
-//   {
-//     _id: "2",
-//     name: "Infosys Tech Vision 2024",
-//     date: "15-10-2024",
-//     organizer: "Infosys",
-//     platform: "Zoom",
-//     image:
-//       "https://mma.prnewswire.com/media/633365/Infosys_Logo.jpg?p=facebook",
-//   },
-//   {
-//     _id: "3",
-//     name: "Wipro Innovate 2024",
-//     date: "20-11-2024",
-//     organizer: "Wipro",
-//     platform: "Google meet",
-//     image: "https://admeducation.com/wp-content/uploads/2024/05/WIPRO-Logo.jpg",
-//   },
-//   {
-//     _id: "4",
-//     name: "Accenture Women’s Leadership Forum",
-//     date: "20-11-2024",
-//     organizer: "Accenture",
-//     platform: "Google Meet",
-//     image: "https://www.nidv.eu/wp-content/uploads/2020/12/Accenture.png",
-//   },
-// ];
-
 function VirtualEvent() {
   const menuItems = [
     { label: "Home", href: "/" },
@@ -189,7 +152,7 @@ function VirtualEvent() {
                 } lg:flex hidden`}
             >
               <input
-                className={`outline-none text-xl h-16 text-zinc-600 font-serif ring-1 ring-zinc-400 focus:ring-2 duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-xl px-4 py-2 shadow-md focus:shadow-lg dark:shadow-md w-[70%] 2xl:w-[80%] xl:w-[60%] lg:w-[80%] ${isSearchDropdown
+                className={`outline-none text-xl h-10 text-zinc-600 font-serif ring-1 ring-zinc-400 focus:ring-2 duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-xl px-4 py-2 shadow-md focus:shadow-lg dark:shadow-md w-[70%] 2xl:w-[80%] xl:w-[60%] lg:w-[80%] ${isSearchDropdown
                     ? "animate-slideUp block"
                     : "animate-slideBelow block"
                   }`}
@@ -242,7 +205,7 @@ function VirtualEvent() {
             </div>
 
             {/* User Section */}
-            <div className="w-[50%] sm:w-[35%] md:w-[35%] lg:w-2/5 xl:w-[25%] 2xl:w-[20%] flex justify-end items-center space-x-4">
+            <div className="w-[70%] sm:w-[35%] md:w-[35%] lg:w-2/5 xl:w-[25%] 2xl:w-[20%] flex justify-end items-center space-x-4 pr-9">
               {/* Search Button */}
               <div className="hidden lg:flex xl:w-[35%] lg:w-[20%] md:w-full justify-center">
                 <FontAwesomeIcon
@@ -282,7 +245,7 @@ function VirtualEvent() {
               ) : (
                 <>
                   {/* LOGIN Button */}
-                  <div className=" flex mr-6 items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
+                  <div className=" flex mr-6 items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 md:px-1 lg:pr-24 xl:px-2 2xl:px-1">
                     <div className=" w-full flex justify-center items-center">
                       <button
                         onClick={handleLogInClick}

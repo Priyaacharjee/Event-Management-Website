@@ -4,6 +4,7 @@ import { createEvent } from "../utils/utils";
 const CreateForm = () => {
   const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     eventName: "",
@@ -105,11 +106,21 @@ const CreateForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
-    await createEvent(formData).then((result) => {
-      alert(result);
-    });
+    setTimeout(async () => {
+      try {
+        const result = await createEvent(formData);
+        alert(result);
+      } catch (error) {
+        console.error(error);
+        alert('Error creating event');
+      } finally {
+        setLoading(false);
+      }
+    }, 3000);
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -536,6 +547,27 @@ const CreateForm = () => {
           </div>
         </div>
       </div>
+      {loading && (
+        <>
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 999,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+          <div className="loader"></div>
+          </div>
+        </>
+      )
+      }
     </div>
   );
 };
