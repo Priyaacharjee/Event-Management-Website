@@ -11,6 +11,7 @@ import Footer from "../Components/Footer";
 import { AiFillHome, AiOutlineAppstore, AiFillContacts } from "react-icons/ai";
 import ImageLoader from "../Components/ImageLoader1";
 
+
 const footerMenuItems = [
   { href: "header", label: "Header", icon: AiFillHome },
   { href: "features", label: "Features", icon: AiOutlineAppstore },
