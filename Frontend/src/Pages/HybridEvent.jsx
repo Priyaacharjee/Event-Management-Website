@@ -35,7 +35,19 @@ function HybridEvent() {
 
   useEffect(() => {
     fetchHybridEvents().then((events) => {
-      sethybridEvents(events);
+      sethybridEvents(
+        events.filter((event) => {
+          const today = new Date();
+          const currentDate = today.toISOString().split("T")[0];
+          const currentTime = today.toTimeString().split(" ")[0];
+          const eventDate = new Date(event.date).toISOString().split("T")[0];
+          const registrationLastDate = new Date(event.lastDateOfRegistration)
+            .toISOString()
+            .split("T")[0];
+
+          return registrationLastDate >= currentDate && eventDate > currentDate;
+        })
+      );
     });
   }, []);
 
@@ -149,14 +161,16 @@ function HybridEvent() {
           {/* Search-Bar Dropdown */}
           {(searchBarClicked || isSearchDropdown) && (
             <div
-              className={`pt-[7rem] pb-[3rem] bg-zinc-200 relative top-13 w-full h-24 flex justify-center items-center shadow-xl ${isSearchDropdown ? "animate-slideUp" : "animate-slideBelow"
-                } lg:flex hidden`}
+              className={`pt-[7rem] pb-[3rem] bg-zinc-200 relative top-13 w-full h-24 flex justify-center items-center shadow-xl ${
+                isSearchDropdown ? "animate-slideUp" : "animate-slideBelow"
+              } lg:flex hidden`}
             >
               <input
-                className={`outline-none text-xl h-16 text-zinc-600 font-serif ring-1 ring-zinc-400 focus:ring-2 duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-xl px-4 py-2 shadow-md focus:shadow-lg dark:shadow-md w-[70%] 2xl:w-[80%] xl:w-[60%] lg:w-[80%] ${isSearchDropdown
-                  ? "animate-slideUp block"
-                  : "animate-slideBelow block"
-                  }`}
+                className={`outline-none text-xl h-16 text-zinc-600 font-serif ring-1 ring-zinc-400 focus:ring-2 duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-xl px-4 py-2 shadow-md focus:shadow-lg dark:shadow-md w-[70%] 2xl:w-[80%] xl:w-[60%] lg:w-[80%] ${
+                  isSearchDropdown
+                    ? "animate-slideUp block"
+                    : "animate-slideBelow block"
+                }`}
                 autoComplete="off"
                 placeholder="Search here for product reviews, FAQs and More..."
                 name="text"
@@ -274,8 +288,9 @@ function HybridEvent() {
           {/* Hamburger Menu */}
           {(hamburgerMenuClicked || isClosing) && (
             <div
-              className={`flex-col flex justify-end mt-4 mr-2 text-white w-40 items-center h-auto ${isClosing ? "animate-slideOut" : "animate-slideIn"
-                } fixed top-14 right-5 bg-opacity-[0.3] rounded-lg`}
+              className={`flex-col flex justify-end mt-4 mr-2 text-white w-40 items-center h-auto ${
+                isClosing ? "animate-slideOut" : "animate-slideIn"
+              } fixed top-14 right-5 bg-opacity-[0.3] rounded-lg`}
               style={{ backgroundColor: "rgba(0, 0, 255, 0.6)" }}
             >
               {menuItems.map((item, index) => (
@@ -295,8 +310,9 @@ function HybridEvent() {
           {/* User Dropdown */}
           {(dropDownOpen || isClosingDropdown) && user && (
             <div
-              className={`absolute top-[4.5rem] left-[49%] 2xl:left-[87%] xl:left-[83%] lg:left-[75%] md:left-[71%] sm:left-[66%] flex-col flex text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-opacity-[0.3] rounded-lg ${isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
-                }`}
+              className={`absolute top-[4.5rem] left-[49%] 2xl:left-[87%] xl:left-[83%] lg:left-[75%] md:left-[71%] sm:left-[66%] flex-col flex text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-opacity-[0.3] rounded-lg ${
+                isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
+              }`}
               style={{ backgroundColor: "rgba(0, 0, 255, 0.6)" }}
             >
               <div className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:underline hover:font-bold">
@@ -322,11 +338,13 @@ function HybridEvent() {
           </h1>
           <div className="flex h-72 items-center">
             <p className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif w-[66%] pl-16">
-              Join us for our hybrid events that combine the best of in-person and
-              virtual experiences. Engage with industry experts and fellow
+              Join us for our hybrid events that combine the best of in-person
+              and virtual experiences. Engage with industry experts and fellow
               participants from anywhere, whether you're at the venue or joining
-              remotely.<br/><br/> Enjoy interactive sessions, valuable discussions, and
-              ample networking opportunities that connect you to insights and
+              remotely.
+              <br />
+              <br /> Enjoy interactive sessions, valuable discussions, and ample
+              networking opportunities that connect you to insights and
               innovations across the globe. Embrace the flexibility of hybrid
               events and be part of the future of gatherings!
             </p>
