@@ -11,8 +11,8 @@ const Registrationform = () => {
     Name: "",
     PhoneNo: "",
     Emailid: "",
-    EventName: "",
-    EventDate: "",
+    EventName: "TCS",
+    EventDate: "23/10/2024",
     Pay: false,
     paidAmount: 0,
   });
@@ -51,11 +51,11 @@ const Registrationform = () => {
       <div className="bg-white p-6 m-12 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-2/3 xl:w-[90%]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="w-full lg:w-full">
-            <h2 className="font-serif text-3xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
+            <h2 className="font-serif text-3xl sm:text-3xl font-bold mb-6 sm:mb-8 text-indigo-600">
               Register Yourself!!
             </h2>
 
-            <form onSubmit={handleSubmit}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
               {/*Name*/}
               <div>
                 <label
