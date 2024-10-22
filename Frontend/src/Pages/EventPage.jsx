@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { fetchSingleEvent } from "../utils/utils";
-import { findUser, logoutUser } from "../utils/utils";
+import {
+  findUser,
+  logoutUser,
+  fetchSingleEvent,
+  checkUserIsRegisteredInEventOrNot,
+} from "../utils/utils";
 import { Link } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "../Components/Navbar";
@@ -11,7 +15,6 @@ import {
   faBars,
   faXmark,
   faUser,
-  faMagnifyingGlass,
   faCaretDown,
   faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
@@ -50,8 +53,9 @@ function EventPage() {
     },
     {
       label: "Date & Time",
-      value: `${new Date(event.date).toLocaleDateString("en-GB")}, ${event.time
-        }`,
+      value: `${new Date(event.date).toLocaleDateString("en-GB")}, ${
+        event.time
+      }`,
     },
     { label: "Speaker", value: event.speaker },
     {
@@ -85,7 +89,6 @@ function EventPage() {
   const handleLogInClick = () => {
     navigate("/login");
   };
-
 
   const hambergerClick = () => {
     if (hamburgerMenuClicked) {
@@ -135,17 +138,22 @@ function EventPage() {
   const handleCommentSubmit = () => {
     alert("Comment submitted!");
   };
-  
+
   const handleReplyClick = () => {
     alert("Reply clicked!");
   };
-  
 
   const [user, setUser] = useState(null);
+  const [registered, setregistered] = useState(false);
 
   useEffect(() => {
     findUser().then((response) => {
       setUser(response.username.split(" ")[0]);
+      if (response.username) {
+        checkUserIsRegisteredInEventOrNot(eventId).then((result) => {
+          setregistered(result);
+        });
+      }
     });
   }, []);
 
@@ -187,12 +195,20 @@ function EventPage() {
               </p>
             ))}
 
-            <button
-              className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
-              onClick={() => navigate(`/registrationform/${eventId}`)}
-            >
-              Register Now
-            </button>
+            {registered ? (
+              <button
+                className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
+              >
+                Registered
+              </button>
+            ) : (
+              <button
+                className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
+                onClick={() => navigate(`/registrationform/${eventId}`)}
+              >
+                Register Now
+              </button>
+            )}
           </div>
         </div>
 
@@ -200,8 +216,8 @@ function EventPage() {
         <div className="w-full max-w-4xl mt-8">
           {descriptionTags.map((item, index) =>
             (event.eventType === "virtual" && item.label === "Venue") ||
-              (event.eventType === "in_person" &&
-                item.label === "Platform") ? null : (
+            (event.eventType === "in_person" &&
+              item.label === "Platform") ? null : (
               <p key={index} className="text-lg font-medium">
                 {item.label} : <span className="font-light">{item.value}</span>
               </p>
@@ -226,7 +242,7 @@ function EventPage() {
             >
               Submit
             </button>
-             {/* <button
+            {/* <button
               className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300"
               onClick={handleReplyClick}
             >
@@ -234,7 +250,6 @@ function EventPage() {
             </button> */}
           </div>
         </div>
-
       </div>
 
       <div className="m-0 p-0" id="contact">

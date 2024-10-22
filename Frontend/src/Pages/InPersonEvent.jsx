@@ -23,9 +23,7 @@ const footerMenuItems = [
   { href: "contact", label: "Contact", icon: AiFillContacts },
 ];
 
-
 function InPersonEvent() {
-
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "about" },
@@ -38,7 +36,19 @@ function InPersonEvent() {
 
   useEffect(() => {
     fetchIn_PersonEvents().then((events) => {
-      setin_personEvents(events);
+      setin_personEvents(
+        events.filter((event) => {
+          const today = new Date();
+          const currentDate = today.toISOString().split("T")[0];
+          const currentTime = today.toTimeString().split(" ")[0];
+          const eventDate = new Date(event.date).toISOString().split("T")[0];
+          const registrationLastDate = new Date(event.lastDateOfRegistration)
+            .toISOString()
+            .split("T")[0];
+
+          return registrationLastDate >= currentDate && eventDate > currentDate;
+        })
+      );
     });
   }, []);
 
@@ -167,16 +177,17 @@ function InPersonEvent() {
           </h1>
           <div className="flex h-72 items-center">
             <p className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif w-[66%] pl-16">
-              Join us for our upcoming in-person meetings, where you will have the
-              opportunity to connect with industry professionals and like-minded
-              individuals. These gatherings are designed to foster collaboration
-              and inspire innovation.<br /> <br /> You'll gain valuable insights into the
-              latest trends and developments in the industry, while also exploring
-              exciting opportunities for networking and partnership. Whether you
-              are looking to enhance your skills, share knowledge, or simply
-              engage with peers, our events offer a dynamic environment to
-              exchange ideas and make meaningful connections. Don't miss out on
-              the chance to be a part of these impactful meetings!
+              Join us for our upcoming in-person meetings, where you will have
+              the opportunity to connect with industry professionals and
+              like-minded individuals. These gatherings are designed to foster
+              collaboration and inspire innovation.
+              <br /> <br /> You'll gain valuable insights into the latest trends
+              and developments in the industry, while also exploring exciting
+              opportunities for networking and partnership. Whether you are
+              looking to enhance your skills, share knowledge, or simply engage
+              with peers, our events offer a dynamic environment to exchange
+              ideas and make meaningful connections. Don't miss out on the
+              chance to be a part of these impactful meetings!
             </p>
             <div className=" w-[30%] ml-auto flex justify-end pr-13">
               <img

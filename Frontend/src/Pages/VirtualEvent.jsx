@@ -36,7 +36,19 @@ function VirtualEvent() {
 
   useEffect(() => {
     fetchVirtualEvents().then((events) => {
-      setvirtualEvents(events);
+      setvirtualEvents(
+        events.filter((event) => {
+          const today = new Date();
+          const currentDate = today.toISOString().split("T")[0];
+          const currentTime = today.toTimeString().split(" ")[0];
+          const eventDate = new Date(event.date).toISOString().split("T")[0];
+          const registrationLastDate = new Date(event.lastDateOfRegistration)
+            .toISOString()
+            .split("T")[0];
+
+          return registrationLastDate >= currentDate && eventDate > currentDate;
+        })
+      );
     });
   }, []);
 
@@ -167,13 +179,18 @@ function VirtualEvent() {
           </h1>
           <div className="flex h-72 items-center">
             <p className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif w-[66%] pl-16">
-              Join our virtual events to connect with industry experts, explore exciting opportunities, and expand your network—all from the comfort of home. Engage in insightful discussions, discover the latest trends, and collaborate with professionals in a dynamic online community.
-
-              <br /><br />
-
-              Whether you're looking to enhance your skills or broaden your connections, our events offer valuable insights and interactive experiences. Don’t miss out—participate in workshops, panels, and live sessions designed to help you grow personally and professionally.
-
-
+              Join our virtual events to connect with industry experts, explore
+              exciting opportunities, and expand your network—all from the
+              comfort of home. Engage in insightful discussions, discover the
+              latest trends, and collaborate with professionals in a dynamic
+              online community.
+              <br />
+              <br />
+              Whether you're looking to enhance your skills or broaden your
+              connections, our events offer valuable insights and interactive
+              experiences. Don’t miss out—participate in workshops, panels, and
+              live sessions designed to help you grow personally and
+              professionally.
             </p>
             <div className=" w-[30%] ml-auto flex justify-end pr-5">
               <img

@@ -36,7 +36,19 @@ function HybridEvent() {
 
   useEffect(() => {
     fetchHybridEvents().then((events) => {
-      sethybridEvents(events);
+      sethybridEvents(
+        events.filter((event) => {
+          const today = new Date();
+          const currentDate = today.toISOString().split("T")[0];
+          const currentTime = today.toTimeString().split(" ")[0];
+          const eventDate = new Date(event.date).toISOString().split("T")[0];
+          const registrationLastDate = new Date(event.lastDateOfRegistration)
+            .toISOString()
+            .split("T")[0];
+
+          return registrationLastDate >= currentDate && eventDate > currentDate;
+        })
+      );
     });
   }, []);
 
@@ -167,11 +179,13 @@ function HybridEvent() {
           </h1>
           <div className="flex h-72 items-center">
             <p className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif w-[66%] pl-16">
-              Join us for our hybrid events that combine the best of in-person and
-              virtual experiences. Engage with industry experts and fellow
+              Join us for our hybrid events that combine the best of in-person
+              and virtual experiences. Engage with industry experts and fellow
               participants from anywhere, whether you're at the venue or joining
-              remotely.<br/><br/> Enjoy interactive sessions, valuable discussions, and
-              ample networking opportunities that connect you to insights and
+              remotely.
+              <br />
+              <br /> Enjoy interactive sessions, valuable discussions, and ample
+              networking opportunities that connect you to insights and
               innovations across the globe. Embrace the flexibility of hybrid
               events and be part of the future of gatherings!
             </p>
