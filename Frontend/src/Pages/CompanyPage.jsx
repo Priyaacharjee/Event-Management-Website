@@ -264,12 +264,8 @@ const CompanyPage = () => {
                       {event.eventType === "in_person" && (
                         <span>In Person</span>
                       )}
-                      {event.eventType === "virtual" && (
-                        <span>Virtual</span>
-                      )}
-                      {event.eventType === "hybrid" && (
-                        <span>Hybrid</span>
-                      )}
+                      {event.eventType === "virtual" && <span>Virtual</span>}
+                      {event.eventType === "hybrid" && <span>Hybrid</span>}
                     </div>
 
                     {/* Event transparency Type */}
@@ -281,12 +277,21 @@ const CompanyPage = () => {
                       <span>{event.isPublic ? "Public" : "Private"}</span>
                     </div>
                   </div>
-                  <button
-                    className="btn1 mt-4 h-12 px-4 bg-indigo-600 text-white font-bold rounded-md"
-                    onClick={() => openModal(event)}
-                  >
-                    Track Event
-                  </button>
+                  <div className="flex gap-10">
+                    <button
+                      className="btn1 mt-4 h-12 px-4 bg-indigo-600 text-white font-bold rounded-md"
+                      onClick={() => openModal(event)}
+                    >
+                      Track Event
+                    </button>
+
+                    <button
+                      className="btn1 mt-4 h-12 px-4 bg-indigo-600 text-white font-bold rounded-md"
+                      onClick={() => openModal(event)}
+                    >
+                      Update Event Details
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
