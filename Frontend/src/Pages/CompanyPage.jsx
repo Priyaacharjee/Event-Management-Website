@@ -14,57 +14,11 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { findUser } from "../utils/utils";
 
 const headerMenuItems = [
   { label: "Home", to: "/" },
   // { label: 'Features', href: 'features' }, // (for scrolling elements with id in same page)
-];
-
-const events = [
-  {
-    name: "Tech Expo 2024",
-    date: "Oct 10, 2024",
-    time: "10:00 AM - 4:00 PM",
-    type: "In-person",
-    transparency: "public",
-    imageUrl:
-      "https://img.freepik.com/free-vector/gradient-car-rental-design-template_23-2149264700.jpg",
-    createdDate: "Oct 1, 2024",
-    slotConfirmedDate: "Oct 2, 2024",
-  },
-  {
-    name: "Robotics 2024",
-    date: "Nov 10, 2024",
-    time: "10:00 AM - 4:00 PM",
-    type: "Hybrid",
-    transparency: "public",
-    imageUrl:
-      "https://img.freepik.com/free-vector/artificial-intelligence-concept-facebook-post_23-2150394426.jpg",
-    createdDate: "Oct 5, 2024",
-    slotConfirmedDate: "Oct 6, 2024",
-  },
-  {
-    name: "Virtual Product Launch",
-    date: "Dec 15, 2024",
-    time: "2:00 PM - 3:30 PM",
-    type: "Virtual",
-    transparency: "private",
-    imageUrl:
-      "https://img.freepik.com/free-vector/gradient-texture-technology-webinar_23-2149094510.jpg",
-    createdDate: "Oct 5, 2024",
-    slotConfirmedDate: "Oct 10, 2024",
-  },
-  {
-    name: "Photography Workshop",
-    date: "April 15, 2025",
-    time: "5:00 PM - 6:00 PM",
-    type: "Hybrid",
-    transparency: "private",
-    imageUrl:
-      "https://img.freepik.com/free-vector/webinar-template-photographer-career-hobby_23-2150302583.jpg",
-    createdDate: "April 5, 2024",
-    slotConfirmedDate: null,
-  },
 ];
 
 const CompanyPage = () => {
@@ -73,13 +27,6 @@ const CompanyPage = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [user, setUser] = useState({
-    image:
-      localStorage.getItem("userImage") || "https://via.placeholder.com/150",
-    username: "Shreya",
-    email: "shreya@example.com",
-    phone: "9748054821",
-  });
 
   const handleCreateEventClick = () => {
     navigate("/createform");
@@ -156,6 +103,21 @@ const CompanyPage = () => {
     return isSlotConfirmed && currentDate > eventDateObj;
   };
 
+  const [userProfile, setuserProfile] = useState();
+  const [createdEvents, setcreatedEvents] = useState([]);
+  const [appliedEvents, setappliedEvents] = useState([]);
+  const [events, setevents] = useState([]);
+
+  useEffect(() => {
+    findUser().then((response) => {
+      setuserProfile(response);
+      setcreatedEvents(response.createdEvents);
+      setappliedEvents(response.appliedEvents);
+      setevents(response.createdEvents);
+      console.log(response);
+    });
+  }, []);
+
   return (
     <>
       <Navabar menuItems={headerMenuItems} />
@@ -182,7 +144,9 @@ const CompanyPage = () => {
           style={{ height: "calc(100vh - 60px)" }}
         >
           <img
-            src={selectedImage || user.image}
+            src={
+              userProfile && userProfile.image ? userProfile.image.url : null
+            }
             alt="User Profile"
             className="rounded-full w-24 bg-gray-900 text-sm h-24 mb-4 shadow-lg border-[.4rem] border-indigo-400 sm:w-32 sm:h-32"
           />
@@ -197,18 +161,24 @@ const CompanyPage = () => {
             />
           </label>
 
-          <h2 className="text-md font-bold sm:text-lg">{user.username}</h2>
+          <h2 className="text-md font-bold sm:text-lg">
+            {userProfile ? userProfile.username : null}
+          </h2>
           <div className="w-32 h-1 border-b-4 border-yellow-400 m-2 rounded-2xl md:mt-4 mb-12"></div>
 
           <div className="flex flex-col text-left space-y-4">
             <div className="flex items-center space-x-2">
               <FontAwesomeIcon icon={faEnvelope} className="text-indigo-300" />
-              <p className="text-xs sm:text-sm">{user.email}</p>
+              <p className="text-xs sm:text-sm">
+                {userProfile ? userProfile.email : null}
+              </p>
             </div>
 
             <div className="flex items-center space-x-2">
               <FontAwesomeIcon icon={faPhone} className="text-indigo-300" />
-              <p className="text-xs sm:text-sm">{user.phone}</p>
+              <p className="text-xs sm:text-sm">
+                {userProfile ? userProfile.contact : null}
+              </p>
             </div>
           </div>
 
@@ -245,72 +215,86 @@ const CompanyPage = () => {
           </div>
 
           <hr className="border-0 h-[2px] bg-gray-500 my-6"></hr>
-          {events.map((event, index) => (
-            <div
-              key={index}
-              className="border-2 border-black mt-4 lg:ml-32 w-[100%] lg:w-[80%] h-auto bg-gray-200 shadow-lg rounded-lg p-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-            >
-              {/* Event Image */}
-              <img
-                src={event.imageUrl}
-                alt={event.name}
-                className="w-full md:w-60 h-auto rounded-md"
-                style={{ aspectRatio: "3 / 2" }}
-              />
+          {Array.isArray(events) &&
+            events.map((event, index) => (
+              <div
+                key={index}
+                className="border-2 border-black mt-4 lg:ml-32 w-[100%] lg:w-[80%] h-auto bg-gray-200 shadow-lg rounded-lg p-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+              >
+                {/* Event Image */}
+                <img
+                  src={event.posterImage ? event.posterImage.url : null}
+                  alt={event.eventName}
+                  className="w-full md:w-60 h-auto rounded-md"
+                  style={{ aspectRatio: "3 / 2" }}
+                />
 
-              {/* Event Info */}
-              <div className="flex flex-col justify-center items-center w-full">
-                <h3 className="text-lg text-gradient1 xds:text-2xl mb-4 text-indigo-800 font-bold font-serif">
-                  {event.name}
-                </h3>
-                <div className="flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
-                  {/* Event Date */}
-                  <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-sm lg:text-sm font-bold text-white">
-                    <FontAwesomeIcon
-                      icon={faCalendarAlt}
-                      className="mr-2 text-indigo-800"
-                    />
-                    <span>{event.date}</span>
+                {/* Event Info */}
+                <div className="flex flex-col justify-center items-center w-full">
+                  <h3 className="text-lg text-gradient1 xds:text-2xl mb-4 text-indigo-800 font-bold font-serif">
+                    {event.eventName}
+                  </h3>
+                  <div className="flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
+                    {/* Event Date */}
+                    <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-sm lg:text-sm font-bold text-white">
+                      <FontAwesomeIcon
+                        icon={faCalendarAlt}
+                        className="mr-2 text-indigo-800"
+                      />
+                      <span>{event.date.split("T")[0]}</span>
+                    </div>
+
+                    {/* Event Time */}
+                    <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
+                      <FontAwesomeIcon
+                        icon={faClock}
+                        className="mr-2 text-indigo-800"
+                      />
+                      <span>{event.time}</span>
+                    </div>
                   </div>
+                  <div className="mt-3 flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
+                    {/* Event Type */}
+                    <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
+                      <FontAwesomeIcon
+                        icon={faMapMarkerAlt}
+                        className="mr-2 text-indigo-800"
+                      />
+                      {event.eventType === "in_person" && (
+                        <span>In Person</span>
+                      )}
+                      {event.eventType === "virtual" && <span>Virtual</span>}
+                      {event.eventType === "hybrid" && <span>Hybrid</span>}
+                    </div>
 
-                  {/* Event Time */}
-                  <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
-                    <FontAwesomeIcon
-                      icon={faClock}
-                      className="mr-2 text-indigo-800"
-                    />
-                    <span>{event.time}</span>
+                    {/* Event transparency Type */}
+                    <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        className="mr-2 text-indigo-800"
+                      />
+                      <span>{event.isPublic ? "Public" : "Private"}</span>
+                    </div>
+                  </div>
+                  <div className="flex gap-10">
+                    <button
+                      className="btn1 mt-4 h-12 px-4 bg-indigo-600 text-white font-bold rounded-md"
+                      onClick={() => openModal(event)}
+                    >
+                      Track Event
+                    </button>
+
+                    <button
+                      className="btn1 mt-4 h-12 px-4 bg-indigo-600 text-white font-bold rounded-md"
+                      onClick={() => openModal(event)}
+                    >
+                      Update Event Details
+                    </button>
                   </div>
                 </div>
-                <div className="mt-3 flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
-                  {/* Event Type */}
-                  <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
-                    <FontAwesomeIcon
-                      icon={faMapMarkerAlt}
-                      className="mr-2 text-indigo-800"
-                    />
-                    <span>{event.type}</span>
-                  </div>
-
-                  {/* Event transparency Type */}
-                  <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
-                    <FontAwesomeIcon
-                      icon={faUser}
-                      className="mr-2 text-indigo-800"
-                    />
-                    <span>{event.transparency}</span>
-                  </div>
-                </div>
-                <button
-                  className="btn1 mt-4 h-12 px-4 bg-indigo-600 text-white font-bold rounded-md"
-                  onClick={() => openModal(event)}
-                >
-                  Track Event
-                </button>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         {/* Modal */}

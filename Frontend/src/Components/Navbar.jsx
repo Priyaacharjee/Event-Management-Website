@@ -9,9 +9,9 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { Link as RouterLink } from 'react-router-dom'; 
-import { Link as ScrollLink } from 'react-scroll';
-import { findUser,logoutUser } from "../utils/utils";
+import { Link as RouterLink } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import { findUser, logoutUser } from "../utils/utils";
 import Loader from "./loader";
 
 export default function Navbar({ menuItems }) {
@@ -20,18 +20,13 @@ export default function Navbar({ menuItems }) {
   const [isClosing, setIsClosing] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [isClosingDropdown, setIsClosingDropdown] = useState(false);
-  const [loading,setLoading]=useState(false);
-
+  const [loading, setLoading] = useState(false);
 
   const [searchBarClicked, setSearchBarClicked] = useState(false);
   const [isSearchDropdown, setIsSearchDropdown] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
 
   const [isMdOrLarger, setIsMdOrLarger] = useState(false);
-
-  const handleSignUpClick = () => {
-    navigate("/signup");
-  };
 
   const handleLogInClick = () => {
     navigate("/login");
@@ -107,15 +102,15 @@ export default function Navbar({ menuItems }) {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setIsMdOrLarger(true); 
-        setHamburgerMenuClicked(false); 
+        setIsMdOrLarger(true);
+        setHamburgerMenuClicked(false);
       } else {
         setIsMdOrLarger(false);
       }
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); 
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -129,10 +124,10 @@ export default function Navbar({ menuItems }) {
     };
   }, [scrollDirection]);
 
-    const handelLogout = () => {
+  const handelLogout = () => {
     setLoading(true);
-    setTimeout(()=>{
-       logoutUser().then((response) => {
+    setTimeout(() => {
+      logoutUser().then((response) => {
         if (response !== "Logout successfully") {
           alert(response);
         }
@@ -141,8 +136,7 @@ export default function Navbar({ menuItems }) {
         });
       });
       setLoading(false);
-    },3000)
-    
+    }, 3000);
   };
 
   const [user, setUser] = useState(null);
@@ -184,37 +178,39 @@ export default function Navbar({ menuItems }) {
           className="h-16 flex items-center px-4 justify-between w-full text-[16px] bg-black text-white fixed top-0 z-50"
         >
           {/* Logo */}
-          <div className="text-gradient2 font-serif text-5xl w-[50%] sm:w-[20%] md:w-[20%] lg:w-[20%] xl:w-[20%] 2xl:w-[20%] lg:pl-5 xl:pl-8" style={{ fontFamily: '"quick"' }}>
+          <div
+            className="text-gradient2 font-serif text-5xl w-[50%] sm:w-[20%] md:w-[20%] lg:w-[20%] xl:w-[20%] 2xl:w-[20%] lg:pl-5 xl:pl-8"
+            style={{ fontFamily: '"quick"' }}
+          >
             Eventek
           </div>
 
-          {/* Navbar Menu */}          
+          {/* Navbar Menu */}
           <div className="hidden md:flex md:w-3/5 lg:w-[45%] xl:w-[40%] 2xl:w-[35%] items-center">
             <ul className="w-full flex justify-around text-center sm:space-x-2 md:space-x-4 lg:space-x-8">
-                {menuItems.map((item, index) => (
+              {menuItems.map((item, index) => (
                 <li key={index}>
-                    {item.to ? ( 
+                  {item.to ? (
                     <RouterLink
-                        to={item.to}  
-                        className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
+                      to={item.to}
+                      className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
                     >
-                        {item.label}
+                      {item.label}
                     </RouterLink>
-                    ) : item.href ? ( 
+                  ) : item.href ? (
                     <ScrollLink
-                        to={item.href}  
-                        smooth={true}
-                        duration={500}
-                        className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
+                      to={item.href}
+                      smooth={true}
+                      duration={500}
+                      className="hover:cursor-pointer hover:text-red-300 hover:font-bold"
                     >
-                        {item.label}
+                      {item.label}
                     </ScrollLink>
-                    ) : null} 
+                  ) : null}
                 </li>
-                ))}
+              ))}
             </ul>
           </div>
-
 
           {/* User Section */}
           <div className="w-[50%] sm:w-[35%] md:w-[35%] lg:w-2/5 xl:w-[25%] 2xl:w-[20%] flex justify-end items-center space-x-4">
@@ -228,46 +224,10 @@ export default function Navbar({ menuItems }) {
               />
             </div>
 
-            {/* LOGIN Button  */}
-            {/* <div className="flex items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
-              <div className=" w-full md:w-40 flex justify-center items-center">
-                <button
-                  onClick={handleLogInClick}
-                  className="flex btn1 justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-2 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl "
-                >
-                  Log In
-                </button>
-              </div>
-            </div> */}
-
-            {/* User Section in Navbar */}
-            {/* <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
-              <div className=" w-full md:w-40 flex justify-center items-center space-x-4">
-                    <FontAwesomeIcon icon={faUser} className="text-lg cursor-pointer" />
-                    <span className="text-white font-bold hover:text-blue-100 hover:underline">User</span>
-
-                    {dropDownOpen ? (
-                    <FontAwesomeIcon
-                        icon={faCaretUp}
-                        className="cursor-pointer"
-                        style={{ color: "#ffffff" }}
-                        onClick={dropDown}
-                    />
-                    ) : (
-                    <FontAwesomeIcon
-                        icon={faCaretDown}
-                        style={{ color: "#ffffff" }}
-                        className="cursor-pointer"
-                        onClick={dropDown}
-                    />
-                    )}
-              </div>
-            </div>  */}
-
-
             {/* USER SECTION IN NAVBAR */}
             {user ? (
               <>
+              <div className="border-4 space-x-4">
                 <FontAwesomeIcon
                   icon={faUser}
                   className="text-lg cursor-pointer"
@@ -290,6 +250,7 @@ export default function Navbar({ menuItems }) {
                     onClick={dropDown}
                   />
                 )}
+                </div>
               </>
             ) : (
               <>
@@ -307,7 +268,6 @@ export default function Navbar({ menuItems }) {
               </>
             )}
 
-
             {/* Hamburger Icon */}
             {!isMdOrLarger && (
               <div className="block md:hidden fixed">
@@ -324,56 +284,61 @@ export default function Navbar({ menuItems }) {
 
         {/* Hamburger Menu */}
         {(hamburgerMenuClicked || isClosing) && (
-        <div
+          <div
             className={`z-50 block md:hidden flex-col flex justify-end mt-4 mr-2 text-white w-40 p-4 space-y-8 items-center h-auto ${
-            isClosing ? "animate-slideOut" : "animate-slideIn"
+              isClosing ? "animate-slideOut" : "animate-slideIn"
             } fixed top-14 right-5 bg-slate-300 bg-opacity-[0.3] rounded-lg`}
             style={{ backgroundColor: "rgba(0, 0, 255, 0.6)" }}
-        >
+          >
             {menuItems.map((item, index) => (
-            <div key={index}> 
+              <div key={index}>
                 {item.to ? (
-                <RouterLink
+                  <RouterLink
                     to={item.to}
                     className="w-full text-center hover:cursor-pointer hover:text-red-300 hover:font-bold"
-                >
-                    <div className=" w-40 border-b-2 border-gray-200 -mb-3  ">{item.label}</div>
-                </RouterLink>
+                  >
+                    <div className=" w-40 border-b-2 border-gray-200 -mb-3  ">
+                      {item.label}
+                    </div>
+                  </RouterLink>
                 ) : item.href ? (
-                <ScrollLink
+                  <ScrollLink
                     to={item.href}
                     smooth={true}
                     duration={500}
                     className="w-full text-center  hover:cursor-pointer hover:text-red-300 hover:font-bold"
-                >
-                    <div className=" w-40 border-b-2 border-gray-200 -mb-2  ">{item.label}</div>
-                </ScrollLink>
+                  >
+                    <div className=" w-40 border-b-2 border-gray-200 -mb-2  ">
+                      {item.label}
+                    </div>
+                  </ScrollLink>
                 ) : null}
-            </div>
+              </div>
             ))}
-        </div>
+          </div>
         )}
-
 
         {/* User Dropdown */}
         {(dropDownOpen || isClosingDropdown) && user && (
-            <div
+          <div
             className={`border-4 fixed mt-4 sm:ml-8 top-14 left-[49%] 2xl:left-[87%] xl:left-[83%] lg:left-[75%] md:left-[71%] sm:left-[66%] flex-col justify-end flex text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-slate-300 bg-opacity-[0.3] rounded-lg ${
-                isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
+              isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
             }`}
             style={{ backgroundColor: "rgba(0, 0, 255, 0.6)" }}
-            >
+          >
             <div
-             onClick={handleCompanyPageClick}
-             className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
-                My Account
+              onClick={handleCompanyPageClick}
+              className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold"
+            >
+              My Account
             </div>
-            <div 
-             onClick={handelLogout}
-            className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
-                Log Out
+            <div
+              onClick={handelLogout}
+              className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold"
+            >
+              Log Out
             </div>
-            </div>
+          </div>
         )}
       </div>
       {loading && (
@@ -395,8 +360,7 @@ export default function Navbar({ menuItems }) {
             <Loader />
           </div>
         </>
-      )
-      }
+      )}
     </>
   );
 }

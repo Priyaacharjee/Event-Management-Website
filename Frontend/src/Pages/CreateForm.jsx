@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { createEvent } from "../utils/utils";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreateForm = () => {
+  const navigate = useNavigate();
   const { eventType } = useParams();
 
   const [payableAmount, setPayableAmount] = useState(0);
@@ -114,25 +116,45 @@ const CreateForm = () => {
     setPayableAmount(amount);
   };
 
+  const handlePayment = () => {
+    setFormData({
+      ...formData,
+      bill: payableAmount,
+    });
+    if (
+      formData.eventDate <= formData.registrationEndDate ||
+      formData.eventDate < new Date() ||
+      formData.registrationEndDate < new Date()
+    ) {
+      alert("Please provide a valid Event date & Last date of registration!");
+    } else if (formData.isPaid && formData.paidAmountPerPerson <= 0) {
+      alert("Please provide an amount to be paid by every participent!");
+    } else {
+      setbillPaymentDone(true);
+      alert(`${payableAmount}/- Payment successfull`);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       if (!billPaymentDone) {
         alert("Please complete your payment to create an event!");
-      } else if (
-        formData.eventDate <= formData.registrationEndDate ||
-        formData.eventDate <= new Date() ||
-        formData.registrationEndDate <= new Date()
-      ) {
-        alert("Please provide a valid Event date & Last date of registration!");
-      } else if (formData.isPaid && formData.paidAmountPerPerson <= 0) {
-        alert("Please provide an amount to be paid by every participent!");
       } else {
         setLoading(true);
         const result = await createEvent(formData);
         setTimeout(async () => {
           setLoading(false);
           alert(result);
+          if (formData.eventType === "virtualevent") {
+            navigate("/virtual");
+          }
+          if (formData.eventType === "hybridevent") {
+            navigate("/hybrid");
+          }
+          if (formData.eventType === "in_person") {
+            navigate("/inpersonevent");
+          }
         }, 3000);
       }
     } catch (error) {
@@ -524,19 +546,37 @@ const CreateForm = () => {
                   <h3 className="text-lg font-bold text-red-500">
                     Total Bill: ₹{payableAmount}
                   </h3>
-                  <button
-                    className="mt-2 ml-8 bg-indigo-600 text-white p-2 rounded-md hover:bg-green-600"
-                    onClick={() => {
-                      setFormData({
-                        ...formData,
-                        bill: payableAmount,
-                      });
-                      setbillPaymentDone(true);
-                      alert(`${payableAmount}/- Payment successfull`);
-                    }}
+                  <div
+                    className="mt-2 ml-8 bg-indigo-600 text-white p-2 rounded-md hover:bg-green-600 cursor-pointer"
+                    onClick={handlePayment}
+                    // onClick={() => {
+                    //   setFormData({
+                    //     ...formData,
+                    //     bill: payableAmount,
+                    //   });
+                    //   if (
+                    //     formData.eventDate <= formData.registrationEndDate ||
+                    //     formData.eventDate <= new Date() ||
+                    //     formData.registrationEndDate <= new Date()
+                    //   ) {
+                    //     alert(
+                    //       "Please provide a valid Event date & Last date of registration!"
+                    //     );
+                    //   } else if (
+                    //     formData.isPaid &&
+                    //     formData.paidAmountPerPerson <= 0
+                    //   ) {
+                    //     alert(
+                    //       "Please provide an amount to be paid by every participent!"
+                    //     );
+                    //   } else {
+                    //     setbillPaymentDone(true);
+                    //     alert(`${payableAmount}/- Payment successfull`);
+                    //   }
+                    // }}
                   >
                     Pay Now
-                  </button>
+                  </div>
                 </div>
                 <div className="flex justify-center items-center text-gray-400">
                   **No hidden cost will be included further

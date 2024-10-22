@@ -7,6 +7,7 @@ const Registrationform = () => {
   const navigate = useNavigate();
   const [paymentDone, setpaymentDone] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [formdata, setformdata] = useState({
     Name: "",
@@ -16,6 +17,8 @@ const Registrationform = () => {
     EventDate: "",
     Venue: "",
     Pay: false,
+    scannerImage: "",
+    payAmount: 0,
   });
 
   const handleSubmit = (e) => {
@@ -29,7 +32,7 @@ const Registrationform = () => {
           setLoading(false);
           alert(response);
           if (response === "Registration successfull") {
-            navigate(`/eventpage/${eventId}}`);
+            navigate(`/eventpage/${eventId}`);
           }
         });
       }, 3000);
@@ -48,6 +51,8 @@ const Registrationform = () => {
           EventDate: new Date(event.date).toLocaleDateString("en-GB"),
           Pay: event.isPaid,
           paidAmount: event.payableAmount ? event.payableAmount : 0,
+          scannerImage: event.scannerImage ? event.scannerImage.url : null,
+          payAmount: event.payableAmount ? event.payableAmount : null,
         });
       });
     });
@@ -63,7 +68,7 @@ const Registrationform = () => {
             </h2>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
-              {/*Name*/}
+              {/* Name */}
               <div>
                 <label
                   htmlFor="Name"
@@ -81,7 +86,7 @@ const Registrationform = () => {
                 />
               </div>
 
-              {/*Phone Number*/}
+              {/* Phone Number */}
               <div>
                 <label
                   htmlFor="PhoneNo"
@@ -151,26 +156,71 @@ const Registrationform = () => {
               </div>
 
               {/*Payment */}
-              {formdata.Pay && !paymentDone && (
+
+              {(formdata.Pay && !paymentDone)? (
                 <div className="w-[90%] flex justify-center items-center flex-col">
                   <div
                     className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
-                    onClick={() => {
-                      setpaymentDone(true);
-                      alert("Payment successfull");
-                    }}
+                    onClick={() => setModalOpen(true)}
                   >
                     Pay Now &emsp; {formdata.paidAmount}/-
                   </div>
+
+                  {/* Modal */}
+                  {modalOpen && (
+                    <div
+                      style={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        zIndex: 999,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "white",
+                          padding: "20px",
+                          borderRadius: "8px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <img
+                          src={formdata.scannerImage}
+                          alt="Scanner"
+                          style={{
+                            width: "200px",
+                            height: "200px",
+                            marginBottom: "20px",
+                          }}
+                        />
+                        <div className="text-2xl">Pay <strong>Rs.{formdata.payAmount}/-</strong></div>
+                        <button
+                          className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer mt-5"
+                          onClick={() => {
+                            setpaymentDone(true);
+                            setModalOpen(false);
+                            alert("Payment successful");
+                          }}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-              {formdata.Pay && paymentDone && (
-                <div className="w-[90%] flex justify-center items-center flex-col">
-                  <div className="mt-2 ml-8 bg-green-600 text-white p-2 rounded-md">
-                    Payment Done Rs.{formdata.paidAmount}
+              ):(<div className="w-[90%] flex justify-center items-center flex-col">
+                  <div
+                    className="mt-2 ml-8 bg-green-500 text-white p-2 rounded-md font-bold"
+                  >
+                    Payment Done
                   </div>
-                </div>
-              )}
+                </div>)}
 
               {/* Register Button */}
               <div className="mt-8 text-center">
