@@ -12,6 +12,7 @@ import {
   faClock,
   faMapMarkerAlt,
   faPlus,
+  faTowerBroadcast,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { findUser } from "../utils/utils";
@@ -253,12 +254,33 @@ const CompanyPage = () => {
                       />
                       <span>{event.time}</span>
                     </div>
-                  </div>
-                  <div className="mt-3 flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
+
+                    {/* Location */}
+                    {event.city && (
+                      <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
+                        <FontAwesomeIcon
+                          icon={faMapMarkerAlt}
+                          className="mr-2 text-indigo-800"
+                        />
+                        <span>{event.city}</span>
+                      </div>
+                    )}
+
+                    {/* Platform */}
+                    {event.platform && (
+                      <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
+                        <FontAwesomeIcon
+                          icon={faClock}
+                          className="mr-2 text-indigo-800"
+                        />
+                        <span>{event.platform}</span>
+                      </div>
+                    )}
+
                     {/* Event Type */}
                     <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
                       <FontAwesomeIcon
-                        icon={faMapMarkerAlt}
+                        icon={faTowerBroadcast}
                         className="mr-2 text-indigo-800"
                       />
                       {event.eventType === "in_person" && (
@@ -267,7 +289,9 @@ const CompanyPage = () => {
                       {event.eventType === "virtual" && <span>Virtual</span>}
                       {event.eventType === "hybrid" && <span>Hybrid</span>}
                     </div>
-
+                  </div>
+                  
+                  <div className="mt-3 flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
                     {/* Event transparency Type */}
                     <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
                       <FontAwesomeIcon
