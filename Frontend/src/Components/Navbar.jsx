@@ -27,9 +27,7 @@ export default function Navbar({ menuItems }) {
 
   const [isMdOrLarger, setIsMdOrLarger] = useState(false);
 
-  const handleSignUpClick = () => {
-    navigate("/signup");
-  };
+
 
   const handleLogInClick = () => {
     navigate("/login");
@@ -229,6 +227,7 @@ export default function Navbar({ menuItems }) {
             {/* USER SECTION IN NAVBAR */}
             {user ? (
               <>
+              <div className="border-4 space-x-4">
                 <FontAwesomeIcon
                   icon={faUser}
                   className="text-lg cursor-pointer"
@@ -251,6 +250,7 @@ export default function Navbar({ menuItems }) {
                     onClick={dropDown}
                   />
                 )}
+                </div>
               </>
             ) : (
               <>

@@ -7,6 +7,8 @@ const Registrationform = () => {
   const navigate = useNavigate();
   const [paymentDone, setpaymentDone] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
 
   const [formdata, setformdata] = useState({
     Name: "",
@@ -29,7 +31,7 @@ const Registrationform = () => {
           setLoading(false);
           alert(response);
           if (response === "Registration successfull") {
-            navigate(`/eventpage/${eventId}}`);
+            navigate(`/eventpage/${eventId}`);
           }
         });
       }, 3000);
@@ -151,26 +153,60 @@ const Registrationform = () => {
               </div>
 
               {/*Payment */}
-              {formdata.Pay && !paymentDone && (
-                <div className="w-[90%] flex justify-center items-center flex-col">
+
+            {formdata.Pay && !paymentDone && (
+              <div className="w-[90%] flex justify-center items-center flex-col">
+                <div
+                  className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
+                  onClick={() => setModalOpen(true)} 
+                >
+                  Pay Now &emsp; {formdata.paidAmount}/-
+                </div>
+
+                {/* Modal */}
+                {modalOpen && (
                   <div
-                    className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
-                    onClick={() => {
-                      setpaymentDone(true);
-                      alert("Payment successfull");
+                    style={{
+                      position: "fixed",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      backgroundColor: "rgba(0, 0, 0, 0.5)",
+                      zIndex: 999,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    Pay Now &emsp; {formdata.paidAmount}/-
+                    <div
+                      style={{
+                        backgroundColor: "white",
+                        padding: "20px",
+                        borderRadius: "8px",
+                        textAlign: "center",
+                      }}
+                    >
+                      <img
+                        src="https://b2024479.smushcdn.com/2024479/wp-content/uploads/2020/05/HelloTech-qr-code-1024x1024.jpg?lossy=1&strip=1&webp=1" 
+                        alt="Scanner"
+                        style={{ width: "200px", height: "200px", marginBottom: "20px" }}
+                      />
+                      <button
+                        className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
+                        onClick={() => {
+                          setpaymentDone(true);
+                          setModalOpen(false); 
+                          alert("Payment successful");
+                        }}
+                      >
+                        Close
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
-              {formdata.Pay && paymentDone && (
-                <div className="w-[90%] flex justify-center items-center flex-col">
-                  <div className="mt-2 ml-8 bg-green-600 text-white p-2 rounded-md">
-                    Payment Done Rs.{formdata.paidAmount}
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
+            )}
 
               {/* Register Button */}
               <div className="mt-8 text-center">
