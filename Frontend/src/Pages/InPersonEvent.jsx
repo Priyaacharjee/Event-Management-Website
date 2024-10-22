@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
 import VirtualCard from "../Components/VirtualCard";
-import { NavLink, useNavigate } from "react-router-dom";
-import { findUser, logoutUser, fetchIn_PersonEvents } from "../utils/utils";
-import { Link } from "react-scroll";
+import { useNavigate } from "react-router-dom";
+import { fetchIn_PersonEvents } from "../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 
-import {
-  faBars,
-  faXmark,
-  faUser,
-  faMagnifyingGlass,
-  faCaretDown,
-  faCaretUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { AiFillHome, AiOutlineAppstore, AiFillContacts } from "react-icons/ai";
 
 const footerMenuItems = [
@@ -24,13 +16,6 @@ const footerMenuItems = [
 ];
 
 function InPersonEvent() {
-  const menuItems = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "about" },
-    { label: "Upcoming  Events", href: "upcoming" },
-    { label: "Contact", href: "contact" },
-  ];
-
   const navigate = useNavigate();
   const [in_personEvents, setin_personEvents] = useState([]);
 
@@ -52,108 +37,6 @@ function InPersonEvent() {
     });
   }, []);
 
-  const [hamburgerMenuClicked, setHamburgerMenuClicked] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-  const [dropDownOpen, setDropDownOpen] = useState(false);
-  const [isClosingDropdown, setIsClosingDropdown] = useState(false);
-
-  const [searchBarClicked, setSearchBarClicked] = useState(false);
-  const [isSearchDropdown, setIsSearchDropdown] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState(null);
-
-  const handleLogInClick = () => {
-    navigate("/login");
-  };
-
-  const searchClick = () => {
-    if (searchBarClicked) {
-      setIsSearchDropdown(true);
-      setTimeout(() => {
-        setSearchBarClicked(false);
-        setIsSearchDropdown(false);
-      }, 900);
-    } else {
-      setSearchBarClicked(true);
-    }
-    setDropDownOpen(false);
-    setHamburgerMenuClicked(false);
-  };
-
-  const hambergerClick = () => {
-    if (hamburgerMenuClicked) {
-      setIsClosing(true);
-      setTimeout(() => {
-        setHamburgerMenuClicked(false);
-        setIsClosing(false);
-      }, 900);
-    } else {
-      setHamburgerMenuClicked(true);
-    }
-    setDropDownOpen(false);
-    setSearchBarClicked(false);
-  };
-
-  const dropDown = () => {
-    if (dropDownOpen) {
-      setIsClosingDropdown(true);
-      setTimeout(() => {
-        setDropDownOpen(false);
-        setIsClosingDropdown(false);
-      }, 900);
-    } else {
-      setDropDownOpen(true);
-    }
-    setHamburgerMenuClicked(false);
-    setSearchBarClicked(false);
-  };
-
-  function handleEnter(e) {
-    if (e.keyCode == 13) {
-      alert("search clicked!");
-    }
-  }
-
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const direction = scrollTop > 100 ? "down" : "up";
-    if (scrollDirection !== direction) {
-      setScrollDirection(direction);
-      if (direction === "down") {
-        setIsSearchDropdown(true);
-        setTimeout(() => {
-          setSearchBarClicked(false);
-          setIsSearchDropdown(false);
-        }, 900);
-      }
-    }
-  };
-
-  const handelLogout = () => {
-    logoutUser().then((response) => {
-      if (response !== "Logout successfully") {
-        alert(response);
-      }
-      findUser().then((response) => {
-        response ? setUser(response.username.split(" ")[0]) : setUser(null);
-      });
-    });
-  };
-
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    findUser().then((response) => {
-      setUser(response.username.split(" ")[0]);
-    });
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrollDirection]);
-
   const headerMenuItems = [
     { label: "Home", to: "/" },
     { label: "About", to: "/" },
@@ -165,7 +48,7 @@ function InPersonEvent() {
     <>
       <div className="App">
         {/* Header Section */}
-         <Navbar menuItems={headerMenuItems}/>
+        <Navbar menuItems={headerMenuItems} />
 
         {/* Virtual Meeting Section */}
         <section className="text-center my-8 p-8">

@@ -1,49 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {
   findUser,
-  logoutUser,
   fetchSingleEvent,
   checkUserIsRegisteredInEventOrNot,
 } from "../utils/utils";
-import { Link } from "react-scroll";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
-import {
-  faBars,
-  faXmark,
-  faUser,
-  faCaretDown,
-  faCaretUp,
-} from "@fortawesome/free-solid-svg-icons";
 import { AiFillHome, AiOutlineAppstore, AiFillContacts } from "react-icons/ai";
+import ImageLoader from "../Components/ImageLoader1";
 
 const footerMenuItems = [
   { href: "header", label: "Header", icon: AiFillHome },
   { href: "features", label: "Features", icon: AiOutlineAppstore },
   { href: "contact", label: "Contact", icon: AiFillContacts },
 ];
-import ImageLoader from "../Components/ImageLoader1";
 
 function EventPage() {
-  const menuItems = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "about" },
-    { label: "Contact", href: "contact" },
-  ];
-
   const navigate = useNavigate();
   const { eventId } = useParams();
 
   const [event, setevent] = useState({});
-
-  useEffect(() => {
-    fetchSingleEvent(eventId).then((response) => {
-      setevent(response);
-    });
-  }, []);
 
   const eventTags = [
     { label: "Event Name", value: event.eventName },
@@ -80,41 +58,7 @@ function EventPage() {
     { label: "Rules & Regulations", value: event.rules },
   ];
 
-  const [hamburgerMenuClicked, setHamburgerMenuClicked] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-  const [dropDownOpen, setDropDownOpen] = useState(false);
-  const [isClosingDropdown, setIsClosingDropdown] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
-
-  const handleLogInClick = () => {
-    navigate("/login");
-  };
-
-  const hambergerClick = () => {
-    if (hamburgerMenuClicked) {
-      setIsClosing(true);
-      setTimeout(() => {
-        setHamburgerMenuClicked(false);
-        setIsClosing(false);
-      }, 900);
-    } else {
-      setHamburgerMenuClicked(true);
-    }
-    setDropDownOpen(false);
-  };
-
-  const dropDown = () => {
-    if (dropDownOpen) {
-      setIsClosingDropdown(true);
-      setTimeout(() => {
-        setDropDownOpen(false);
-        setIsClosingDropdown(false);
-      }, 900);
-    } else {
-      setDropDownOpen(true);
-    }
-    setHamburgerMenuClicked(false);
-  };
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
@@ -124,17 +68,6 @@ function EventPage() {
     }
   };
 
-  const handelLogout = () => {
-    logoutUser().then((response) => {
-      if (response !== "Logout successfully") {
-        alert(response);
-      }
-      findUser().then((response) => {
-        response ? setUser(response.username.split(" ")[0]) : setUser(null);
-      });
-    });
-  };
-
   const handleCommentSubmit = () => {
     alert("Comment submitted!");
   };
@@ -142,6 +75,12 @@ function EventPage() {
   const handleReplyClick = () => {
     alert("Reply clicked!");
   };
+
+  useEffect(() => {
+    fetchSingleEvent(eventId).then((response) => {
+      setevent(response);
+    });
+  }, []);
 
   const [user, setUser] = useState(null);
   const [registered, setregistered] = useState(false);
@@ -173,9 +112,9 @@ function EventPage() {
   return (
     <>
       <div className="flex flex-col items-center py-10">
-         {/* Header Section */}
-            
-         <Navbar menuItems={headerMenuItems}/>  
+        {/* Header Section */}
+
+        <Navbar menuItems={headerMenuItems} />
 
         {/* Event Header with Image */}
         <div className="flex justify-between w-full max-w-4xl items-center">
@@ -196,9 +135,7 @@ function EventPage() {
             ))}
 
             {registered ? (
-              <button
-                className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
-              >
+              <button className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500">
                 Registered
               </button>
             ) : (
