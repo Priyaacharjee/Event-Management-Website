@@ -22,43 +22,6 @@ const footerMenuItems = [
   { href: "contact", label: "Contact", icon: AiFillContacts },
 ];
 
-// const virtualEvents = [
-//   {
-//     _id: "1",
-//     name: "TCS Global Leadership Summit",
-//     date: "24-09-2024",
-//     organizer: "TCS",
-//     platform: "Google meet",
-//     image:
-//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlEo5Tk4qtc8LYOiDmEq5VE1rGJzAd18p1lg&s",
-//   },
-//   {
-//     _id: "2",
-//     name: "Infosys Tech Vision 2024",
-//     date: "15-10-2024",
-//     organizer: "Infosys",
-//     platform: "Zoom",
-//     image:
-//       "https://mma.prnewswire.com/media/633365/Infosys_Logo.jpg?p=facebook",
-//   },
-//   {
-//     _id: "3",
-//     name: "Wipro Innovate 2024",
-//     date: "20-11-2024",
-//     organizer: "Wipro",
-//     platform: "Google meet",
-//     image: "https://admeducation.com/wp-content/uploads/2024/05/WIPRO-Logo.jpg",
-//   },
-//   {
-//     _id: "4",
-//     name: "Accenture Women’s Leadership Forum",
-//     date: "20-11-2024",
-//     organizer: "Accenture",
-//     platform: "Google Meet",
-//     image: "https://www.nidv.eu/wp-content/uploads/2020/12/Accenture.png",
-//   },
-// ];
-
 function VirtualEvent() {
   const menuItems = [
     { label: "Home", href: "/" },

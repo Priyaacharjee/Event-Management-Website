@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { fetchSingleEvent } from "../utils/utils";
+import ImageLoader from "../Components/ImageLoader1";
 
 function EventPage() {
   const navigate = useNavigate();
@@ -53,11 +54,15 @@ function EventPage() {
       <div className="flex flex-col items-center py-10">
         {/* Event Header with Image */}
         <div className="flex justify-between w-full max-w-4xl items-center">
-          <img
-            src={event.posterImage ? event.posterImage.url : null}
-            alt={event.eventName}
-            className="w-96 h-48 object-cover rounded-lg"
-          />
+          {event.posterImage ? (
+            <img
+              src={event.posterImage ? event.posterImage.url : null}
+              alt={event.eventName}
+              className="w-96 h-48 object-cover rounded-lg"
+            />
+          ) : (
+            <ImageLoader />
+          )}
           <div className="ml-8">
             {eventTags.map((item, index) => (
               <p key={index} className="text-lg font-medium">
