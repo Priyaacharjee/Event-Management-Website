@@ -45,7 +45,7 @@ const Login = () => {
        setLoading(true);
        setTimeout(()=>{
          loginUser(formData.email, formData.password).then((response) => {
-           if (response !== "Login successfull") {
+           if (response !== "Login successfully") {
              alert(response);
             } else {
               navigate("/");

@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { createEvent } from "../utils/utils";
+import { useParams } from "react-router-dom";
 
 const CreateForm = () => {
+  const { eventType } = useParams();
+
   const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [billPaymentDone, setbillPaymentDone] = useState(false);
 
   const [formData, setFormData] = useState({
     eventName: "",
@@ -70,7 +75,7 @@ const CreateForm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value, eventType });
   };
 
   const handleFileChange = (event) => {
@@ -80,8 +85,13 @@ const CreateForm = () => {
 
   const handleEventTypeChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-    calculatePayableAmount(formData.headcount, value);
+    if (value) {
+      setFormData({ ...formData, [name]: value });
+      calculatePayableAmount(formData.headcount, value);
+    } else {
+      setFormData({ ...formData, [name]: eventType });
+      calculatePayableAmount(formData.headcount, eventType);
+    }
   };
 
   const calculatePayableAmount = (headcount, eventType) => {
@@ -106,21 +116,22 @@ const CreateForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
 
-    setTimeout(async () => {
-      try {
+    try {
+      if (!billPaymentDone) {
+        alert("Please complete your payment to create an event!");
+      } else {
+        setLoading(true);
         const result = await createEvent(formData);
-        alert(result);
-      } catch (error) {
-        console.error(error);
-        alert('Error creating event');
-      } finally {
-        setLoading(false);
+        setTimeout(async () => {
+          setLoading(false);
+          alert(result);
+        }, 3000);
       }
-    }, 3000);
+    } catch (error) {
+      alert("An error occurred while creating the event. Please try again.");
+    }
   };
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -202,12 +213,19 @@ const CreateForm = () => {
                 </label>
                 <select
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  value={formData.eventType}
+                  disabled={
+                    eventType === "in_person" ||
+                      eventType === "virtual" ||
+                      eventType === "hybrid"
+                      ? true
+                      : false
+                  }
                   name="eventType"
                   onChange={handleEventTypeChange}
+                  value={eventType ? eventType : null}
                   required
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled selected={eventType ? false : true}>
                     Select event type
                   </option>
                   <option value="in_person">In-person</option>
@@ -217,45 +235,47 @@ const CreateForm = () => {
               </div>
 
               {/* Conditional Field Based on Event Type */}
-              {formData.eventType === "in_person" && (
-                <div className="bg-indigo-200 p-6 rounded-xl">
-                  <label className="block text-sm mt-8 font-medium text-gray-700">
-                    Preferable City Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="cityName"
-                    value={formData.cityName}
-                    onChange={handleInputChange}
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    placeholder="Enter preferable city"
-                  />
-                </div>
-              )}
+              {(formData.eventType === "in_person" ||
+                eventType === "in_person") && (
+                  <div className="bg-indigo-200 p-6 rounded-xl">
+                    <label className="block text-sm mt-8 font-medium text-gray-700">
+                      Preferable City Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="cityName"
+                      value={formData.cityName}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                      placeholder="Enter preferable city"
+                    />
+                  </div>
+                )}
 
-              {formData.eventType === "virtual" && (
-                <div className="bg-indigo-200 p-6 rounded-xl">
-                  <label className="block text-sm mt-8 font-medium text-gray-700">
-                    Preferable Online Meeting Platform{" "}
-                    <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    name="platform"
-                    value={formData.platform}
-                    onChange={handleInputChange}
-                  >
-                    <option value="" disabled selected>
-                      Select preferable platform
-                    </option>
-                    <option value="zoom">Zoom</option>
-                    <option value="gmeet">Google Meet</option>
-                    <option value="skype">Skype</option>
-                  </select>
-                </div>
-              )}
+              {(eventType === "virtual" ||
+                formData.eventType === "virtual") && (
+                  <div className="bg-indigo-200 p-6 rounded-xl">
+                    <label className="block text-sm mt-8 font-medium text-gray-700">
+                      Preferable Online Meeting Platform{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                      name="platform"
+                      value={formData.platform}
+                      onChange={handleInputChange}
+                    >
+                      <option value="" disabled selected>
+                        Select preferable platform
+                      </option>
+                      <option value="zoom">Zoom</option>
+                      <option value="gmeet">Google Meet</option>
+                      <option value="skype">Skype</option>
+                    </select>
+                  </div>
+                )}
 
-              {formData.eventType === "hybrid" && (
+              {(eventType === "hybrid" || formData.eventType === "hybrid") && (
                 <>
                   <div className="bg-indigo-200 p-6 rounded-xl">
                     <div>
@@ -408,10 +428,11 @@ const CreateForm = () => {
                         ...formData,
                         headcount: e.target.value,
                       });
-                      calculatePayableAmount(
-                        e.target.value,
-                        formData.eventType
-                      );
+                      if (eventType) {
+                        calculatePayableAmount(e.target.value, eventType);
+                      } else {
+                        calculatePayableAmount(e.target.value, formData.eventType);
+                      }
                     }
                   }}
                   required
@@ -500,7 +521,8 @@ const CreateForm = () => {
                         ...formData,
                         bill: payableAmount,
                       });
-                      alert(`${payableAmount}/- Payment successfull`)
+                      setbillPaymentDone(true);
+                      alert(`${payableAmount}/- Payment successfull`);
                     }}
                   >
                     Pay Now
@@ -563,7 +585,7 @@ const CreateForm = () => {
               justifyContent: "center",
             }}
           >
-          <div className="loader"></div>
+            <div className="loader"></div>
           </div>
         </>
       )

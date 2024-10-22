@@ -367,7 +367,7 @@ function InPersonEvent() {
             </p>
             <button
               className="btn1 justify-center items-center p-4 rounded-md mt-7"
-              onClick={() => navigate("/CreateForm")}
+              onClick={() => navigate("/CreateForm/in_person")}
             >
               Create Meeting
             </button>

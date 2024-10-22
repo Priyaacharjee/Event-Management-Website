@@ -16,6 +16,7 @@ const {
   fetchLastCreatedEvent,
   fetchAllIn_PersonEvents,
   fetchAllHybridEvents,
+  eventRegistration,
 } = require("../controller/userController");
 
 router.get("/", (req, res) => {
@@ -60,5 +61,8 @@ router.post("/fetchsingleevent", fetchSingleEvent);
 
 // FETCH LAST CREATED EVENT
 router.get("/fetchlastcreatedevent", fetchLastCreatedEvent);
+
+// EVENT REGISTRATION
+router.post("/eventregistration", isLoggedIn, eventRegistration);
 
 module.exports = router;

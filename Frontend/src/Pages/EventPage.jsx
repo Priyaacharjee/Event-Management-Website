@@ -21,6 +21,7 @@ const footerMenuItems = [
   { href: "features", label: "Features", icon: AiOutlineAppstore },
   { href: "contact", label: "Contact", icon: AiFillContacts },
 ];
+import ImageLoader from "../Components/ImageLoader1";
 
 function EventPage() {
   const menuItems = [
@@ -56,7 +57,6 @@ function EventPage() {
       label: "Paid Amount",
       value: event.payableAmount ? event.payableAmount : "Free",
     },
-    { label: "Interested", value: event.interestedButton },
     { label: "Total Seats", value: event.headcount },
   ];
 
@@ -64,7 +64,10 @@ function EventPage() {
     { label: "Platform", value: event.platform },
     { label: "Venue", value: event.city },
     { label: "Description", value: event.description },
-    { label: "Remaining Seats", value: event.remainingSeats },
+    {
+      label: "Remaining Seats",
+      value: event.headcount - event.tillNowTotalRegistration,
+    },
     {
       label: "Last Date of Registration",
       value: new Date(event.lastDateOfRegistration).toLocaleDateString("en-GB"),
@@ -295,11 +298,15 @@ function EventPage() {
 
         {/* Event Header with Image */}
         <div className="flex justify-between w-full max-w-4xl items-center">
-          <img
-            src={event.posterImage ? event.posterImage.url : null}
-            alt={event.eventName}
-            className="w-96 h-48 object-cover rounded-lg"
-          />
+          {event.posterImage ? (
+            <img
+              src={event.posterImage ? event.posterImage.url : null}
+              alt={event.eventName}
+              className="w-96 h-48 object-cover rounded-lg"
+            />
+          ) : (
+            <ImageLoader />
+          )}
           <div className="ml-8">
             {eventTags.map((item, index) => (
               <p key={index} className="text-lg font-medium">
@@ -309,7 +316,7 @@ function EventPage() {
 
             <button
               className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
-              onClick={() => navigate("/registrationform")}
+              onClick={() => navigate(`/registrationform/${eventId}`)}
             >
               Register Now
             </button>

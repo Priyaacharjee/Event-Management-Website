@@ -323,3 +323,27 @@ module.exports.fetchLastCreatedEvent = async (req, res) => {
     res.send(err.message);
   }
 };
+
+// Event Registration
+module.exports.eventRegistration = async (req, res) => {
+  try {
+    const { eventId } = req.body;
+    const user = req.user;
+
+    await userModel.findOneAndUpdate(
+      { email: user.email },
+      { $push: { appliedEvents: eventId } }
+    );
+
+    const event = await eventModel.findOne({ _id: eventId });
+
+    await eventModel.findOneAndUpdate(
+      { _id: eventId },
+      { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
+    );
+
+    res.send("Registration successfull");
+  } catch (err) {
+    res.send(err.message);
+  }
+};

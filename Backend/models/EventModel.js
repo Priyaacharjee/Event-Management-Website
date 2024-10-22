@@ -2,22 +2,30 @@ const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+
   eventName: { type: String },
   date: { type: Date },
   time: { type: String },
   speaker: { type: String },
-  eventType: { type: String },
-  city: { type: String },
-  hall: { type: String },
-  platform: { type: String },
+  headcount: { type: Number },
+  description: { type: String },
+  bill: { type: Number },
+
   isPublic: { type: Boolean },
   isPaid: { type: Boolean },
   payableAmount: { type: Number },
-  headcount: { type: Number },
+
+  eventType: { type: String },
+  city: { type: String },
+  hallName: { type: String },
+  hallBookingTime: { type: String },
+  platform: { type: String },
+
   tillNowTotalRegistration: { type: Number, default: 0 },
-  description: { type: String },
-  bill: { type: Number },
   lastDateOfRegistration: { type: Date },
+
+  interested: { type: Number, default: 0 },
+
   posterImage: {
     public_id: {
       type: String,

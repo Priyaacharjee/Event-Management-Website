@@ -113,6 +113,7 @@ export default function Header({ menuItems }) {
           response ? setUser(response.username.split(" ")[0]) : setUser(null);
         });
       });
+      setLoading(false);
     },3000)
     
   };
