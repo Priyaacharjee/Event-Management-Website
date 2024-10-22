@@ -129,7 +129,15 @@ module.exports.updatePasswordRequest = async (req, res) => {
 module.exports.updatePassword = async (req, res) => {
   try {
     let { email, password } = req.body;
-    let user = userModel.updateOne({ email }, { $set: { password } });
+
+    const salt = await bcrypt.genSalt(12);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    let user = await userModel.updateOne(
+      { email: email.email },
+      { $set: { password: hashedPassword } }
+    );
+
     if (user) {
       res.send("Password Updated Successfully");
     }
