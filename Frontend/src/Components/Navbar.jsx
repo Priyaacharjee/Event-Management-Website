@@ -21,8 +21,6 @@ export default function Navbar({ menuItems }) {
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [isClosingDropdown, setIsClosingDropdown] = useState(false);
   const [loading,setLoading]=useState(false);
-
-
   const [searchBarClicked, setSearchBarClicked] = useState(false);
   const [isSearchDropdown, setIsSearchDropdown] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
