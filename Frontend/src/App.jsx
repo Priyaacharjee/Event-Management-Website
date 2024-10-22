@@ -9,6 +9,8 @@ import Login from "./Pages/Login";
 import Forgetpassword from "./Pages/Forgetpassword";
 import Resetpassword from "./Pages/Resetpassword";
 import CreateForm from "./Pages/CreateForm";
+import CompanyPage from "./Pages/CompanyPage";
+
 
 function App() {
   const [themeMode, setThemeMode] = useState("light");
@@ -37,6 +39,7 @@ function App() {
             <Route path="/forgetpassword" element={<Forgetpassword />} />
             <Route path="/resetpassword" element={<Resetpassword />} />
             <Route path="/createform" element={<CreateForm />} />
+            <Route path="/companypage" element={<CompanyPage/>}/>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
