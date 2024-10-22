@@ -10,6 +10,7 @@ const eventSchema = new mongoose.Schema({
   headcount: { type: Number },
   description: { type: String },
   bill: { type: Number },
+  mettingLink: { type: String },
 
   isPublic: { type: Boolean },
   isPaid: { type: Boolean },

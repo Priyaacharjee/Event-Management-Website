@@ -12,6 +12,7 @@ import VirtualEvent from "./Pages/VirtualEvent";
 import InPersonEvent from "./Pages/InPersonEvent";
 import HybridEvent from "./Pages/HybridEvent";
 import CreateForm from "./Pages/CreateForm";
+import CompanyPage from "./Pages/CompanyPage";
 import Registrationform from "./Pages/Registrationform";
 import EventPage from "./Pages/EventPage";
 
@@ -46,6 +47,7 @@ function App() {
             <Route path="/hybridevent" element={<HybridEvent />} />
             <Route path="/createform/:eventType" element={<CreateForm />} />
             <Route path="/createform" element={<CreateForm />} />
+            <Route path="/companypage" element={<CompanyPage/>}/>
             <Route path="/registrationform/:eventId" element={<Registrationform/>}/>
             <Route path="/eventpage/:eventId" element={<EventPage />} />
           </Routes>

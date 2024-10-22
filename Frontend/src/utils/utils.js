@@ -199,3 +199,19 @@ export const eventRegistration = async (eventId) => {
     console.log(err.message);
   }
 };
+
+// Check a User is Registered in Event or Not
+export const checkUserIsRegisteredInEventOrNot = async (eventId) => {
+  try {
+    let response = await axios.post(
+      "http://localhost:8000/users/checkuserisregisteredineventornot",
+      { eventId },
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
