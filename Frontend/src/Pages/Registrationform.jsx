@@ -9,7 +9,6 @@ const Registrationform = () => {
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-
   const [formdata, setformdata] = useState({
     Name: "",
     PhoneNo: "",
@@ -18,6 +17,8 @@ const Registrationform = () => {
     EventDate: "",
     Venue: "",
     Pay: false,
+    scannerImage: "",
+    payAmount: 0,
   });
 
   const handleSubmit = (e) => {
@@ -50,6 +51,8 @@ const Registrationform = () => {
           EventDate: new Date(event.date).toLocaleDateString("en-GB"),
           Pay: event.isPaid,
           paidAmount: event.payableAmount ? event.payableAmount : 0,
+          scannerImage: event.scannerImage ? event.scannerImage.url : null,
+          payAmount: event.payableAmount ? event.payableAmount : null,
         });
       });
     });
@@ -65,7 +68,7 @@ const Registrationform = () => {
             </h2>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
-              {/*Name*/}
+              {/* Name */}
               <div>
                 <label
                   htmlFor="Name"
@@ -83,7 +86,7 @@ const Registrationform = () => {
                 />
               </div>
 
-              {/*Phone Number*/}
+              {/* Phone Number */}
               <div>
                 <label
                   htmlFor="PhoneNo"
@@ -154,59 +157,70 @@ const Registrationform = () => {
 
               {/*Payment */}
 
-            {formdata.Pay && !paymentDone && (
-              <div className="w-[90%] flex justify-center items-center flex-col">
-                <div
-                  className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
-                  onClick={() => setModalOpen(true)} 
-                >
-                  Pay Now &emsp; {formdata.paidAmount}/-
-                </div>
-
-                {/* Modal */}
-                {modalOpen && (
+              {(formdata.Pay && !paymentDone)? (
+                <div className="w-[90%] flex justify-center items-center flex-col">
                   <div
-                    style={{
-                      position: "fixed",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
-                      zIndex: 999,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
+                    className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
+                    onClick={() => setModalOpen(true)}
                   >
+                    Pay Now &emsp; {formdata.paidAmount}/-
+                  </div>
+
+                  {/* Modal */}
+                  {modalOpen && (
                     <div
                       style={{
-                        backgroundColor: "white",
-                        padding: "20px",
-                        borderRadius: "8px",
-                        textAlign: "center",
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        zIndex: 999,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
-                      <img
-                        src="https://b2024479.smushcdn.com/2024479/wp-content/uploads/2020/05/HelloTech-qr-code-1024x1024.jpg?lossy=1&strip=1&webp=1" 
-                        alt="Scanner"
-                        style={{ width: "200px", height: "200px", marginBottom: "20px" }}
-                      />
-                      <button
-                        className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
-                        onClick={() => {
-                          setpaymentDone(true);
-                          setModalOpen(false); 
-                          alert("Payment successful");
+                      <div
+                        style={{
+                          backgroundColor: "white",
+                          padding: "20px",
+                          borderRadius: "8px",
+                          textAlign: "center",
                         }}
                       >
-                        Close
-                      </button>
+                        <img
+                          src={formdata.scannerImage}
+                          alt="Scanner"
+                          style={{
+                            width: "200px",
+                            height: "200px",
+                            marginBottom: "20px",
+                          }}
+                        />
+                        <div className="text-2xl">Pay <strong>Rs.{formdata.payAmount}/-</strong></div>
+                        <button
+                          className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer mt-5"
+                          onClick={() => {
+                            setpaymentDone(true);
+                            setModalOpen(false);
+                            alert("Payment successful");
+                          }}
+                        >
+                          Close
+                        </button>
+                      </div>
                     </div>
+                  )}
+                </div>
+              ):(<div className="w-[90%] flex justify-center items-center flex-col">
+                  <div
+                    className="mt-2 ml-8 bg-green-500 text-white p-2 rounded-md font-bold"
+                  >
+                    Payment Done
                   </div>
-                )}
-              </div>
-            )}
+                </div>)}
 
               {/* Register Button */}
               <div className="mt-8 text-center">
