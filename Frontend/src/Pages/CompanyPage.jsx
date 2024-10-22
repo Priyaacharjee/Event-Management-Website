@@ -115,7 +115,6 @@ const CompanyPage = () => {
       setcreatedEvents(response.createdEvents);
       setappliedEvents(response.appliedEvents);
       setevents(response.createdEvents);
-      console.log(response);
     });
   }, []);
 
@@ -290,7 +289,7 @@ const CompanyPage = () => {
                       {event.eventType === "hybrid" && <span>Hybrid</span>}
                     </div>
                   </div>
-                  
+
                   <div className="mt-3 flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
                     {/* Event transparency Type */}
                     <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
