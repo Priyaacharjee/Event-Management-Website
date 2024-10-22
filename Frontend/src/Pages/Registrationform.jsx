@@ -4,17 +4,17 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const Registrationform = () => {
   const { eventId } = useParams();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [paymentDone, setpaymentDone] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [formdata, setformdata] = useState({
-    Name: '',
-    PhoneNo: '',
-    Emailid: '',
-    EventName: '',
-    EventDate: '',
-    Venue: '',
+    Name: "",
+    PhoneNo: "",
+    Emailid: "",
+    EventName: "",
+    EventDate: "",
+    Venue: "",
     Pay: false,
   });
 
@@ -28,7 +28,7 @@ const Registrationform = () => {
         eventRegistration(eventId).then((response) => {
           setLoading(false);
           alert(response);
-          if(response==="Registration successfull"){
+          if (response === "Registration successfull") {
             navigate(`/eventpage/${eventId}}`);
           }
         });
@@ -53,18 +53,22 @@ const Registrationform = () => {
     });
   }, []);
 
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-6 m-12 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-2/3 xl:w-[90%]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="w-full lg:w-full">
-            <h2 className="font-serif text-3xl sm:text-3xl font-bold text-indigo-600 mb-6 sm:mb-8">Register Yourself !!</h2>
+            <h2 className="font-serif text-3xl sm:text-3xl font-bold text-indigo-600 mb-6 sm:mb-8">
+              Register Yourself !!
+            </h2>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
               {/*Name*/}
               <div>
-                <label htmlFor="Name" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="Name"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Your Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -74,7 +78,6 @@ const Registrationform = () => {
                   placeholder={formdata.Name}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   disabled
-
                 />
               </div>
 
@@ -128,7 +131,7 @@ const Registrationform = () => {
                   className="mt-1 block w-full p-2 "
                   disabled
                 />
-              </div >
+              </div>
 
               {/* Event Date */}
               <div>
@@ -145,7 +148,7 @@ const Registrationform = () => {
                   className="mt-1 block w-full p-2 "
                   disabled
                 />
-              </div >
+              </div>
 
               {/*Payment */}
               {formdata.Pay && !paymentDone && (
@@ -182,8 +185,14 @@ const Registrationform = () => {
           </div>
 
           {/* Right Part*/}
-          < div className="hidden lg:block relative" >
-            <div className="relative overflow-hidden w-full h-full rounded-lg shadow-lg" style={{ clipPath: 'polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)' }}>
+          <div className="hidden lg:block relative">
+            <div
+              className="relative overflow-hidden w-full h-full rounded-lg shadow-lg"
+              style={{
+                clipPath:
+                  "polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)",
+              }}
+            >
               <div
                 className="relative overflow-hidden w-full h-full rounded-lg shadow-lg"
                 style={{
@@ -225,8 +234,7 @@ const Registrationform = () => {
               <div className="loader"></div>
             </div>
           </>
-        )
-        }
+        )}
       </div>
     </div>
   );

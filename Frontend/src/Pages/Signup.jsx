@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Login from "./Login";
 import { signUp } from "../utils/utils";
 import Loader from "../Components/loader";
 
@@ -18,7 +17,7 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({});
   const [signupError, setSignupError] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -122,16 +121,18 @@ const Signup = () => {
                 name="userName"
                 value={formData.userName}
                 onChange={handleChange}
-                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 ${errors.userName
-                  ? "border-red-500 focus:border-red-500"
-                  : "border-gray-300 focus:border-blue-600"
-                  } peer`}
+                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 ${
+                  errors.userName
+                    ? "border-red-500 focus:border-red-500"
+                    : "border-gray-300 focus:border-blue-600"
+                } peer`}
                 placeholder=" "
               />
               <label
                 htmlFor="userName"
-                className={`peer-focus:font-medium absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-2.5 ${errors.userName ? "text-red-500" : "peer-focus:text-blue-600"
-                  } peer-focus:top-3 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                className={`peer-focus:font-medium absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:top-2.5 ${
+                  errors.userName ? "text-red-500" : "peer-focus:text-blue-600"
+                } peer-focus:top-3 peer-focus:scale-75 peer-focus:-translate-y-6`}
               >
                 Company Name/User Name
               </label>
@@ -148,8 +149,9 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 id="email"
-                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${errors.email ? "border-red-500" : "border-gray-300"
-                  } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
               <label
@@ -163,7 +165,6 @@ const Signup = () => {
               )}
             </div>
 
-
             {/* CONTACT NUMBER */}
             <div className="relative z-0 w-full mb-4 sm:mb-6 group">
               <input
@@ -171,8 +172,9 @@ const Signup = () => {
                 name="contactNumber"
                 value={formData.contactNumber}
                 onChange={handleChange}
-                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 ${errors.contactNumber ? "border-red-500" : "border-gray-300"
-                  } peer`}
+                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 ${
+                  errors.contactNumber ? "border-red-500" : "border-gray-300"
+                } peer`}
                 placeholder=" "
               />
               <label
@@ -195,8 +197,9 @@ const Signup = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${errors.password ? "border-red-500" : "border-gray-300"
-                  } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
               <label
@@ -217,8 +220,9 @@ const Signup = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${errors.confirmPassword ? "border-red-500" : "border-gray-300"
-                  } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
+                className={`block py-2 px-0 w-full text-gray-900 bg-transparent border-0 border-b-2 ${
+                  errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                } appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
                 placeholder=" "
               />
               <label
@@ -346,39 +350,9 @@ const Signup = () => {
             <Loader />
           </div>
         </>
-      )
-      }
+      )}
     </div>
-
   );
 };
 
 export default Signup;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

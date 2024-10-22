@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { changePasswordRequest } from "../utils/utils";
 import Resetpassword from "./Resetpassword";
 
