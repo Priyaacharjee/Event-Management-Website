@@ -66,7 +66,7 @@ export const changePasswordRequest = async (email) => {
     );
     return response.data;
   } catch (err) {
-    return err.message;
+    console.log(err.message);
   }
 };
 
@@ -79,7 +79,7 @@ export const changePassword = async (email, password) => {
     );
     return response.data;
   } catch (err) {
-    return err.message;
+    console.log(err.message);
   }
 };
 
@@ -109,9 +109,9 @@ export const createEvent = async (formData) => {
       { withCredentials: true }
     );
 
-    return response.data; // Return the response data from the server
+    return response.data;
   } catch (err) {
-    return err.message; // Return an error object
+    console.log(err.message);
   }
 };
 
@@ -177,7 +177,23 @@ export const fetchSingleEvent = async (eventId) => {
 export const fetchLastCreatedEvent = async () => {
   try {
     let response = await axios.get(
-      "http://localhost:8000/users/fetchlastcreatedevent",
+      "http://localhost:8000/users/fetchlastcreatedevent"
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Event Registration
+export const eventRegistration = async (eventId) => {
+  try {
+    let response = await axios.post(
+      "http://localhost:8000/users/eventregistration",
+      { eventId },
+      {
+        withCredentials: true,
+      }
     );
     return response.data;
   } catch (err) {

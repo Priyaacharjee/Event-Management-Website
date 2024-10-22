@@ -67,7 +67,7 @@ function EventPage() {
 
             <button
               className="mt-6 bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-500"
-              onClick={() => navigate("/registrationform")}
+              onClick={() => navigate(`/registrationform/${eventId}`)}
             >
               Register Now
             </button>

@@ -5,6 +5,8 @@ const CreateForm = () => {
   const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
 
+  const [billPaymentDone, setbillPaymentDone] = useState(false);
+
   const [formData, setFormData] = useState({
     eventName: "",
     eventDate: "",
@@ -106,9 +108,13 @@ const CreateForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await createEvent(formData).then((result) => {
-      alert(result);
-    });
+    if (!billPaymentDone) {
+      alert("Please complete you payment to create an event!");
+    } else {
+      await createEvent(formData).then((result) => {
+        alert(result);
+      });
+    }
   };
 
   return (
@@ -489,7 +495,8 @@ const CreateForm = () => {
                         ...formData,
                         bill: payableAmount,
                       });
-                      alert(`${payableAmount}/- Payment successfull`)
+                      setbillPaymentDone(true);
+                      alert(`${payableAmount}/- Payment successfull`);
                     }}
                   >
                     Pay Now
