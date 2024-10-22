@@ -12,7 +12,7 @@ import {
   faClock,
   faMapMarkerAlt,
   faPlus,
-  faTowerBroadcast,
+  faTowerBroadcast
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { findUser } from "../utils/utils";
@@ -28,6 +28,7 @@ const CompanyPage = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedTab,setSelectedTab] = useState("created")
 
   const handleCreateEventClick = () => {
     navigate("/createform");
@@ -195,16 +196,17 @@ const CompanyPage = () => {
           } mt-8 mb-8 w-full  lg:w-5/6 ml-8 lg:ml-[14rem] mr-8 lgoverflow-y-auto space-y-4`}
           style={{ height: "calc(100vh - 60px)" }}
         >
-          <div className="mt-4 flex flex-row justify-between items-center">
+          <div className="mt-4 flex flex-row space-x-12 justify-center items-center mb-12">
             <h2
-              className="text-gradient2 text-3xl xds:text-3xl sm:text-5xl font-bold w-[60%]  "
+              className="-ml-12 text-gradient2 text-3xl xds:text-3xl sm:text-5xl font-bold w-[80%]  "
               style={{ fontFamily: '"quick"' }}
             >
               Events &nbsp;Ground
             </h2>
+
             <button
               onClick={handleCreateEventClick}
-              className=" text-sm xds:text-lg  sm:text-xl h-6 xds:h-8 sm:h-12  px-1 xds:px-2 sm:px-4 bg-indigo-600 hover:bg-indigo-500 text-white flex justify-center items-center font-bold rounded-md"
+              className="text-sm xds:text-lg  sm:text-xl h-6 xds:h-8 sm:h-12  px-1 xds:px-2 sm:px-4 bg-indigo-600 hover:bg-indigo-500 text-white flex justify-center items-center font-bold rounded-md"
             >
               <FontAwesomeIcon
                 icon={faPlus}
@@ -214,7 +216,56 @@ const CompanyPage = () => {
             </button>
           </div>
 
+
+          <div className="flex mt-24 mr-12">
+            <div
+              onClick={() => setSelectedTab('created')}
+              className={`text-sm xds:text-lg sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 flex justify-center items-center font-bold rounded-md cursor-pointer ${
+                selectedTab === 'created' ? 'text-indigo-400' : 'hover:text-indigo-800'
+              }`}
+            >
+              Created Events
+            </div>
+
+            <div
+              onClick={() => setSelectedTab('participated')}
+              className={`text-sm xds:text-lg sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 flex justify-center items-center font-bold rounded-md cursor-pointer ${
+                selectedTab === 'participated' ? 'text-indigo-400' : 'hover:text-indigo-800'
+              }`}
+            >
+              Participated Events
+            </div>
+          </div>
+
+          <hr className="border-0 h-[2px] bg-gray-400 my-6"></hr>
+
+          <div className="flex flex-row mr-12 justify-between space-x-4">
+            {/* Search box */}
+            <input
+              type="text"
+              placeholder="Search your events..."
+              className=" mb-4 px-3 py-1 w-[50%] border-4 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+
+            {/* Buttons */}
+            <div className="flex">
+              <button
+                className=" text-sm xds:text-lg sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 bg-indigo-300 hover:bg-indigo-500 hover:text-white flex justify-center items-center font-bold rounded-md"
+              >
+                Upcoming Events
+              </button>
+              <button
+                className=" text-sm xds:text-lg ml-8 sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 bg-indigo-300 hover:bg-indigo-500 hover:text-white flex justify-center items-center font-bold rounded-md"
+              >
+                Past Events
+              </button>
+            </div>
+          </div>
+
+
+
           <hr className="border-0 h-[2px] bg-gray-500 my-6"></hr>
+
           {Array.isArray(events) &&
             events.map((event, index) => (
               <div
@@ -289,7 +340,7 @@ const CompanyPage = () => {
                       {event.eventType === "hybrid" && <span>Hybrid</span>}
                     </div>
                   </div>
-
+                  
                   <div className="mt-3 flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
                     {/* Event transparency Type */}
                     <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
