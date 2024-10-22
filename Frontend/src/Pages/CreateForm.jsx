@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { createEvent } from "../utils/utils";
+import { useParams } from "react-router-dom";
 
 const CreateForm = () => {
+  const { eventType } = useParams();
+
   const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
 
@@ -71,7 +74,7 @@ const CreateForm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value, eventType });
   };
 
   const handleFileChange = (event) => {
@@ -81,8 +84,13 @@ const CreateForm = () => {
 
   const handleEventTypeChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-    calculatePayableAmount(formData.headcount, value);
+    if (value) {
+      setFormData({ ...formData, [name]: value });
+      calculatePayableAmount(formData.headcount, value);
+    } else {
+      setFormData({ ...formData, [name]: eventType });
+      calculatePayableAmount(formData.headcount, eventType);
+    }
   };
 
   const calculatePayableAmount = (headcount, eventType) => {
@@ -101,7 +109,7 @@ const CreateForm = () => {
       else if (headcount <= 400) amount = 5000;
       else if (headcount <= 500) amount = 7000;
     }
-
+    
     setPayableAmount(amount);
   };
 
@@ -114,6 +122,7 @@ const CreateForm = () => {
       await createEvent(formData).then((result) => {
         alert(result);
       });
+      console.log(formData);
     }
   };
 
@@ -197,12 +206,19 @@ const CreateForm = () => {
                 </label>
                 <select
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  value={formData.eventType}
+                  disabled={
+                    eventType === "in_person" ||
+                    eventType === "vritual" ||
+                    eventType === "hybrid"
+                      ? true
+                      : false
+                  }
                   name="eventType"
                   onChange={handleEventTypeChange}
+                  value={eventType ? eventType : null}
                   required
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled selected={eventType ? false : true}>
                     Select event type
                   </option>
                   <option value="in_person">In-person</option>
@@ -212,7 +228,8 @@ const CreateForm = () => {
               </div>
 
               {/* Conditional Field Based on Event Type */}
-              {formData.eventType === "in_person" && (
+              {(formData.eventType === "in_person" ||
+                eventType === "in_person") && (
                 <div className="bg-indigo-200 p-6 rounded-xl">
                   <label className="block text-sm mt-8 font-medium text-gray-700">
                     Preferable City Name <span className="text-red-500">*</span>
@@ -228,7 +245,8 @@ const CreateForm = () => {
                 </div>
               )}
 
-              {formData.eventType === "virtual" && (
+              {(eventType === "virtual" ||
+                formData.eventType === "virtual") && (
                 <div className="bg-indigo-200 p-6 rounded-xl">
                   <label className="block text-sm mt-8 font-medium text-gray-700">
                     Preferable Online Meeting Platform{" "}
@@ -250,7 +268,7 @@ const CreateForm = () => {
                 </div>
               )}
 
-              {formData.eventType === "hybrid" && (
+              {(eventType === "hybrid" || formData.eventType === "hybrid") && (
                 <>
                   <div className="bg-indigo-200 p-6 rounded-xl">
                     <div>
@@ -403,10 +421,11 @@ const CreateForm = () => {
                         ...formData,
                         headcount: e.target.value,
                       });
-                      calculatePayableAmount(
-                        e.target.value,
-                        formData.eventType
-                      );
+                      if (eventType) {
+                        calculatePayableAmount(e.target.value, eventType);
+                      } else {
+                        calculatePayableAmount(e.target.value, formData.eventType);
+                      }
                     }
                   }}
                   required

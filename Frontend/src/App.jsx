@@ -44,6 +44,7 @@ function App() {
             <Route path="/virtualevent" element={<VirtualEvent />} />
             <Route path="/inpersonevent" element={<InPersonEvent />} />
             <Route path="/hybridevent" element={<HybridEvent />} />
+            <Route path="/createform/:eventType" element={<CreateForm />} />
             <Route path="/createform" element={<CreateForm />} />
             <Route path="/registrationform/:eventId" element={<Registrationform/>}/>
             <Route path="/eventpage/:eventId" element={<EventPage />} />
