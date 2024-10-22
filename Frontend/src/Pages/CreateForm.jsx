@@ -492,7 +492,6 @@ const CreateForm = () => {
               </div>
 
               {/* Last Date of Registration*/}
-              {/* {isPublic && ( */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Last Date of Registration{" "}
