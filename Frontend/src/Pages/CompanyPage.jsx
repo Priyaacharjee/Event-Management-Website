@@ -12,7 +12,7 @@ import {
   faClock,
   faMapMarkerAlt,
   faPlus,
-  faTowerBroadcast
+  faTowerBroadcast,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { findUser } from "../utils/utils";
@@ -28,7 +28,7 @@ const CompanyPage = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [selectedTab,setSelectedTab] = useState("created")
+  const [selectedTab, setSelectedTab] = useState("created");
 
   const handleCreateEventClick = () => {
     navigate("/createform");
@@ -109,6 +109,7 @@ const CompanyPage = () => {
   const [createdEvents, setcreatedEvents] = useState([]);
   const [appliedEvents, setappliedEvents] = useState([]);
   const [events, setevents] = useState([]);
+  const [eventsCopy, seteventsCopy] = useState([]);
 
   useEffect(() => {
     findUser().then((response) => {
@@ -216,21 +217,32 @@ const CompanyPage = () => {
             </button>
           </div>
 
-
           <div className="flex mt-24 mr-12">
             <div
-              onClick={() => setSelectedTab('created')}
+              onClick={() => {
+                setSelectedTab("created");
+                setevents(createdEvents);
+                seteventsCopy(createdEvents);
+              }}
               className={`text-sm xds:text-lg sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 flex justify-center items-center font-bold rounded-md cursor-pointer ${
-                selectedTab === 'created' ? 'text-indigo-400' : 'hover:text-indigo-800'
+                selectedTab === "created"
+                  ? "text-indigo-400"
+                  : "hover:text-indigo-800"
               }`}
             >
               Created Events
             </div>
 
             <div
-              onClick={() => setSelectedTab('participated')}
+              onClick={() => {
+                setSelectedTab("participated");
+                setevents(appliedEvents);
+                seteventsCopy(appliedEvents);
+              }}
               className={`text-sm xds:text-lg sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 flex justify-center items-center font-bold rounded-md cursor-pointer ${
-                selectedTab === 'participated' ? 'text-indigo-400' : 'hover:text-indigo-800'
+                selectedTab === "participated"
+                  ? "text-indigo-400"
+                  : "hover:text-indigo-800"
               }`}
             >
               Participated Events
@@ -250,19 +262,37 @@ const CompanyPage = () => {
             {/* Buttons */}
             <div className="flex">
               <button
-                className=" text-sm xds:text-lg sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 bg-indigo-300 hover:bg-indigo-500 hover:text-white flex justify-center items-center font-bold rounded-md"
+                onClick={() => {
+                  setevents(
+                    eventsCopy.filter((event) => {
+                      const eventDate = new Date(event.date);
+                      const today = new Date();
+
+                      return eventDate >= today;
+                    })
+                  );
+                }}
+                className="text-sm xds:text-lg sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 bg-indigo-300 hover:bg-indigo-500 hover:text-white flex justify-center items-center font-bold rounded-md"
               >
                 Upcoming Events
               </button>
               <button
+                onClick={() => {
+                  setevents(
+                    eventsCopy.filter((event) => {
+                      const eventDate = new Date(event.date);
+                      const today = new Date();
+
+                      return eventDate < today;
+                    })
+                  );
+                }}
                 className=" text-sm xds:text-lg ml-8 sm:text-lg h-6 xds:h-8 sm:h- px-1 xds:px-2 sm:px-4 bg-indigo-300 hover:bg-indigo-500 hover:text-white flex justify-center items-center font-bold rounded-md"
               >
                 Past Events
               </button>
             </div>
           </div>
-
-
 
           <hr className="border-0 h-[2px] bg-gray-500 my-6"></hr>
 
@@ -340,7 +370,7 @@ const CompanyPage = () => {
                       {event.eventType === "hybrid" && <span>Hybrid</span>}
                     </div>
                   </div>
-                  
+
                   <div className="mt-3 flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
                     {/* Event transparency Type */}
                     <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
