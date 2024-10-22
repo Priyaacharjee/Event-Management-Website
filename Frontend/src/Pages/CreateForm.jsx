@@ -36,7 +36,7 @@ const CreateForm = () => {
       alert("Please Upload an Scanner Image");
       return;
     }
-    const maxSizeInKB = 70;
+    const maxSizeInKB = 50;
     if (file.size > maxSizeInKB * 1024) {
       alert(`File size should be less than ${maxSizeInKB} KB.`);
       return;
@@ -52,7 +52,7 @@ const CreateForm = () => {
       alert("Please Upload an Poster Image");
       return;
     }
-    const maxSizeInKB = 70;
+    const maxSizeInKB = 50;
     if (file.size > maxSizeInKB * 1024) {
       alert(`File size should be less than ${maxSizeInKB} KB.`);
       return;
@@ -109,7 +109,7 @@ const CreateForm = () => {
       else if (headcount <= 400) amount = 5000;
       else if (headcount <= 500) amount = 7000;
     }
-    
+
     setPayableAmount(amount);
   };
 
@@ -118,11 +118,14 @@ const CreateForm = () => {
 
     if (!billPaymentDone) {
       alert("Please complete you payment to create an event!");
+    } else if (formData.isPaid && formData.paidAmountPerPerson === 0) {
+      alert("Please provide an amount to be paid by an participent!");
+    } else if (formData.eventDate < formData.registrationEndDate) {
+      alert("Please provide an valid Event Date & Registration End Date!");
     } else {
       await createEvent(formData).then((result) => {
         alert(result);
       });
-      console.log(formData);
     }
   };
 
@@ -208,7 +211,7 @@ const CreateForm = () => {
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   disabled={
                     eventType === "in_person" ||
-                    eventType === "vritual" ||
+                    eventType === "virtual" ||
                     eventType === "hybrid"
                       ? true
                       : false
@@ -424,7 +427,10 @@ const CreateForm = () => {
                       if (eventType) {
                         calculatePayableAmount(e.target.value, eventType);
                       } else {
-                        calculatePayableAmount(e.target.value, formData.eventType);
+                        calculatePayableAmount(
+                          e.target.value,
+                          formData.eventType
+                        );
                       }
                     }
                   }}

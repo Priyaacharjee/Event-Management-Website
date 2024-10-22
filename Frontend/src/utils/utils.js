@@ -101,7 +101,6 @@ export const findUser = async () => {
 
 // Create Event
 export const createEvent = async (formData) => {
-  console.log(formData);
   try {
     const response = await axios.post(
       "http://localhost:8000/users/createevent",

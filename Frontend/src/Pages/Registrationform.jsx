@@ -144,16 +144,24 @@ const Registrationform = () => {
               </div>
 
               {/*Payment */}
-              {formdata.Pay && (
+              {formdata.Pay && !paymentDone && (
                 <div className="w-[90%] flex justify-center items-center flex-col">
-                  <button
+                  <div
                     className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
                     onClick={() => {
                       setpaymentDone(true);
+                      alert("Payment successfull");
                     }}
                   >
                     Pay Now &emsp; {formdata.paidAmount}/-
-                  </button>
+                  </div>
+                </div>
+              )}
+              {formdata.Pay && paymentDone && (
+                <div className="w-[90%] flex justify-center items-center flex-col">
+                  <div className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">
+                    Payment Done Rs.{formdata.paidAmount}
+                  </div>
                 </div>
               )}
 
