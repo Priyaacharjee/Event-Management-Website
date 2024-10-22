@@ -123,8 +123,8 @@ const CreateForm = () => {
     });
     if (
       formData.eventDate <= formData.registrationEndDate ||
-      formData.eventDate <= new Date() ||
-      formData.registrationEndDate <= new Date()
+      formData.eventDate < new Date() ||
+      formData.registrationEndDate < new Date()
     ) {
       alert("Please provide a valid Event date & Last date of registration!");
     } else if (formData.isPaid && formData.paidAmountPerPerson <= 0) {
