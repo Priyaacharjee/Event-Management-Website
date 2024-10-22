@@ -157,7 +157,7 @@ const Registrationform = () => {
 
               {/*Payment */}
 
-              {(formdata.Pay && !paymentDone)? (
+              {formdata.Pay && !paymentDone && (
                 <div className="w-[90%] flex justify-center items-center flex-col">
                   <div
                     className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
@@ -184,12 +184,29 @@ const Registrationform = () => {
                     >
                       <div
                         style={{
+                          position: "relative",
                           backgroundColor: "white",
-                          padding: "20px",
+                          padding: "20px 0px 20px 20px",
                           borderRadius: "8px",
                           textAlign: "center",
+                          width: "300px",
                         }}
                       >
+                        <button
+                          style={{
+                            position: "absolute",
+                            top: "10px",
+                            right: "10px",
+                            background: "none",
+                            border: "none",
+                            fontSize: "20px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => setModalOpen(false)}
+                        >
+                          &times;
+                        </button>
+
                         <img
                           src={formdata.scannerImage}
                           alt="Scanner"
@@ -199,28 +216,31 @@ const Registrationform = () => {
                             marginBottom: "20px",
                           }}
                         />
-                        <div className="text-2xl">Pay <strong>Rs.{formdata.payAmount}/-</strong></div>
+                        <div className="text-2xl">
+                          <strong>Rs.{formdata.payAmount}/-</strong>
+                        </div>
                         <button
-                          className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer mt-5"
+                          className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer mt-5 pl-10 pr-10"
                           onClick={() => {
                             setpaymentDone(true);
                             setModalOpen(false);
                             alert("Payment successful");
                           }}
                         >
-                          Close
+                          Pay
                         </button>
                       </div>
                     </div>
                   )}
                 </div>
-              ):(<div className="w-[90%] flex justify-center items-center flex-col">
-                  <div
-                    className="mt-2 ml-8 bg-green-500 text-white p-2 rounded-md font-bold"
-                  >
+              )}
+              {formdata.Pay && paymentDone && (
+                <div className="w-[90%] flex justify-center items-center flex-col">
+                  <div className="mt-2 ml-8 bg-green-500 text-white p-2 rounded-md font-bold">
                     Payment Done
                   </div>
-                </div>)}
+                </div>
+              )}
 
               {/* Register Button */}
               <div className="mt-8 text-center">

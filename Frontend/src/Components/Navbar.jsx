@@ -285,7 +285,7 @@ export default function Navbar({ menuItems }) {
         {/* Hamburger Menu */}
         {(hamburgerMenuClicked || isClosing) && (
           <div
-            className={`z-50 block md:hidden flex-col flex justify-end mt-4 mr-2 text-white w-40 p-4 space-y-8 items-center h-auto ${
+            className={`z-50 md:hidden flex-col flex justify-end mt-4 mr-2 text-white w-40 p-4 space-y-8 items-center h-auto ${
               isClosing ? "animate-slideOut" : "animate-slideIn"
             } fixed top-14 right-5 bg-slate-300 bg-opacity-[0.3] rounded-lg`}
             style={{ backgroundColor: "rgba(0, 0, 255, 0.6)" }}
