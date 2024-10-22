@@ -41,7 +41,10 @@ function EventPage() {
     { label: "Platform", value: event.platform },
     { label: "Venue", value: event.city },
     { label: "Description", value: event.description },
-    { label: "Remaining Seats", value: event.remainingSeats },
+    {
+      label: "Remaining Seats",
+      value: event.headcount - event.tillNowTotalRegistration,
+    },
     {
       label: "Last Date of Registration",
       value: new Date(event.lastDateOfRegistration).toLocaleDateString("en-GB"),

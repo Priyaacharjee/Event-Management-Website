@@ -334,7 +334,14 @@ module.exports.eventRegistration = async (req, res) => {
       { email: user.email },
       { $push: { appliedEvents: eventId } }
     );
-    
+
+    const event = await eventModel.findOne({ _id: eventId });
+
+    await eventModel.findOneAndUpdate(
+      { _id: eventId },
+      { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
+    );
+
     res.send("Registration successfull");
   } catch (err) {
     res.send(err.message);
