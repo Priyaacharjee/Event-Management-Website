@@ -9,7 +9,14 @@ const {
   getUser,
   uploadProfilePicture,
   updatePasswordRequest,
+  updatePassword,
   createEvent,
+  fetchAllVirtualEvents,
+  fetchSingleEvent,
+  fetchLastCreatedEvent,
+  fetchAllIn_PersonEvents,
+  fetchAllHybridEvents,
+  eventRegistration,
 } = require("../controller/userController");
 
 router.get("/", (req, res) => {
@@ -29,13 +36,33 @@ router.get("/logout", isLoggedIn, logoutUser);
 router.get("/getuser", isLoggedIn, getUser);
 
 // UPDATE PASSWORD REQUEST
-router.get("/updatepasswordrequest", isLoggedIn, updatePasswordRequest);
+router.get("/updatepasswordrequest", updatePasswordRequest);
+
+// UPDATE PASSWORD
+router.put("/updatepassword", updatePassword);
 
 // UPLOAD PROFILE PICTURE (USING CLOUDINARY)
 router.post("/uploadprofilepicture", isLoggedIn, uploadProfilePicture);
 
 // CREATE ORDER
-// router.post("/createevent", isLoggedIn, createEvent);
-router.post("/createevent",  createEvent);
+router.post("/createevent", isLoggedIn, createEvent);
+
+// FETCH ALL VIRTUAL EVENTS
+router.get("/fetchallvirtualevents", fetchAllVirtualEvents);
+
+// FETCH ALL IN_PERSON EVENTS
+router.get("/fetchallin_personvents", fetchAllIn_PersonEvents);
+
+// FETCH ALL HYBRID EVENTS
+router.get("/fetchallhyybridevents", fetchAllHybridEvents);
+
+// FETCH A SINGLE EVENT
+router.post("/fetchsingleevent", fetchSingleEvent);
+
+// FETCH LAST CREATED EVENT
+router.get("/fetchlastcreatedevent", fetchLastCreatedEvent);
+
+// EVENT REGISTRATION
+router.post("/eventregistration", isLoggedIn, eventRegistration);
 
 module.exports = router;

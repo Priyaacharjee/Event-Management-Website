@@ -10,14 +10,16 @@ export default function Header() {
   const [scrollDirection, setScrollDirection] = useState(null);
 
   const handleSignUpClick = () => {
-    navigate("/signup");
+    if (user) {
+      navigate("/createform");
+    } else {
+      navigate("/signup");
+    }
   };
 
   const handleLogInClick = () => {
     navigate("/login");
   };
-
-
 
   const searchClick = () => {
     if (searchBarClicked) {
@@ -102,11 +104,15 @@ export default function Header() {
             &nbsp;for you
           </h1>
           <div className="text-slate-500 lg:text-xl mt-4 lg:mt-6 text-center lg:text-left font-serif">
-           We specialize in organizing exquisite events, whether in-person, virtual, or hybrid mode,
-           with flawless execution and attention to detail for upto 500 people.
+            We specialize in organizing exquisite events, whether in-person,
+            virtual, or hybrid mode, with flawless execution and attention to
+            detail for upto 500 people.
           </div>
-          <div className=" flex justify-center items-center gap-4 lg:gap-0 flex-col xds:flex-row  w-full lg:w-[70%] mt-6 lg:mt-8 space-y-4 lg:space-y-0 lg:space-x-4 items-center lg:items-start">
-            <div className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]" style={{ color: "#ffffff" }}>
+          <div className=" flex justify-center gap-4 lg:gap-0 flex-col xds:flex-row  w-full lg:w-[70%] mt-6 lg:mt-8 space-y-4 lg:space-y-0 lg:space-x-4 items-center lg:items-start">
+            <div
+              className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]"
+              style={{ color: "#ffffff" }}
+            >
               <button
                 onClick={handleSignUpClick}
                 className="flex btn1 justify-center items-center h-full w-full  p-4 rounded-full "
@@ -114,7 +120,10 @@ export default function Header() {
                 Create Events
               </button>
             </div>
-            <div className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]" style={{ color: "#ffffff" }}>
+            <div
+              className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]"
+              style={{ color: "#ffffff" }}
+            >
               <button
                 onClick={handleLogInClick}
                 className="flex btn1 justify-center items-center h-full w-full p-4 rounded-full -mt-4 lg:mt-0"
@@ -140,7 +149,7 @@ export default function Header() {
             <input
               type="text"
               placeholder="Search for product reviews, FAQs and More..."
-              className="w-full h-full p-4 rounded-full font-serif text-sm sm:text-md text-zinc-700 font-mono focus:outline-none md:p-3 sm:p-3 xs:p-3 shadow-2xl border-2 border-black "
+              className="w-full h-full p-4 rounded-full text-sm sm:text-md text-zinc-700 font-mono focus:outline-none md:p-3 sm:p-3 xs:p-3 shadow-2xl border-2 border-black "
             />
             <button className="absolute right-[2px] top-1/2 transform -translate-y-1/2 bg-slate-900 rounded-full w-[4rem] h-[2.67rem]">
               <FontAwesomeIcon
@@ -152,6 +161,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+
     </>
   );
 }

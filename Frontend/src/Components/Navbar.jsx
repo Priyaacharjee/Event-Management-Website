@@ -11,6 +11,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Link as RouterLink } from 'react-router-dom'; 
 import { Link as ScrollLink } from 'react-scroll';
+import { findUser,logoutUser } from "../utils/utils";
+import Loader from "./loader";
 
 export default function Navbar({ menuItems }) {
   const navigate = useNavigate();
@@ -18,6 +20,8 @@ export default function Navbar({ menuItems }) {
   const [isClosing, setIsClosing] = useState(false);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [isClosingDropdown, setIsClosingDropdown] = useState(false);
+  const [loading,setLoading]=useState(false);
+
 
   const [searchBarClicked, setSearchBarClicked] = useState(false);
   const [isSearchDropdown, setIsSearchDropdown] = useState(false);
@@ -125,6 +129,30 @@ export default function Navbar({ menuItems }) {
     };
   }, [scrollDirection]);
 
+    const handelLogout = () => {
+    setLoading(true);
+    setTimeout(()=>{
+       logoutUser().then((response) => {
+        if (response !== "Logout successfully") {
+          alert(response);
+        }
+        findUser().then((response) => {
+          response ? setUser(response.username.split(" ")[0]) : setUser(null);
+        });
+      });
+      setLoading(false);
+    },3000)
+    
+  };
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    findUser().then((response) => {
+      setUser(response.username.split(" ")[0]);
+    });
+  }, []);
+
   return (
     <>
       <div className="w-full h-16">
@@ -213,7 +241,7 @@ export default function Navbar({ menuItems }) {
             </div> */}
 
             {/* User Section in Navbar */}
-            <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
+            {/* <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
               <div className=" w-full md:w-40 flex justify-center items-center space-x-4">
                     <FontAwesomeIcon icon={faUser} className="text-lg cursor-pointer" />
                     <span className="text-white font-bold hover:text-blue-100 hover:underline">User</span>
@@ -234,7 +262,50 @@ export default function Navbar({ menuItems }) {
                     />
                     )}
               </div>
-            </div> 
+            </div>  */}
+
+
+            {/* USER SECTION IN NAVBAR */}
+            {user ? (
+              <>
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className="text-lg cursor-pointer"
+                />
+                <span className="text-white font-bold hover:text-blue-100 hover:underline">
+                  {user}
+                </span>
+                {dropDownOpen ? (
+                  <FontAwesomeIcon
+                    icon={faCaretUp}
+                    className="cursor-pointer"
+                    style={{ color: "#ffffff" }}
+                    onClick={dropDown}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faCaretDown}
+                    style={{ color: "#ffffff" }}
+                    className="cursor-pointer"
+                    onClick={dropDown}
+                  />
+                )}
+              </>
+            ) : (
+              <>
+                {/* LOGIN Button */}
+                <div className=" flex items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 md:px-1 lg:pr-24 xl:px-2 2xl:px-1">
+                  <div className=" w-full flex justify-center items-center">
+                    <button
+                      onClick={handleLogInClick}
+                      className="flex btn1 justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-2 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl"
+                    >
+                      Log In
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
 
 
             {/* Hamburger Icon */}
@@ -285,7 +356,7 @@ export default function Navbar({ menuItems }) {
 
 
         {/* User Dropdown */}
-        {(dropDownOpen || isClosingDropdown) && (
+        {(dropDownOpen || isClosingDropdown) && user && (
             <div
             className={`border-4 fixed mt-4 sm:ml-8 top-14 left-[49%] 2xl:left-[87%] xl:left-[83%] lg:left-[75%] md:left-[71%] sm:left-[66%] flex-col justify-end flex text-white w-40 items-center h-[5.2rem] mr-[5%] sm:mr-[5%] md:mr-[3%] lg:mr-[5%] bg-slate-300 bg-opacity-[0.3] rounded-lg ${
                 isClosingDropdown ? "animate-slideUp" : "animate-slideBelow"
@@ -297,12 +368,35 @@ export default function Navbar({ menuItems }) {
              className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
                 My Account
             </div>
-            <div className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
+            <div 
+             onClick={handelLogout}
+            className="w-full text-center pt-2 pb-2 hover:cursor-pointer hover:text-red-300 hover:font-bold">
                 Log Out
             </div>
             </div>
         )}
       </div>
+      {loading && (
+        <>
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 999,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader />
+          </div>
+        </>
+      )
+      }
     </>
   );
 }

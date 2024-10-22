@@ -79,7 +79,7 @@ const Signup = () => {
     setSignupError("");
 
     if (validateForm()) {
-      setLoading(true); // Start loading
+      setLoading(true);
       setTimeout(async () => {
         try {
           const result = await signUp(
@@ -245,7 +245,7 @@ const Signup = () => {
               />
               <div className="ml-2">
                 <label className="block text-gray-600">
-                  I'm agree with the terms and privacy policy
+                  I agree with the terms and privacy policy
                 </label>
                 {errors.agreeToTerms && (
                   <p className="text-red-500 text-sm mt-1">
