@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { findUser, logoutUser } from "../utils/utils";
 import { Link } from "react-scroll";
+import Loader from "./loader";
 
 export default function Header({ menuItems }) {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export default function Header({ menuItems }) {
   const [searchBarClicked, setSearchBarClicked] = useState(false);
   const [isSearchDropdown, setIsSearchDropdown] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
+  const [loading,setLoading]=useState(false);
 
   const handleSignUpClick = () => {
     if (user) {
@@ -101,14 +103,19 @@ export default function Header({ menuItems }) {
   };
 
   const handelLogout = () => {
-    logoutUser().then((response) => {
-      if (response !== "Logout successfully") {
-        alert(response);
-      }
-      findUser().then((response) => {
-        response ? setUser(response.username.split(" ")[0]) : setUser(null);
+    setLoading(true);
+    setTimeout(()=>{
+       logoutUser().then((response) => {
+        if (response !== "Logout successfully") {
+          alert(response);
+        }
+        findUser().then((response) => {
+          response ? setUser(response.username.split(" ")[0]) : setUser(null);
+        });
       });
-    });
+      setLoading(false);
+    },3000)
+    
   };
 
   const [user, setUser] = useState(null);
@@ -182,7 +189,7 @@ export default function Header({ menuItems }) {
           </div>
 
           {/* User Section */}
-          <div className="w-[50%] sm:w-[35%] md:w-[35%] lg:w-2/5 xl:w-[25%] 2xl:w-[20%] flex justify-end items-center space-x-4">
+          <div className="w-[50%] sm:w-[35%] md:w-[35%] lg:w-2/5 xl:w-[25%] 2xl:w-[20%] flex justify-end items-center space-x-4 pr-9">
             {/* Search Button */}
             <div className="hidden lg:flex xl:w-[35%] lg:w-[20%] md:w-full justify-center">
               <FontAwesomeIcon
@@ -222,11 +229,11 @@ export default function Header({ menuItems }) {
             ) : (
               <>
                 {/* LOGIN Button */}
-                <div className=" flex items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
+                <div className=" flex items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 md:px-1 lg:pr-24 xl:px-2 2xl:px-1">
                   <div className=" w-full flex justify-center items-center">
                     <button
                       onClick={handleLogInClick}
-                      className="flex btn1 justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-2 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl "
+                      className="flex btn1 justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-2 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl"
                     >
                       Log In
                     </button>
@@ -386,6 +393,27 @@ export default function Header({ menuItems }) {
           </div>
         </div>
       </div>
+      {loading && (
+        <>
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 999,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Loader />
+          </div>
+        </>
+      )
+      }
     </>
   );
 }

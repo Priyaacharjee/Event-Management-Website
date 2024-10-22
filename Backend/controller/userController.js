@@ -187,7 +187,7 @@ module.exports.createEvent = async (req, res) => {
       registrationEndDate,
       isPaid,
       headcount,
-      payableAmount,
+      paidAmountPerPerson,
       eventType,
       isPublic,
       scannerImage,
@@ -229,7 +229,7 @@ module.exports.createEvent = async (req, res) => {
       platform,
       isPublic,
       isPaid,
-      payableAmount,
+      payableAmount:paidAmountPerPerson,
       bill,
       headcount,
       description,
@@ -320,6 +320,30 @@ module.exports.fetchLastCreatedEvent = async (req, res) => {
     }
   } catch (err) {
     console.log(err.message);
+    res.send(err.message);
+  }
+};
+
+// Event Registration
+module.exports.eventRegistration = async (req, res) => {
+  try {
+    const { eventId } = req.body;
+    const user = req.user;
+
+    await userModel.findOneAndUpdate(
+      { email: user.email },
+      { $push: { appliedEvents: eventId } }
+    );
+
+    const event = await eventModel.findOne({ _id: eventId });
+
+    await eventModel.findOneAndUpdate(
+      { _id: eventId },
+      { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
+    );
+
+    res.send("Registration successfull");
+  } catch (err) {
     res.send(err.message);
   }
 };

@@ -206,7 +206,7 @@ function HybridEvent() {
             </div>
 
             {/* User Section */}
-            <div className="w-[50%] sm:w-[35%] md:w-[35%] lg:w-2/5 xl:w-[25%] 2xl:w-[20%] flex justify-end items-center space-x-4">
+            <div className="w-[70%] sm:w-[35%] md:w-[35%] lg:w-2/5 xl:w-[25%] 2xl:w-[20%] flex justify-end items-center space-x-4 pr-9">
               {/* Search Button */}
               <div className="hidden lg:flex xl:w-[35%] lg:w-[20%] md:w-full justify-center">
                 <FontAwesomeIcon
@@ -246,11 +246,11 @@ function HybridEvent() {
               ) : (
                 <>
                   {/* LOGIN Button */}
-                  <div className=" flex mr-6 items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
+                  <div className=" flex mr-6 items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 md:px-1 lg:pr-24 xl:px-2 2xl:px-1">
                     <div className=" w-full flex justify-center items-center">
                       <button
                         onClick={handleLogInClick}
-                        className="flex btn1 justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-2 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl "
+                        className="flex btn1 justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-2 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl"
                       >
                         Log In
                       </button>
@@ -260,7 +260,7 @@ function HybridEvent() {
               )}
 
               {/* Hamburger Icon */}
-              <div className="block md:hidden fixed ">
+              <div className="block md:hidden fixed">
                 <FontAwesomeIcon
                   icon={hamburgerMenuClicked ? faXmark : faBars}
                   style={{ color: "#ffffff" }}
@@ -362,7 +362,7 @@ function HybridEvent() {
             </p>
             <button
               className="btn1 justify-center items-center p-4 rounded-md mt-7"
-              onClick={() => navigate("/CreateForm")}
+              onClick={() => navigate("/CreateForm/hybrid")}
             >
               Create Meeting
             </button>
