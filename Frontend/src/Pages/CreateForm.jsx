@@ -550,31 +550,6 @@ const CreateForm = () => {
                   <div
                     className="mt-2 ml-8 bg-indigo-600 text-white p-2 rounded-md hover:bg-green-600 cursor-pointer"
                     onClick={handlePayment}
-                    // onClick={() => {
-                    //   setFormData({
-                    //     ...formData,
-                    //     bill: payableAmount,
-                    //   });
-                    //   if (
-                    //     formData.eventDate <= formData.registrationEndDate ||
-                    //     formData.eventDate <= new Date() ||
-                    //     formData.registrationEndDate <= new Date()
-                    //   ) {
-                    //     alert(
-                    //       "Please provide a valid Event date & Last date of registration!"
-                    //     );
-                    //   } else if (
-                    //     formData.isPaid &&
-                    //     formData.paidAmountPerPerson <= 0
-                    //   ) {
-                    //     alert(
-                    //       "Please provide an amount to be paid by every participent!"
-                    //     );
-                    //   } else {
-                    //     setbillPaymentDone(true);
-                    //     alert(`${payableAmount}/- Payment successfull`);
-                    //   }
-                    // }}
                   >
                     Pay Now
                   </div>
