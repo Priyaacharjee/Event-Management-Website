@@ -130,14 +130,12 @@ const CompanyPage = () => {
     const currentDate = new Date();
     const eventDateObj = new Date(eventDate);
   
-    // If slotConfirmedDate is null, return false immediately
     if (!slotConfirmedDate) {
-        return false;  // Event cannot be complete without a confirmed slot
+        return false;  
     }
 
     const isSlotConfirmed = checkSlotConfirmation(createdDate, slotConfirmedDate);
     
-    // Event is complete only if slot was confirmed and the event date has passed
     return isSlotConfirmed && currentDate > eventDateObj;
 };
 
@@ -303,7 +301,6 @@ const CompanyPage = () => {
                           <FontAwesomeIcon icon={faCalendarAlt} className="mr-2 text-gray-500" />
                           <span className="text-gray-500 text-sm">{selectedEvent.createdDate}</span>
                         </div>
-                        {/* i dont want this line to be blue if "Slot not yet decided" that means   slotConfirmedDate: null  */}
                         <div
                           className={`w-1 ${selectedEvent.slotConfirmedDate ? (isSlotConfirmed || selectedEvent.completed ? 'bg-blue-600' : 'bg-gray-400') : 'bg-gray-400'} h-16`}
                           style={{ marginLeft: '0.35rem', marginRight: '1.5rem', marginTop: '-2.8rem' }}

@@ -18,8 +18,6 @@ const Registrationform = () => {
     Pay: false,
   });
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formdata.Pay && !paymentDone) {
@@ -180,8 +178,8 @@ const Registrationform = () => {
                   Register
                 </button>
               </div>
-            </form >
-          </div >
+            </form>
+          </div>
 
           {/* Right Part*/}
           < div className="hidden lg:block relative" >
@@ -206,8 +204,8 @@ const Registrationform = () => {
                 </video>
               </div>
             </div>
-          </div >
-        </div >
+          </div>
+        </div>
         {loading && (
           <>
             <div
@@ -229,7 +227,7 @@ const Registrationform = () => {
           </>
         )
         }
-      </div >
+      </div>
     </div>
   );
 };

@@ -20,6 +20,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { AiFillHome, AiOutlineAppstore, AiFillContacts } from "react-icons/ai";
 
+
 const footerMenuItems = [
   { href: "header", label: "Header", icon: AiFillHome },
   { href: "features", label: "Features", icon: AiOutlineAppstore },

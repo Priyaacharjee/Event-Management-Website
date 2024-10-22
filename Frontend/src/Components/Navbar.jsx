@@ -228,43 +228,6 @@ export default function Navbar({ menuItems }) {
               />
             </div>
 
-            {/* LOGIN Button  */}
-            {/* <div className="flex items-center justify-center px-[3px] sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
-              <div className=" w-full md:w-40 flex justify-center items-center">
-                <button
-                  onClick={handleLogInClick}
-                  className="flex btn1 justify-center items-center h-12 sm:h-10 md:h-12 lg:h-12 xl:h-12 w-full px-2 sm:px-5 md:px-6 lg:px-8 xl:px-10 rounded-lg font-bold text-sm sm:text-base md:text-lg lg:text-xl "
-                >
-                  Log In
-                </button>
-              </div>
-            </div> */}
-
-            {/* User Section in Navbar */}
-            {/* <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
-              <div className=" w-full md:w-40 flex justify-center items-center space-x-4">
-                    <FontAwesomeIcon icon={faUser} className="text-lg cursor-pointer" />
-                    <span className="text-white font-bold hover:text-blue-100 hover:underline">User</span>
-
-                    {dropDownOpen ? (
-                    <FontAwesomeIcon
-                        icon={faCaretUp}
-                        className="cursor-pointer"
-                        style={{ color: "#ffffff" }}
-                        onClick={dropDown}
-                    />
-                    ) : (
-                    <FontAwesomeIcon
-                        icon={faCaretDown}
-                        style={{ color: "#ffffff" }}
-                        className="cursor-pointer"
-                        onClick={dropDown}
-                    />
-                    )}
-              </div>
-            </div>  */}
-
-
             {/* USER SECTION IN NAVBAR */}
             {user ? (
               <>
