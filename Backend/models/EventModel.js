@@ -23,7 +23,9 @@ const eventSchema = new mongoose.Schema({
 
   tillNowTotalRegistration: { type: Number, default: 0 },
   lastDateOfRegistration: { type: Date },
-  
+
+  interested: { type: Number, default: 0 },
+
   posterImage: {
     public_id: {
       type: String,
