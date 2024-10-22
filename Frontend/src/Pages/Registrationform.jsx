@@ -144,7 +144,7 @@ const Registrationform = () => {
               </div>
 
               {/*Payment */}
-              {!formdata.Pay && (
+              {formdata.Pay && (
                 <div className="w-[90%] flex justify-center items-center flex-col">
                   <button
                     className="mt-2 ml-8 bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
