@@ -229,7 +229,7 @@ module.exports.createEvent = async (req, res) => {
       platform,
       isPublic,
       isPaid,
-      payableAmount:paidAmountPerPerson,
+      payableAmount: paidAmountPerPerson,
       bill,
       headcount,
       description,
@@ -343,6 +343,23 @@ module.exports.eventRegistration = async (req, res) => {
     );
 
     res.send("Registration successfull");
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+// Check a User is Registered in Event or Not
+module.exports.checkUserIsRegisteredInEventOrNot = async (req, res) => {
+  try {
+    const { eventId } = req.body;
+    const user = req.user;
+    const appliedEvents = user.appliedEvents;
+
+    if (appliedEvents.includes(eventId)) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
   } catch (err) {
     res.send(err.message);
   }
