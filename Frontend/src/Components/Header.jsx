@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { findUser } from "../utils/utils";
 
 export default function Header() {
   const navigate = useNavigate();
   const [searchBarClicked, setSearchBarClicked] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    findUser().then((response) => {
+      setUser(response.username.split(" ")[0]);
+    });
+  }, []);
 
   const handleSignUpClick = () => {
     if (user) {
@@ -161,7 +170,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-
     </>
   );
 }

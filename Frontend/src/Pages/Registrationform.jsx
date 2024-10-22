@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const Registrationform = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
+  
   const [paymentDone, setpaymentDone] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +30,7 @@ const Registrationform = () => {
           setLoading(false);
           alert(response);
           if (response === "Registration successfull") {
-            navigate(`/eventpage/${eventId}}`);
+            navigate(`/eventpage/${eventId}`);
           }
         });
       }, 3000);
