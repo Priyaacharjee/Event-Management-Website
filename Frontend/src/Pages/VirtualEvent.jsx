@@ -32,6 +32,7 @@ function VirtualEvent() {
 
   const navigate = useNavigate();
   const [virtualEvents, setvirtualEvents] = useState([]);
+  const [virtualEventsCopy, setvirtualEventsCopy] = useState([]);
 
   useEffect(() => {
     fetchVirtualEvents().then((events) => {
@@ -49,6 +50,9 @@ function VirtualEvent() {
         })
       );
     });
+    if (virtualEvents.length > 0) {
+      setvirtualEventsCopy(virtualEvents);
+    }
   }, []);
 
   const [hamburgerMenuClicked, setHamburgerMenuClicked] = useState(false);
@@ -106,9 +110,17 @@ function VirtualEvent() {
     setSearchBarClicked(false);
   };
 
+  const [searchTopic, setsearchTopic] = useState();
+
   function handleEnter(e) {
     if (e.keyCode == 13) {
-      alert("search clicked!");
+      setvirtualEvents(
+        virtualEventsCopy.filter((event) => {
+          return event.eventName
+            .toLowerCase()
+            .includes(searchTopic.toLowerCase());
+        })
+      );
     }
   }
 
@@ -174,6 +186,9 @@ function VirtualEvent() {
                 placeholder="Search here for product reviews, FAQs and More..."
                 name="text"
                 type="text"
+                onChange={(e) => {
+                  setsearchTopic(e.target.value);
+                }}
                 onKeyDown={handleEnter}
               />
             </div>
