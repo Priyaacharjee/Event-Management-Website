@@ -116,7 +116,6 @@ const CreateForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       if (!billPaymentDone) {
         alert("Please complete your payment to create an event!");
