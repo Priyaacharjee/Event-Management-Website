@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "../Components/Slider";
+import Navabar from "../Components/Navbar";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Company_card from "../Components/Company_card";
@@ -57,8 +58,12 @@ export default function Home() {
 
   return (
     <>
-      {/*HEADER ------------------------------------------------------------- */}
-      <Header menuItems={headerMenuItems} />
+
+      {/*NAVBAR------------------------------------------------------------- */}
+      <Navabar menuItems={headerMenuItems} />
+
+      {/*HERO PANEL ------------------------------------------------------------- */}
+      <Header  />
 
       {/*EVENT TYPES --------------------------------------------------------- */}
       <div

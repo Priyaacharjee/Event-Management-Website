@@ -101,7 +101,6 @@ export const findUser = async () => {
 
 // Create Event
 export const createEvent = async (formData) => {
-  console.log(formData);
   try {
     const response = await axios.post(
       "http://localhost:8000/users/createevent",
@@ -190,6 +189,22 @@ export const eventRegistration = async (eventId) => {
   try {
     let response = await axios.post(
       "http://localhost:8000/users/eventregistration",
+      { eventId },
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Check a User is Registered in Event or Not
+export const checkUserIsRegisteredInEventOrNot = async (eventId) => {
+  try {
+    let response = await axios.post(
+      "http://localhost:8000/users/checkuserisregisteredineventornot",
       { eventId },
       {
         withCredentials: true,

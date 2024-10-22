@@ -37,7 +37,7 @@ const CreateForm = () => {
       alert("Please Upload an Scanner Image");
       return;
     }
-    const maxSizeInKB = 70;
+    const maxSizeInKB = 50;
     if (file.size > maxSizeInKB * 1024) {
       alert(`File size should be less than ${maxSizeInKB} KB.`);
       return;
@@ -53,7 +53,7 @@ const CreateForm = () => {
       alert("Please Upload an Poster Image");
       return;
     }
-    const maxSizeInKB = 70;
+    const maxSizeInKB = 50;
     if (file.size > maxSizeInKB * 1024) {
       alert(`File size should be less than ${maxSizeInKB} KB.`);
       return;
@@ -119,6 +119,14 @@ const CreateForm = () => {
     try {
       if (!billPaymentDone) {
         alert("Please complete your payment to create an event!");
+      } else if (
+        formData.eventDate <= formData.registrationEndDate ||
+        formData.eventDate <= new Date() ||
+        formData.registrationEndDate <= new Date()
+      ) {
+        alert("Please provide a valid Event date & Last date of registration!");
+      } else if (formData.isPaid && formData.paidAmountPerPerson <= 0) {
+        alert("Please provide an amount to be paid by every participent!");
       } else {
         setLoading(true);
         const result = await createEvent(formData);
@@ -214,8 +222,8 @@ const CreateForm = () => {
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   disabled={
                     eventType === "in_person" ||
-                      eventType === "virtual" ||
-                      eventType === "hybrid"
+                    eventType === "virtual" ||
+                    eventType === "hybrid"
                       ? true
                       : false
                   }
@@ -236,43 +244,43 @@ const CreateForm = () => {
               {/* Conditional Field Based on Event Type */}
               {(formData.eventType === "in_person" ||
                 eventType === "in_person") && (
-                  <div className="bg-indigo-200 p-6 rounded-xl">
-                    <label className="block text-sm mt-8 font-medium text-gray-700">
-                      Preferable City Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="cityName"
-                      value={formData.cityName}
-                      onChange={handleInputChange}
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                      placeholder="Enter preferable city"
-                    />
-                  </div>
-                )}
+                <div className="bg-indigo-200 p-6 rounded-xl">
+                  <label className="block text-sm mt-8 font-medium text-gray-700">
+                    Preferable City Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="cityName"
+                    value={formData.cityName}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    placeholder="Enter preferable city"
+                  />
+                </div>
+              )}
 
               {(eventType === "virtual" ||
                 formData.eventType === "virtual") && (
-                  <div className="bg-indigo-200 p-6 rounded-xl">
-                    <label className="block text-sm mt-8 font-medium text-gray-700">
-                      Preferable Online Meeting Platform{" "}
-                      <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                      name="platform"
-                      value={formData.platform}
-                      onChange={handleInputChange}
-                    >
-                      <option value="" disabled selected>
-                        Select preferable platform
-                      </option>
-                      <option value="zoom">Zoom</option>
-                      <option value="gmeet">Google Meet</option>
-                      <option value="skype">Skype</option>
-                    </select>
-                  </div>
-                )}
+                <div className="bg-indigo-200 p-6 rounded-xl">
+                  <label className="block text-sm mt-8 font-medium text-gray-700">
+                    Preferable Online Meeting Platform{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    name="platform"
+                    value={formData.platform}
+                    onChange={handleInputChange}
+                  >
+                    <option value="" disabled selected>
+                      Select preferable platform
+                    </option>
+                    <option value="zoom">Zoom</option>
+                    <option value="gmeet">Google Meet</option>
+                    <option value="skype">Skype</option>
+                  </select>
+                </div>
+              )}
 
               {(eventType === "hybrid" || formData.eventType === "hybrid") && (
                 <>
@@ -430,7 +438,10 @@ const CreateForm = () => {
                       if (eventType) {
                         calculatePayableAmount(e.target.value, eventType);
                       } else {
-                        calculatePayableAmount(e.target.value, formData.eventType);
+                        calculatePayableAmount(
+                          e.target.value,
+                          formData.eventType
+                        );
                       }
                     }
                   }}
@@ -587,8 +598,7 @@ const CreateForm = () => {
             <div className="loader"></div>
           </div>
         </>
-      )
-      }
+      )}
     </div>
   );
 };

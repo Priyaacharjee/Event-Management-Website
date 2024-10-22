@@ -129,7 +129,15 @@ module.exports.updatePasswordRequest = async (req, res) => {
 module.exports.updatePassword = async (req, res) => {
   try {
     let { email, password } = req.body;
-    let user = userModel.updateOne({ email }, { $set: { password } });
+
+    const salt = await bcrypt.genSalt(12);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    let user = await userModel.updateOne(
+      { email: email.email },
+      { $set: { password: hashedPassword } }
+    );
+
     if (user) {
       res.send("Password Updated Successfully");
     }
@@ -187,7 +195,7 @@ module.exports.createEvent = async (req, res) => {
       registrationEndDate,
       isPaid,
       headcount,
-      payableAmount,
+      paidAmountPerPerson,
       eventType,
       isPublic,
       scannerImage,
@@ -229,7 +237,7 @@ module.exports.createEvent = async (req, res) => {
       platform,
       isPublic,
       isPaid,
-      payableAmount,
+      payableAmount: paidAmountPerPerson,
       bill,
       headcount,
       description,
@@ -343,6 +351,23 @@ module.exports.eventRegistration = async (req, res) => {
     );
 
     res.send("Registration successfull");
+  } catch (err) {
+    res.send(err.message);
+  }
+};
+
+// Check a User is Registered in Event or Not
+module.exports.checkUserIsRegisteredInEventOrNot = async (req, res) => {
+  try {
+    const { eventId } = req.body;
+    const user = req.user;
+    const appliedEvents = user.appliedEvents;
+
+    if (appliedEvents.includes(eventId)) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
   } catch (err) {
     res.send(err.message);
   }
