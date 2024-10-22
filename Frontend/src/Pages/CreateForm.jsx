@@ -89,7 +89,6 @@ const CreateForm = () => {
     const { name, value } = event.target;
     if (value) {
       setFormData({ ...formData, [name]: value });
-      alert(event.target.value)
       calculatePayableAmount(formData.headcount, value);
     } else {
       setFormData({ ...formData, [name]: eventType });
@@ -493,7 +492,6 @@ const CreateForm = () => {
               </div>
 
               {/* Last Date of Registration*/}
-              {/* {isPublic && ( */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Last Date of Registration{" "}
