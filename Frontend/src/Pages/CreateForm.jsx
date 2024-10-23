@@ -146,11 +146,11 @@ const CreateForm = () => {
         setTimeout(async () => {
           setLoading(false);
           alert(result);
-          if (formData.eventType === "virtualevent") {
-            navigate("/virtual");
+          if (formData.eventType === "virtual") {
+            navigate("/virtualevent");
           }
-          if (formData.eventType === "hybridevent") {
-            navigate("/hybrid");
+          if (formData.eventType === "hybrid") {
+            navigate("/hybridevent");
           }
           if (formData.eventType === "in_person") {
             navigate("/inpersonevent");
