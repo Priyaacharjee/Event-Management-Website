@@ -227,30 +227,29 @@ export default function Navbar({ menuItems }) {
             {/* USER SECTION IN NAVBAR */}
             {user ? (
               <>
-              <div className="space-x-4">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className="text-lg cursor-pointer"
-                />
-                <span className="text-white font-bold hover:text-blue-100 hover:underline">
-                  {user}
-                </span>
-                {dropDownOpen ? (
-                  <FontAwesomeIcon
-                    icon={faCaretUp}
-                    className="cursor-pointer"
-                    style={{ color: "#ffffff" }}
-                    onClick={dropDown}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faCaretDown}
-                    style={{ color: "#ffffff" }}
-                    className="cursor-pointer"
-                    onClick={dropDown}
-                  />
-                )}
-                </div>
+            {/* User Section in Navbar */}
+            <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
+              <div className=" w-full md:w-40 flex justify-center items-center space-x-4">
+                    <FontAwesomeIcon icon={faUser} className="text-lg cursor-pointer" />
+                    <span className="text-white font-bold hover:text-blue-100 hover:underline">{user}</span>
+
+                    {dropDownOpen ? (
+                    <FontAwesomeIcon
+                        icon={faCaretUp}
+                        className="cursor-pointer"
+                        style={{ color: "#ffffff" }}
+                        onClick={dropDown}
+                    />
+                    ) : (
+                    <FontAwesomeIcon
+                        icon={faCaretDown}
+                        style={{ color: "#ffffff" }}
+                        className="cursor-pointer"
+                        onClick={dropDown}
+                    />
+                    )}
+              </div>
+            </div> 
               </>
             ) : (
               <>
