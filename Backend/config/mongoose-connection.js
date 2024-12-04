@@ -6,7 +6,7 @@ const mongoUri = process.env.MONGODB_URI;
 mongoose
   .connect(`${mongoUri}`, { dbName: "event_management" })
   .then(() => {
-    console.log("Server is running");
+    console.log("Db Connected");
   })
   .catch((err) => {
     console.log(err.message);

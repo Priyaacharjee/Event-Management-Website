@@ -13,6 +13,7 @@ import {
   faMapMarkerAlt,
   faPlus,
   faTowerBroadcast,
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { findUser } from "../utils/utils";
@@ -369,6 +370,7 @@ const CompanyPage = () => {
                       {event.eventType === "virtual" && <span>Virtual</span>}
                       {event.eventType === "hybrid" && <span>Hybrid</span>}
                     </div>
+                    
                   </div>
 
                   <div className="mt-3 flex justify-center items-center space-x-2 xds:space-x-8 sm:space-x-12 md:space-x-6 lg:space-x-8">
@@ -379,6 +381,14 @@ const CompanyPage = () => {
                         className="mr-2 text-indigo-800"
                       />
                       <span>{event.isPublic ? "Public" : "Private"}</span>
+                    </div>
+
+                    <div className="flex items-center text-xs xds:text-md sm:text-lg md:text-xs lg:text-sm font-bold text-white">
+                      <FontAwesomeIcon
+                        icon={faUsers}
+                        className="mr-2 text-indigo-800"
+                      />
+                      <span>{event.tillNowTotalRegistration}</span>
                     </div>
                   </div>
                   <div className="flex gap-10">
