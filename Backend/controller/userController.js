@@ -4,6 +4,10 @@ const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
 require("dotenv").config();
+const NodeCache = require("node-cache");
+const nodemailer = require("nodemailer");
+
+const nodeCache = new NodeCache();
 
 // Register User
 module.exports.signUp = async (req, res) => {
@@ -55,7 +59,7 @@ module.exports.loginUser = async (req, res) => {
         let user = await userModel.findOne({ email });
 
         if (user) {
-          bcrypt.compare(password, user.password, (err, result) => {
+          bcrypt.compare(password, user.password, async (err, result) => {
             if (result) {
               let token = generateToken(user);
               res.cookie("token", token, {
@@ -64,6 +68,12 @@ module.exports.loginUser = async (req, res) => {
                 sameSite: "Lax",
                 path: "/",
               });
+
+              user = await user.populate({
+                path: "createdEvents appliedEvents",
+              });
+              nodeCache.set("user", JSON.stringify(user));
+
               res.send("Login successfully");
             } else {
               res.send("Wrong Password");
@@ -99,13 +109,17 @@ module.exports.logoutUser = async (req, res) => {
 // Get Single User
 module.exports.getUser = async (req, res) => {
   try {
-    let user = req.user;
+    if (nodeCache.has("user")) {
+      res.send(JSON.parse(nodeCache.get("user")));
+    } else {
+      let user = req.user;
 
-    await user.populate({
-      path: "createdEvents appliedEvents",
-    });
+      await user.populate({
+        path: "createdEvents appliedEvents",
+      });
 
-    res.send(user);
+      res.send(user);
+    }
   } catch (err) {
     console.log(err.message);
     res.send("Internal Server Error");
@@ -338,19 +352,61 @@ module.exports.eventRegistration = async (req, res) => {
     const { eventId } = req.body;
     const user = req.user;
 
-    await userModel.findOneAndUpdate(
-      { email: user.email },
-      { $push: { appliedEvents: eventId } }
-    );
+    const testAccount = await nodemailer.createTestAccount();
 
-    const event = await eventModel.findOne({ _id: eventId });
+    const transporter = nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      auth: {
+        user: "jena.upton36@ethereal.email",
+        pass: "MpDyCsGCV2McPFjwPm",
+      },
+    });
 
-    await eventModel.findOneAndUpdate(
-      { _id: eventId },
-      { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
-    );
+    let info = await transporter.sendMail({
+      from: '"Eventek" <eventek@gmail.com>',
+      to: user.email,
+      subject: "Registration successfull",
+      text: "Your registration is accepted",
+      html: "<b>submitted</b>",
+    });
 
-    res.send("Registration successfull");
+    const auth = nodemailer.createTransport({
+      service: "gmail",
+      secure: true,
+      port: 465,
+      auth: {
+        user: "keya.tarafdar2003@gmail.com",
+        pass: "your_password",
+      },
+    });
+
+    const receiver = {
+      from: "tarafdar.keya2003@gmail.com",
+      to: user.email,
+      subject: "Node Js Mail Testing!",
+      text: "Hello this is a text mail!",
+    };
+
+    auth.sendMail(receiver, (error, emailResponse) => {
+      if (error) throw error;
+      console.log("success!");
+      res.send("mail sent");
+    });
+
+    // await userModel.findOneAndUpdate(
+    //   { email: user.email },
+    //   { $push: { appliedEvents: eventId } }
+    // );
+
+    // const event = await eventModel.findOne({ _id: eventId });
+
+    // await eventModel.findOneAndUpdate(
+    //   { _id: eventId },
+    //   { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
+    // );
+
+    // res.send("Registration successfull");
   } catch (err) {
     res.send(err.message);
   }
