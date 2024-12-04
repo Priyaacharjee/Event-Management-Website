@@ -352,61 +352,39 @@ module.exports.eventRegistration = async (req, res) => {
     const { eventId } = req.body;
     const user = req.user;
 
+    const event = await eventModel.findOne({ _id: eventId });
+    const formattedDate = new Date(event.date).toLocaleDateString('en-GB');
+
     const testAccount = await nodemailer.createTestAccount();
 
     const transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: "jena.upton36@ethereal.email",
-        pass: "MpDyCsGCV2McPFjwPm",
+        user: 'twila.wolff9@ethereal.email',
+        pass: 'JbyeNkTZ3Bv9bkJSd1'
       },
     });
 
     let info = await transporter.sendMail({
-      from: '"Eventek" <eventek@gmail.com>',
+      from: '"Keya Tarafdar" <keya@gmail.com>',
       to: user.email,
       subject: "Registration successfull",
-      text: "Your registration is accepted",
-      html: "<b>submitted</b>",
+      text: `Your registration is successfull in the event ${event.eventName}`,
+      html: `Your registration is successfull in the event <b>${event.eventName}</b>.<br> Date: ${formattedDate} <br> Time: ${event.time}`,
     });
 
-    const auth = nodemailer.createTransport({
-      service: "gmail",
-      secure: true,
-      port: 465,
-      auth: {
-        user: "keya.tarafdar2003@gmail.com",
-        pass: "your_password",
-      },
-    });
+    await userModel.findOneAndUpdate(
+      { email: user.email },
+      { $push: { appliedEvents: eventId } }
+    );
 
-    const receiver = {
-      from: "tarafdar.keya2003@gmail.com",
-      to: user.email,
-      subject: "Node Js Mail Testing!",
-      text: "Hello this is a text mail!",
-    };
+    await eventModel.findOneAndUpdate(
+      { _id: eventId },
+      { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
+    );
 
-    auth.sendMail(receiver, (error, emailResponse) => {
-      if (error) throw error;
-      console.log("success!");
-      res.send("mail sent");
-    });
-
-    // await userModel.findOneAndUpdate(
-    //   { email: user.email },
-    //   { $push: { appliedEvents: eventId } }
-    // );
-
-    // const event = await eventModel.findOne({ _id: eventId });
-
-    // await eventModel.findOneAndUpdate(
-    //   { _id: eventId },
-    //   { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
-    // );
-
-    // res.send("Registration successfull");
+    res.send("Registration successfull");
   } catch (err) {
     res.send(err.message);
   }
