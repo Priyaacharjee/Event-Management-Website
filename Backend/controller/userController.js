@@ -370,8 +370,8 @@ module.exports.eventRegistration = async (req, res) => {
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: "twila.wolff9@ethereal.email",
-        pass: "JbyeNkTZ3Bv9bkJSd1",
+        user: 'grayce.buckridge@ethereal.email',
+        pass: 'Rtq5DANRTFayCJGA8d',
       },
     });
 
