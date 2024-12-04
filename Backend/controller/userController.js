@@ -353,7 +353,16 @@ module.exports.eventRegistration = async (req, res) => {
     const user = req.user;
 
     const event = await eventModel.findOne({ _id: eventId });
-    const formattedDate = new Date(event.date).toLocaleDateString('en-GB');
+    const formattedDate = new Date(event.date).toLocaleDateString("en-GB");
+
+    const timeParts = event.time.split(":"); 
+    let hours = parseInt(timeParts[0], 10);
+    const minutes = timeParts[1];
+    const period = hours < 12 ? "AM" : "PM";
+
+    hours = hours % 12 || 12; 
+
+    const formattedTime = `${hours}:${minutes} ${period}`;
 
     const testAccount = await nodemailer.createTestAccount();
 
@@ -361,8 +370,8 @@ module.exports.eventRegistration = async (req, res) => {
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: 'twila.wolff9@ethereal.email',
-        pass: 'JbyeNkTZ3Bv9bkJSd1'
+        user: "twila.wolff9@ethereal.email",
+        pass: "JbyeNkTZ3Bv9bkJSd1",
       },
     });
 
@@ -371,7 +380,7 @@ module.exports.eventRegistration = async (req, res) => {
       to: user.email,
       subject: "Registration successfull",
       text: `Your registration is successfull in the event ${event.eventName}`,
-      html: `Your registration is successfull in the event <b>${event.eventName}</b>.<br> Date: ${formattedDate} <br> Time: ${event.time}`,
+      html: `Your registration is successfull in the event <b>${event.eventName}</b>.<br> <b>Date:</b> ${formattedDate} <br> <b>Time:</b> ${formattedTime}`,
     });
 
     await userModel.findOneAndUpdate(
