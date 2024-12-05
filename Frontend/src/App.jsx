@@ -41,7 +41,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgetpassword" element={<Forgetpassword />} />
-            <Route path="/resetpassword" element={<Resetpassword />} />
+            {/* <Route path="/resetpassword" element={<Resetpassword />} /> */}
+            <Route path="/resetpassword/:venueId" element={<Resetpassword />} />
             <Route path="/virtualevent" element={<VirtualEvent />} />
             <Route path="/inpersonevent" element={<InPersonEvent />} />
             <Route path="/hybridevent" element={<HybridEvent />} />

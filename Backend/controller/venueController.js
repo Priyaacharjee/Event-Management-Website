@@ -51,8 +51,7 @@ module.exports.loginVenue = async (req, res) => {
     let token = req.cookies.token;
     if (token) {
       res.send("You are already logged in.");
-    } 
-    else {
+    } else {
       let { email, password } = req.body;
 
       if (email && password) {
@@ -111,6 +110,28 @@ module.exports.logoutVenue = async (req, res) => {
     });
     res.send("Logout successfully");
   } catch (err) {
+    res.send("Internal Server Error");
+  }
+};
+
+// Update Password
+module.exports.updatePassword = async (req, res) => {
+  try {
+    let { venueId, password } = req.body;
+
+    const salt = await bcrypt.genSalt(12);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    let venue = await venueModel.updateOne(
+      { _id: venueId },
+      { $set: { password: hashedPassword } }
+    );
+
+    if (venue) {
+      res.send("Password Updated Successfully");
+    }
+  } catch (err) {
+    console.log(err.message);
     res.send("Internal Server Error");
   }
 };

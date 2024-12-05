@@ -89,6 +89,17 @@ module.exports.logoutAdmin = async (req, res) => {
   }
 };
 
+// Fetch Admin
+module.exports.fetchAdmin = async (req, res) => {
+  try {
+    const admin = req.admin;
+    await admin.populate({ path: "appliedVenues" });
+    res.send(admin);
+  } catch (err) {
+    res.send("Internal Server Error");
+  }
+};
+
 // Accept a Venue
 module.exports.acceptVenue = async (req, res) => {
   try {
@@ -105,8 +116,8 @@ module.exports.acceptVenue = async (req, res) => {
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: "mariam.kessler18@ethereal.email",
-        pass: "cuVNrpdAgQTBr35VwP",
+        user: process.env.user,
+        pass: process.env.pass,
       },
     });
 
@@ -114,7 +125,7 @@ module.exports.acceptVenue = async (req, res) => {
       from: '"Eventek" <eventek@gmail.com>',
       to: venue.email,
       subject: "Application accepted",
-      html: `Your application is accepted by us. Please complete your profile 100%. Otherwise it will not be shown to the event creators.<br> Your login credentials are:<br> <b>Email:</b> ${venue.email} <br> <b>Password:</b> ${venue.temporaryPassword} <br> Please change your password first.`,
+      html: `Your application is accepted by us. Please complete your profile 100%. Otherwise it will not be shown to the event creators.<br><br> Your login credentials are:<br> <b>Email:</b> ${venue.email} <br> <b>Password:</b> ${venue.temporaryPassword} <br> Please change your password first.<br><br> <a href=http://localhost:5173/resetpassword/${venueId} target="_blank"><button style="background-color: blue; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 8px; cursor: pointer;">Change Password</button></a>`,
     });
 
     res.send("Venue is added");
@@ -136,8 +147,8 @@ module.exports.rejectVenue = async (req, res) => {
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: "mariam.kessler18@ethereal.email",
-        pass: "cuVNrpdAgQTBr35VwP",
+        user: process.env.user,
+        pass: process.env.pass,
       },
     });
 

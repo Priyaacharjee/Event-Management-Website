@@ -374,8 +374,8 @@ module.exports.eventRegistration = async (req, res) => {
         host: "smtp.ethereal.email",
         port: 587,
         auth: {
-          user: "wyatt.gaylord@ethereal.email",
-          pass: "vKYVuPYWWpBwUzYGAk",
+          user: process.env.user,
+          pass: process.env.pass,
         },
       });
 

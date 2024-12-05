@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { changePassword } from "../utils/utils";
 
 const Resetpassword = (email) => {
   const navigate = useNavigate();
+  const { venueId } = useParams();
+
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",

@@ -8,6 +8,7 @@ const {
   logoutAdmin,
   acceptVenue,
   rejectVenue,
+  fetchAdmin,
 } = require("../controller/adminController");
 
 router.get("/", (req, res) => {
@@ -22,6 +23,9 @@ router.post("/login", loginAdmin);
 
 // ADMIN LOGOUT
 router.get("/logout", adminIsLoggedIn, logoutAdmin);
+
+//  FETCH ADMIN
+router.get("/fetchadmin", adminIsLoggedIn, fetchAdmin);
 
 // ACCEPT A VENUE
 router.post("/acceptvenue", adminIsLoggedIn, acceptVenue);
