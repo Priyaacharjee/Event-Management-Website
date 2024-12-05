@@ -353,47 +353,57 @@ module.exports.eventRegistration = async (req, res) => {
     const user = req.user;
 
     const event = await eventModel.findOne({ _id: eventId });
-    const formattedDate = new Date(event.date).toLocaleDateString("en-GB");
 
-    const timeParts = event.time.split(":"); 
-    let hours = parseInt(timeParts[0], 10);
-    const minutes = timeParts[1];
-    const period = hours < 12 ? "AM" : "PM";
+    if (event.registeredUser && event.registeredUser.includes(user._id)) {
+      res.send("User already registered in the event");
+    } else {
+      const formattedDate = new Date(event.date).toLocaleDateString("en-GB");
 
-    hours = hours % 12 || 12; 
+      const timeParts = event.time.split(":");
+      let hours = parseInt(timeParts[0], 10);
+      const minutes = timeParts[1];
+      const period = hours < 12 ? "AM" : "PM";
 
-    const formattedTime = `${hours}:${minutes} ${period}`;
+      hours = hours % 12 || 12;
 
-    const testAccount = await nodemailer.createTestAccount();
+      const formattedTime = `${hours}:${minutes} ${period}`;
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      auth: {
-        user: 'grayce.buckridge@ethereal.email',
-        pass: 'Rtq5DANRTFayCJGA8d',
-      },
-    });
+      const testAccount = await nodemailer.createTestAccount();
 
-    let info = await transporter.sendMail({
-      from: '"Keya Tarafdar" <keya@gmail.com>',
-      to: user.email,
-      subject: "Registration successfull",
-      text: `Your registration is successfull in the event ${event.eventName}`,
-      html: `Your registration is successfull in the event <b>${event.eventName}</b>.<br> <b>Date:</b> ${formattedDate} <br> <b>Time:</b> ${formattedTime}`,
-    });
+      const transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        auth: {
+          user: process.env.user,
+          pass: process.env.pass,
+        },
+      });
 
-    await userModel.findOneAndUpdate(
-      { email: user.email },
-      { $push: { appliedEvents: eventId } }
-    );
+      let info = await transporter.sendMail({
+        from: '"Eventek" <eventek@gmail.com>',
+        to: user.email,
+        subject: "Registration successfull",
+        text: `Your registration is successfull in the event ${event.eventName}`,
+        html: `Your registration is successfull in the event <b>${event.eventName}</b>.<br> <b>Date:</b> ${formattedDate} <br> <b>Time:</b> ${formattedTime}`,
+      });
 
-    await eventModel.findOneAndUpdate(
-      { _id: eventId },
-      { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
-    );
+      await userModel.findOneAndUpdate(
+        { email: user.email },
+        { $push: { appliedEvents: eventId } }
+      );
 
-    res.send("Registration successfull");
+      await eventModel.findOneAndUpdate(
+        { _id: eventId },
+        {
+          $push: { registeredUser: user._id },
+          $set: {
+            tillNowTotalRegistration: 1,
+          },
+        }
+      );
+
+      res.send("Registration successfull");
+    }
   } catch (err) {
     res.send(err.message);
   }

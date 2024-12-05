@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   findUser,
   fetchSingleEvent,
@@ -10,7 +9,6 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { AiFillHome, AiOutlineAppstore, AiFillContacts } from "react-icons/ai";
 import ImageLoader from "../Components/ImageLoader1";
-
 
 const footerMenuItems = [
   { href: "header", label: "Header", icon: AiFillHome },

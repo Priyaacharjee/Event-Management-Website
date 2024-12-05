@@ -532,6 +532,30 @@ const CreateForm = () => {
                   </div>
                 )}
 
+
+              {(eventType === "virtual" ||
+                formData.eventType === "virtual") && (
+                  <div className="bg-indigo-200 p-6 rounded-xl">
+                    <label className="block text-sm mt-8 font-medium text-gray-700">
+                      Preferable Online Meeting Platform{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                      name="platform"
+                      value={formData.platform}
+                      onChange={handleInputChange}
+                    >
+                      <option value="" disabled selected>
+                        Select preferable platform
+                      </option>
+                      <option value="zoom">Zoom</option>
+                      <option value="gmeet">Google Meet</option>
+                      <option value="skype">Skype</option>
+                    </select>
+                  </div>
+                )}
+
               {(eventType === "hybrid" || formData.eventType === "hybrid") && (
                 <>
                   <div className="bg-indigo-200 p-6 rounded-xl">
