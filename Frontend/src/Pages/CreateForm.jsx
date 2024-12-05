@@ -10,18 +10,68 @@ const CreateForm = () => {
   const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [billPaymentDone, setbillPaymentDone] = useState(false);
 
+  const [venueDropdown, setVenueDropdown] = useState(false);
+  const [selectedVenue, setSelectedVenue] = useState("");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+
+  const [selectedVenues, setSelectedVenues] = useState({
+    primary: "",
+    secondary: "",
+    tertiary: "",
+  });
+
+  const [selectedTimeSlots, setSelectedTimeSlots] = useState({
+    primary: "",
+    secondary: "",
+    tertiary: "",
+  });
+
   const cities = [
-    { value: "", label: "Select preferred city", disabled: true },
     { value: "kolkata", label: "Kolkata" },
     { value: "bangalore", label: "Bangalore" },
     { value: "pune", label: "Pune" },
     { value: "hyderabad", label: "Hyderabad" },
   ];
 
+  const venues = [
+    { city: "kolkata", value: "venue1", label: "ITC Royal Bengal", timeSlots: ["10:00 AM", "02:00 PM", "06:00 PM"] },
+    { city: "kolkata", value: "venue2", label: "The Grand Oberoi", timeSlots: ["09:00 AM", "01:00 PM", "05:00 PM"] },
+    { city: "kolkata", value: "venue3", label: "JW Marriott", timeSlots: ["11:00 AM", "03:00 PM", "07:00 PM"] },
+    { city: "bangalore", value: "venue4", label: "The Leela Palace", timeSlots: ["10:00 AM", "02:00 PM", "06:00 PM"] },
+    { city: "bangalore", value: "venue5", label: "Taj West End", timeSlots: ["09:00 AM", "01:00 PM", "05:00 PM"] },
+    { city: "pune", value: "venue6", label: "Conrad Pune", timeSlots: ["11:00 AM", "03:00 PM", "07:00 PM"] },
+    { city: "pune", value: "venue7", label: "Shantai Hotel", timeSlots: ["10:00 AM", "02:00 PM", "06:00 PM"] },
+    { city: "pune", value: "venue8", label: "Lemon Tree Hotel", timeSlots: ["09:00 AM", "01:00 PM", "05:00 PM"] },
+    { city: "hyderabad", value: "venue9", label: "Novotel Hyderabad", timeSlots: ["10:00 AM", "02:00 PM", "06:00 PM"] },
+    { city: "hyderabad", value: "venue10", label: "Amrutha Castle", timeSlots: ["09:00 AM", "01:00 PM", "05:00 PM"] },
 
+  ];
+
+
+  const handleVenueChange = (level, value) => {
+    setSelectedVenues((prev) => {
+      const updated = { ...prev, [level]: value };
+      // Reset the lower levels when a higher level changes
+      if (level === "primary") {
+        updated.secondary = "";
+        updated.tertiary = "";
+      } else if (level === "secondary") {
+        updated.tertiary = "";
+      }
+      return updated;
+    });
+    setSelectedTimeSlot("");
+  };
+
+  // Updated Time Slot Change Handler
+  const handleTimeSlotChange = (venueLevel, timeSlot) => {
+    setSelectedTimeSlots((prev) => ({
+      ...prev,
+      [venueLevel]: timeSlot,
+    }));
+  };
 
   const [formData, setFormData] = useState({
     eventName: "",
@@ -29,7 +79,7 @@ const CreateForm = () => {
     eventTime: "",
     eventType: "",
     speakerName: "",
-    cityName: "",
+    city: "",
     platform: "",
     description: "",
     registrationEndDate: "",
@@ -42,6 +92,13 @@ const CreateForm = () => {
     posterImage: null,
     scannerImage: null,
   });
+
+  // Filter venues based on the selected city
+  const filteredVenues = venues.filter((venue) => venue.city === formData.city);
+
+  // Exclude already selected venues
+  const getAvailableVenues = (excludeValues) =>
+    filteredVenues.filter((venue) => !excludeValues.includes(venue.value));
 
   const handleScannerImage = async (e) => {
     const file = e.target.files[0];
@@ -273,28 +330,207 @@ const CreateForm = () => {
                 </select>
               </div>
 
-              {/* Conditional Field Based on Event Type */}
+              {/* Conditional field based on event type */}
               {(formData.eventType === "in_person" || eventType === "in_person") && (
                 <div className="bg-indigo-200 p-6 rounded-xl">
-                  <label className="block text-sm mt-8 font-medium text-gray-700">
+                  {/* City Dropdown */}
+                  <label className="block text-sm font-medium text-gray-700">
                     Preferable City Name <span className="text-red-500">*</span>
                   </label>
                   <select
                     name="city"
                     id="city"
-                    onChange={(e) =>
-                      setFormData({ ...formData, city: e.target.value })
-                    }
+                    value={formData.city || ""}
+                    onChange={(e) => {
+                      setFormData({ ...formData, city: e.target.value });
+                      setVenueDropdown(true);
+                      setSelectedVenues({ primary: "", secondary: "", tertiary: "" });
+                    }}
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   >
+                    <option value="" disabled>
+                      Select City
+                    </option>
                     {cities.map((city, index) => (
-                      <option key={index} value={city.value} disabled={city.disabled || false}>
+                      <option key={index} value={city.value}>
                         {city.label}
                       </option>
                     ))}
                   </select>
+
+                  {/* Venue Dropdowns */}
+                  {venueDropdown && formData.city && (
+                    <>
+                      {/* Primary Venue */}
+                      <div className="mt-4">
+                        <label htmlFor="primaryVenue" className="block text-sm font-medium text-gray-700">
+                          Venue 1 <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          id="primaryVenue"
+                          value={selectedVenues.primary}
+                          onChange={(e) => handleVenueChange("primary", e.target.value)}
+                          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="" disabled>
+                            Select Venue 1
+                          </option>
+                          {getAvailableVenues([]).map((venue) => (
+                            <option key={venue.value} value={venue.value}>
+                              {venue.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Time Slot for Primary Venue */}
+                      {selectedVenues.primary && (
+                        <div className="mt-4">
+                          
+                          <p className="block text-sm font-medium text-gray-700">Select Preferred Time Slot</p>
+                          <div className="mt-2 space-y-2">
+                            {venues
+                              .find((venue) => venue.value === selectedVenues.primary)
+                              ?.timeSlots.map((timeSlot, index) => (
+                                <label key={index} className="flex items-center space-x-2">
+                                  <input
+                                    type="radio"
+                                    name="timeSlotPrimary"
+                                    value={timeSlot}
+                                    checked={selectedTimeSlots.primary === timeSlot}
+                                    onChange={(e) => handleTimeSlotChange("primary", e.target.value)}
+                                    className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                                  />
+                                  <span className="text-gray-700">{timeSlot}</span>
+                                </label>
+                              ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Secondary Venue */}
+                      {selectedVenues.primary && (
+                        <div className="mt-4">
+                          <label htmlFor="secondaryVenue" className="block text-sm font-medium text-gray-700">
+                            Venue 2 <span className="text-red-500">*</span>
+                          </label>
+                          <select
+                            id="secondaryVenue"
+                            value={selectedVenues.secondary}
+                            onChange={(e) => handleVenueChange("secondary", e.target.value)}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                          >
+                            <option value="" disabled>
+                              Select Venue 2
+                            </option>
+                            {getAvailableVenues([selectedVenues.primary]).map((venue) => (
+                              <option key={venue.value} value={venue.value}>
+                                {venue.label}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Time Slot for Secondary Venue */}
+                      {selectedVenues.secondary && (
+                        <div className="mt-4">
+                          <p className="block text-sm font-medium text-gray-700">Select Preferred Time Slot</p>
+                          <div className="mt-2 space-y-2">
+                            {venues
+                              .find((venue) => venue.value === selectedVenues.secondary)
+                              ?.timeSlots.map((timeSlot, index) => (
+                                <label key={index} className="flex items-center space-x-2">
+                                  <input
+                                    type="radio"
+                                    name="timeSlotSecondary"
+                                    value={timeSlot}
+                                    checked={selectedTimeSlots.secondary === timeSlot}
+                                    onChange={(e) => handleTimeSlotChange("secondary", e.target.value)}
+                                    className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                                  />
+                                  <span className="text-gray-700">{timeSlot}</span>
+                                </label>
+                              ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tertiary Venue */}
+                      {selectedVenues.secondary && (
+                        <div className="mt-4">
+                          <label htmlFor="tertiaryVenue" className="block text-sm font-medium text-gray-700">
+                            Venue 3
+                          </label>
+                          <select
+                            id="tertiaryVenue"
+                            value={selectedVenues.tertiary}
+                            onChange={(e) => handleVenueChange("tertiary", e.target.value)}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                          >
+                            <option value="" disabled>
+                              Select Venue 3
+                            </option>
+                            {getAvailableVenues([selectedVenues.primary, selectedVenues.secondary]).map((venue) => (
+                              <option key={venue.value} value={venue.value}>
+                                {venue.label}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Time Slot for Tertiary Venue */}
+                      {selectedVenues.tertiary && (
+                        <div className="mt-4">
+                          <p className="block text-sm font-medium text-gray-700">Select Preferred Time Slot</p>
+                          <div className="mt-2 space-y-2">
+                            {venues
+                              .find((venue) => venue.value === selectedVenues.tertiary)
+                              ?.timeSlots.map((timeSlot, index) => (
+                                <label key={index} className="flex items-center space-x-2">
+                                  <input
+                                    type="radio"
+                                    name="timeSlotTertiary"
+                                    value={timeSlot}
+                                    checked={selectedTimeSlots.tertiary === timeSlot}
+                                    onChange={(e) => handleTimeSlotChange("tertiary", e.target.value)}
+                                    className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                                  />
+                                  <span className="text-gray-700">{timeSlot}</span>
+                                </label>
+                              ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
                 </div>
               )}
+
+              {(eventType === "virtual" ||
+                formData.eventType === "virtual") && (
+                  <div className="bg-indigo-200 p-6 rounded-xl">
+                    <label className="block text-sm mt-8 font-medium text-gray-700">
+                      Preferable Online Meeting Platform{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                      name="platform"
+                      value={formData.platform}
+                      onChange={handleInputChange}
+                    >
+                      <option value="" disabled selected>
+                        Select preferable platform
+                      </option>
+                      <option value="zoom">Zoom</option>
+                      <option value="gmeet">Google Meet</option>
+                      <option value="skype">Skype</option>
+                    </select>
+                  </div>
+                )}
 
 
               {(eventType === "virtual" ||
@@ -324,36 +560,12 @@ const CreateForm = () => {
                 <>
                   <div className="bg-indigo-200 p-6 rounded-xl">
                     <div>
-                      {/* <label className="block text-sm mt-8 font-medium text-gray-700">
-                        Preferable City Name{" "}
-                        <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="cityName"
-                        value={formData.cityName}
-                        onChange={handleInputChange}
-                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                        placeholder="Enter preferable city"
-                      /> */}
-                      <label className="block text-sm mt-8 font-medium text-gray-700">
-                        Preferable City Name <span className="text-red-500">*</span>
-                      </label>
-                      <select name="" id="" className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
-                        <option value="" disabled selected>Select preffered city</option>
-                        <option value="kolkata">Kolkata</option>
-                        <option value="bangalore">Bangalore</option>
-                        <option value="pune">Pune</option>
-                        <option value="Hydrabad">Hydrabad</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm mt-8 font-medium text-gray-700">
+                      <label className="block text-sm mt-2 font-medium text-gray-700">
                         Preferable Online Meeting Platform{" "}
                         <span className="text-red-500">*</span>
                       </label>
                       <select
-                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                         name="platform"
                         value={formData.platform}
                         onChange={handleInputChange}
@@ -366,6 +578,179 @@ const CreateForm = () => {
                         <option value="skype">Skype</option>
                       </select>
                     </div>
+                    <div>
+                      <label className="block text-sm mt-8 font-medium text-gray-700">
+                        Preferable City Name <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        name="city"
+                        id="city"
+                        value={formData.city || ""}
+                        onChange={(e) => {
+                          setFormData({ ...formData, city: e.target.value });
+                          setVenueDropdown(true);
+                        }}
+                        className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                      >
+                        <option value="" disabled>
+                          Select City
+                        </option>
+                        {cities.map((city, index) => (
+                          <option key={index} value={city.value}>
+                            {city.label}
+                          </option>
+                        ))}
+                      </select>
+
+                      {/* Venue Dropdown */}
+                      {venueDropdown && formData.city && (
+                        <>
+                          {/* Primary Venue */}
+                          <div className="mt-4">
+                            <label htmlFor="primaryVenue" className="block text-sm font-medium text-gray-700">
+                               Venue 1 <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                              id="primaryVenue"
+                              value={selectedVenues.primary}
+                              onChange={(e) => handleVenueChange("primary", e.target.value)}
+                              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                            >
+                              <option value="" disabled>
+                                Select Venue 1
+                              </option>
+                              {getAvailableVenues([]).map((venue) => (
+                                <option key={venue.value} value={venue.value}>
+                                  {venue.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {/* Time Slot for Primary Venue */}
+                          {selectedVenues.primary && (
+                            <div className="mt-4">
+                             
+                              <p className="block text-sm font-medium text-gray-700">Select Preferred Time Slot</p>
+                              <div className="mt-2 space-y-2">
+                                {venues
+                                  .find((venue) => venue.value === selectedVenues.primary)
+                                  ?.timeSlots.map((timeSlot, index) => (
+                                    <label key={index} className="flex items-center space-x-2">
+                                      <input
+                                        type="radio"
+                                        name="timeSlotPrimary"
+                                        value={timeSlot}
+                                        checked={selectedTimeSlots.primary === timeSlot}
+                                        onChange={(e) => handleTimeSlotChange("primary", e.target.value)}
+                                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                                      />
+                                      <span className="text-gray-700">{timeSlot}</span>
+                                    </label>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Secondary Venue */}
+                          {selectedVenues.primary && (
+                            <div className="mt-4">
+                              <label htmlFor="secondaryVenue" className="block text-sm font-medium text-gray-700">
+                                 Venue 2<span className="text-red-500">*</span>
+                              </label>
+                              <select
+                                id="secondaryVenue"
+                                value={selectedVenues.secondary}
+                                onChange={(e) => handleVenueChange("secondary", e.target.value)}
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                              >
+                                <option value="" disabled>
+                                  Select Venue 2
+                                </option>
+                                {getAvailableVenues([selectedVenues.primary]).map((venue) => (
+                                  <option key={venue.value} value={venue.value}>
+                                    {venue.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          )}
+
+                          {/* Time Slot for Secondary Venue */}
+                          {selectedVenues.secondary && (
+                            <div className="mt-4">
+                              <p className="block text-sm font-medium text-gray-700">Select Preferred Time Slot</p>
+                              <div className="mt-2 space-y-2">
+                                {venues
+                                  .find((venue) => venue.value === selectedVenues.secondary)
+                                  ?.timeSlots.map((timeSlot, index) => (
+                                    <label key={index} className="flex items-center space-x-2">
+                                      <input
+                                        type="radio"
+                                        name="timeSlotSecondary"
+                                        value={timeSlot}
+                                        checked={selectedTimeSlots.secondary === timeSlot}
+                                        onChange={(e) => handleTimeSlotChange("secondary", e.target.value)}
+                                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                                      />
+                                      <span className="text-gray-700">{timeSlot}</span>
+                                    </label>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Tertiary Venue */}
+                          {selectedVenues.secondary && (
+                            <div className="mt-4">
+                              <label htmlFor="tertiaryVenue" className="block text-sm font-medium text-gray-700">
+                                Venue 3
+                              </label>
+                              <select
+                                id="tertiaryVenue"
+                                value={selectedVenues.tertiary}
+                                onChange={(e) => handleVenueChange("tertiary", e.target.value)}
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                              >
+                                <option value="" disabled>
+                                  Select Venue 3
+                                </option>
+                                {getAvailableVenues([selectedVenues.primary, selectedVenues.secondary]).map((venue) => (
+                                  <option key={venue.value} value={venue.value}>
+                                    {venue.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          )}
+
+                          {/* Time Slot for Tertiary Venue */}
+                          {selectedVenues.tertiary && (
+                            <div className="mt-4">
+                              <p className="block text-sm font-medium text-gray-700">Select Preferred Time Slot</p>
+                              <div className="mt-2 space-y-2">
+                                {venues
+                                  .find((venue) => venue.value === selectedVenues.tertiary)
+                                  ?.timeSlots.map((timeSlot, index) => (
+                                    <label key={index} className="flex items-center space-x-2">
+                                      <input
+                                        type="radio"
+                                        name="timeSlotTertiary"
+                                        value={timeSlot}
+                                        checked={selectedTimeSlots.tertiary === timeSlot}
+                                        onChange={(e) => handleTimeSlotChange("tertiary", e.target.value)}
+                                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                                      />
+                                      <span className="text-gray-700">{timeSlot}</span>
+                                    </label>
+                                  ))}
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+
                   </div>
                 </>
               )}
