@@ -1,6 +1,7 @@
 const userModel = require("../models/userModel");
 const eventModel = require("../models/EventModel");
 const venueModel = require("../models/venueModel");
+const commentModel = require("../models/commentModel");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
@@ -427,12 +428,97 @@ module.exports.checkUserIsRegisteredInEventOrNot = async (req, res) => {
   }
 };
 
-// Fetch All Venue City
+// Fetch All Venue
 module.exports.fetchAllVenue = async (req, res) => {
   try {
     const venues = await venueModel.find();
     // const venues = await venueModel.find({ isCompleteProfile: true });
     res.send(venues);
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Comment on a particular event
+module.exports.commentOnAEvent = async (req, res) => {
+  try {
+    let user = req.user;
+    let { eventId, comment } = req.body;
+
+    await commentModel.create({
+      userId: user._id,
+      eventId,
+      commentBody: comment,
+    });
+
+    res.send("Comment added");
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Reply a Comment
+module.exports.replyAComment = async (req, res) => {
+  try {
+    let user = req.user;
+    let { eventId, reply, commentId } = req.body;
+
+    let replyComment = await commentModel.create({
+      userId: user._id,
+      eventId,
+      commentBody: reply,
+    });
+
+    await commentModel.findOneAndUpdate(
+      {
+        _id: commentId,
+      },
+      { $push: { reply: replyComment._id } }
+    );
+
+    res.send("Replied to a comment");
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Like a Comment
+module.exports.commentOnAEvent = async (req, res) => {
+  try {
+    let user = req.user;
+    let { commentId } = req.body;
+
+    await commentModel.findOneAndUpdate(
+      {
+        _id: commentId,
+      },
+      { $push: { likeCount: user._id } }
+    );
+
+    res.send("Liked");
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Remove Like from a Comment
+module.exports.commentOnAEvent = async (req, res) => {
+  try {
+    let user = req.user;
+    let { commentId } = req.body;
+
+    await commentModel.findOneAndUpdate(
+      {
+        _id: commentId,
+      },
+      { $pull: { likeCount: user._id } }
+    );
+
+    res.send("Like Removed");
   } catch (err) {
     console.log(err.message);
     res.send("Internal Server Error");
