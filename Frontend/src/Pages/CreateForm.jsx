@@ -91,6 +91,9 @@ const CreateForm = () => {
     bill: 0,
     posterImage: null,
     scannerImage: null,
+    venue1:"",
+    venue2:"",
+    venue3:"",
   });
 
   // Filter venues based on the selected city
