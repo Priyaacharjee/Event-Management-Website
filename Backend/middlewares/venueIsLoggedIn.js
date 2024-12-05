@@ -1,20 +1,20 @@
 const jwt = require("jsonwebtoken");
-const adminModel = require("../models/adminModel");
+const venueModel = require("../models/venueModel");
 
 module.exports = async (req, res, next) => {
   try {
     let token = req.cookies.token;
-
+    
     if (token) {
       let decode = jwt.verify(token, process.env.JWT_KEY);
-      let admin = await adminModel
+      let venue = await venueModel
         .findOne({ email: decode.email })
         .select("-password");
-      if (admin) {
-        req.admin = admin;
+      if (venue) {
+        req.venue = venue;
         next();
       }
-    } else {
+    }else {
       res.send("You need to login first");
     }
   } catch (err) {

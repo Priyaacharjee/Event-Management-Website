@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { createEvent } from "../utils/utils";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,16 @@ const CreateForm = () => {
   const [loading, setLoading] = useState(false);
 
   const [billPaymentDone, setbillPaymentDone] = useState(false);
+
+  const cities = [
+    { value: "", label: "Select preferred city", disabled: true },
+    { value: "kolkata", label: "Kolkata" },
+    { value: "bangalore", label: "Bangalore" },
+    { value: "pune", label: "Pune" },
+    { value: "hyderabad", label: "Hyderabad" },
+  ];
+
+
 
   const [formData, setFormData] = useState({
     eventName: "",
@@ -244,8 +254,8 @@ const CreateForm = () => {
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   disabled={
                     eventType === "in_person" ||
-                    eventType === "virtual" ||
-                    eventType === "hybrid"
+                      eventType === "virtual" ||
+                      eventType === "hybrid"
                       ? true
                       : false
                   }
@@ -264,51 +274,57 @@ const CreateForm = () => {
               </div>
 
               {/* Conditional Field Based on Event Type */}
-              {(formData.eventType === "in_person" ||
-                eventType === "in_person") && (
+              {(formData.eventType === "in_person" || eventType === "in_person") && (
                 <div className="bg-indigo-200 p-6 rounded-xl">
                   <label className="block text-sm mt-8 font-medium text-gray-700">
                     Preferable City Name <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
-                    name="cityName"
-                    value={formData.cityName}
-                    onChange={handleInputChange}
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    placeholder="Enter preferable city"
-                  />
-                </div>
-              )}
-
-              {(eventType === "virtual" ||
-                formData.eventType === "virtual") && (
-                <div className="bg-indigo-200 p-6 rounded-xl">
-                  <label className="block text-sm mt-8 font-medium text-gray-700">
-                    Preferable Online Meeting Platform{" "}
-                    <span className="text-red-500">*</span>
-                  </label>
                   <select
+                    name="city"
+                    id="city"
+                    onChange={(e) =>
+                      setFormData({ ...formData, city: e.target.value })
+                    }
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    name="platform"
-                    value={formData.platform}
-                    onChange={handleInputChange}
                   >
-                    <option value="" disabled selected>
-                      Select preferable platform
-                    </option>
-                    <option value="zoom">Zoom</option>
-                    <option value="gmeet">Google Meet</option>
-                    <option value="skype">Skype</option>
+                    {cities.map((city, index) => (
+                      <option key={index} value={city.value} disabled={city.disabled || false}>
+                        {city.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
               )}
+
+
+              {(eventType === "virtual" ||
+                formData.eventType === "virtual") && (
+                  <div className="bg-indigo-200 p-6 rounded-xl">
+                    <label className="block text-sm mt-8 font-medium text-gray-700">
+                      Preferable Online Meeting Platform{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                      name="platform"
+                      value={formData.platform}
+                      onChange={handleInputChange}
+                    >
+                      <option value="" disabled selected>
+                        Select preferable platform
+                      </option>
+                      <option value="zoom">Zoom</option>
+                      <option value="gmeet">Google Meet</option>
+                      <option value="skype">Skype</option>
+                    </select>
+                  </div>
+                )}
 
               {(eventType === "hybrid" || formData.eventType === "hybrid") && (
                 <>
                   <div className="bg-indigo-200 p-6 rounded-xl">
                     <div>
-                      <label className="block text-sm mt-8 font-medium text-gray-700">
+                      {/* <label className="block text-sm mt-8 font-medium text-gray-700">
                         Preferable City Name{" "}
                         <span className="text-red-500">*</span>
                       </label>
@@ -319,7 +335,17 @@ const CreateForm = () => {
                         onChange={handleInputChange}
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                         placeholder="Enter preferable city"
-                      />
+                      /> */}
+                      <label className="block text-sm mt-8 font-medium text-gray-700">
+                        Preferable City Name <span className="text-red-500">*</span>
+                      </label>
+                      <select name="" id="" className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                        <option value="" disabled selected>Select preffered city</option>
+                        <option value="kolkata">Kolkata</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="pune">Pune</option>
+                        <option value="Hydrabad">Hydrabad</option>
+                      </select>
                     </div>
                     <div>
                       <label className="block text-sm mt-8 font-medium text-gray-700">
