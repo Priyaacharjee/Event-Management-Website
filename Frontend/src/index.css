@@ -179,4 +179,57 @@
     transform: rotate(90deg);
   }
 }
+
+/* Custom container for calendar */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  background: white;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Calendar wrapper */
+.react-calendar {
+  border: none;
+  font-family: Arial, sans-serif;
+}
+
+/* Highlight specific dates */
+.react-calendar__tile.highlight {
+  background: #6a5acd; /* Purple highlight */
+  color: white;
+  border-radius: 6px;
+}
+
+.react-calendar__tile--active {
+  background: #6a5acd;
+  color: white;
+  border-radius: 6px;
+}
+
+.react-calendar__navigation button {
+  color: #6a5acd;
+  font-weight: bold;
+}
+
+/* General styles for days */
+.react-calendar__tile {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  margin: 5px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.react-calendar__month-view__weekdays {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #6a5acd;
+}
+
   

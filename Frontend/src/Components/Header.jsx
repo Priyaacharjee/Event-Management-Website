@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { findUser } from "../utils/utils";
+import Event_card from "./Event_card";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Header() {
 
   const handleLogInClick = () => {
     navigate("/login");
+    //navigate("/eventcard");
   };
 
   const searchClick = () => {
@@ -135,6 +137,7 @@ export default function Header() {
             >
               <button
                 onClick={handleLogInClick}
+                //onClick={<Event_card/>}
                 className="flex btn1 justify-center items-center h-full w-full p-4 rounded-full -mt-4 lg:mt-0"
               >
                 Show Events
