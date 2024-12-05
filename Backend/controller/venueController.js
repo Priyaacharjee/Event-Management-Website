@@ -115,7 +115,7 @@ module.exports.logoutVenue = async (req, res) => {
 };
 
 // Update Password
-module.exports.updatePassword = async (req, res) => {
+module.exports.updatePasswordFirstTime = async (req, res) => {
   try {
     let { venueId, password } = req.body;
 
@@ -124,7 +124,7 @@ module.exports.updatePassword = async (req, res) => {
 
     let venue = await venueModel.updateOne(
       { _id: venueId },
-      { $set: { password: hashedPassword } }
+      { $set: { password: hashedPassword, temporaryPassword: null } }
     );
 
     if (venue) {

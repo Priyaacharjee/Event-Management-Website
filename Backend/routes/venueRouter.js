@@ -6,7 +6,7 @@ const {
   signUp,
   loginVenue,
   logoutVenue,
-  updatePassword,
+  updatePasswordFirstTime,
 } = require("../controller/venueController");
 
 router.get("/", (req, res) => {
@@ -23,6 +23,6 @@ router.post("/login", loginVenue);
 router.get("/logout", venueIsLoggedIn, logoutVenue);
 
 // UPDATE PASSWORD
-router.post("/updatepassword", venueIsLoggedIn, updatePassword);
+router.put("/updatepasswordfirsttime", updatePasswordFirstTime);
 
 module.exports = router;
