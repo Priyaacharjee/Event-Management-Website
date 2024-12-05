@@ -1,7 +1,7 @@
 // *userRouter.js*
 const express = require("express");
 const router = express.Router();
-const isLoggedIn = require("../middlewares/userIsLoggedIn");
+const userIsLoggedIn = require("../middlewares/userIsLoggedIn");
 const {
   signUp,
   loginUser,
@@ -18,6 +18,7 @@ const {
   fetchAllHybridEvents,
   eventRegistration,
   checkUserIsRegisteredInEventOrNot,
+  fetchAllVenue,
 } = require("../controller/userController");
 
 router.get("/", (req, res) => {
@@ -31,10 +32,10 @@ router.post("/signup", signUp);
 router.post("/login", loginUser);
 
 // USER LOGOUT
-router.get("/logout", isLoggedIn, logoutUser);
+router.get("/logout", userIsLoggedIn, logoutUser);
 
 // GET SINGLE USER
-router.get("/getuser", isLoggedIn, getUser);
+router.get("/getuser", userIsLoggedIn, getUser);
 
 // UPDATE PASSWORD REQUEST
 router.get("/updatepasswordrequest", updatePasswordRequest);
@@ -43,10 +44,10 @@ router.get("/updatepasswordrequest", updatePasswordRequest);
 router.put("/updatepassword", updatePassword);
 
 // UPLOAD PROFILE PICTURE (USING CLOUDINARY)
-router.post("/uploadprofilepicture", isLoggedIn, uploadProfilePicture);
+router.post("/uploadprofilepicture", userIsLoggedIn, uploadProfilePicture);
 
 // CREATE ORDER
-router.post("/createevent", isLoggedIn, createEvent);
+router.post("/createevent", userIsLoggedIn, createEvent);
 
 // FETCH ALL VIRTUAL EVENTS
 router.get("/fetchallvirtualevents", fetchAllVirtualEvents);
@@ -64,13 +65,16 @@ router.post("/fetchsingleevent", fetchSingleEvent);
 router.get("/fetchlastcreatedevent", fetchLastCreatedEvent);
 
 // EVENT REGISTRATION
-router.post("/eventregistration", isLoggedIn, eventRegistration);
+router.post("/eventregistration", userIsLoggedIn, eventRegistration);
 
 // CHECK A USER IS REGISTERED IN A EVENT OR NOT
 router.post(
   "/checkuserisregisteredineventornot",
-  isLoggedIn,
+  userIsLoggedIn,
   checkUserIsRegisteredInEventOrNot
 );
+
+// GET ALL VENUE CITY
+router.get("/getallvenue", userIsLoggedIn, fetchAllVenue);
 
 module.exports = router;

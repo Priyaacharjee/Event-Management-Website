@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel");
 const eventModel = require("../models/EventModel");
+const venueModel = require("../models/venueModel");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
@@ -423,5 +424,17 @@ module.exports.checkUserIsRegisteredInEventOrNot = async (req, res) => {
     }
   } catch (err) {
     res.send(err.message);
+  }
+};
+
+// Fetch All Venue City
+module.exports.fetchAllVenue = async (req, res) => {
+  try {
+    const venues = await venueModel.find();
+    // const venues = await venueModel.find({ isCompleteProfile: true });
+    res.send(venues);
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
   }
 };

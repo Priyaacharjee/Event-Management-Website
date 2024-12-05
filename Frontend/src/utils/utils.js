@@ -70,12 +70,25 @@ export const changePasswordRequest = async (email) => {
   }
 };
 
-// Change Password
+// Change Password of User
 export const changePassword = async (email, password) => {
   try {
     let response = await axios.put(
       "http://localhost:8000/users/updatepassword",
       { email, password }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Change Password of Venue User
+export const changePasswordVenue = async (venueId, password) => {
+  try {
+    let response = await axios.put(
+      "http://localhost:8000/venue/updatepasswordfirsttime",
+      { venueId, password }
     );
     return response.data;
   } catch (err) {
@@ -105,6 +118,20 @@ export const createEvent = async (formData) => {
     const response = await axios.post(
       "http://localhost:8000/users/createevent",
       { formData },
+      { withCredentials: true }
+    );
+
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Fetch All Venue
+export const fetchAllVenues = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:8000/users/getallvenue",
       { withCredentials: true }
     );
 

@@ -13,6 +13,10 @@ const venueSchema = new mongoose.Schema({
 
   maxCapacity: Number,
   bookingPrice: Number,
+  openingtime: String,
+  closingtime: String,
+  noOfSlot: Number,
+  timeDivisionOfSlot: [String],
 
   acceptedByAdmin: { type: Boolean, default: false },
 
