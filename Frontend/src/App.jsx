@@ -17,6 +17,7 @@ import Registrationform from "./Pages/Registrationform";
 import EventPage from "./Pages/EventPage";
 import Event_card from "./Components/Event_card";
 import CustomCalendar from "./Components/CustomCalendar";
+import VenueUserPage from "./Pages/VenueUserPage";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
             <Route path="/registrationform/:eventId" element={<Registrationform/>}/>
             <Route path="/eventpage/:eventId" element={<EventPage />} />
             <Route path="/eventcard" element={<Event_card/>}/>
+            <Route path="/venueuser" element={<VenueUserPage/>}/>
             <Route path="/calendar" element={<CustomCalendar/>}/>
           </Routes>
         </BrowserRouter>
