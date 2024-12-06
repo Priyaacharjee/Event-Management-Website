@@ -15,7 +15,7 @@ export default function Header() {
 
   useEffect(() => {
     findUser().then((response) => {
-      setUser(response.username.split(" ")[0]);
+      setUser(response ? response.username.split(" ")[0] : null);
     });
   }, []);
 

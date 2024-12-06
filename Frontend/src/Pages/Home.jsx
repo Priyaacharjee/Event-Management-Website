@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "../Components/Slider";
 import Navbar from "../Components/Navbar";
 import Header from "../Components/Header";
@@ -58,12 +58,11 @@ export default function Home() {
 
   return (
     <>
-
       {/*NAVBAR------------------------------------------------------------- */}
       <Navbar menuItems={headerMenuItems} />
 
       {/*HERO PANEL ------------------------------------------------------------- */}
-      <Header  />
+      <Header />
 
       {/*EVENT TYPES --------------------------------------------------------- */}
       <div
