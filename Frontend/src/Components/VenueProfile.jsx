@@ -14,8 +14,6 @@ function VenueProfile() {
         return <div>Upcoming Bookings</div>;
       case "Past Bookings":
         return <div>Past Bookings</div>;
-      default:
-        return <div></div>;
     }
   };
 
