@@ -39,10 +39,12 @@ module.exports.signUp = async (req, res) => {
 module.exports.loginAdmin = async (req, res) => {
   try {
     let token = req.cookies.token;
+
     if (token) {
       res.send("You are already logged in.");
     } else {
       let { email, password } = req.body;
+
 
       if (email && password) {
         let admin = await adminModel.findOne({ email });
@@ -70,6 +72,7 @@ module.exports.loginAdmin = async (req, res) => {
       }
     }
   } catch (err) {
+    console.log(err.message);
     return res.send(err.message);
   }
 };
