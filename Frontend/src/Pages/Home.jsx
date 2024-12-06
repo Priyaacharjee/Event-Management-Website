@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "../Components/Slider";
 import Navbar from "../Components/Navbar";
 import Header from "../Components/Header";
@@ -106,20 +106,14 @@ export default function Home() {
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
         <div id="upcoming" className="w-[85%]">
           <Upcoming_event
-            eventId={lastEvent ? lastEvent._id : null}
-            name={lastEvent ? lastEvent.eventName : null}
-            des={lastEvent ? lastEvent.description : null}
-            date={lastEvent ? lastEvent.date : null}
-            time={lastEvent ? lastEvent.time : null}
-            platform={lastEvent ? lastEvent.platform : null}
-            venue={lastEvent ? lastEvent.city : null}
-            poster={
-              lastEvent
-                ? lastEvent.posterImage
-                  ? lastEvent.posterImage.url
-                  : null
-                : null
-            }
+            eventId={lastEvent? lastEvent._id:null}
+            name={lastEvent? lastEvent.eventName:null}
+            des={lastEvent? lastEvent.description:null}
+            date={lastEvent? lastEvent.date:null}
+            time={lastEvent? lastEvent.time:null}
+            platform={lastEvent? lastEvent.platform:null}
+            venue={lastEvent? lastEvent.city:null}
+            poster={lastEvent? (lastEvent.posterImage ? lastEvent.posterImage.url : null):null}
           />
         </div>
 
