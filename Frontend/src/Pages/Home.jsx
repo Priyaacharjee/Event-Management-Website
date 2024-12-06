@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "../Components/Slider";
-import Navabar from "../Components/Navbar";
+import Navbar from "../Components/Navbar";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Company_card from "../Components/Company_card";
@@ -60,7 +60,7 @@ export default function Home() {
     <>
 
       {/*NAVBAR------------------------------------------------------------- */}
-      <Navabar menuItems={headerMenuItems} />
+      <Navbar menuItems={headerMenuItems} />
 
       {/*HERO PANEL ------------------------------------------------------------- */}
       <Header  />
