@@ -15,6 +15,9 @@ import CreateForm from "./Pages/CreateForm";
 import CompanyPage from "./Pages/CompanyPage";
 import Registrationform from "./Pages/Registrationform";
 import EventPage from "./Pages/EventPage";
+import Event_card from "./Components/Event_card";
+import CustomCalendar from "./Components/CustomCalendar";
+
 
 function App() {
   const [themeMode, setThemeMode] = useState("light");
@@ -41,7 +44,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgetpassword" element={<Forgetpassword />} />
-            <Route path="/resetpassword" element={<Resetpassword />} />
+            {/* <Route path="/resetpassword" element={<Resetpassword />} /> */}
+            <Route path="/resetpassword/:venueId" element={<Resetpassword />} />
             <Route path="/virtualevent" element={<VirtualEvent />} />
             <Route path="/inpersonevent" element={<InPersonEvent />} />
             <Route path="/hybridevent" element={<HybridEvent />} />
@@ -50,6 +54,8 @@ function App() {
             <Route path="/companypage" element={<CompanyPage/>}/>
             <Route path="/registrationform/:eventId" element={<Registrationform/>}/>
             <Route path="/eventpage/:eventId" element={<EventPage />} />
+            <Route path="/eventcard" element={<Event_card/>}/>
+            <Route path="/calendar" element={<CustomCalendar/>}/>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

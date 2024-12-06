@@ -1,5 +1,7 @@
 const userModel = require("../models/userModel");
 const eventModel = require("../models/EventModel");
+const venueModel = require("../models/venueModel");
+const commentModel = require("../models/commentModel");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
@@ -353,47 +355,57 @@ module.exports.eventRegistration = async (req, res) => {
     const user = req.user;
 
     const event = await eventModel.findOne({ _id: eventId });
-    const formattedDate = new Date(event.date).toLocaleDateString("en-GB");
 
-    const timeParts = event.time.split(":"); 
-    let hours = parseInt(timeParts[0], 10);
-    const minutes = timeParts[1];
-    const period = hours < 12 ? "AM" : "PM";
+    if (event.registeredUser && event.registeredUser.includes(user._id)) {
+      res.send("User already registered in the event");
+    } else {
+      const formattedDate = new Date(event.date).toLocaleDateString("en-GB");
 
-    hours = hours % 12 || 12; 
+      const timeParts = event.time.split(":");
+      let hours = parseInt(timeParts[0], 10);
+      const minutes = timeParts[1];
+      const period = hours < 12 ? "AM" : "PM";
 
-    const formattedTime = `${hours}:${minutes} ${period}`;
+      hours = hours % 12 || 12;
 
-    const testAccount = await nodemailer.createTestAccount();
+      const formattedTime = `${hours}:${minutes} ${period}`;
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      auth: {
-        user: "twila.wolff9@ethereal.email",
-        pass: "JbyeNkTZ3Bv9bkJSd1",
-      },
-    });
+      const testAccount = await nodemailer.createTestAccount();
 
-    let info = await transporter.sendMail({
-      from: '"Keya Tarafdar" <keya@gmail.com>',
-      to: user.email,
-      subject: "Registration successfull",
-      text: `Your registration is successfull in the event ${event.eventName}`,
-      html: `Your registration is successfull in the event <b>${event.eventName}</b>.<br> <b>Date:</b> ${formattedDate} <br> <b>Time:</b> ${formattedTime}`,
-    });
+      const transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        auth: {
+          user: process.env.user,
+          pass: process.env.pass,
+        },
+      });
 
-    await userModel.findOneAndUpdate(
-      { email: user.email },
-      { $push: { appliedEvents: eventId } }
-    );
+      let info = await transporter.sendMail({
+        from: '"Eventek" <eventek@gmail.com>',
+        to: user.email,
+        subject: "Registration successfull",
+        text: `Your registration is successfull in the event ${event.eventName}`,
+        html: `Your registration is successfull in the event <b>${event.eventName}</b>.<br> <b>Date:</b> ${formattedDate} <br> <b>Time:</b> ${formattedTime}`,
+      });
 
-    await eventModel.findOneAndUpdate(
-      { _id: eventId },
-      { $set: { tillNowTotalRegistration: event.tillNowTotalRegistration + 1 } }
-    );
+      await userModel.findOneAndUpdate(
+        { email: user.email },
+        { $push: { appliedEvents: eventId } }
+      );
 
-    res.send("Registration successfull");
+      await eventModel.findOneAndUpdate(
+        { _id: eventId },
+        {
+          $push: { registeredUser: user._id },
+          $set: {
+            tillNowTotalRegistration: 1,
+          },
+        }
+      );
+
+      res.send("Registration successfull");
+    }
   } catch (err) {
     res.send(err.message);
   }
@@ -413,5 +425,102 @@ module.exports.checkUserIsRegisteredInEventOrNot = async (req, res) => {
     }
   } catch (err) {
     res.send(err.message);
+  }
+};
+
+// Fetch All Venue
+module.exports.fetchAllVenue = async (req, res) => {
+  try {
+    const venues = await venueModel.find();
+    // const venues = await venueModel.find({ isCompleteProfile: true });
+    res.send(venues);
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Comment on a particular event
+module.exports.commentOnAEvent = async (req, res) => {
+  try {
+    let user = req.user;
+    let { eventId, comment } = req.body;
+
+    await commentModel.create({
+      userId: user._id,
+      eventId,
+      commentBody: comment,
+    });
+
+    res.send("Comment added");
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Reply a Comment
+module.exports.replyAComment = async (req, res) => {
+  try {
+    let user = req.user;
+    let { eventId, reply, commentId } = req.body;
+
+    let replyComment = await commentModel.create({
+      userId: user._id,
+      eventId,
+      commentBody: reply,
+    });
+
+    await commentModel.findOneAndUpdate(
+      {
+        _id: commentId,
+      },
+      { $push: { reply: replyComment._id } }
+    );
+
+    res.send("Replied to a comment");
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Like a Comment
+module.exports.commentOnAEvent = async (req, res) => {
+  try {
+    let user = req.user;
+    let { commentId } = req.body;
+
+    await commentModel.findOneAndUpdate(
+      {
+        _id: commentId,
+      },
+      { $push: { likeCount: user._id } }
+    );
+
+    res.send("Liked");
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Remove Like from a Comment
+module.exports.commentOnAEvent = async (req, res) => {
+  try {
+    let user = req.user;
+    let { commentId } = req.body;
+
+    await commentModel.findOneAndUpdate(
+      {
+        _id: commentId,
+      },
+      { $pull: { likeCount: user._id } }
+    );
+
+    res.send("Like Removed");
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
   }
 };

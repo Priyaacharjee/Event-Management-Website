@@ -25,6 +25,8 @@ const eventSchema = new mongoose.Schema({
   tillNowTotalRegistration: { type: Number, default: 0 },
   lastDateOfRegistration: { type: Date },
 
+  registeredUser:[{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+
   interested: { type: Number, default: 0 },
 
   posterImage: {
