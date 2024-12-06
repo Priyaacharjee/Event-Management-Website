@@ -21,13 +21,14 @@ const eventSchema = new mongoose.Schema({
   hallName: { type: String },
   hallBookingTime: { type: String },
   platform: { type: String },
+  isVanueConfirmed: { type: Boolean, default: false },
 
   tillNowTotalRegistration: { type: Number, default: 0 },
   lastDateOfRegistration: { type: Date },
 
-  registeredUser:[{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+  registeredUser: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 
-  interested: { type: Number, default: 0 },
+  interested: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 
   posterImage: {
     public_id: {

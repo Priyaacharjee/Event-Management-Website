@@ -58,12 +58,11 @@ export default function Home() {
 
   return (
     <>
-
       {/*NAVBAR------------------------------------------------------------- */}
       <Navabar menuItems={headerMenuItems} />
 
       {/*HERO PANEL ------------------------------------------------------------- */}
-      <Header  />
+      <Header />
 
       {/*EVENT TYPES --------------------------------------------------------- */}
       <div
@@ -107,14 +106,20 @@ export default function Home() {
         {/* UPCOMING EVENTS ------------------------------------------------------------ */}
         <div id="upcoming" className="w-[85%]">
           <Upcoming_event
-            eventId={lastEvent._id}
-            name={lastEvent.eventName}
-            des={lastEvent.description}
-            date={lastEvent.date}
-            time={lastEvent.time}
-            platform={lastEvent.platform}
-            venue={lastEvent.city}
-            poster={lastEvent.posterImage ? lastEvent.posterImage.url : null}
+            eventId={lastEvent ? lastEvent._id : null}
+            name={lastEvent ? lastEvent.eventName : null}
+            des={lastEvent ? lastEvent.description : null}
+            date={lastEvent ? lastEvent.date : null}
+            time={lastEvent ? lastEvent.time : null}
+            platform={lastEvent ? lastEvent.platform : null}
+            venue={lastEvent ? lastEvent.city : null}
+            poster={
+              lastEvent
+                ? lastEvent.posterImage
+                  ? lastEvent.posterImage.url
+                  : null
+                : null
+            }
           />
         </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../utils/utils";
+import { loginUser, loginVenue } from "../utils/utils";
 import Loader from "../Components/loader";
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -41,17 +41,23 @@ const Login = () => {
     e.preventDefault();
     const isValid = validateForm();
     if (isValid) {
-       setLoading(true);
-       setTimeout(()=>{
-         loginUser(formData.email, formData.password).then((response) => {
-           if (response !== "Login successfully") {
-             alert(response);
-            } else {
-              navigate("/");
-            }
-          });
-          setLoading(false)
-        },3000);
+      setLoading(true);
+      setTimeout(() => {
+        loginUser(formData.email, formData.password).then((response) => {
+          if (response === "Login successfully") {
+            navigate("/");
+          } else {
+            loginVenue(formData.email, formData.password).then((response) => {
+              if (response === "Login successfully") {
+                navigate("/venueuser");
+              } else {
+                alert(response);
+              }
+            });
+          }
+        });
+        setLoading(false);
+      }, 3000);
     }
   };
 
@@ -190,8 +196,7 @@ const Login = () => {
             <Loader />
           </div>
         </>
-      )
-      }
+      )}
     </div>
   );
 };

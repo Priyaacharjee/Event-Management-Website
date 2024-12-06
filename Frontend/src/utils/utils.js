@@ -242,3 +242,32 @@ export const checkUserIsRegisteredInEventOrNot = async (eventId) => {
     console.log(err.message);
   }
 };
+
+// VENUE FUNCTIONALITIES--------------------------
+
+// Venues Login
+export const loginVenue = async (email, password) => {
+  try {
+    let response = await axios.post(
+      "http://localhost:8000/venue/login",
+      { email, password },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Venues Login
+export const findVenue = async () => {
+  try {
+    let response = await axios.get(
+      "http://localhost:8000/venue/fetchvenueuser",
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};

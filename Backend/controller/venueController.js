@@ -135,3 +135,14 @@ module.exports.updatePasswordFirstTime = async (req, res) => {
     res.send("Internal Server Error");
   }
 };
+
+// Fetch Venue User
+module.exports.fetchVenueUser = async (req, res) => {
+  try {
+    let venue = req.venue;
+    res.send(venue);
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};

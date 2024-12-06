@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
-import { findUser, logoutUser } from "../utils/utils";
+import { findUser, logoutUser, findVenue } from "../utils/utils";
 import Loader from "./loader";
 
 export default function Navbar({ menuItems }) {
@@ -142,8 +142,15 @@ export default function Navbar({ menuItems }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    findUser().then((response) => {
-      setUser(response.username.split(" ")[0]);
+    findUser().then((user) => {
+      if (user) {
+        setUser(user.username.split(" ")[0]);
+      }
+    });
+    findVenue().then((venue) => {
+      if (venue) {
+        setUser(venue.name);
+      }
     });
   }, []);
 
@@ -227,29 +234,34 @@ export default function Navbar({ menuItems }) {
             {/* USER SECTION IN NAVBAR */}
             {user ? (
               <>
-            {/* User Section in Navbar */}
-            <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
-              <div className=" w-full md:w-40 flex justify-center items-center space-x-4">
-                    <FontAwesomeIcon icon={faUser} className="text-lg cursor-pointer" />
-                    <span className="text-white font-bold hover:text-blue-100 hover:underline">{user}</span>
+                {/* User Section in Navbar */}
+                <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
+                  <div className=" w-full md:w-40 flex justify-center items-center space-x-4">
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className="text-lg cursor-pointer"
+                    />
+                    <span className="text-white font-bold hover:text-blue-100 hover:underline">
+                      {user}
+                    </span>
 
                     {dropDownOpen ? (
-                    <FontAwesomeIcon
+                      <FontAwesomeIcon
                         icon={faCaretUp}
                         className="cursor-pointer"
                         style={{ color: "#ffffff" }}
                         onClick={dropDown}
-                    />
+                      />
                     ) : (
-                    <FontAwesomeIcon
+                      <FontAwesomeIcon
                         icon={faCaretDown}
                         style={{ color: "#ffffff" }}
                         className="cursor-pointer"
                         onClick={dropDown}
-                    />
+                      />
                     )}
-              </div>
-            </div> 
+                  </div>
+                </div>
               </>
             ) : (
               <>
