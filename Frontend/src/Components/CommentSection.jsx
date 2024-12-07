@@ -152,11 +152,6 @@ const CommentSection = () => {
     },
   ]);
 
-  const [activeReplyId, setActiveReplyId] = useState(null);
-
-  const handleReplyClick = (id) => {
-    setActiveReplyId(activeReplyId === id ? null : id); // Toggle reply box
-  };
 
   return (
     <div className="mt-6 text-gray-700 p-4 w-[65%] mx-auto">
@@ -180,7 +175,6 @@ const CommentSection = () => {
           text={comment.text}
           likes={comment.likes}
           replies={comment.replies}
-          onReply={handleReplyClick}
           paddingLeft={0}
         />
       ))}
