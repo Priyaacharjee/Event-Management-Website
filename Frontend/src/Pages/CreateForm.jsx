@@ -442,8 +442,8 @@ const CreateForm = () => {
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   disabled={
                     eventType === "in_person" ||
-                      eventType === "virtual" ||
-                      eventType === "hybrid"
+                    eventType === "virtual" ||
+                    eventType === "hybrid"
                       ? true
                       : false
                   }
@@ -464,87 +464,87 @@ const CreateForm = () => {
               {/* Conditional field based on event type */}
               {(formData.eventType === "in_person" ||
                 eventType === "in_person") && (
-                  <div className="bg-indigo-200 p-6 rounded-xl">
-                    {/* City Dropdown */}
-                    <label className="block text-sm font-medium text-gray-700">
-                      Preferable City Name <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      name="city"
-                      id="city"
-                      value={formData.city || ""}
-                      onChange={(e) => {
-                        setFormData({ ...formData, city: e.target.value });
-                        setvenue_1(
-                          allVenues
-                            .filter((venue) => venue.city === e.target.value)
-                            .map((venue) => venue.name)
-                        );
+                <div className="bg-indigo-200 p-6 rounded-xl">
+                  {/* City Dropdown */}
+                  <label className="block text-sm font-medium text-gray-700">
+                    Preferable City Name <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    name="city"
+                    id="city"
+                    value={formData.city || ""}
+                    onChange={(e) => {
+                      setFormData({ ...formData, city: e.target.value });
+                      setvenue_1(
+                        allVenues
+                          .filter((venue) => venue.city === e.target.value)
+                          .map((venue) => venue.name)
+                      );
 
-                        setVenueDropdown(true);
+                      setVenueDropdown(true);
 
-                        // setSelectedVenues({ primary: "", secondary: "", tertiary: "" });
-                      }}
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    >
-                      <option value="" disabled>
-                        Select City
-                      </option>
-                      {formData.eventDate ? (
-                        <>
-                          {allCity.map((city, index) => (
-                            <option key={index}>{city}</option>
-                          ))}
-                        </>
-                      ) : (
-                        <option disabled className="text-red-600">
-                          Please select the Event Date first
-                        </option>
-                      )}
-                    </select>
-
-                    {/* Venue Dropdowns */}
-                    {venueDropdown && formData.city && (
+                      // setSelectedVenues({ primary: "", secondary: "", tertiary: "" });
+                    }}
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  >
+                    <option value="" disabled>
+                      Select City
+                    </option>
+                    {formData.eventDate ? (
                       <>
-                        {/* Primary Venue */}
-                        <div className="mt-4">
-                          <label
-                            htmlFor="primaryVenue"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Venue 1 <span className="text-red-500">*</span>
-                          </label>
-                          <select
-                            id="primaryVenue"
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                venue1: {
-                                  ...formData.venue1,
-                                  id: e.target.value,
-                                },
-                              });
-                              setVenue1(true);
-                            }}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                          >
-                            <option value="" disabled selected>
-                              Select Venue 1
-                            </option>
-                            {venue_1.map((venue, index) => (
-                              <option key={index} value={venue}>
-                                {venue}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
+                        {allCity.map((city, index) => (
+                          <option key={index}>{city}</option>
+                        ))}
+                      </>
+                    ) : (
+                      <option disabled className="text-red-600">
+                        Please select the Event Date first
+                      </option>
+                    )}
+                  </select>
 
-                        {venue1 ? (
-                          <div className="mt-4">
-                            <p className="block text-sm font-medium text-gray-700">
-                              Select Preferred Time Slot
-                            </p>
-                            {/* <div className="mt-2 space-y-2">
+                  {/* Venue Dropdowns */}
+                  {venueDropdown && formData.city && (
+                    <>
+                      {/* Primary Venue */}
+                      <div className="mt-4">
+                        <label
+                          htmlFor="primaryVenue"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Venue 1 <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          id="primaryVenue"
+                          onChange={(e) => {
+                            setFormData({
+                              ...formData,
+                              venue1: {
+                                ...formData.venue1,
+                                id: e.target.value,
+                              },
+                            });
+                            setVenue1(true);
+                          }}
+                          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="" disabled selected>
+                            Select Venue 1
+                          </option>
+                          {venue_1.map((venue, index) => (
+                            <option key={index} value={venue}>
+                              {venue}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {venue1 ? (
+                        <div className="mt-4">
+                          <p className="block text-sm font-medium text-gray-700">
+                            Select Preferred Time Slot
+                          </p>
+                          {/* <div className="mt-2 space-y-2">
                             {venues.timeSlots.map((timeSlot, index) => (
                               <label key={index} className="flex items-center space-x-2">
                                 <input
@@ -567,53 +567,53 @@ const CreateForm = () => {
                               </label>
                             ))}
                           </div> */}
-                          </div>
-                        ) : null}
-                        {/* Time Slot for Primary Venue */}
-
-                        {/* Secondary Venue */}
-                        <div className="mt-4">
-                          <label
-                            htmlFor="secondaryVenue"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Venue 2 <span className="text-red-500">*</span>
-                          </label>
-                          <select
-                            id="secondaryVenue"
-                            value={selectedVenues.secondary}
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                venue2: {
-                                  ...formData.venue2,
-                                  id: e.target.value,
-                                },
-                              });
-                              setVenue2(true);
-                            }}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                          >
-                            <option value="" disabled>
-                              Select Venue 2
-                            </option>
-                            {getAvailableVenues([selectedVenues.primary]).map(
-                              (venue) => (
-                                <option key={venue.value} value={venue.value}>
-                                  {venue.label}
-                                </option>
-                              )
-                            )}
-                          </select>
                         </div>
+                      ) : null}
+                      {/* Time Slot for Primary Venue */}
 
-                        {/* Time Slot for Secondary Venue */}
-                        {venue2 ? (
-                          <div className="mt-4">
-                            <p className="block text-sm font-medium text-gray-700">
-                              Select Preferred Time Slot
-                            </p>
-                            {/* // <div className="mt-2 space-y-2">
+                      {/* Secondary Venue */}
+                      <div className="mt-4">
+                        <label
+                          htmlFor="secondaryVenue"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Venue 2 <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          id="secondaryVenue"
+                          value={selectedVenues.secondary}
+                          onChange={(e) => {
+                            setFormData({
+                              ...formData,
+                              venue2: {
+                                ...formData.venue2,
+                                id: e.target.value,
+                              },
+                            });
+                            setVenue2(true);
+                          }}
+                          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="" disabled>
+                            Select Venue 2
+                          </option>
+                          {getAvailableVenues([selectedVenues.primary]).map(
+                            (venue) => (
+                              <option key={venue.value} value={venue.value}>
+                                {venue.label}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
+
+                      {/* Time Slot for Secondary Venue */}
+                      {venue2 ? (
+                        <div className="mt-4">
+                          <p className="block text-sm font-medium text-gray-700">
+                            Select Preferred Time Slot
+                          </p>
+                          {/* // <div className="mt-2 space-y-2">
                             //   {venues
                             //     .find(
                             //       (venue) =>
@@ -645,53 +645,53 @@ const CreateForm = () => {
                             //       </label>
                             //     ))}
                             // </div> */}
-                          </div>
-                        ) : null}
-
-                        {/* Tertiary Venue */}
-                        <div className="mt-4">
-                          <label
-                            htmlFor="tertiaryVenue"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Venue 3
-                          </label>
-                          <select
-                            id="tertiaryVenue"
-                            value={selectedVenues.tertiary}
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                venue3: {
-                                  ...formData.venue3,
-                                  id: e.target.value,
-                                },
-                              });
-                              setVenue3(true);
-                            }}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                          >
-                            <option value="" disabled>
-                              Select Venue 3
-                            </option>
-                            {getAvailableVenues([
-                              selectedVenues.primary,
-                              selectedVenues.secondary,
-                            ]).map((venue) => (
-                              <option key={venue.value} value={venue.value}>
-                                {venue.label}
-                              </option>
-                            ))}
-                          </select>
                         </div>
+                      ) : null}
 
-                        {/* Time Slot for Tertiary Venue */}
-                        {venue3 ? (
-                          <div className="mt-4">
-                            <p className="block text-sm font-medium text-gray-700">
-                              Select Preferred Time Slot
-                            </p>
-                            {/* <div className="mt-2 space-y-2">
+                      {/* Tertiary Venue */}
+                      <div className="mt-4">
+                        <label
+                          htmlFor="tertiaryVenue"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Venue 3
+                        </label>
+                        <select
+                          id="tertiaryVenue"
+                          value={selectedVenues.tertiary}
+                          onChange={(e) => {
+                            setFormData({
+                              ...formData,
+                              venue3: {
+                                ...formData.venue3,
+                                id: e.target.value,
+                              },
+                            });
+                            setVenue3(true);
+                          }}
+                          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="" disabled>
+                            Select Venue 3
+                          </option>
+                          {getAvailableVenues([
+                            selectedVenues.primary,
+                            selectedVenues.secondary,
+                          ]).map((venue) => (
+                            <option key={venue.value} value={venue.value}>
+                              {venue.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Time Slot for Tertiary Venue */}
+                      {venue3 ? (
+                        <div className="mt-4">
+                          <p className="block text-sm font-medium text-gray-700">
+                            Select Preferred Time Slot
+                          </p>
+                          {/* <div className="mt-2 space-y-2">
                               {venues
                                 .find(
                                   (venue) =>
@@ -723,35 +723,35 @@ const CreateForm = () => {
                                   </label>
                                 ))}
                             </div> */}
-                          </div>
-                        ) : null}
-                      </>
-                    )}
-                  </div>
-                )}
+                        </div>
+                      ) : null}
+                    </>
+                  )}
+                </div>
+              )}
 
               {(eventType === "virtual" ||
                 formData.eventType === "virtual") && (
-                  <div className="bg-indigo-200 p-6 rounded-xl">
-                    <label className="block text-sm mt-8 font-medium text-gray-700">
-                      Preferable Online Meeting Platform{" "}
-                      <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                      name="platform"
-                      value={formData.platform}
-                      onChange={handleInputChange}
-                    >
-                      <option value="" disabled selected>
-                        Select preferable platform
-                      </option>
-                      <option value="zoom">Zoom</option>
-                      <option value="gmeet">Google Meet</option>
-                      <option value="skype">Skype</option>
-                    </select>
-                  </div>
-                )}
+                <div className="bg-indigo-200 p-6 rounded-xl">
+                  <label className="block text-sm mt-8 font-medium text-gray-700">
+                    Preferable Online Meeting Platform{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    name="platform"
+                    value={formData.platform}
+                    onChange={handleInputChange}
+                  >
+                    <option value="" disabled selected>
+                      Select preferable platform
+                    </option>
+                    <option value="zoom">Zoom</option>
+                    <option value="gmeet">Google Meet</option>
+                    <option value="skype">Skype</option>
+                  </select>
+                </div>
+              )}
 
               {/* {(eventType === "virtual" ||
                 formData.eventType === "virtual") && (
@@ -806,21 +806,26 @@ const CreateForm = () => {
                       <select
                         name="city"
                         id="city"
-                        value={formData.city || ""}
                         onChange={(e) => {
                           setFormData({ ...formData, city: e.target.value });
                           setVenueDropdown(true);
                         }}
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                       >
-                        <option value="" disabled>
+                        <option value="" disabled selected>
                           Select City
                         </option>
-                        {cities.map((city, index) => (
-                          <option key={index} value={city.value}>
-                            {city.label}
+                        {formData.eventDate ? (
+                          <>
+                            {allCity.map((city, index) => (
+                              <option key={index}>{city}</option>
+                            ))}
+                          </>
+                        ) : (
+                          <option disabled className="text-red-600">
+                            Please select the Event Date first
                           </option>
-                        ))}
+                        )}
                       </select>
 
                       {/* Venue Dropdown */}
@@ -845,15 +850,13 @@ const CreateForm = () => {
                                   },
                                 });
                                 setVenue1(true);
-                              }
-
-                              }
+                              }}
                               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                             >
-                              <option value="" disabled>
+                              <option value="" disabled selected>
                                 Select Venue 1
                               </option>
-                              {venue_1.map((venue, index) => (
+                              {Array.isArray(venue_1) && venue_1.length>0 && venue_1.map((venue, index) => (
                                 <option key={index} value={venue}>
                                   {venue}
                                 </option>
@@ -903,7 +906,6 @@ const CreateForm = () => {
                             </label>
                             <select
                               id="secondaryVenue"
-                              value={selectedVenues.secondary}
                               onChange={(e) => {
                                 setFormData({
                                   ...formData,
@@ -919,13 +921,13 @@ const CreateForm = () => {
                               <option value="" disabled>
                                 Select Venue 2
                               </option>
-                              {getAvailableVenues([selectedVenues.primary]).map(
+                              {/* {venue_1.map(
                                 (venue) => (
-                                  <option key={venue.value} value={venue.value}>
-                                    {venue.label}
+                                  <option key={venue}>
+                                    {venue}
                                   </option>
                                 )
-                              )}
+                              )} */}
                             </select>
                           </div>
 
@@ -970,51 +972,50 @@ const CreateForm = () => {
                             </div>
                           ) : null}
 
-
-                         {/* Tertiary Venue */}
-                        <div className="mt-4">
-                          <label
-                            htmlFor="tertiaryVenue"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Venue 3
-                          </label>
-                          <select
-                            id="tertiaryVenue"
-                            value={selectedVenues.tertiary}
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                venue3: {
-                                  ...formData.venue3,
-                                  id: e.target.value,
-                                },
-                              });
-                              setVenue3(true);
-                            }}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                          >
-                            <option value="" disabled>
-                              Select Venue 3
-                            </option>
-                            {getAvailableVenues([
-                              selectedVenues.primary,
-                              selectedVenues.secondary,
-                            ]).map((venue) => (
-                              <option key={venue.value} value={venue.value}>
-                                {venue.label}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        {/* Time Slot for Tertiary Venue */}
-                        {venue3 ? (
+                          {/* Tertiary Venue */}
                           <div className="mt-4">
-                            <p className="block text-sm font-medium text-gray-700">
-                              Select Preferred Time Slot
-                            </p>
-                            {/* <div className="mt-2 space-y-2">
+                            <label
+                              htmlFor="tertiaryVenue"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Venue 3
+                            </label>
+                            <select
+                              id="tertiaryVenue"
+                              value={selectedVenues.tertiary}
+                              onChange={(e) => {
+                                setFormData({
+                                  ...formData,
+                                  venue3: {
+                                    ...formData.venue3,
+                                    id: e.target.value,
+                                  },
+                                });
+                                setVenue3(true);
+                              }}
+                              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                            >
+                              <option value="" disabled>
+                                Select Venue 3
+                              </option>
+                              {getAvailableVenues([
+                                selectedVenues.primary,
+                                selectedVenues.secondary,
+                              ]).map((venue) => (
+                                <option key={venue.value} value={venue.value}>
+                                  {venue.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {/* Time Slot for Tertiary Venue */}
+                          {venue3 ? (
+                            <div className="mt-4">
+                              <p className="block text-sm font-medium text-gray-700">
+                                Select Preferred Time Slot
+                              </p>
+                              {/* <div className="mt-2 space-y-2">
                               {venues
                                 .find(
                                   (venue) =>
@@ -1046,8 +1047,8 @@ const CreateForm = () => {
                                   </label>
                                 ))}
                             </div> */}
-                          </div>
-                        ) : null}
+                            </div>
+                          ) : null}
                         </>
                       )}
                     </div>
