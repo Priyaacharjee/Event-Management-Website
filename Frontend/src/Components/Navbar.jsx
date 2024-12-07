@@ -128,12 +128,17 @@ export default function Navbar({ menuItems }) {
     setLoading(true);
     setTimeout(() => {
       logoutUser().then((response) => {
-        if (response !== "Logout successfully") {
+        if (response === "User Logout successfully") {
+          findUser().then((response) => {
+            response ? setUser(response.username.split(" ")[0]) : setUser(null);
+          });
+        } else if (response === "Venue Logout successfully") {
+          navigate("/");
+        } else if (response === "Admin Logout successfully") {
+          navigate("/");
+        } else {
           alert(response);
         }
-        findUser().then((response) => {
-          response ? setUser(response.username.split(" ")[0]) : setUser(null);
-        });
       });
       setLoading(false);
     }, 3000);
@@ -152,7 +157,7 @@ export default function Navbar({ menuItems }) {
         setUser(venue.name);
       }
     });
-  }, []);
+  }, [handelLogout]);
 
   return (
     <>
