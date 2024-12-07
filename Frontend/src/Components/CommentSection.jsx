@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaThumbsUp, FaReply} from "react-icons/fa";
+import { FaThumbsUp, FaReply } from "react-icons/fa";
+import { IoIosArrowDown, IoMdSend } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 
 const CommentTemplate = ({
@@ -9,21 +10,18 @@ const CommentTemplate = ({
   timestamp,
   text,
   likes,
-  replyBoxOpen,
   onReply,
 }) => {
+  const [replyBoxOpen, setreplyBoxOpen] = useState(false);
   return (
     <div className="p-4 mx-auto bg-white text-gray-900 mb-4 w-full">
-       <div className="mb-6 w-full">
+      <div className="mb-6 w-full">
         <input
           type="text"
           className="w-full p-2 rounded bg-gray-700 text-white outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Add a comment..."
         />
-        <button
-          className="mt-2 float-end px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 "
-
-        >
+        <button className="mt-2 float-end px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 ">
           Post
         </button>
       </div>
@@ -53,30 +51,41 @@ const CommentTemplate = ({
             </button>
             <button
               className="flex items-center space-x-1 hover:underline"
-              onClick={() => onReply(id)}
+              onClick={() => setreplyBoxOpen(true)}
             >
               <FaReply />
               <span>Reply</span>
             </button>
             <button className="flex items-center space-x-1 text-lg hover:text-red-600">
-               <MdDelete />
+              <MdDelete />
             </button>
           </div>
-          <div className="text-blue-700 hover:underline">Replies</div>
+          <div className="text-blue-700 flex pt-2 items-center gap-1">
+            <div className="cursor-pointer hover:text-xl">
+              <IoIosArrowDown />
+            </div>
+            <div className="cursor-pointer hover:underline">Replies</div>
+          </div>
         </div>
       </div>
 
       {/* Reply Box */}
       {replyBoxOpen && (
-        <div className="mt-4 ml-14">
-          <input
-            type="text"
-            className="w-full p-2 rounded bg-gray-200 text-gray-900 outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder={`Replying to @${username}...`}
-          />
-          <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Reply
-          </button>
+        <div className="mt-4 ml-14 flex gap-5">
+          <div className="m-0 p-0 w-[95%]">
+            <input
+              type="text"
+              className="w-full p-2 rounded bg-gray-200 text-gray-900 outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder={`Replying to @${username}...`}
+            />
+          </div>
+          <div className="w-[5%] flex items-center text-2xl text-blue-700">
+            <IoMdSend
+              onClick={() => {
+                setreplyBoxOpen(false);
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
@@ -114,7 +123,7 @@ const CommentSection = () => {
   };
 
   return (
-    <div className="bg-slate-300 mt-6 text-gray-700 p-4 w-[60%] mx-auto">
+    <div className="mt-6 text-gray-700 p-4 w-[65%] mx-auto">
       {comments.map((comment) => (
         <CommentTemplate
           key={comment.id}
@@ -133,7 +142,3 @@ const CommentSection = () => {
 };
 
 export default CommentSection;
-
-
-
-
