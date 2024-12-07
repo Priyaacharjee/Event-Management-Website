@@ -172,7 +172,6 @@ const CommentSection = () => {
           text={comment.text}
           likes={comment.likes}
           replies={comment.replies}
-          onReply={handleReplyClick}
           paddingLeft={0}
         />
       ))}
