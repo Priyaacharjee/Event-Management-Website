@@ -753,28 +753,6 @@ const CreateForm = () => {
                   </div>
                 )}
 
-              {/* {(eventType === "virtual" ||
-                formData.eventType === "virtual") && (
-                <div className="bg-indigo-200 p-6 rounded-xl">
-                  <label className="block text-sm mt-8 font-medium text-gray-700">
-                    Preferable Online Meeting Platform{" "}
-                    <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    name="platform"
-                    value={formData.platform}
-                    onChange={handleInputChange}
-                  >
-                    <option value="" disabled selected>
-                      Select preferable platform
-                    </option>
-                    <option value="zoom">Zoom</option>
-                    <option value="gmeet">Google Meet</option>
-                    <option value="skype">Skype</option>
-                  </select>
-                </div>
-              )} */}
 
               {(eventType === "hybrid" || formData.eventType === "hybrid") && (
                 <>
@@ -1212,7 +1190,7 @@ const CreateForm = () => {
                 />
               </div>
 
-              {/* Payment */}
+              {/* Payment
               <div className="w-[90%] flex justify-center items-center flex-col">
                 <div className=" mt-8 flex justify-center items-center bg-indigo-200 p-6 rounded-xl shadow-md">
                   <h3 className="text-lg font-bold text-red-500">
@@ -1228,7 +1206,7 @@ const CreateForm = () => {
                 <div className="flex justify-center items-center text-gray-400">
                   **No hidden cost will be included further
                 </div>
-              </div>
+              </div> */}
 
               {/* Submit Button */}
               <div className="mt-8 text-center">
