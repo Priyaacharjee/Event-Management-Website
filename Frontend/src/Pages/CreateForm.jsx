@@ -808,6 +808,12 @@ const CreateForm = () => {
                         id="city"
                         onChange={(e) => {
                           setFormData({ ...formData, city: e.target.value });
+                          setvenue_1(
+                            allVenues
+                              .filter((venue) => venue.city === e.target.value)
+                              .map((venue) => venue.name)
+                          );
+
                           setVenueDropdown(true);
                         }}
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -850,17 +856,20 @@ const CreateForm = () => {
                                   },
                                 });
                                 setVenue1(true);
+                                console.log(venue_1);
                               }}
                               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                             >
                               <option value="" disabled selected>
                                 Select Venue 1
                               </option>
-                              {Array.isArray(venue_1) && venue_1.length>0 && venue_1.map((venue, index) => (
-                                <option key={index} value={venue}>
-                                  {venue}
-                                </option>
-                              ))}
+                              {Array.isArray(venue_1) &&
+                                venue_1.length > 0 &&
+                                venue_1.map((venue, index) => (
+                                  <option key={index} value={venue}>
+                                    {venue}
+                                  </option>
+                                ))}
                             </select>
                           </div>
 
