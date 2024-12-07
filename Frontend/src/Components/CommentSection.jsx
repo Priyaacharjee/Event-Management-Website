@@ -10,7 +10,6 @@ const CommentTemplate = ({
   timestamp,
   text,
   likes,
-  onReply,
 }) => {
   const [replyBoxOpen, setreplyBoxOpen] = useState(false);
   return (
@@ -115,11 +114,6 @@ const CommentSection = () => {
     },
   ]);
 
-  const [activeReplyId, setActiveReplyId] = useState(null);
-
-  const handleReplyClick = (id) => {
-    setActiveReplyId(activeReplyId === id ? null : id); // Toggle reply box
-  };
 
   return (
     <div className="mt-6 text-gray-700 p-4 w-[65%] mx-auto">
@@ -132,8 +126,6 @@ const CommentSection = () => {
           timestamp={comment.timestamp}
           text={comment.text}
           likes={comment.likes}
-          replyBoxOpen={activeReplyId === comment.id}
-          onReply={handleReplyClick}
         />
       ))}
     </div>
