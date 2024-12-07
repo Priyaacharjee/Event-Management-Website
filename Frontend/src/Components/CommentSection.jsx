@@ -85,11 +85,14 @@ const CommentTemplate = ({
                     }}
                   />
                 </div>
-                <div className="cursor-pointer hover:underline">{replies.length} Replies</div>
+                <div className="cursor-pointer hover:underline">
+                  {replies.length} Replies
+                </div>
               </div>
             )}
           </div>
         </div>
+        
 
         {/* Recursive call */}
         {replies && replies.length > 0 && repliesShow ? (
