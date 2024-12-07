@@ -60,6 +60,25 @@ const CommentTemplate = ({
               <MdDelete />
             </button>
           </div>
+          {/* Reply Box */}
+          {replyBoxOpen && (
+            <div className="mt-4 flex gap-5">
+              <div className="m-0 p-0 w-[95%]">
+                <input
+                  type="text"
+                  className="w-full p-2 rounded bg-gray-200 text-gray-900 outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder={`Replying to @${username}...`}
+                />
+              </div>
+              <div className="w-[5%] flex items-center text-2xl text-blue-700">
+                <IoMdSend
+                  onClick={() => {
+                    setreplyBoxOpen(false);
+                  }}
+                />
+              </div>
+            </div>
+          )}
           <div className="text-blue-700 flex pt-2 items-center gap-1">
             <div className="cursor-pointer hover:text-xl">
               <IoIosArrowDown />
@@ -68,26 +87,6 @@ const CommentTemplate = ({
           </div>
         </div>
       </div>
-
-      {/* Reply Box */}
-      {replyBoxOpen && (
-        <div className="mt-4 ml-14 flex gap-5">
-          <div className="m-0 p-0 w-[95%]">
-            <input
-              type="text"
-              className="w-full p-2 rounded bg-gray-200 text-gray-900 outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder={`Replying to @${username}...`}
-            />
-          </div>
-          <div className="w-[5%] flex items-center text-2xl text-blue-700">
-            <IoMdSend
-              onClick={() => {
-                setreplyBoxOpen(false);
-              }}
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
