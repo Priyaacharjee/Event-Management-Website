@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaThumbsUp, FaReply, FaGlassCheers } from "react-icons/fa";
 import { IoIosArrowDown, IoMdSend } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
