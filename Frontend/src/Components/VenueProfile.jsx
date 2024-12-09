@@ -17,6 +17,7 @@ function VenueProfile() {
     }
   };
 
+
   return (
     <>
       <div className="h-full w-full flex">
