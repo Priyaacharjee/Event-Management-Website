@@ -16,11 +16,6 @@ function VenueProfile() {
         return (
           <>
             <div className="upcoming-bookings mr-5">
-              <div className="m-auto w-[35%] text-center">
-                <h2 className="text-lg p-2 font-bold font-serif text-blue-900 mb-4">
-                  Upcoming Bookings
-                </h2>
-              </div>
               <div className="bookings-container grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 {bookings.map((booking) => (
                   <div key={booking.id} className="booking-card">
@@ -42,11 +37,6 @@ function VenueProfile() {
         return (
           <>
             <div className="upcoming-bookings mr-5">
-              <div className="m-auto w-[35%] text-center">
-                <h2 className="text-lg p-2 font-bold font-serif text-blue-900 mb-4">
-                  Past Bookings
-                </h2>
-              </div>
               <div className="bookings-container grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 {bookings.map((booking) => (
                   <div key={booking.id} className="booking-card">
@@ -120,9 +110,9 @@ function VenueProfile() {
           <div className="flex gap-5 cursor-pointer ml-5 mt-6">
             {/* Basic Details */}
             <div
-              className={`cursor-pointer relative ${
+              className={`cursor-pointer relative font-bold font-serif text-lg ${
                 activeMenu === "BasicDetails"
-                  ? "text-blue-600"
+                  ? "text-blue-700"
                   : "text-gray-600"
               }`}
               onClick={() => setActiveMenu("BasicDetails")}
@@ -137,8 +127,8 @@ function VenueProfile() {
             </div>
             {/* Gallery */}
             <div
-              className={`cursor-pointer relative ${
-                activeMenu === "Gallery" ? "text-blue-600" : "text-gray-600"
+              className={`cursor-pointer relative font-bold font-serif text-lg ${
+                activeMenu === "Gallery" ? "text-blue-700" : "text-gray-600"
               }`}
               onClick={() => setActiveMenu("Gallery")}
             >
@@ -152,9 +142,9 @@ function VenueProfile() {
             </div>
             {/* Booking Requests */}
             <div
-              className={`cursor-pointer relative ${
+              className={`cursor-pointer relative font-bold font-serif text-lg ${
                 activeMenu === "Booking Requests"
-                  ? "text-blue-600"
+                  ? "text-blue-700"
                   : "text-gray-600"
               }`}
               onClick={() => setActiveMenu("Booking Requests")}
@@ -169,9 +159,9 @@ function VenueProfile() {
             </div>
             {/* Upcoming Bookings */}
             <div
-              className={`cursor-pointer relative ${
+              className={`cursor-pointer relative font-bold font-serif text-lg ${
                 activeMenu === "Upcoming Bookings"
-                  ? "text-blue-600"
+                  ? "text-blue-700"
                   : "text-gray-600"
               }`}
               onClick={() => setActiveMenu("Upcoming Bookings")}
@@ -186,9 +176,9 @@ function VenueProfile() {
             </div>
             {/* Past Bookings */}
             <div
-              className={`cursor-pointer relative ${
+              className={`cursor-pointer relative font-bold font-serif text-lg ${
                 activeMenu === "Past Bookings"
-                  ? "text-blue-600"
+                  ? "text-blue-700"
                   : "text-gray-600"
               }`}
               onClick={() => setActiveMenu("Past Bookings")}

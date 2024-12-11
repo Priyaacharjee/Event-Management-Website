@@ -15,23 +15,25 @@ function VenueUserPage() {
         return <VenueProfile />;
       default:
         return (
-          <div
-            style={{
-              backgroundImage:
-                "url(https://images.pexels.com/photos/4466492/pexels-photo-4466492.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "100vh",
-              width: "100%",
-            }}
-          >
-            <div className="w-[50%] text-center pt-[20%]">
-              <div className="text-8xl font-serif">WELCOME</div>
-              <div className="pt-2 font-serif text-red-700 animate-blink">
-                Please complete your profile 100%!
+          venue && venue.completePercentage < 100 && (
+            <div
+              style={{
+                backgroundImage:
+                  "url(https://images.pexels.com/photos/4466492/pexels-photo-4466492.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                height: "100vh",
+                width: "100%",
+              }}
+            >
+              <div className="w-[50%] text-center pt-[20%]">
+                <div className="text-8xl font-serif">WELCOME</div>
+                <div className="pt-2 font-serif text-red-700 animate-blink">
+                  Please complete your profile 100%!
+                </div>
               </div>
             </div>
-          </div>
+          )
         );
     }
   };
