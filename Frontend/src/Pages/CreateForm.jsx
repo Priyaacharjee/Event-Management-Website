@@ -16,120 +16,12 @@ const CreateForm = () => {
   const [regerror, setRegError] = useState("");
   const [descerror, setDescError] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [billPaymentDone, setbillPaymentDone] = useState(false);
 
   const [venueDropdown, setVenueDropdown] = useState(false);
-  // const [selectedVenue, setSelectedVenue] = useState("");
-  // const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
-
-  const [selectedVenues, setSelectedVenues] = useState({
-    primary: "",
-    secondary: "",
-    tertiary: "",
-  });
-
-  // const [selectedTimeSlots, setSelectedTimeSlots] = useState({
-  //   primary: "",
-  //   secondary: "",
-  //   tertiary: "",
-  // });
 
   const [venue1, setVenue1] = useState(false);
   const [venue2, setVenue2] = useState(false);
   const [venue3, setVenue3] = useState(false);
-
-  // const cities = [
-  //   { value: "kolkata", label: "Kolkata" },
-  //   { value: "bangalore", label: "Bangalore" },
-  //   { value: "pune", label: "Pune" },
-  //   { value: "hyderabad", label: "Hyderabad" },
-  // ];
-
-  const venues = [
-    {
-      city: "kolkata",
-      value: "venue1",
-      label: "ITC Royal Bengal",
-      timeSlots: ["10:00 AM", "02:00 PM", "06:00 PM"],
-    },
-    {
-      city: "kolkata",
-      value: "venue2",
-      label: "The Grand Oberoi",
-      timeSlots: ["09:00 AM", "01:00 PM", "05:00 PM"],
-    },
-    {
-      city: "kolkata",
-      value: "venue3",
-      label: "JW Marriott",
-      timeSlots: ["11:00 AM", "03:00 PM", "07:00 PM"],
-    },
-    {
-      city: "bangalore",
-      value: "venue4",
-      label: "The Leela Palace",
-      timeSlots: ["10:00 AM", "02:00 PM", "06:00 PM"],
-    },
-    {
-      city: "bangalore",
-      value: "venue5",
-      label: "Taj West End",
-      timeSlots: ["09:00 AM", "01:00 PM", "05:00 PM"],
-    },
-    {
-      city: "pune",
-      value: "venue6",
-      label: "Conrad Pune",
-      timeSlots: ["11:00 AM", "03:00 PM", "07:00 PM"],
-    },
-    {
-      city: "pune",
-      value: "venue7",
-      label: "Shantai Hotel",
-      timeSlots: ["10:00 AM", "02:00 PM", "06:00 PM"],
-    },
-    {
-      city: "pune",
-      value: "venue8",
-      label: "Lemon Tree Hotel",
-      timeSlots: ["09:00 AM", "01:00 PM", "05:00 PM"],
-    },
-    {
-      city: "hyderabad",
-      value: "venue9",
-      label: "Novotel Hyderabad",
-      timeSlots: ["10:00 AM", "02:00 PM", "06:00 PM"],
-    },
-    {
-      city: "hyderabad",
-      value: "venue10",
-      label: "Amrutha Castle",
-      timeSlots: ["09:00 AM", "01:00 PM", "05:00 PM"],
-    },
-  ];
-
-  // const handleVenueChange = (level, value) => {
-  //   setSelectedVenues((prev) => {
-  //     const updated = { ...prev, [level]: value };
-  //     // Reset the lower levels when a higher level changes
-  //     if (level === "primary") {
-  //       updated.secondary = "";
-  //       updated.tertiary = "";
-  //     } else if (level === "secondary") {
-  //       updated.tertiary = "";
-  //     }
-  //     return updated;
-  //   });
-  //   setSelectedTimeSlot("");
-  // };
-
-  // Updated Time Slot Change Handler
-  // const handleTimeSlotChange = (venueLevel, timeSlot) => {
-  //   setSelectedTimeSlots((prev) => ({
-  //     ...prev,
-  //     [venueLevel]: timeSlot,
-  //   }));
-  // };
 
   const [formData, setFormData] = useState({
     eventName: "",
@@ -164,13 +56,6 @@ const CreateForm = () => {
       timeslot: null,
     },
   });
-
-  // Filter venues based on the selected city
-  const filteredVenues = venues.filter((venue) => venue.city === formData.city);
-
-  // Exclude already selected venues
-  const getAvailableVenues = (excludeValues) =>
-    filteredVenues.filter((venue) => !excludeValues.includes(venue.value));
 
   const handleScannerImage = async (e) => {
     const file = e.target.files[0];
@@ -233,7 +118,7 @@ const CreateForm = () => {
     const { name, value } = event.target;
     if (name === "eventName") {
       const validationError = validateEventName(value);
-      setNameError(validationError); // Set error message
+      setNameError(validationError);
     }
     setFormData({ ...formData, [name]: value, eventType });
   };
@@ -247,58 +132,14 @@ const CreateForm = () => {
     const { name, value } = event.target;
     if (value) {
       setFormData({ ...formData, [name]: value });
-      // calculatePayableAmount(formData.headcount, value);
     } else {
       setFormData({ ...formData, [name]: eventType });
-      // calculatePayableAmount(formData.headcount, eventType);
     }
   };
-
-  // const calculatePayableAmount = (headcount, eventType) => {
-  //   let amount = 0;
-
-  //   if (eventType === "in_person") {
-  //     if (headcount <= 200) amount = 2000;
-  //     else if (headcount <= 400) amount = 4000;
-  //     else if (headcount <= 500) amount = 5000;
-  //   } else if (eventType === "virtual") {
-  //     if (headcount <= 200) amount = 500;
-  //     else if (headcount <= 400) amount = 700;
-  //     else if (headcount <= 500) amount = 1000;
-  //   } else if (eventType === "hybrid") {
-  //     if (headcount <= 200) amount = 3000;
-  //     else if (headcount <= 400) amount = 5000;
-  //     else if (headcount <= 500) amount = 7000;
-  //   }
-
-  //   setPayableAmount(amount);
-  // };
-
-  // const handlePayment = () => {
-  //   setFormData({
-  //     ...formData,
-  //     bill: payableAmount,
-  //   });
-  //   if (
-  //     formData.eventDate <= formData.registrationEndDate ||
-  //     formData.eventDate < new Date() ||
-  //     formData.registrationEndDate < new Date()
-  //   ) {
-  //     alert("Please provide a valid Event date & Last date of registration!");
-  //   } else if (formData.isPaid && formData.paidAmountPerPerson <= 0) {
-  //     alert("Please provide an amount to be paid by every participent!");
-  //   } else {
-  //     setbillPaymentDone(true);
-  //     alert(`${payableAmount}/- Payment successfull`);
-  //   }
-  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // if (!billPaymentDone) {
-      //   alert("Please complete your payment to create an event!");
-      // } else {
       setLoading(true);
       const result = await createEvent(formData);
       setTimeout(async () => {
@@ -314,7 +155,6 @@ const CreateForm = () => {
           navigate("/inpersonevent");
         }
       }, 3000);
-      //}
     } catch (error) {
       alert("An error occurred while creating the event. Please try again.");
     }
@@ -326,6 +166,7 @@ const CreateForm = () => {
   const [venue_1, setvenue_1] = useState([]);
   const [venue_2, setvenue_2] = useState([]);
   const [venue_3, setvenue_3] = useState([]);
+  
   useEffect(() => {
     fetchAllVenues().then((response) => {
       setallVenues(response);
@@ -526,7 +367,7 @@ const CreateForm = () => {
                   onChange={(e) => {
                     const selectedTime = e.target.value;
                     const currentDate = new Date();
-                    const currentTime = currentDate.toTimeString().slice(0, 5); // Format as "HH:MM"
+                    const currentTime = currentDate.toTimeString().slice(0, 5);
 
                     // Get the event date (ensure `formData.eventDate` exists)
                     const isToday =
@@ -637,16 +478,8 @@ const CreateForm = () => {
                     setError("");
                     setFormData({
                       ...formData,
-                      headcount: e.target.value,
+                      headcount: value,
                     });
-                    // if (eventType) {
-                    //   calculatePayableAmount(e.target.value, eventType);
-                    // } else {
-                    //   calculatePayableAmount(
-                    //     e.target.value,
-                    //     formData.eventType
-                    //   );
-                    // }
                   }}
                   required
                 />
@@ -894,7 +727,7 @@ const CreateForm = () => {
                           htmlFor="tertiaryVenue"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Venue 3{" "}
+                          Venue 3
                           <span
                             className="float-end hover:underline text-blue-800"
                             onClick={openNewTab}
@@ -1046,7 +879,7 @@ const CreateForm = () => {
                           setvenue_1(
                             allVenues
                               .filter((venue) => venue.city === e.target.value)
-                              .map((venue) => venue.name)
+                              .map((venue) => venue)
                           );
 
                           setVenueDropdown(true);
@@ -1072,7 +905,7 @@ const CreateForm = () => {
                       {/* Venue Dropdown */}
                       {venueDropdown && formData.city && (
                         <>
-                          {/* Primary Venue */}
+                          {/* Venue 2 */}
                           <div className="mt-4">
                             <label
                               htmlFor="primaryVenue"
@@ -1097,7 +930,10 @@ const CreateForm = () => {
                                   },
                                 });
                                 setVenue1(true);
-                                console.log(venue_1);
+                                const filteredVenues = venue_1.filter(
+                                  (venue) => venue._id !== e.target.value
+                                );
+                                setvenue_2(filteredVenues);
                               }}
                               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                             >
@@ -1105,10 +941,9 @@ const CreateForm = () => {
                                 Select Venue 1
                               </option>
                               {Array.isArray(venue_1) &&
-                                venue_1.length > 0 &&
                                 venue_1.map((venue, index) => (
-                                  <option key={index} value={venue}>
-                                    {venue}
+                                  <option key={index} value={venue._id}>
+                                    {venue.name}
                                   </option>
                                 ))}
                             </select>
@@ -1146,7 +981,7 @@ const CreateForm = () => {
                             </div>
                           ) : null}
 
-                          {/* Secondary Venue */}
+                          {/* Venue 2 */}
                           <div className="mt-4">
                             <label
                               htmlFor="secondaryVenue"
@@ -1171,6 +1006,10 @@ const CreateForm = () => {
                                   },
                                 });
                                 setVenue2(true);
+                                const filteredVenues = venue_2.filter(
+                                  (venue) => venue._id !== e.target.value
+                                );
+                                setvenue_3(filteredVenues);
                               }}
                               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                             >
@@ -1228,13 +1067,13 @@ const CreateForm = () => {
                             </div>
                           ) : null}
 
-                          {/* Tertiary Venue */}
+                          {/* Venue 3 */}
                           <div className="mt-4">
                             <label
                               htmlFor="tertiaryVenue"
                               className="block text-sm font-medium text-gray-700"
                             >
-                              Venue 3{" "}
+                              Venue 3
                               <span
                                 className="float-end hover:underline text-blue-800"
                                 onClick={openNewTab}
@@ -1260,14 +1099,17 @@ const CreateForm = () => {
                               <option value="" disabled>
                                 Select Venue 3
                               </option>
-                              {getAvailableVenues([
-                                selectedVenues.primary,
-                                selectedVenues.secondary,
-                              ]).map((venue) => (
-                                <option key={venue.value} value={venue.value}>
-                                  {venue.label}
+                              {venue_3.length === 0 ? (
+                                <option className="text-red-600">
+                                  No more venue is available!
                                 </option>
-                              ))}
+                              ) : (
+                                venue_3.map((venue, index) => (
+                                  <option key={index} value={venue._id}>
+                                    {venue.name}
+                                  </option>
+                                ))
+                              )}
                             </select>
                           </div>
 

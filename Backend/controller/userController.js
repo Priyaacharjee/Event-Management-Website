@@ -276,7 +276,7 @@ module.exports.createEvent = async (req, res) => {
         url: posterResult.secure_url,
       },
     });
-    console.log(event);
+    // console.log(event);
 
     await userModel.findOneAndUpdate(
       { _id: req.user._id },
