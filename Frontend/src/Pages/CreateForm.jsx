@@ -6,7 +6,6 @@ const CreateForm = () => {
   const navigate = useNavigate();
   const { eventType } = useParams();
 
-  // const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
   const [nameerror, setNameError] = useState("");
   const [dateerror, setDateError] = useState("");
@@ -73,22 +72,6 @@ const CreateForm = () => {
     setFormData({ ...formData, scannerImage: imageData });
   };
 
-  const handlePosterImage = async (e) => {
-    const file = e.target.files[0];
-    if (!file) {
-      alert("Please Upload an Poster Image");
-      return;
-    }
-    const maxSizeInKB = 50;
-    if (file.size > maxSizeInKB * 1024) {
-      alert(`File size should be less than ${maxSizeInKB} KB.`);
-      return;
-    }
-
-    const imageData = await setFileToBase(file);
-    setFormData({ ...formData, posterImage: imageData });
-  };
-
   const setFileToBase = (file) => {
     return new Promise((resolve) => {
       const reader = new FileReader();
@@ -97,11 +80,6 @@ const CreateForm = () => {
         resolve(reader.result);
       };
     });
-  };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value, eventType });
   };
 
   const handleFileChange = (event) => {
@@ -534,7 +512,6 @@ const CreateForm = () => {
                           </span>
                         </label>
                         <select
-                          id="primaryVenue"
                           onChange={(e) => {
                             setFormData({
                               ...formData,
@@ -564,42 +541,18 @@ const CreateForm = () => {
                         </select>
                       </div>
 
+                      {/* Time Slot for Venue 1 */}
                       {venue1 ? (
                         <div className="mt-4">
                           <p className="block text-sm font-medium text-gray-700">
                             Select Preferred Time Slot
                           </p>
-                          {/* <div className="mt-2 space-y-2">
-                            {venues.timeSlots.map((timeSlot, index) => (
-                              <label key={index} className="flex items-center space-x-2">
-                                <input
-                                  type="radio"
-                                  name="timeSlotPrimary"
-                                  value={timeSlot} // Add value to ensure the correct timeslot is set
-                                  checked={formData.venue1.timeslot === timeSlot} // Update checked to match the new structure
-                                  onChange={(e) =>
-                                    setFormData({
-                                      ...formData,
-                                      venue1: {
-                                        ...formData.venue1,
-                                        timeslot: e.target.value, // Set the timeslot for venue1
-                                      },
-                                    })
-                                  }
-                                  className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                                />
-                                <span className="text-gray-700">{timeSlot}</span>
-                              </label>
-                            ))}
-                          </div> */}
                         </div>
                       ) : null}
-                      {/* Time Slot for Primary Venue */}
 
                       {/* Venue 2 */}
                       <div className="mt-4">
                         <label
-                          htmlFor="secondaryVenue"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Venue 2 <span className="text-red-500">*</span>
@@ -611,7 +564,6 @@ const CreateForm = () => {
                           </span>
                         </label>
                         <select
-                          id="secondaryVenue"
                           onChange={(e) => {
                             setFormData({
                               ...formData,
@@ -645,51 +597,18 @@ const CreateForm = () => {
                         </select>
                       </div>
 
-                      {/* Time Slot for Secondary Venue */}
+                      {/* Time Slot for Venue 2 */}
                       {venue2 ? (
                         <div className="mt-4">
                           <p className="block text-sm font-medium text-gray-700">
                             Select Preferred Time Slot
                           </p>
-                          {/* // <div className="mt-2 space-y-2">
-                            //   {venues
-                            //     .find(
-                            //       (venue) =>
-                            //         venue.value === selectedVenues.secondary
-                            //     )
-                            //     ?.timeSlots.map((timeSlot, index) => (
-                            //       <label
-                            //         key={index}
-                            //         className="flex items-center space-x-2"
-                            //       >
-                            //         <input
-                            //           type="radio"
-                            //           name="timeSlotSecondary"
-                            //           value={timeSlot}
-                            //           checked={
-                            //             selectedTimeSlots.secondary === timeSlot
-                            //           }
-                            //           onChange={(e) =>
-                            //             handleTimeSlotChange(
-                            //               "secondary",
-                            //               e.target.value
-                            //             )
-                            //           }
-                            //           className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                            //         />
-                            //         <span className="text-gray-700">
-                            //           {timeSlot}
-                            //         </span>
-                            //       </label>
-                            //     ))}
-                            // </div> */}
                         </div>
                       ) : null}
 
                       {/* Venue 3 */}
                       <div className="mt-4">
                         <label
-                          htmlFor="tertiaryVenue"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Venue 3
@@ -701,7 +620,6 @@ const CreateForm = () => {
                           </span>
                         </label>
                         <select
-                          id="tertiaryVenue"
                           onChange={(e) => {
                             setFormData({
                               ...formData,
@@ -731,44 +649,12 @@ const CreateForm = () => {
                         </select>
                       </div>
 
-                      {/* Time Slot for Tertiary Venue */}
+                      {/* Time Slot for Venue 3 */}
                       {venue3 ? (
                         <div className="mt-4">
                           <p className="block text-sm font-medium text-gray-700">
                             Select Preferred Time Slot
                           </p>
-                          {/* <div className="mt-2 space-y-2">
-                              {venues
-                                .find(
-                                  (venue) =>
-                                    venue.value === selectedVenues.tertiary
-                                )
-                                ?.timeSlots.map((timeSlot, index) => (
-                                  <label
-                                    key={index}
-                                    className="flex items-center space-x-2"
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="timeSlotTertiary"
-                                      value={timeSlot}
-                                      checked={
-                                        selectedTimeSlots.tertiary === timeSlot
-                                      }
-                                      onChange={(e) =>
-                                        handleTimeSlotChange(
-                                          "tertiary",
-                                          e.target.value
-                                        )
-                                      }
-                                      className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                                    />
-                                    <span className="text-gray-700">
-                                      {timeSlot}
-                                    </span>
-                                  </label>
-                                ))}
-                            </div> */}
                         </div>
                       ) : null}
                     </>
@@ -873,7 +759,6 @@ const CreateForm = () => {
                           {/* Venue 2 */}
                           <div className="mt-4">
                             <label
-                              htmlFor="primaryVenue"
                               className="block text-sm font-medium text-gray-700"
                             >
                               Venue 1 <span className="text-red-500">*</span>
@@ -885,7 +770,6 @@ const CreateForm = () => {
                               </span>
                             </label>
                             <select
-                              id="primaryVenue"
                               onChange={(e) => {
                                 setFormData({
                                   ...formData,
@@ -914,42 +798,18 @@ const CreateForm = () => {
                             </select>
                           </div>
 
-                          {/* Time Slot for Primary Venue */}
+                          {/* Time Slot for Venue 1 */}
                           {venue1 ? (
                             <div className="mt-4">
                               <p className="block text-sm font-medium text-gray-700">
                                 Select Preferred Time Slot
                               </p>
-                              {/* <div className="mt-2 space-y-2">
-                            {venues.timeSlots.map((timeSlot, index) => (
-                              <label key={index} className="flex items-center space-x-2">
-                                <input
-                                  type="radio"
-                                  name="timeSlotPrimary"
-                                  value={timeSlot} // Add value to ensure the correct timeslot is set
-                                  checked={formData.venue1.timeslot === timeSlot} // Update checked to match the new structure
-                                  onChange={(e) =>
-                                    setFormData({
-                                      ...formData,
-                                      venue1: {
-                                        ...formData.venue1,
-                                        timeslot: e.target.value, // Set the timeslot for venue1
-                                      },
-                                    })
-                                  }
-                                  className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                                />
-                                <span className="text-gray-700">{timeSlot}</span>
-                              </label>
-                            ))}
-                          </div> */}
                             </div>
                           ) : null}
 
                           {/* Venue 2 */}
                           <div className="mt-4">
                             <label
-                              htmlFor="secondaryVenue"
                               className="block text-sm font-medium text-gray-700"
                             >
                               Venue 2 <span className="text-red-500">*</span>
@@ -961,7 +821,6 @@ const CreateForm = () => {
                               </span>
                             </label>
                             <select
-                              id="secondaryVenue"
                               onChange={(e) => {
                                 setFormData({
                                   ...formData,
@@ -991,51 +850,18 @@ const CreateForm = () => {
                             </select>
                           </div>
 
-                          {/* Time Slot for Secondary Venue */}
+                          {/* Time Slot for Venue 2 */}
                           {venue2 ? (
                             <div className="mt-4">
                               <p className="block text-sm font-medium text-gray-700">
                                 Select Preferred Time Slot
                               </p>
-                              {/* // <div className="mt-2 space-y-2">
-                            //   {venues
-                            //     .find(
-                            //       (venue) =>
-                            //         venue.value === selectedVenues.secondary
-                            //     )
-                            //     ?.timeSlots.map((timeSlot, index) => (
-                            //       <label
-                            //         key={index}
-                            //         className="flex items-center space-x-2"
-                            //       >
-                            //         <input
-                            //           type="radio"
-                            //           name="timeSlotSecondary"
-                            //           value={timeSlot}
-                            //           checked={
-                            //             selectedTimeSlots.secondary === timeSlot
-                            //           }
-                            //           onChange={(e) =>
-                            //             handleTimeSlotChange(
-                            //               "secondary",
-                            //               e.target.value
-                            //             )
-                            //           }
-                            //           className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                            //         />
-                            //         <span className="text-gray-700">
-                            //           {timeSlot}
-                            //         </span>
-                            //       </label>
-                            //     ))}
-                            // </div> */}
                             </div>
                           ) : null}
 
                           {/* Venue 3 */}
                           <div className="mt-4">
                             <label
-                              htmlFor="tertiaryVenue"
                               className="block text-sm font-medium text-gray-700"
                             >
                               Venue 3
@@ -1048,7 +874,6 @@ const CreateForm = () => {
                             </label>
 
                             <select
-                              id="tertiaryVenue"
                               onChange={(e) => {
                                 setFormData({
                                   ...formData,
@@ -1078,44 +903,12 @@ const CreateForm = () => {
                             </select>
                           </div>
 
-                          {/* Time Slot for Tertiary Venue */}
+                          {/* Time Slot for Venue 3 */}
                           {venue3 ? (
                             <div className="mt-4">
                               <p className="block text-sm font-medium text-gray-700">
                                 Select Preferred Time Slot
                               </p>
-                              {/* <div className="mt-2 space-y-2">
-                              {venues
-                                .find(
-                                  (venue) =>
-                                    venue.value === selectedVenues.tertiary
-                                )
-                                ?.timeSlots.map((timeSlot, index) => (
-                                  <label
-                                    key={index}
-                                    className="flex items-center space-x-2"
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="timeSlotTertiary"
-                                      value={timeSlot}
-                                      checked={
-                                        selectedTimeSlots.tertiary === timeSlot
-                                      }
-                                      onChange={(e) =>
-                                        handleTimeSlotChange(
-                                          "tertiary",
-                                          e.target.value
-                                        )
-                                      }
-                                      className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                                    />
-                                    <span className="text-gray-700">
-                                      {timeSlot}
-                                    </span>
-                                  </label>
-                                ))}
-                            </div> */}
                             </div>
                           ) : null}
                         </>
