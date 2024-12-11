@@ -157,7 +157,7 @@ export default function Navbar({ menuItems }) {
         setUser(venue.name);
       }
     });
-  }, [handelLogout]);
+  }, []);
 
   return (
     <>

@@ -23,13 +23,12 @@ export default function Header() {
     if (user) {
       navigate("/createform");
     } else {
-      navigate("/signup");
+      navigate("/login");
     }
   };
 
   const handleLogInClick = () => {
     navigate("/login");
-    //navigate("/eventcard");
   };
 
   const searchClick = () => {

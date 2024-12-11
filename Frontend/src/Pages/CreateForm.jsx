@@ -6,20 +6,21 @@ const CreateForm = () => {
   const navigate = useNavigate();
   const { eventType } = useParams();
 
-  const [payableAmount, setPayableAmount] = useState(0);
+  // const [payableAmount, setPayableAmount] = useState(0);
   const [error, setError] = useState("");
   const [nameerror, setNameError] = useState("");
   const [dateerror, setDateError] = useState("");
+  const [enddateerror, setEndDateError] = useState("");
   const [speakererror, setSpeakerError] = useState("");
   const [timeerror, setTimeError] = useState("");
   const [regerror, setRegError] = useState("");
   const [descerror, setDescError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [billPaymentDone, setbillPaymentDone] = useState(false);
+  // const [billPaymentDone, setbillPaymentDone] = useState(false);
 
   const [venueDropdown, setVenueDropdown] = useState(false);
-  const [selectedVenue, setSelectedVenue] = useState("");
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  // const [selectedVenue, setSelectedVenue] = useState("");
+  // const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
 
   const [selectedVenues, setSelectedVenues] = useState({
     primary: "",
@@ -27,22 +28,22 @@ const CreateForm = () => {
     tertiary: "",
   });
 
-  const [selectedTimeSlots, setSelectedTimeSlots] = useState({
-    primary: "",
-    secondary: "",
-    tertiary: "",
-  });
+  // const [selectedTimeSlots, setSelectedTimeSlots] = useState({
+  //   primary: "",
+  //   secondary: "",
+  //   tertiary: "",
+  // });
 
   const [venue1, setVenue1] = useState(false);
   const [venue2, setVenue2] = useState(false);
   const [venue3, setVenue3] = useState(false);
 
-  const cities = [
-    { value: "kolkata", label: "Kolkata" },
-    { value: "bangalore", label: "Bangalore" },
-    { value: "pune", label: "Pune" },
-    { value: "hyderabad", label: "Hyderabad" },
-  ];
+  // const cities = [
+  //   { value: "kolkata", label: "Kolkata" },
+  //   { value: "bangalore", label: "Bangalore" },
+  //   { value: "pune", label: "Pune" },
+  //   { value: "hyderabad", label: "Hyderabad" },
+  // ];
 
   const venues = [
     {
@@ -107,32 +108,34 @@ const CreateForm = () => {
     },
   ];
 
-  const handleVenueChange = (level, value) => {
-    setSelectedVenues((prev) => {
-      const updated = { ...prev, [level]: value };
-      // Reset the lower levels when a higher level changes
-      if (level === "primary") {
-        updated.secondary = "";
-        updated.tertiary = "";
-      } else if (level === "secondary") {
-        updated.tertiary = "";
-      }
-      return updated;
-    });
-    setSelectedTimeSlot("");
-  };
+  // const handleVenueChange = (level, value) => {
+  //   setSelectedVenues((prev) => {
+  //     const updated = { ...prev, [level]: value };
+  //     // Reset the lower levels when a higher level changes
+  //     if (level === "primary") {
+  //       updated.secondary = "";
+  //       updated.tertiary = "";
+  //     } else if (level === "secondary") {
+  //       updated.tertiary = "";
+  //     }
+  //     return updated;
+  //   });
+  //   setSelectedTimeSlot("");
+  // };
 
   // Updated Time Slot Change Handler
-  const handleTimeSlotChange = (venueLevel, timeSlot) => {
-    setSelectedTimeSlots((prev) => ({
-      ...prev,
-      [venueLevel]: timeSlot,
-    }));
-  };
+  // const handleTimeSlotChange = (venueLevel, timeSlot) => {
+  //   setSelectedTimeSlots((prev) => ({
+  //     ...prev,
+  //     [venueLevel]: timeSlot,
+  //   }));
+  // };
 
   const [formData, setFormData] = useState({
     eventName: "",
     eventDate: "",
+    eventDuration: 1,
+    eventEndDate: "",
     eventTime: "",
     eventType: "",
     speakerName: "",
@@ -223,7 +226,7 @@ const CreateForm = () => {
     if (wordCount > maxWords) {
       return `Event name should not exceed ${maxWords} words.`;
     }
-    return ""; // No error
+    return "";
   };
 
   const handleInputChange = (event) => {
@@ -244,32 +247,32 @@ const CreateForm = () => {
     const { name, value } = event.target;
     if (value) {
       setFormData({ ...formData, [name]: value });
-      calculatePayableAmount(formData.headcount, value);
+      // calculatePayableAmount(formData.headcount, value);
     } else {
       setFormData({ ...formData, [name]: eventType });
-      calculatePayableAmount(formData.headcount, eventType);
+      // calculatePayableAmount(formData.headcount, eventType);
     }
   };
 
-  const calculatePayableAmount = (headcount, eventType) => {
-    let amount = 0;
+  // const calculatePayableAmount = (headcount, eventType) => {
+  //   let amount = 0;
 
-    if (eventType === "in_person") {
-      if (headcount <= 200) amount = 2000;
-      else if (headcount <= 400) amount = 4000;
-      else if (headcount <= 500) amount = 5000;
-    } else if (eventType === "virtual") {
-      if (headcount <= 200) amount = 500;
-      else if (headcount <= 400) amount = 700;
-      else if (headcount <= 500) amount = 1000;
-    } else if (eventType === "hybrid") {
-      if (headcount <= 200) amount = 3000;
-      else if (headcount <= 400) amount = 5000;
-      else if (headcount <= 500) amount = 7000;
-    }
+  //   if (eventType === "in_person") {
+  //     if (headcount <= 200) amount = 2000;
+  //     else if (headcount <= 400) amount = 4000;
+  //     else if (headcount <= 500) amount = 5000;
+  //   } else if (eventType === "virtual") {
+  //     if (headcount <= 200) amount = 500;
+  //     else if (headcount <= 400) amount = 700;
+  //     else if (headcount <= 500) amount = 1000;
+  //   } else if (eventType === "hybrid") {
+  //     if (headcount <= 200) amount = 3000;
+  //     else if (headcount <= 400) amount = 5000;
+  //     else if (headcount <= 500) amount = 7000;
+  //   }
 
-    setPayableAmount(amount);
-  };
+  //   setPayableAmount(amount);
+  // };
 
   // const handlePayment = () => {
   //   setFormData({
@@ -320,9 +323,9 @@ const CreateForm = () => {
   const [allVenues, setallVenues] = useState([]);
   const [allVenuesCopy, setallVenuesCopy] = useState([]);
   const [allCity, setallCity] = useState([]);
-  const [venue_1, setvenue_1] = useState();
-  const [venue_2, setvenue_2] = useState();
-  const [venue_3, setvenue_3] = useState();
+  const [venue_1, setvenue_1] = useState([]);
+  const [venue_2, setvenue_2] = useState([]);
+  const [venue_3, setvenue_3] = useState([]);
   useEffect(() => {
     fetchAllVenues().then((response) => {
       setallVenues(response);
@@ -331,7 +334,11 @@ const CreateForm = () => {
   }, []);
 
   const openNewTab = () => {
-    window.open("http://localhost:5173/eventpage/6752099badee855cd533b8d2", "_blank", "noopener,noreferrer");
+    window.open(
+      "http://localhost:5173/eventpage/6752099badee855cd533b8d2",
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
@@ -353,13 +360,21 @@ const CreateForm = () => {
                   type="text"
                   name="eventName"
                   value={formData.eventName}
-                  onChange={handleInputChange}
-                  className={`mt-1 block w-full p-2 border ${nameerror ? "border-red-500" : "border-gray-300"
-                    } rounded-md shadow-sm`}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      eventName: e.target.value,
+                    });
+                  }}
+                  className={`mt-1 block w-full p-2 border ${
+                    nameerror ? "border-red-500" : "border-gray-300"
+                  } rounded-md shadow-sm`}
                   placeholder="Enter event name"
                   required
                 />
-                {nameerror && <p className="text-red-500 text-sm mt-1">{nameerror}</p>}
+                {nameerror && (
+                  <p className="text-red-500 text-sm mt-1">{nameerror}</p>
+                )}
               </div>
 
               {/* Event Date */}
@@ -383,13 +398,18 @@ const CreateForm = () => {
                     }
 
                     if (selectedDate > oneYearLater) {
-                      setDateError("Event date must be within the next 1 year.");
+                      setDateError(
+                        "Event date must be within the next 1 year."
+                      );
                       setFormData({ ...formData, eventDate: "" });
                       return;
                     }
 
-                    setDateError(""); // Clear error if valid
-                    handleInputChange(e);
+                    setDateError("");
+                    setFormData({
+                      ...formData,
+                      eventDate: e.target.value,
+                    });
 
                     // Filter venue based to date
                     const filteredVenues = allVenuesCopy.filter((venue) => {
@@ -411,8 +431,88 @@ const CreateForm = () => {
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
-                {dateerror && <p className="text-red-500 text-sm mt-1">{dateerror}</p>}
+                {dateerror && (
+                  <p className="text-red-500 text-sm mt-1">{dateerror}</p>
+                )}
               </div>
+
+              {/* Event Duration */}
+              {formData.eventDate && (
+                <div className="flex">
+                  <label className="block text-sm font-medium text-gray-700 pr-5">
+                    Is it a Single Day Event?
+                  </label>
+                  <input
+                    checked={formData.eventDuration === 1}
+                    type="checkbox"
+                    className="mr-1"
+                    onChange={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        eventDuration: 1,
+                      }))
+                    }
+                  />
+                  Yes
+                  <input
+                    type="checkbox"
+                    className="ml-4 mr-1"
+                    checked={formData.eventDuration === 0}
+                    onChange={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        eventDuration: 0,
+                      }))
+                    }
+                  />
+                  No
+                </div>
+              )}
+
+              {/* Event Ending Date */}
+              {formData.eventDuration === 0 && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    End Date of Event <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    name="eventEndDate"
+                    onChange={(e) => {
+                      const selectedEndDate = new Date(e.target.value);
+                      const eventStartDate = new Date(formData.eventDate);
+                      const today = new Date();
+                      const oneYearLater = new Date();
+                      oneYearLater.setFullYear(today.getFullYear() + 1);
+
+                      const fiveDaysLater = new Date(eventStartDate);
+                      fiveDaysLater.setDate(eventStartDate.getDate() + 5);
+
+                      if (selectedEndDate <= eventStartDate) {
+                        setEndDateError("Please select a valid Event end data");
+                        setFormData({ ...formData, eventEndDate: "" });
+                      }
+                      if (selectedEndDate > fiveDaysLater) {
+                        setEndDateError(
+                          "Event end date must be within 5 days from the event start date."
+                        );
+                        setFormData({ ...formData, eventEndDate: "" });
+                      } else {
+                        setEndDateError("");
+                        setFormData({
+                          ...formData,
+                          eventEndDate: e.target.value,
+                        });
+                      }
+                    }}
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    required
+                  />
+                  {enddateerror && (
+                    <p className="text-red-500 text-sm mt-1">{enddateerror}</p>
+                  )}
+                </div>
+              )}
 
               {/* Event Time */}
               <div>
@@ -430,14 +530,17 @@ const CreateForm = () => {
 
                     // Get the event date (ensure `formData.eventDate` exists)
                     const isToday =
-                      formData.eventDate === currentDate.toISOString().split("T")[0];
+                      formData.eventDate ===
+                      currentDate.toISOString().split("T")[0];
 
                     // Validate time range (e.g., between 09:00 and 21:00)
                     const minTime = "09:00";
                     const maxTime = "21:00";
 
                     if (selectedTime < minTime || selectedTime > maxTime) {
-                      setTimeError("Event time must be between 9:00 AM and 9:00 PM.");
+                      setTimeError(
+                        "Event time must be between 9:00 AM and 9:00 PM."
+                      );
                       setFormData({ ...formData, eventTime: "" });
                       return;
                     }
@@ -451,14 +554,18 @@ const CreateForm = () => {
 
                     // Clear error and set valid input
                     setTimeError("");
-                    handleInputChange(e);
+                    setFormData({
+                      ...formData,
+                      eventTime: e.target.value,
+                    });
                   }}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
-                {timeerror && <p className="text-red-500 text-sm mt-1">{timeerror}</p>}
+                {timeerror && (
+                  <p className="text-red-500 text-sm mt-1">{timeerror}</p>
+                )}
               </div>
-
 
               {/* Speaker */}
               <div>
@@ -475,14 +582,18 @@ const CreateForm = () => {
 
                     // Check if the input is valid
                     if (!nameRegex.test(value)) {
-                      setSpeakerError("Speaker's name can only contain alphabets and spaces.");
+                      setSpeakerError(
+                        "Speaker's name can only contain alphabets and spaces."
+                      );
                       setFormData({ ...formData, speakerName: "" });
                       return;
                     }
 
                     // Check length
                     if (value.length > 50) {
-                      setSpeakerError("Speaker's name cannot exceed 50 characters.");
+                      setSpeakerError(
+                        "Speaker's name cannot exceed 50 characters."
+                      );
                       setFormData({ ...formData, speakerName: "" });
                       return;
                     }
@@ -496,19 +607,24 @@ const CreateForm = () => {
 
                     // Clear error and set valid input
                     setSpeakerError("");
-                    handleInputChange(e);
+                    setFormData({
+                      ...formData,
+                      speakerName: e.target.value,
+                    });
                   }}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   placeholder="Enter speaker's name"
                   required
                 />
-                {speakererror && <p className="text-red-500 text-sm mt-1">{speakererror}</p>}
+                {speakererror && (
+                  <p className="text-red-500 text-sm mt-1">{speakererror}</p>
+                )}
               </div>
 
               {/* Total HeadCount */}
               <div>
                 <label className="block text-sm mt-8 font-medium text-gray-700">
-                  Total HeadCount (Up to 500 people){" "}
+                  Total HeadCount
                   <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -518,23 +634,19 @@ const CreateForm = () => {
                   placeholder="Enter number of maximum participent"
                   onChange={(e) => {
                     const value = parseInt(e.target.value);
-                    if (value > 500) {
-                      setError("Headcount cannot exceed 500 people");
-                    } else {
-                      setError("");
-                      setFormData({
-                        ...formData,
-                        headcount: e.target.value,
-                      });
-                      if (eventType) {
-                        calculatePayableAmount(e.target.value, eventType);
-                      } else {
-                        calculatePayableAmount(
-                          e.target.value,
-                          formData.eventType
-                        );
-                      }
-                    }
+                    setError("");
+                    setFormData({
+                      ...formData,
+                      headcount: e.target.value,
+                    });
+                    // if (eventType) {
+                    //   calculatePayableAmount(e.target.value, eventType);
+                    // } else {
+                    //   calculatePayableAmount(
+                    //     e.target.value,
+                    //     formData.eventType
+                    //   );
+                    // }
                   }}
                   required
                 />
@@ -551,8 +663,8 @@ const CreateForm = () => {
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   disabled={
                     eventType === "in_person" ||
-                      eventType === "virtual" ||
-                      eventType === "hybrid"
+                    eventType === "virtual" ||
+                    eventType === "hybrid"
                       ? true
                       : false
                   }
@@ -573,88 +685,93 @@ const CreateForm = () => {
               {/* Conditional field based on event type */}
               {(formData.eventType === "in_person" ||
                 eventType === "in_person") && (
-                  <div className="bg-indigo-200 p-6 rounded-xl">
-                    {/* City Dropdown */}
-                    <label className="block text-sm font-medium text-gray-700">
-                      Preferable City Name <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      name="city"
-                      id="city"
-                      value={formData.city || ""}
-                      onChange={(e) => {
-                        setFormData({ ...formData, city: e.target.value });
-                        setvenue_1(
-                          allVenues
-                            .filter((venue) => venue.city === e.target.value)
-                            .map((venue) => venue.name)
-                        );
+                <div className="bg-indigo-200 p-6 rounded-xl">
+                  {/* City Dropdown */}
+                  <label className="block text-sm font-medium text-gray-700">
+                    Preferable City Name <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    name="city"
+                    id="city"
+                    onChange={(e) => {
+                      setFormData({ ...formData, city: e.target.value });
+                      setvenue_1(
+                        allVenues
+                          .filter((venue) => venue.city === e.target.value)
+                          .map((venue) => venue)
+                      );
 
-                        setVenueDropdown(true);
-
-                        // setSelectedVenues({ primary: "", secondary: "", tertiary: "" });
-                      }}
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                    >
-                      <option value="" disabled>
-                        Select City
-                      </option>
-                      {formData.eventDate ? (
-                        <>
-                          {allCity.map((city, index) => (
-                            <option key={index}>{city}</option>
-                          ))}
-                        </>
-                      ) : (
-                        <option disabled className="text-red-600">
-                          Please select the Event Date first
-                        </option>
-                      )}
-                    </select>
-
-                    {/* Venue Dropdowns */}
-                    {venueDropdown && formData.city && (
+                      setVenueDropdown(true);
+                    }}
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  >
+                    <option disabled selected>
+                      Select City
+                    </option>
+                    {formData.eventDate ? (
                       <>
-                        {/* Primary Venue */}
-                        <div className="mt-4">
-                          <label
-                            htmlFor="primaryVenue"
-                            className="block text-sm font-medium text-gray-700"
+                        {allCity.map((city, index) => (
+                          <option key={index}>{city}</option>
+                        ))}
+                      </>
+                    ) : (
+                      <option disabled className="text-red-600">
+                        Please select the Event Date first
+                      </option>
+                    )}
+                  </select>
+
+                  {/* Venue Dropdowns */}
+                  {venueDropdown && formData.city && (
+                    <>
+                      {/* Venue 1 */}
+                      <div className="mt-4">
+                        <label className="block text-sm font-medium text-gray-700">
+                          Venue 1 <span className="text-red-500">*</span>
+                          <span
+                            className="float-end hover:underline text-blue-800"
+                            onClick={openNewTab}
                           >
-                            Venue 1 <span className="text-red-500">*</span>
-                            <span className="float-end hover:underline text-blue-800" onClick={openNewTab}>View Details</span>
-                          </label>
-                          <select
-                            id="primaryVenue"
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                venue1: {
-                                  ...formData.venue1,
-                                  id: e.target.value,
-                                },
-                              });
-                              setVenue1(true);
-                            }}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                          >
-                            <option value="" disabled selected>
-                              Select Venue 1
-                            </option>
-                            {venue_1.map((venue, index) => (
-                              <option key={index} value={venue}>
-                                {venue}
+                            View Details
+                          </span>
+                        </label>
+                        <select
+                          id="primaryVenue"
+                          onChange={(e) => {
+                            setFormData({
+                              ...formData,
+                              venue1: {
+                                ...formData.venue1,
+                                id: e.target.value,
+                              },
+                            });
+                            setVenue1(true);
+
+                            const filteredVenues = venue_1.filter(
+                              (venue) => venue._id !== e.target.value
+                            );
+                            setvenue_2(filteredVenues);
+                          }}
+                          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="" disabled selected>
+                            Select Venue 1
+                          </option>
+                          {Array.isArray(venue_1) &&
+                            venue_1.map((venue, index) => (
+                              <option key={index} value={venue._id}>
+                                {venue.name}
                               </option>
                             ))}
-                          </select>
-                        </div>
+                        </select>
+                      </div>
 
-                        {venue1 ? (
-                          <div className="mt-4">
-                            <p className="block text-sm font-medium text-gray-700">
-                              Select Preferred Time Slot
-                            </p>
-                            {/* <div className="mt-2 space-y-2">
+                      {venue1 ? (
+                        <div className="mt-4">
+                          <p className="block text-sm font-medium text-gray-700">
+                            Select Preferred Time Slot
+                          </p>
+                          {/* <div className="mt-2 space-y-2">
                             {venues.timeSlots.map((timeSlot, index) => (
                               <label key={index} className="flex items-center space-x-2">
                                 <input
@@ -677,54 +794,66 @@ const CreateForm = () => {
                               </label>
                             ))}
                           </div> */}
-                          </div>
-                        ) : null}
-                        {/* Time Slot for Primary Venue */}
-
-                        {/* Secondary Venue */}
-                        <div className="mt-4">
-                          <label
-                            htmlFor="secondaryVenue"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Venue 2 <span className="text-red-500">*</span>
-                            <span className="float-end hover:underline text-blue-800" onClick={openNewTab}>View Details</span>
-                          </label>
-                          <select
-                            id="secondaryVenue"
-                            value={selectedVenues.secondary}
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                venue2: {
-                                  ...formData.venue2,
-                                  id: e.target.value,
-                                },
-                              });
-                              setVenue2(true);
-                            }}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                          >
-                            <option value="" disabled>
-                              Select Venue 2
-                            </option>
-                            {getAvailableVenues([selectedVenues.primary]).map(
-                              (venue) => (
-                                <option key={venue.value} value={venue.value}>
-                                  {venue.label}
-                                </option>
-                              )
-                            )}
-                          </select>
                         </div>
+                      ) : null}
+                      {/* Time Slot for Primary Venue */}
 
-                        {/* Time Slot for Secondary Venue */}
-                        {venue2 ? (
-                          <div className="mt-4">
-                            <p className="block text-sm font-medium text-gray-700">
-                              Select Preferred Time Slot
-                            </p>
-                            {/* // <div className="mt-2 space-y-2">
+                      {/* Venue 2 */}
+                      <div className="mt-4">
+                        <label
+                          htmlFor="secondaryVenue"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Venue 2 <span className="text-red-500">*</span>
+                          <span
+                            className="float-end hover:underline text-blue-800"
+                            onClick={openNewTab}
+                          >
+                            View Details
+                          </span>
+                        </label>
+                        <select
+                          id="secondaryVenue"
+                          onChange={(e) => {
+                            setFormData({
+                              ...formData,
+                              venue2: {
+                                ...formData.venue2,
+                                id: e.target.value,
+                              },
+                            });
+                            setVenue2(true);
+                            const filteredVenues = venue_2.filter(
+                              (venue) => venue._id !== e.target.value
+                            );
+                            setvenue_3(filteredVenues);
+                          }}
+                          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="" disabled selected>
+                            Select Venue 2
+                          </option>
+                          {Array.isArray(venue_2) && venue_2.length === 0 ? (
+                            <option className="text-red-600">
+                              No more venue is available!
+                            </option>
+                          ) : (
+                            venue_2.map((venue, index) => (
+                              <option key={index} value={venue._id}>
+                                {venue.name}
+                              </option>
+                            ))
+                          )}
+                        </select>
+                      </div>
+
+                      {/* Time Slot for Secondary Venue */}
+                      {venue2 ? (
+                        <div className="mt-4">
+                          <p className="block text-sm font-medium text-gray-700">
+                            Select Preferred Time Slot
+                          </p>
+                          {/* // <div className="mt-2 space-y-2">
                             //   {venues
                             //     .find(
                             //       (venue) =>
@@ -756,52 +885,61 @@ const CreateForm = () => {
                             //       </label>
                             //     ))}
                             // </div> */}
-                          </div>
-                        ) : null}
-
-                        {/* Tertiary Venue */}
-                        <div className="mt-4">
-                          <label
-                            htmlFor="tertiaryVenue"
-                            className="block text-sm font-medium text-gray-700"
-                          >Venue 3 <span className="float-end hover:underline text-blue-800" onClick={openNewTab}>View Details</span>
-                          </label>
-                          <select
-                            id="tertiaryVenue"
-                            value={selectedVenues.tertiary}
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                venue3: {
-                                  ...formData.venue3,
-                                  id: e.target.value,
-                                },
-                              });
-                              setVenue3(true);
-                            }}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                          >
-                            <option value="" disabled>
-                              Select Venue 3
-                            </option>
-                            {getAvailableVenues([
-                              selectedVenues.primary,
-                              selectedVenues.secondary,
-                            ]).map((venue) => (
-                              <option key={venue.value} value={venue.value}>
-                                {venue.label}
-                              </option>
-                            ))}
-                          </select>
                         </div>
+                      ) : null}
 
-                        {/* Time Slot for Tertiary Venue */}
-                        {venue3 ? (
-                          <div className="mt-4">
-                            <p className="block text-sm font-medium text-gray-700">
-                              Select Preferred Time Slot
-                            </p>
-                            {/* <div className="mt-2 space-y-2">
+                      {/* Venue 3 */}
+                      <div className="mt-4">
+                        <label
+                          htmlFor="tertiaryVenue"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Venue 3{" "}
+                          <span
+                            className="float-end hover:underline text-blue-800"
+                            onClick={openNewTab}
+                          >
+                            View Details
+                          </span>
+                        </label>
+                        <select
+                          id="tertiaryVenue"
+                          onChange={(e) => {
+                            setFormData({
+                              ...formData,
+                              venue3: {
+                                ...formData.venue3,
+                                id: e.target.value,
+                              },
+                            });
+                            setVenue3(true);
+                          }}
+                          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="" disabled selected>
+                            Select Venue 3
+                          </option>
+                          {venue_3.length === 0 ? (
+                            <option className="text-red-600">
+                              No more venue is available!
+                            </option>
+                          ) : (
+                            venue_3.map((venue, index) => (
+                              <option key={index} value={venue._id}>
+                                {venue.name}
+                              </option>
+                            ))
+                          )}
+                        </select>
+                      </div>
+
+                      {/* Time Slot for Tertiary Venue */}
+                      {venue3 ? (
+                        <div className="mt-4">
+                          <p className="block text-sm font-medium text-gray-700">
+                            Select Preferred Time Slot
+                          </p>
+                          {/* <div className="mt-2 space-y-2">
                               {venues
                                 .find(
                                   (venue) =>
@@ -833,36 +971,40 @@ const CreateForm = () => {
                                   </label>
                                 ))}
                             </div> */}
-                          </div>
-                        ) : null}
-                      </>
-                    )}
-                  </div>
-                )}
+                        </div>
+                      ) : null}
+                    </>
+                  )}
+                </div>
+              )}
 
               {(eventType === "virtual" ||
                 formData.eventType === "virtual") && (
-                  <div className="bg-indigo-200 p-6 rounded-xl">
-                    <label className="block text-sm mt-8 font-medium text-gray-700">
-                      Preferable Online Meeting Platform{" "}
-                      <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                      name="platform"
-                      value={formData.platform}
-                      onChange={handleInputChange}
-                    >
-                      <option value="" disabled selected>
-                        Select preferable platform
-                      </option>
-                      <option value="zoom">Zoom</option>
-                      <option value="gmeet">Google Meet</option>
-                      <option value="skype">Skype</option>
-                    </select>
-                  </div>
-                )}
-
+                <div className="bg-indigo-200 p-6 rounded-xl">
+                  <label className="block text-sm mt-1 font-medium text-gray-700">
+                    Preferable Online Meeting Platform{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    name="platform"
+                    value={formData.platform || ""}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        platform: e.target.value,
+                      }))
+                    }
+                  >
+                    <option value="" disabled selected>
+                      Select preferable platform
+                    </option>
+                    <option value="zoom">Zoom</option>
+                    <option value="gmeet">Google Meet</option>
+                    <option value="skype">Skype</option>
+                  </select>
+                </div>
+              )}
 
               {(eventType === "hybrid" || formData.eventType === "hybrid") && (
                 <>
@@ -873,10 +1015,15 @@ const CreateForm = () => {
                         <span className="text-red-500">*</span>
                       </label>
                       <select
-                        className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                         name="platform"
-                        value={formData.platform}
-                        onChange={handleInputChange}
+                        value={formData.platform || ""}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            platform: e.target.value,
+                          }))
+                        }
                       >
                         <option value="" disabled selected>
                           Select preferable platform
@@ -932,7 +1079,12 @@ const CreateForm = () => {
                               className="block text-sm font-medium text-gray-700"
                             >
                               Venue 1 <span className="text-red-500">*</span>
-                              <span className="float-end hover:underline text-blue-800" onClick={openNewTab}>View Details</span>
+                              <span
+                                className="float-end hover:underline text-blue-800"
+                                onClick={openNewTab}
+                              >
+                                View Details
+                              </span>
                             </label>
                             <select
                               id="primaryVenue"
@@ -1000,9 +1152,13 @@ const CreateForm = () => {
                               htmlFor="secondaryVenue"
                               className="block text-sm font-medium text-gray-700"
                             >
-
                               Venue 2 <span className="text-red-500">*</span>
-                              <span className="float-end hover:underline text-blue-800" onClick={openNewTab}>View Details</span>
+                              <span
+                                className="float-end hover:underline text-blue-800"
+                                onClick={openNewTab}
+                              >
+                                View Details
+                              </span>
                             </label>
                             <select
                               id="secondaryVenue"
@@ -1078,7 +1234,13 @@ const CreateForm = () => {
                               htmlFor="tertiaryVenue"
                               className="block text-sm font-medium text-gray-700"
                             >
-                              Venue 3 <span className="float-end hover:underline text-blue-800" onClick={openNewTab}>View Details</span>
+                              Venue 3{" "}
+                              <span
+                                className="float-end hover:underline text-blue-800"
+                                onClick={openNewTab}
+                              >
+                                View Details
+                              </span>
                             </label>
 
                             <select
@@ -1221,7 +1383,10 @@ const CreateForm = () => {
                         type="number"
                         name="paidAmountPerPerson"
                         value={formData.paidAmountPerPerson}
-                        onChange={handleInputChange}
+                        onChange={setFormData({
+                          ...formData,
+                          paidAmountPerPerson: e.target.value,
+                        })}
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                         placeholder="Enter amount per person"
                       />
@@ -1251,7 +1416,8 @@ const CreateForm = () => {
               {/* Description of the event */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Description of the Event <span className="text-red-500">*</span>
+                  Description of the Event{" "}
+                  <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -1259,17 +1425,24 @@ const CreateForm = () => {
                   name="description"
                   value={formData.description}
                   onChange={(e) => {
-                    handleInputChange(e);
+                    setFormData({
+                      ...formData,
+                      description: e.target.value,
+                    });
                   }}
                   onBlur={(e) => {
                     const inputText = e.target.value.trim();
-                    const wordCount = inputText.split(/\s+/).filter((word) => word).length;
+                    const wordCount = inputText
+                      .split(/\s+/)
+                      .filter((word) => word).length;
 
                     // Validation on blur
                     if (wordCount > 100) {
                       setDescError("Description cannot exceed 100 words.");
                     } else if (wordCount < 10) {
-                      setDescError("Description must be at least 10 words long.");
+                      setDescError(
+                        "Description must be at least 10 words long."
+                      );
                     } else {
                       setDescError(""); // Clear error if valid
                     }
@@ -1277,15 +1450,16 @@ const CreateForm = () => {
                   placeholder="Enter event description in 100 words"
                   required
                 />
-                {descerror && <p className="text-red-500 text-sm mt-1">{descerror}</p>}
+                {descerror && (
+                  <p className="text-red-500 text-sm mt-1">{descerror}</p>
+                )}
               </div>
-
-
 
               {/* Last Date of Registration*/}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Last Date of Registration <span className="text-gray-400">(if any)</span>
+                  Last Date of Registration{" "}
+                  <span className="text-gray-400">(if any)</span>
                 </label>
                 <input
                   type="date"
@@ -1300,26 +1474,34 @@ const CreateForm = () => {
                     today.setHours(0, 0, 0, 0);
 
                     if (registrationDate < today) {
-                      setRegError("Last date of registration cannot be in the past.");
+                      setRegError(
+                        "Last date of registration cannot be in the past."
+                      );
                       setFormData({ ...formData, registrationEndDate: "" });
                       return;
                     }
 
                     if (formData.eventDate && registrationDate > eventDate) {
-                      setRegError("Last date of registration must be before the event date.");
+                      setRegError(
+                        "Last date of registration must be before the event date."
+                      );
                       setFormData({ ...formData, registrationEndDate: "" });
                       return;
                     }
 
                     // Clear error and update valid input
                     setRegError("");
-                    handleInputChange(e);
+                    setFormData({
+                      ...formData,
+                      registrationEndDate: e.target.value,
+                    });
                   }}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                 />
-                {regerror && <p className="text-red-500 text-sm mt-1">{regerror}</p>}
+                {regerror && (
+                  <p className="text-red-500 text-sm mt-1">{regerror}</p>
+                )}
               </div>
-
 
               {/* Rules & Regulations */}
               <div>
@@ -1401,7 +1583,7 @@ const CreateForm = () => {
                 muted
               >
                 <source
-                   src="https://videos.pexels.com/video-files/3202042/3202042-hd_1920_1080_25fps.mp4"
+                  src="https://videos.pexels.com/video-files/3202042/3202042-hd_1920_1080_25fps.mp4"
                   //src="https://media.istockphoto.com/id/1363141305/video/creative-people-brainstorming-about-start-up-project-and-collaboration.mp4?s=mp4-640x640-is&k=20&c=u7oTfPpSR8d91vqjtGNMfNnkwDVbzOtkD8-sNc697sA="
                   type="video/mp4"
                 />
