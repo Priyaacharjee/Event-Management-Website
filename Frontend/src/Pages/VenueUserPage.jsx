@@ -26,9 +26,7 @@ function VenueUserPage() {
             }}
           >
             <div className="w-[50%] text-center pt-[20%]">
-              <div className="text-8xl font-serif">
-                WELCOME
-              </div>
+              <div className="text-8xl font-serif">WELCOME</div>
               <div className="pt-2 font-serif text-red-700 animate-blink">
                 Please complete your profile 100%!
               </div>
