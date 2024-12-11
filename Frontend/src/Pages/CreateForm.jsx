@@ -10,11 +10,11 @@ const CreateForm = () => {
   const [error, setError] = useState("");
   const [nameerror, setNameError] = useState("");
   const [dateerror, setDateError] = useState("");
-  const [enddateerror, setEndDateError] = useState("");
-  const [speakererror, setSpeakerError] = useState("");
+  const [speakerError, setSpeakerError] = useState("");
   const [timeerror, setTimeError] = useState("");
   const [regerror, setRegError] = useState("");
   const [descerror, setDescError] = useState("");
+  const [posterError, setPosterError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [venueDropdown, setVenueDropdown] = useState(false);
@@ -99,27 +99,8 @@ const CreateForm = () => {
     });
   };
 
-  const validateEventName = (value) => {
-    const maxWords = 20;
-    const regex = /^[A-Za-z][A-Za-z\s]{0,}$/; // Starts with letters, only spaces allowed, no special chars or digits.
-
-    const wordCount = value.trim().split(/\s+/).length;
-
-    if (!regex.test(value)) {
-      return "Event name must start with a letter and contain only alphabets and spaces.";
-    }
-    if (wordCount > maxWords) {
-      return `Event name should not exceed ${maxWords} words.`;
-    }
-    return "";
-  };
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    if (name === "eventName") {
-      const validationError = validateEventName(value);
-      setNameError(validationError);
-    }
     setFormData({ ...formData, [name]: value, eventType });
   };
 
@@ -202,14 +183,22 @@ const CreateForm = () => {
                   name="eventName"
                   value={formData.eventName}
                   onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      eventName: e.target.value,
-                    });
+                    const value = e.target.value;
+                    const maxWords = 20;
+                    const regex = /^[A-Za-z][A-Za-z\s]{0,}$/; // Starts with letters, only spaces allowed, no special chars or digits.
+                    const wordCount = value.trim().split(/\s+/).length;
+
+                    const errorMessage =
+                      !regex.test(value)
+                        ? "Event name must start with a letter and contain only alphabets and spaces."
+                        : wordCount > maxWords
+                          ? `Event name should not exceed ${maxWords} words.`
+                          : "";
+                    setNameError(errorMessage);
+                    setFormData({ ...formData, eventName: value });
                   }}
-                  className={`mt-1 block w-full p-2 border ${
-                    nameerror ? "border-red-500" : "border-gray-300"
-                  } rounded-md shadow-sm`}
+                  className={`mt-1 block w-full p-2 border ${nameerror ? "border-red-500" : "border-gray-300"
+                    } rounded-md shadow-sm`}
                   placeholder="Enter event name"
                   required
                 />
@@ -246,11 +235,7 @@ const CreateForm = () => {
                       return;
                     }
 
-                    setDateError("");
-                    setFormData({
-                      ...formData,
-                      eventDate: e.target.value,
-                    });
+                    setDateError(""); 
 
                     // Filter venue based to date
                     const filteredVenues = allVenuesCopy.filter((venue) => {
@@ -379,34 +364,26 @@ const CreateForm = () => {
                     const maxTime = "21:00";
 
                     if (selectedTime < minTime || selectedTime > maxTime) {
-                      setTimeError(
-                        "Event time must be between 9:00 AM and 9:00 PM."
-                      );
-                      setFormData({ ...formData, eventTime: "" });
-                      return;
-                    }
-
-                    // Check for past time if the event is today
-                    if (isToday && selectedTime < currentTime) {
+                      setTimeError("Event time must be between 9:00 AM and 9:00 PM.");
+                    } else if (isToday && selectedTime < currentTime) {
                       setTimeError("Event time cannot be in the past.");
-                      setFormData({ ...formData, eventTime: "" });
-                      return;
+                    } else {
+                      setTimeError("");
                     }
 
-                    // Clear error and set valid input
-                    setTimeError("");
-                    setFormData({
-                      ...formData,
-                      eventTime: e.target.value,
-                    });
+                    setFormData({ ...formData, eventTime: selectedTime });
                   }}
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  className={`mt-1 block w-full p-2 border ${timeerror ? "border-red-500" : "border-gray-300"
+                    } rounded-md shadow-sm`}
                   required
                 />
                 {timeerror && (
                   <p className="text-red-500 text-sm mt-1">{timeerror}</p>
                 )}
               </div>
+
+
+
 
               {/* Speaker */}
               <div>
@@ -421,46 +398,34 @@ const CreateForm = () => {
                     const value = e.target.value;
                     const nameRegex = /^[a-zA-Z\s]*$/;
 
-                    // Check if the input is valid
-                    if (!nameRegex.test(value)) {
-                      setSpeakerError(
-                        "Speaker's name can only contain alphabets and spaces."
-                      );
-                      setFormData({ ...formData, speakerName: "" });
-                      return;
-                    }
-
-                    // Check length
-                    if (value.length > 50) {
-                      setSpeakerError(
-                        "Speaker's name cannot exceed 50 characters."
-                      );
-                      setFormData({ ...formData, speakerName: "" });
-                      return;
-                    }
-
                     // Check for empty input
                     if (value.trim() === "") {
                       setSpeakerError("Speaker's name cannot be empty.");
-                      setFormData({ ...formData, speakerName: "" });
-                      return;
+                    }
+                    // Check if the input is valid
+                    else if (!nameRegex.test(value)) {
+                      setSpeakerError("Speaker's name can only contain alphabets and spaces.");
+                    }
+                    // Check length
+                    else if (value.length > 50) {
+                      setSpeakerError("Speaker's name cannot exceed 50 characters.");
+                    }
+                    // Clear error if valid
+                    else {
+                      setSpeakerError("");
                     }
 
-                    // Clear error and set valid input
-                    setSpeakerError("");
-                    setFormData({
-                      ...formData,
-                      speakerName: e.target.value,
-                    });
+                    // Always update the state so the user can type
+                    setFormData({ ...formData, speakerName: value });
                   }}
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  className={`mt-1 block w-full p-2 border ${speakerError ? "border-red-500" : "border-gray-300"
+                    } rounded-md shadow-sm`}
                   placeholder="Enter speaker's name"
                   required
                 />
-                {speakererror && (
-                  <p className="text-red-500 text-sm mt-1">{speakererror}</p>
-                )}
+                {speakerError && <p className="text-red-500 text-sm mt-1">{speakerError}</p>}
               </div>
+
 
               {/* Total HeadCount */}
               <div>
@@ -1364,18 +1329,47 @@ const CreateForm = () => {
                 <label className="block text-sm font-medium text-gray-700">
                   Poster (in JPG/JPEG/PNG format){" "}
                   <span className="text-red-500">*</span>
-                  <h5 className="text-red-500">
-                    **Image should be in 3:2 size format
-                  </h5>
+                  <h5 className="text-red-500">**Image should be in 3:2 size format</h5>
                 </label>
                 <input
                   type="file"
                   name="posterImage"
                   accept=".jpg,.jpeg,.png"
-                  onChange={handlePosterImage}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+
+                    if (!file) {
+                      setPosterError("Please select an image file.");
+                      return;
+                    }
+
+                    const validFormats = ["image/jpeg", "image/jpg", "image/png"];
+                    if (!validFormats.includes(file.type)) {
+                      setPosterError("File must be in JPG, JPEG, or PNG format.");
+                      return;
+                    }
+
+                    const image = new Image();
+                    image.onload = () => {
+                      const aspectRatio = image.width / image.height;
+                      if (aspectRatio.toFixed(2) !== (3 / 2).toFixed(2)) {
+                        setPosterError("Image must be in a 3:2 aspect ratio.");
+                        return;
+                      }
+                      setPosterError(""); // Clear error if valid
+                      setFormData((prev) => ({ ...prev, posterImage: file })); // Save file in formData
+                    };
+
+                    image.onerror = () => {
+                      setPosterError("Invalid image file.");
+                    };
+
+                    image.src = URL.createObjectURL(file);
+                  }}
                   className="mt-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
                   required
                 />
+                {posterError && <p className="text-red-500 text-sm mt-1">{posterError}</p>}
               </div>
 
               {/* Payment
