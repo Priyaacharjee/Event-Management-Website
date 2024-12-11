@@ -121,6 +121,7 @@ function InPersonEvent() {
             {Array.isArray(in_personEvents) &&
               in_personEvents.map((item) => (
                 <VirtualCard
+                  eventType={item.eventType}
                   eventId={item._id}
                   name={item.eventName}
                   date={item.date}

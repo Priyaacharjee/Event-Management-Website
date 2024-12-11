@@ -3,28 +3,43 @@ const mongoose = require("mongoose");
 const eventSchema = new mongoose.Schema({
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 
-  eventName: { type: String },
-  date: { type: Date },
-  time: { type: String },
-  speaker: { type: String },
-  headcount: { type: Number },
-  description: { type: String },
-  bill: { type: Number },
-  mettingLink: { type: String },
+  eventName: String,
+  date: Date,
+  eventEndDate: Date,
+  time: String,
+  speaker: String,
+  headcount: Number,
+  description: String,
+  bill: Number,
+  mettingLink: String,
 
-  isPublic: { type: Boolean },
-  isPaid: { type: Boolean },
-  payableAmount: { type: Number },
+  isPublic: Boolean,
+  isPaid: Boolean,
+  payableAmount: Number,
 
-  eventType: { type: String },
-  city: { type: String },
-  hallName: { type: String },
-  hallBookingTime: { type: String },
-  platform: { type: String },
+  eventType: String,
+
+  venue_1: {
+    id: { type: mongoose.Schema.Types.ObjectId, ref: "venue" },
+    timeslot: { type: String },
+  },
+  venue_2: {
+    id: { type: mongoose.Schema.Types.ObjectId, ref: "venue" },
+    timeslot: { type: String },
+  },
+  venue_3: {
+    id: { type: mongoose.Schema.Types.ObjectId, ref: "venue" },
+    timeslot: { type: String },
+  },
+
+  city: String,
+  hallName: String,
+  hallBookingTime: String,
+  platform: String,
   isVanueConfirmed: { type: Boolean, default: false },
 
   tillNowTotalRegistration: { type: Number, default: 0 },
-  lastDateOfRegistration: { type: Date },
+  lastDateOfRegistration: Date,
 
   registeredUser: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 

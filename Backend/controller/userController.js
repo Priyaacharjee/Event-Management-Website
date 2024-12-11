@@ -203,9 +203,10 @@ module.exports.createEvent = async (req, res) => {
     const {
       eventName,
       eventDate,
+      eventEndDate,
       eventTime,
       speakerName,
-      cityName,
+      city,
       platform,
       description,
       registrationEndDate,
@@ -217,11 +218,12 @@ module.exports.createEvent = async (req, res) => {
       scannerImage,
       posterImage,
       bill,
+      venue1,
+      venue2,
+      venue3,
     } = req.body.formData;
 
-    if (!posterImage) {
-      return res.send("No Event Poster uploaded.");
-    }
+    // console.log(req.body.formData.venue1)
 
     if (isPaid && scannerImage === null) {
       return res.send("No Scanner Image uploaded.");
@@ -246,10 +248,14 @@ module.exports.createEvent = async (req, res) => {
       ownerId: req.user._id,
       eventName,
       date: eventDate,
+      eventEndDate,
       time: eventTime,
       speaker: speakerName,
       eventType,
-      city: cityName,
+      city,
+      venue_1:venue1,
+      venue_2:venue3,
+      venue_3:venue1,
       platform,
       isPublic,
       isPaid,
@@ -270,6 +276,7 @@ module.exports.createEvent = async (req, res) => {
         url: posterResult.secure_url,
       },
     });
+    console.log(event);
 
     await userModel.findOneAndUpdate(
       { _id: req.user._id },
