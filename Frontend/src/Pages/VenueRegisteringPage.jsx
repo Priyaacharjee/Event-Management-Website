@@ -10,7 +10,7 @@ function VenueRegisteringPage() {
   const [content, setcontent] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [successfullyApplied, setSuccessfullyApplied] = useState(true);
+  const [successfullyApplied, setSuccessfullyApplied] = useState(false);
   const [errorApplied, seterrorApplied] = useState(false);
 
   const [formData, setFormData] = useState({
