@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { changePasswordRequest } from "../utils/utils";
 import Resetpassword from "./Resetpassword";
 
@@ -9,8 +8,6 @@ const Forgetpassword = () => {
   });
 
   const [errors, setErrors] = useState({});
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

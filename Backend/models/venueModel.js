@@ -13,10 +13,13 @@ const venueSchema = new mongoose.Schema({
 
   maxCapacity: Number,
   bookingPrice: Number,
+  canOrganizeMultidayEvent:Boolean,
+  
   openingtime: String,
   closingtime: String,
   noOfSlot: Number,
   timeDivisionOfSlot: [String],
+  priceOfSlots: [Number],
 
   acceptedByAdmin: { type: Boolean, default: false },
 
@@ -33,12 +36,13 @@ const venueSchema = new mongoose.Schema({
     },
   ],
 
-  isCompleteProfile: {
-    type: Boolean,
-    default: false,
+  completePercentage: {
+    type: Number,
+    default: 37,
   },
 
   bookedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
+  bookingRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
 
   bookingDates: {
     type: [Date],

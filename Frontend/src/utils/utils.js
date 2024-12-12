@@ -261,13 +261,28 @@ export const loginVenue = async (email, password) => {
   }
 };
 
-// Venues Login
+// Find Venue
 export const findVenue = async () => {
   try {
     let response = await axios.get(
       "http://localhost:8000/venue/fetchvenueuser",
       { withCredentials: true }
     );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Register Venue
+export const registerVenue = async (formData) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/venue/signup",
+      { formData },
+      { withCredentials: true }
+    );
+
     return response.data;
   } catch (err) {
     console.log(err.message);

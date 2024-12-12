@@ -8,6 +8,8 @@ const VirtualCard = ({
   date,
   organizer,
   platform,
+  eventType,
+  venue,
   posterImage,
 }) => {
   const navigate = useNavigate();
@@ -52,9 +54,20 @@ const VirtualCard = ({
       </div>
 
       {/* Platform */}
-      <div className="mt-2">
-        <p className="text-lg font-medium text-white">Platform : {platform}</p>
-      </div>
+      {(eventType === "virtual" || eventType === "hybrid") && (
+        <div className="mt-2">
+          <p className="text-lg font-medium text-white">
+            Platform : {platform}
+          </p>
+        </div>
+      )}
+
+      {/* Venue */}
+      {(eventType === "in_person" || eventType === "hybrid") && (
+        <div className="mt-2">
+          <p className="text-lg font-medium text-white">Venue : {venue}</p>
+        </div>
+      )}
 
       {/* Register Button */}
       <button
