@@ -48,14 +48,15 @@ module.exports.signUp = async (req, res) => {
         });
 
         res.send("User created successfully");
-      } else {
-        res.send(
-          "Email Address does not exists!! Please enter a valid Email Address."
-        );
-      }
-    // } else {
+       //} else {
+      //   res.send(
+      //     "Email Address does not exists!! Please enter a valid Email Address."
+      //   );
+      // }
+    } 
+     else {
       res.send("All fields are required and you must agree to the terms.");
-    // }
+    }
   } catch (err) {
     res.send(err.message);
   }
