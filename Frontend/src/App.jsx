@@ -18,6 +18,10 @@ import EventPage from "./Pages/EventPage";
 import Event_card from "./Components/Event_card";
 import CustomCalendar from "./Components/CustomCalendar";
 import VenueUserPage from "./Pages/VenueUserPage";
+import VenueRegisteringPage from "./Pages/VenueRegisteringPage";
+import Venue from "./Pages/Venue";
+import Venue_card from "./Components/Venue_card";
+import Venue_Details from "./Pages/Venue_Details";
 
 
 function App() {
@@ -52,12 +56,17 @@ function App() {
             <Route path="/hybridevent" element={<HybridEvent />} />
             <Route path="/createform/:eventType" element={<CreateForm />} />
             <Route path="/createform" element={<CreateForm />} />
+            <Route path="/venueregistering" element={<VenueRegisteringPage />} />
             <Route path="/companypage" element={<CompanyPage/>}/>
             <Route path="/registrationform/:eventId" element={<Registrationform/>}/>
             <Route path="/eventpage/:eventId" element={<EventPage />} />
             <Route path="/eventcard" element={<Event_card/>}/>
             <Route path="/venueuser" element={<VenueUserPage/>}/>
             <Route path="/calendar" element={<CustomCalendar/>}/>
+            <Route path="/venuecard" element={<Venue_card/>}/>
+            <Route path="/venue" element={<Venue/>}/>
+            <Route path="/venuedetails" element={<Venue_Details/>}/>
+           
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

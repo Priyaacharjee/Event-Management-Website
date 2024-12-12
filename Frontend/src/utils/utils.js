@@ -261,7 +261,7 @@ export const loginVenue = async (email, password) => {
   }
 };
 
-// Venues Login
+// Find Venue
 export const findVenue = async () => {
   try {
     let response = await axios.get(
