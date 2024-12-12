@@ -2,7 +2,6 @@ import React, { useState,useEffect } from "react";
 import { AiOutlineVideoCameraAdd,AiOutlineEdit,AiOutlineCheck } from "react-icons/ai";
 import { findVenue } from "../utils/utils";
 
-
 function VenueProfile() {
   const [activeMenu, setActiveMenu] = useState("BasicDetails");
   const [isEditing, setIsEditing] = useState(false);
