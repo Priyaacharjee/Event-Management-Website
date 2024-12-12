@@ -240,7 +240,7 @@ export default function Navbar({ menuItems }) {
             </div>
 
             {/* USER SECTION IN NAVBAR */}
-            {user ? (
+            {user || venue ? (
               <>
                 {/* User Section in Navbar */}
                 <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
