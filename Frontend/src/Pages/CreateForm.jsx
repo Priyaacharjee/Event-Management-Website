@@ -214,6 +214,7 @@ const CreateForm = () => {
                     }
 
                     setDateError(""); 
+                    setFormData({ ...formData, eventDate: e.target.value });
 
                     // Filter venue based to date
                     const filteredVenues = allVenuesCopy.filter((venue) => {
