@@ -32,7 +32,7 @@ export default function Navbar({ menuItems }) {
   const [venue, setVenue] = useState(null);
 
   const handleLogInClick = () => {
-    navigate("/companypage");
+    navigate("/login");
   };
 
   const handleCompanyPageClick = () => {
