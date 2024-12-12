@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { AiFillHome, AiOutlineAppstore, AiFillContacts } from "react-icons/ai";
@@ -11,7 +10,6 @@ const footerMenuItems = [
   { href: "contact", label: "Contact", icon: AiFillContacts },
 ];
 function Venue() {
-  const navigate = useNavigate();
 
   const headerMenuItems = [
     { label: "Home", to: "/" },

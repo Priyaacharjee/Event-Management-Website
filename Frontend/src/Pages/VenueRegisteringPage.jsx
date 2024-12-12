@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { registerVenue } from "../utils/utils";
 
 function VenueRegisteringPage() {
-  const navigate = useNavigate();
-
   const [error, setError] = useState("");
   const [nameerror, setNameError] = useState("");
   const [cityerror, setCityError] = useState("");
