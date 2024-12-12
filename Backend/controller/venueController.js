@@ -5,6 +5,7 @@ const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
+const axios = require("axios");
 
 // Register Venue
 module.exports.signUp = async (req, res) => {
@@ -16,6 +17,14 @@ module.exports.signUp = async (req, res) => {
       if (existingVenue) {
         return res.send("Venue already exists. Please Login.");
       }
+
+      // const apiUrl = `https://api.zerobounce.net/v2/validate?api_key=${
+      //   process.env.ZEROBONUS_API_KEY
+      // }&email=${encodeURIComponent(email)}`;
+
+      // const response = await axios.get(apiUrl);
+
+      // if (response.data.status === "valid") {
 
       const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -36,7 +45,9 @@ module.exports.signUp = async (req, res) => {
 
       await adminModel.updateMany({}, { $push: { appliedVenues: venue._id } });
 
-      res.send("Venue created successfully");
+      // } else {
+        res.send("Venue created successfully");
+        // }
     } else {
       res.send("All fields are required and you must agree to the terms.");
     }

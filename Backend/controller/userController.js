@@ -8,6 +8,7 @@ const cloudinary = require("../utils/cloudinary");
 require("dotenv").config();
 const NodeCache = require("node-cache");
 const nodemailer = require("nodemailer");
+const axios = require("axios");
 
 const nodeCache = new NodeCache();
 
@@ -22,27 +23,39 @@ module.exports.signUp = async (req, res) => {
         return res.send("User already exists. Please Login.");
       }
 
-      const salt = await bcrypt.genSalt(12);
-      const hashedPassword = await bcrypt.hash(password, salt);
+      // const apiUrl = `https://api.zerobounce.net/v2/validate?api_key=${
+      //   process.env.ZEROBONUS_API_KEY
+      // }&email=${encodeURIComponent(email)}`;
 
-      let newUser = await userModel.create({
-        email,
-        password: hashedPassword,
-        username: userName,
-        contact: contactNumber,
-      });
+      // const response = await axios.get(apiUrl);
 
-      let token = generateToken(newUser);
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "Lax",
-      });
+      // if (response.data.status === "valid") {
+        const salt = await bcrypt.genSalt(12);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-      res.send("User created successfully");
-    } else {
+        let newUser = await userModel.create({
+          email,
+          password: hashedPassword,
+          username: userName,
+          contact: contactNumber,
+        });
+
+        let token = generateToken(newUser);
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "Lax",
+        });
+
+        res.send("User created successfully");
+      } else {
+        res.send(
+          "Email Address does not exists!! Please enter a valid Email Address."
+        );
+      }
+    // } else {
       res.send("All fields are required and you must agree to the terms.");
-    }
+    // }
   } catch (err) {
     res.send(err.message);
   }
