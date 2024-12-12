@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 const events = [
-  { date: "02/12/2024", time: "10am" },
-  { date: "03/12/2024", time: "2pm" },
-  { date: "04/12/2024", time: "6pm" },
-  { date: "05/12/2024", time: "11am" },
+  { date: "2024-12-02T00:00:00.000+00:00", time: "10:00" },
+  { date: "2024-12-03T00:00:00.000+00:00", time: "14:00" },
+  { date: "2024-12-04T00:00:00.000+00:00", time: "18:00" },
+  { date: "2024-12-05T00:00:00.000+00:00", time: "11:00" },
 ];
 
 const CustomCalendar = () => {
@@ -45,15 +45,25 @@ const CustomCalendar = () => {
   const blankDays = Array(startOfMonth.getDay()).fill(null);
 
   // Format date for comparison
-  const formatDate = (date) =>
-    new Date(date).toLocaleDateString("en-GB"); // Format as DD/MM/YYYY
+  const formatDate = (date) => {
+    const parsedDate = new Date(date);
+    return `${parsedDate.getFullYear()}-${String(parsedDate.getMonth() + 1).padStart(2, '0')}-${String(parsedDate.getDate()).padStart(2, '0')}`;
+  };
 
   // Check if a date has an event
   const getEventForDate = (day) => {
     const formattedDate = formatDate(
       new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
     );
-    return events.find((event) => event.date === formattedDate);
+    return events.find((event) => event.date.startsWith(formattedDate));
+  };
+
+  // Convert 24-hour time to 12-hour format
+  const formatTime = (time) => {
+    const [hours, minutes] = time.split(':');
+    const period = +hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = +hours % 12 || 12; // Convert 0 to 12 for midnight
+    return `${formattedHours}:${minutes} ${period}`;
   };
 
   // Check if a date is today
@@ -63,9 +73,7 @@ const CustomCalendar = () => {
       currentDate.getMonth(),
       day
     );
-    return (
-      currentDay.toDateString() === today.toDateString()
-    );
+    return currentDay.toDateString() === today.toDateString();
   };
 
   return (
@@ -97,8 +105,8 @@ const CustomCalendar = () => {
               onMouseLeave={() => setHoveredEvent(null)}
             >
               {day}
-              {hoveredEvent && hoveredEvent.date === formatDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day)) && (
-                <div className="tooltip">{hoveredEvent.time}</div>
+              {hoveredEvent && hoveredEvent.date.startsWith(formatDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))) && (
+                <div className="tooltip">{formatTime(hoveredEvent.time)}</div>
               )}
             </div>
           );
@@ -109,9 +117,3 @@ const CustomCalendar = () => {
 };
 
 export default CustomCalendar;
-
-
-
-
-
-

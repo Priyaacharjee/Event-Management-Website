@@ -8,7 +8,7 @@ const cloudinary = require("../utils/cloudinary");
 require("dotenv").config();
 const NodeCache = require("node-cache");
 const nodemailer = require("nodemailer");
-const axios = require("axios");
+// const axios = require("axios");
 
 const nodeCache = new NodeCache();
 
