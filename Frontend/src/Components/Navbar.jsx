@@ -131,16 +131,17 @@ export default function Navbar({ menuItems }) {
         if (response === "User Logout successfully") {
           findUser().then((response) => {
             response ? setUser(response.username.split(" ")[0]) : setUser(null);
+            setLoading(false);
           });
         } else if (response === "Venue Logout successfully") {
           navigate("/");
         } else if (response === "Admin Logout successfully") {
           navigate("/");
         } else {
+          setLoading(false);
           alert(response);
         }
       });
-      setLoading(false);
     }, 3000);
   };
 

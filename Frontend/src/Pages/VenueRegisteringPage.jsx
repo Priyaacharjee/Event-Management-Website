@@ -9,7 +9,7 @@ function VenueRegisteringPage() {
 
   const [loading, setLoading] = useState(false);
   const [successfullyApplied, setSuccessfullyApplied] = useState(false);
-  const [errorApplied, seterrorApplied] = useState(true);
+  const [errorApplied, seterrorApplied] = useState(false);
 
   const [formData, setFormData] = useState({
     venueName: "",
