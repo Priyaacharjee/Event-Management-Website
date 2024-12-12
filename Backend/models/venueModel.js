@@ -13,6 +13,8 @@ const venueSchema = new mongoose.Schema({
 
   maxCapacity: Number,
   bookingPrice: Number,
+  canOrganizeMultidayEvent:Boolean,
+  
   openingtime: String,
   closingtime: String,
   noOfSlot: Number,

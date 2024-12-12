@@ -10,9 +10,27 @@ const axios = require("axios");
 // Register Venue
 module.exports.signUp = async (req, res) => {
   try {
-    let { name, email, contact, city, address } = req.body;
+    let {
+      venueName,
+      email,
+      contact,
+      city,
+      fullAddress,
+      maxCapacity,
+      bookingPrice,
+      canOrganizeMultidayEvent,
+    } = req.body.formData;
 
-    if (email && name && contact && city && address) {
+    if (
+      venueName &&
+      city &&
+      email &&
+      contact &&
+      fullAddress &&
+      maxCapacity &&
+      bookingPrice &&
+      (canOrganizeMultidayEvent || !canOrganizeMultidayEvent)
+    ) {
       const existingVenue = await venueModel.findOne({ email });
       if (existingVenue) {
         return res.send("Venue already exists. Please Login.");
@@ -35,21 +53,25 @@ module.exports.signUp = async (req, res) => {
         );
       }
       let venue = await venueModel.create({
+        name: venueName,
         email,
         temporaryPassword: password,
-        name,
         contact,
+        address: fullAddress,
         city,
-        address,
+        maxCapacity,
+        bookingPrice,
+        canOrganizeMultidayEvent,
       });
 
       await adminModel.updateMany({}, { $push: { appliedVenues: venue._id } });
 
+      res.send("You have successfully applied for Registering your Venue");
       // } else {
-        res.send("Venue created successfully");
-        // }
+      // res.send("Email Address doesn't exists!! Please enter a valid Email Address.")
+      // }
     } else {
-      res.send("All fields are required and you must agree to the terms.");
+      res.send("All fields are required.");
     }
   } catch (err) {
     res.send(err.message);

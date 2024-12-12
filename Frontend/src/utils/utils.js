@@ -273,3 +273,18 @@ export const findVenue = async () => {
     console.log(err.message);
   }
 };
+
+// Register Venue
+export const registerVenue = async (formData) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/venue/signup",
+      { formData },
+      { withCredentials: true }
+    );
+
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
