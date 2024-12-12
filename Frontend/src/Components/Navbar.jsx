@@ -25,11 +25,15 @@ export default function Navbar({ menuItems }) {
   const [searchBarClicked, setSearchBarClicked] = useState(false);
   const [isSearchDropdown, setIsSearchDropdown] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
-
+  
   const [isMdOrLarger, setIsMdOrLarger] = useState(false);
+  
+  const [user, setUser] = useState(null);
+  const [venue, setVenue] = useState(null);
 
   const handleLogInClick = () => {
-    navigate("/login");
+    if (user) navigate("/login");
+    if (venue) navigate("/venueuser");
   };
 
   const handleCompanyPageClick = () => {
@@ -145,7 +149,6 @@ export default function Navbar({ menuItems }) {
     }, 3000);
   };
 
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     findUser().then((user) => {
@@ -155,7 +158,7 @@ export default function Navbar({ menuItems }) {
     });
     findVenue().then((venue) => {
       if (venue) {
-        setUser(venue.name);
+        setVenue(venue.name);
       }
     });
   }, []);
@@ -248,7 +251,7 @@ export default function Navbar({ menuItems }) {
                       className="text-lg cursor-pointer"
                     />
                     <span className="text-white font-bold hover:text-blue-100 hover:underline">
-                      {user}
+                      {user ? user : venue ? venue : null}
                     </span>
 
                     {dropDownOpen ? (
