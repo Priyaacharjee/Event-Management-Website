@@ -42,7 +42,7 @@ function VenueRegisteringPage() {
         setLoading(false);
       });
     } catch (error) {
-      alert("An error occurred while creating the event. Please try again.");
+      setcontent("An error occurred while creating the event. Please try again.");
     }
   };
 
