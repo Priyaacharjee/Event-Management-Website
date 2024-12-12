@@ -25,19 +25,19 @@ export default function Navbar({ menuItems }) {
   const [searchBarClicked, setSearchBarClicked] = useState(false);
   const [isSearchDropdown, setIsSearchDropdown] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
-  
+
   const [isMdOrLarger, setIsMdOrLarger] = useState(false);
-  
+
   const [user, setUser] = useState(null);
   const [venue, setVenue] = useState(null);
 
   const handleLogInClick = () => {
-    if (user) navigate("/login");
-    if (venue) navigate("/venueuser");
+    navigate("/login");
   };
 
   const handleCompanyPageClick = () => {
-    navigate("/companypage");
+    if (user) navigate("/companypage");
+    if (venue) navigate("/venueuser");
   };
 
   const searchClick = () => {
@@ -148,7 +148,6 @@ export default function Navbar({ menuItems }) {
       });
     }, 3000);
   };
-
 
   useEffect(() => {
     findUser().then((user) => {
