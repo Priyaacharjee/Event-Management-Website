@@ -130,6 +130,7 @@ function InPersonEvent() {
                   posterImage={item.posterImage ? item.posterImage.url : null}
                 />
               ))}
+              
           </div>
         </section>
       </div>
