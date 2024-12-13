@@ -2,16 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 //import Venue from "../Pages/Venue";
 
-const Ven = ({ Venue, city, navigateTo }) => {
+const Venue_card= ({ name, location, navigateTo }) => {
   const navigate = useNavigate();
   return (
     <div className="pb-1 bg-gradient-to-br from-blue-400 to-blue-900 overflow-hidden">
       <div className="p-3">
         <h2 className="text-2xl font-medium justify-normal items-start text-center font-serif">
-          {Venue}
+          {name}
         </h2>
         <p className="mt-4 text-xl text-black-700 font-medium text-center">
-          {city}
+          {location}
         </p>
       </div>
       <div className="pt-2 pb-2">
@@ -26,65 +26,5 @@ const Ven = ({ Venue, city, navigateTo }) => {
   );
 };
 
-export default function Venue_card() {
-  return (
-    <div className="py-3 flex flex-col items-center justify-center pb-10">
-      <h1 className="text-lg md:text-2xl lg:text-3xl font-bold mb-6 text-center text-black pt-6 pb-2">
-        "DETAILS OF THE VENUE"!!
-        <div className="w-[100%] h-1 border-b-4 border-yellow-400 m-2 rounded-2xl md:mt-4 mb-4"></div>
-      </h1>
+export default Venue_card;
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5">
-        {/* Venue1 */}
-        <div className="w-full h-full">
-          <Ven Venue="ITC Royal Bengal" city="Kolkata" navigateTo="/" />
-        </div>
-
-        {/* Venue2 */}
-        <div className="w-full h-full">
-          <Ven Venue="The Grand Oberoi" city="Kolkata" navigateTo="/" />
-        </div>
-
-        {/* Venue3 */}
-        <div className="w-full h-full">
-          <Ven Venue="JW Marriott" city="Kolkata" navigateTo="/" />
-        </div>
-
-        {/* Venue4 */}
-        <div className="w-full h-full">
-          <Ven Venue="The Leela Palace" city="Bangalore" navigateTo="/" />
-        </div>
-
-        {/* Venue5 */}
-        <div className="w-full h-full">
-          <Ven Venue="Taj West End" city="Bangalore" navigateTo="/" />
-        </div>
-
-        {/* Venue6 */}
-        <div className="w-full h-full">
-          <Ven Venue="Conrad Pune" city="Pune" navigateTo="/" />
-        </div>
-
-        {/* Venue7 */}
-        <div className="w-full h-full">
-          <Ven Venue="Shantai Hotel" city="Pune" navigateTo="/" />
-        </div>
-
-        {/* Venue8 */}
-        <div className="w-full h-full">
-          <Ven Venue="Lemon Tree Hotel" city="Pune" navigateTo="/" />
-        </div>
-
-        {/* Venue9 */}
-        <div className="w-full h-full">
-          <Ven Venue="NovotelHyderabad" city="Hyderabad" navigateTo="/" />
-        </div>
-
-        {/* Venue10 */}
-        <div className="w-full h-full">
-          <Ven Venue="Amrutha Castle" city="Hyderabad" navigateTo="/" />
-        </div>
-      </div>
-    </div>
-  );
-}
