@@ -16,7 +16,6 @@ function Venue() {
   const headerMenuItems = [
     { label: "Home", to: "/" },
     { label: "About", to: "/" },
-    { label: "Venues", href: "venuecard" },
     { label: "Contact", href: "contact" },
   ];
 
