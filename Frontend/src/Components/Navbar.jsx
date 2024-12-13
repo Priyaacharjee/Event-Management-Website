@@ -28,12 +28,16 @@ export default function Navbar({ menuItems }) {
 
   const [isMdOrLarger, setIsMdOrLarger] = useState(false);
 
+  const [user, setUser] = useState(null);
+  const [venue, setVenue] = useState(null);
+
   const handleLogInClick = () => {
     navigate("/login");
   };
 
   const handleCompanyPageClick = () => {
-    navigate("/companypage");
+    if (user) navigate("/companypage");
+    if (venue) navigate("/venueuser");
   };
 
   const searchClick = () => {
@@ -131,20 +135,19 @@ export default function Navbar({ menuItems }) {
         if (response === "User Logout successfully") {
           findUser().then((response) => {
             response ? setUser(response.username.split(" ")[0]) : setUser(null);
+            setLoading(false);
           });
         } else if (response === "Venue Logout successfully") {
           navigate("/");
         } else if (response === "Admin Logout successfully") {
           navigate("/");
         } else {
+          setLoading(false);
           alert(response);
         }
       });
-      setLoading(false);
     }, 3000);
   };
-
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     findUser().then((user) => {
@@ -154,7 +157,7 @@ export default function Navbar({ menuItems }) {
     });
     findVenue().then((venue) => {
       if (venue) {
-        setUser(venue.name);
+        setVenue(venue.name);
       }
     });
   }, []);
@@ -237,7 +240,7 @@ export default function Navbar({ menuItems }) {
             </div>
 
             {/* USER SECTION IN NAVBAR */}
-            {user ? (
+            {user || venue ? (
               <>
                 {/* User Section in Navbar */}
                 <div className="flex items-center justify-center px-[3px] space-x-8 sm:px-8 pr-16 md:pr-16 lg:pr-24 xl:px-2 2xl:px-2">
@@ -247,7 +250,7 @@ export default function Navbar({ menuItems }) {
                       className="text-lg cursor-pointer"
                     />
                     <span className="text-white font-bold hover:text-blue-100 hover:underline">
-                      {user}
+                      {user ? user : venue ? venue : null}
                     </span>
 
                     {dropDownOpen ? (

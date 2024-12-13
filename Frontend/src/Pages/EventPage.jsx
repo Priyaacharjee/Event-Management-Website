@@ -111,7 +111,7 @@ function EventPage() {
 
   return (
     <>
-      <div className="flex flex-col items-center py-10">
+      <div className="flex flex-col items-center pt-10">
         {/* Header Section */}
 
         <Navbar menuItems={headerMenuItems} />
@@ -163,7 +163,7 @@ function EventPage() {
         </div>
 
       {/* Comment Section */}
-      <CommentSection />  {/*eventId={eventId}*/}
+      <CommentSection /> 
 
       {/* Footer Section */}
       <div className="m-0 p-0" id="contact">
