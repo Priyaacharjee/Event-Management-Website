@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { registerVenue } from "../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 function VenueRegisteringPage() {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [nameerror, setNameError] = useState("");
   const [cityerror, setCityError] = useState("");
@@ -39,7 +41,9 @@ function VenueRegisteringPage() {
         setLoading(false);
       });
     } catch (error) {
-      setcontent("An error occurred while creating the event. Please try again.");
+      setcontent(
+        "An error occurred while creating the event. Please try again."
+      );
     }
   };
 
@@ -313,29 +317,29 @@ function VenueRegisteringPage() {
           </div>
         </>
       )}
-      {successfullyApplied ||
-        (errorApplied && (
-          <>
-            <div
-              style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                zIndex: 999,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <div className="flex flex-col items-center justify-center bg-gray-100">
-                <div className="flex flex-col items-center justify-center p-8 rounded-lg shadow-lg bg-white">
-                  {successfullyApplied && (
+      {(successfullyApplied || errorApplied) && (
+        <>
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 999,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div className="flex flex-col items-center justify-center bg-gray-100">
+              <div className="flex flex-col items-center justify-center p-8 rounded-lg shadow-lg bg-white">
+                {successfullyApplied && (
+                  <>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-16 h-16 text-blue-500"
+                      className="w-16 h-16 text-green-600"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -347,11 +351,22 @@ function VenueRegisteringPage() {
                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                  )}
-                  {errorApplied && (
+                    <h2 className="text-2xl font-bold mt-10">{content}</h2>
+                    <div
+                      className="mt-6 text-blue-500 hover:underline cursor-pointer"
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                    >
+                      Back to Home
+                    </div>
+                  </>
+                )}
+                {errorApplied && (
+                  <>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-16 h-16 text-red-600" 
+                      className="w-16 h-16 text-red-600"
                       viewBox="0 0 122.88 122.879"
                       fill="none"
                     >
@@ -362,29 +377,28 @@ function VenueRegisteringPage() {
                         />
                       </g>
                     </svg>
-                  )}
-                  <h2 className="text-2xl font-bold mt-10">
-                    {content}
-                  </h2>
-                  <div
-                    className="mt-6 text-blue-500 hover:underline cursor-pointer"
-                    onClick={() => {
-                      seterrorApplied(false);
-                    }}
-                  >
-                    Back to Application
-                  </div>
-                  <div className="mt-5">
-                    <p className="text-gray-400 text-sm">Thanks & Regard</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm">Eventek.com</p>
-                  </div>
+                    <h2 className="text-2xl font-bold mt-10">{content}</h2>
+                    <div
+                      className="mt-6 text-blue-500 hover:underline cursor-pointer"
+                      onClick={() => {
+                        seterrorApplied(false);
+                      }}
+                    >
+                      Back to Application
+                    </div>
+                  </>
+                )}
+                <div className="mt-5">
+                  <p className="text-gray-400 text-sm">Thanks & Regard</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Eventek.com</p>
                 </div>
               </div>
             </div>
-          </>
-        ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
