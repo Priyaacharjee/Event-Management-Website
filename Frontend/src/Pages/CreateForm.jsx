@@ -135,7 +135,7 @@ const CreateForm = () => {
 
   const openNewTab = () => {
     window.open(
-      "http://localhost:5173/eventpage/6752099badee855cd533b8d2",
+      "http://localhost:5173/venue",
       "_blank",
       "noopener,noreferrer"
     );
@@ -1144,21 +1144,21 @@ const CreateForm = () => {
                     }
 
                     const image = new Image();
-                    image.onload = () => {
-                      const aspectRatio = image.width / image.height;
-                      if (aspectRatio.toFixed(2) !== (3 / 2).toFixed(2)) {
-                        setPosterError("Image must be in a 3:2 aspect ratio.");
-                        return;
-                      }
-                      setPosterError(""); // Clear error if valid
-                      setFormData((prev) => ({ ...prev, posterImage: file })); // Save file in formData
-                    };
+                    // image.onload = () => {
+                    //   const aspectRatio = image.width / image.height;
+                    //   if (aspectRatio.toFixed(2) !== (3 / 2).toFixed(2)) {
+                    //     setPosterError("Image must be in a 3:2 aspect ratio.");
+                    //     return;
+                    //   }
+                    //   setPosterError(""); // Clear error if valid
+                    //   setFormData((prev) => ({ ...prev, posterImage: file })); // Save file in formData
+                    // };
 
                     image.onerror = () => {
                       setPosterError("Invalid image file.");
                     };
 
-                    image.src = URL.createObjectURL(file);
+                    //image.src = URL.createObjectURL(file);
                   }}
                   className="mt-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
                   required
