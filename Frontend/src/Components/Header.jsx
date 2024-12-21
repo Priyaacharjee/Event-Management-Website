@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { findUser } from "../utils/utils";
-import Event_card from "./Event_card";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ export default function Header() {
 
   useEffect(() => {
     findUser().then((response) => {
-      setUser(response.username.split(" ")[0]);
+      setUser(response ? response.username.split(" ")[0] : null);
     });
   }, []);
 
@@ -23,13 +22,12 @@ export default function Header() {
     if (user) {
       navigate("/createform");
     } else {
-      navigate("/signup");
+      navigate("/login");
     }
   };
 
   const handleLogInClick = () => {
     navigate("/login");
-    //navigate("/eventcard");
   };
 
   const searchClick = () => {
@@ -119,9 +117,9 @@ export default function Header() {
             virtual, or hybrid mode, with flawless execution and attention to
             detail for upto 500 people.
           </div>
-          <div className=" flex justify-center gap-4 lg:gap-0 flex-col xds:flex-row  w-full lg:w-[70%] mt-6 lg:mt-8 space-y-4 lg:space-y-0 lg:space-x-4 items-center lg:items-start">
+          <div className=" flex justify-center gap-4 lg:gap-0 flex-col xds:flex-row  w-full lg:w-[85%] mt-6 lg:mt-8 space-y-4 lg:space-y-0 lg:space-x-4 items-center lg:items-start">
             <div
-              className="flex items-center justify-center w-[12rem] lg:w-[12rem] h-[3rem]"
+              className="flex items-center justify-center w-[12rem] lg:w-[13rem] h-[3rem]"
               style={{ color: "#ffffff" }}
             >
               <button
@@ -141,6 +139,19 @@ export default function Header() {
                 className="flex btn1 justify-center items-center h-full w-full p-4 rounded-full -mt-4 lg:mt-0"
               >
                 Show Events
+              </button>
+            </div>
+            <div
+              className="flex items-center justify-center w-[12rem] lg:w-[18rem] h-[3rem]"
+              style={{ color: "#ffffff" }}
+            >
+              <button
+                className="flex btn1 justify-center items-center h-full w-full p-4 rounded-full -mt-4 lg:mt-0"
+                onClick={() => {
+                  navigate("/venueregistering");
+                }}
+              >
+                Register Your Venue
               </button>
             </div>
           </div>

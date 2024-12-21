@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const userIsLoggedIn = require("../middlewares/userIsLoggedIn");
+const commonIsLoggedIn = require("../middlewares/commonIsLoggedIn");
 const {
   signUp,
   loginUser,

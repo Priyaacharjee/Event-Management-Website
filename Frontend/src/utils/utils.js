@@ -1,7 +1,21 @@
 // utils.js
 import axios from "axios";
 
-// USER FUNCTIONS ----------------------------------------------------------------
+// COMMON FUNCTIONS -----------------------------------------------------------------------------------------------------
+
+// Logout
+export const logoutUser = async () => {
+  try {
+    let response = await axios.get("http://localhost:8000/commonroute/logout", {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// USER FUNCTIONS -----------------------------------------------------------------------------------------------------
 
 // User Signup
 export const signUp = async (
@@ -39,18 +53,6 @@ export const loginUser = async (email, password) => {
       { email, password },
       { withCredentials: true }
     );
-    return response.data;
-  } catch (err) {
-    console.log(err.message);
-  }
-};
-
-// User Logout
-export const logoutUser = async () => {
-  try {
-    let response = await axios.get("http://localhost:8000/users/logout", {
-      withCredentials: true,
-    });
     return response.data;
   } catch (err) {
     console.log(err.message);
@@ -237,6 +239,50 @@ export const checkUserIsRegisteredInEventOrNot = async (eventId) => {
         withCredentials: true,
       }
     );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// VENUE FUNCTIONALITIES -----------------------------------------------------------------------------------------------------
+
+// Venues Login
+export const loginVenue = async (email, password) => {
+  try {
+    let response = await axios.post(
+      "http://localhost:8000/venue/login",
+      { email, password },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Find Venue
+export const findVenue = async () => {
+  try {
+    let response = await axios.get(
+      "http://localhost:8000/venue/fetchvenueuser",
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Register Venue
+export const registerVenue = async (formData) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/venue/signup",
+      { formData },
+      { withCredentials: true }
+    );
+
     return response.data;
   } catch (err) {
     console.log(err.message);

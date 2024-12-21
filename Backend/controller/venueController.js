@@ -5,17 +5,44 @@ const { generateToken } = require("../utils/generateToken");
 const cloudinary = require("../utils/cloudinary");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
+const axios = require("axios");
 
 // Register Venue
 module.exports.signUp = async (req, res) => {
   try {
-    let { name, email, contact, city, address } = req.body;
+    let {
+      venueName,
+      email,
+      contact,
+      city,
+      fullAddress,
+      maxCapacity,
+      bookingPrice,
+      canOrganizeMultidayEvent,
+    } = req.body.formData;
 
-    if (email && name && contact && city && address) {
+    if (
+      venueName &&
+      city &&
+      email &&
+      contact &&
+      fullAddress &&
+      maxCapacity &&
+      bookingPrice &&
+      (canOrganizeMultidayEvent || !canOrganizeMultidayEvent)
+    ) {
       const existingVenue = await venueModel.findOne({ email });
       if (existingVenue) {
         return res.send("Venue already exists. Please Login.");
       }
+
+      // const apiUrl = `https://api.zerobounce.net/v2/validate?api_key=${
+      //   process.env.ZEROBONUS_API_KEY
+      // }&email=${encodeURIComponent(email)}`;
+
+      // const response = await axios.get(apiUrl);
+
+      // if (response.data.status === "valid") {
 
       const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -26,19 +53,25 @@ module.exports.signUp = async (req, res) => {
         );
       }
       let venue = await venueModel.create({
+        name: venueName,
         email,
         temporaryPassword: password,
-        name,
         contact,
+        address: fullAddress,
         city,
-        address,
+        maxCapacity,
+        bookingPrice,
+        canOrganizeMultidayEvent,
       });
 
       await adminModel.updateMany({}, { $push: { appliedVenues: venue._id } });
 
-      res.send("Venue created successfully");
+      res.send("You have successfully applied for Registering your Venue");
+      // } else {
+      // res.send("Email Address doesn't exists!! Please enter a valid Email Address.")
+      // }
     } else {
-      res.send("All fields are required and you must agree to the terms.");
+      res.send("All fields are required.");
     }
   } catch (err) {
     res.send(err.message);
@@ -130,6 +163,17 @@ module.exports.updatePasswordFirstTime = async (req, res) => {
     if (venue) {
       res.send("Password Updated Successfully");
     }
+  } catch (err) {
+    console.log(err.message);
+    res.send("Internal Server Error");
+  }
+};
+
+// Fetch Venue User
+module.exports.fetchVenueUser = async (req, res) => {
+  try {
+    let venue = req.venue;
+    res.send(venue);
   } catch (err) {
     console.log(err.message);
     res.send("Internal Server Error");

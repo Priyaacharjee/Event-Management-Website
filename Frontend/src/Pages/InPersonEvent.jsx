@@ -119,16 +119,22 @@ function InPersonEvent() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-8">
             {Array.isArray(in_personEvents) &&
-              in_personEvents.map((item) => (
-                <VirtualCard
-                  eventId={item._id}
-                  name={item.eventName}
-                  date={item.date}
-                  organizer={item.ownerId ? item.ownerId.username : null}
-                  venue={item.venue}
-                  posterImage={item.posterImage ? item.posterImage.url : null}
-                />
-              ))}
+              in_personEvents.map((item) =>
+                item.eventType === "virtual" ||
+                ((item.eventType === "in_person" ||
+                  item.eventType === "hybrid") &&
+                  item.isVanueConfirmed) ? (
+                  <VirtualCard
+                    eventType={item.eventType}
+                    eventId={item._id}
+                    name={item.eventName}
+                    date={item.date}
+                    organizer={item.ownerId ? item.ownerId.username : null}
+                    venue={item.venue}
+                    posterImage={item.posterImage ? item.posterImage.url : null}
+                  />
+                ) : null
+              )}
           </div>
         </section>
       </div>

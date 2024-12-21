@@ -9,6 +9,7 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { AiFillHome, AiOutlineAppstore, AiFillContacts } from "react-icons/ai";
 import ImageLoader from "../Components/ImageLoader1";
+import CommentSection from "../Components/CommentSection";
 
 const footerMenuItems = [
   { href: "header", label: "Header", icon: AiFillHome },
@@ -110,7 +111,7 @@ function EventPage() {
 
   return (
     <>
-      <div className="flex flex-col items-center py-10">
+      <div className="flex flex-col items-center pt-10">
         {/* Header Section */}
 
         <Navbar menuItems={headerMenuItems} />
@@ -161,36 +162,14 @@ function EventPage() {
           )}
         </div>
 
-        {/* Comment Section */}
-        <div className="mt-12 w-full max-w-4xl">
-          <h2 className="text-2xl font-semibold mb-4">Comment Section</h2>
-          <textarea
-            className="w-full p-4 rounded-lg border border-gray-300"
-            rows="4"
-            placeholder="Drop your doubts or comments"
-          />
+      {/* Comment Section */}
+      <CommentSection /> 
 
-          {/* Submit and Reply Buttons */}
-          <div className="mt-4 flex justify-end">
-            <button
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              onClick={handleCommentSubmit}
-            >
-              Submit
-            </button>
-            {/* <button
-              className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300"
-              onClick={handleReplyClick}
-            >
-              Reply
-            </button> */}
-          </div>
-        </div>
-      </div>
-
+      {/* Footer Section */}
       <div className="m-0 p-0" id="contact">
         <Footer menuItems1={footerMenuItems} />
       </div>
+    </div>
     </>
   );
 }
